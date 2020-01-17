@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct TaskListView: View {
-  var tasks: [Task] = testDataTasks
+  @ObservedObject var taskListVM = TaskListViewModel()
   
   var body: some View {
     NavigationView {
       VStack(alignment: .leading) {
         List {
-          ForEach (self.tasks) { task in
-            TaskCell(task: task)
+          ForEach (taskListVM.taskCellViewModels) { taskCellVM in
+            TaskCell(taskCellVM: taskCellVM)
           }
           .onDelete { indexSet in
           }
@@ -44,14 +44,17 @@ struct TaskListView_Previews: PreviewProvider {
 }
 
 struct TaskCell: View {
-  var task: Task
+  @ObservedObject var taskCellVM: TaskCellViewModel
   
   var body: some View {
     HStack {
-      Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
+      Image(systemName: taskCellVM.completionStateIconName)
         .resizable()
         .frame(width: 20, height: 20)
-      Text(task.title)
+        .onTapGesture {
+          self.taskCellVM.task.completed.toggle()
+        }
+      TextField("Enter task title", text: $taskCellVM.task.title)
     }
   }
 }
