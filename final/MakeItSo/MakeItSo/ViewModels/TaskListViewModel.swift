@@ -32,13 +32,9 @@ class TaskListViewModel: ObservableObject {
     viewModels.forEach { taskCellViewModel in
       taskRepository.removeTask(taskCellViewModel.task)
     }
-    
-    // remove from models
-    taskCellViewModels.remove(atOffsets: indexSet)
   }
   
   func addTask(task: Task) {
-    taskCellViewModels.append(TaskCellViewModel(task: task))
     taskRepository.addTask(task)
   }
 }
