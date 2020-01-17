@@ -16,12 +16,7 @@ struct TaskListView: View {
       VStack(alignment: .leading) {
         List {
           ForEach (self.tasks) { task in
-            HStack {
-              Image(systemName: "circle")
-              .resizable()
-              .frame(width: 20, height: 20)
-              Text(task.title)
-            }
+            TaskCell(task: task)
           }
           .onDelete { indexSet in
           }
@@ -45,5 +40,18 @@ struct TaskListView: View {
 struct TaskListView_Previews: PreviewProvider {
   static var previews: some View {
     TaskListView()
+  }
+}
+
+struct TaskCell: View {
+  var task: Task
+  
+  var body: some View {
+    HStack {
+      Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
+        .resizable()
+        .frame(width: 20, height: 20)
+      Text(task.title)
+    }
   }
 }
