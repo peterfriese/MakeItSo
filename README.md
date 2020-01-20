@@ -20,7 +20,7 @@
     <a href="https://github.com/peterfriese/MakeItSo"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/peterfriese/MakeItSo">View Demo</a>
+    <a href="https://github.com/peterfriese/MakeItSo#Demo">View Demo</a>
     ·
     <a href="https://github.com/peterfriese/MakeItSo/issues">Report Bug</a>
     ·
@@ -72,22 +72,16 @@ This project uses Cocoapods to manage dependencies.
 ### Installation
 
 1. Clone the repo
-
-    ``` bash
-    git clone https://github.com/peterfriese/MakeItSo.git
-    ```
-
 2. Navigate to the project folder
+3. Install dependencies
+4. Open the project
 
-    ``` bash
-    cd final/MakeItSo
-    ```
-
-3. Open the project
-
-    ``` bash
-    xed .
-    ```
+``` bash
+git clone https://github.com/peterfriese/MakeItSo.git
+cd final/MakeItSo
+pod install
+xed .
+```
 
 <!-- Demo -->
 ## Demo
@@ -121,7 +115,7 @@ This is not an official Google product.
 
 Peter Friese - [@peterfriese](https://twitter.com/peterfriese)
 
-Project Link: [https://github.com/peterfriese/MakeItSo](https://github.com/peterfrese/MakeItSo)
+Project Link: [https://github.com/peterfriese/MakeItSo](https://github.com/peterfriese/MakeItSo)
 
 <!-- ACKNOWLEDGEMENTS -->
 
