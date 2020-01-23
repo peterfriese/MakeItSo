@@ -9,6 +9,10 @@
 import Foundation
 import Disk
 
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
 class BaseTaskRepository {
   @Published var tasks = [Task]()
 }
@@ -86,6 +90,55 @@ class LocalTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject 
         Failure Reason: \(error.localizedFailureReason ?? "")
         Suggestions: \(error.localizedRecoverySuggestion ?? "")
         """)
+    }
+  }
+}
+
+class FirebaseTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject {
+  var db = Firestore.firestore()
+  
+  override init() {
+    super.init()
+    loadData()
+  }
+  
+  private func loadData() {
+    db.collection("tasks").order(by: "createdTime").addSnapshotListener { (querySnapshot, error) in
+      if let querySnapshot = querySnapshot {
+        self.tasks = querySnapshot.documents.compactMap { document -> Task? in
+          try? document.data(as: Task.self)
+        }
+      }
+    }
+  }
+  
+  func addTask(_ task: Task) {
+    do {
+      let _ = try db.collection("tasks").addDocument(from: task)
+    }
+    catch {
+      print("There was an error while trying to save a task \(error.localizedDescription).")
+    }
+  }
+  
+  func removeTask(_ task: Task) {
+    if let taskID = task.id {
+      db.collection("tasks").document(taskID).delete { (error) in
+        if let error = error {
+          print("Error removing document: \(error.localizedDescription)")
+        }
+      }
+    }
+  }
+  
+  func updateTask(_ task: Task) {
+    if let taskID = task.id {
+      do {
+        try db.collection("tasks").document(taskID).setData(from: task)
+      }
+      catch {
+        print("There was an error while trying to update a task \(error.localizedDescription).")
+      }
     }
   }
 }
