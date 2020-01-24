@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 enum TaskPriority: Int, Codable {
   case high
@@ -15,10 +17,11 @@ enum TaskPriority: Int, Codable {
 }
 
 struct Task: Codable, Identifiable {
-  var id: String = UUID().uuidString
+  @DocumentID var id: String?
   var title: String
   var priority: TaskPriority
   var completed: Bool
+  @ServerTimestamp var createdTime: Timestamp?
 }
 
 #if DEBUG

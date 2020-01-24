@@ -9,6 +9,13 @@
 import Foundation
 import Disk
 
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
+import Combine
+import Resolver
+
 class BaseTaskRepository {
   @Published var tasks = [Task]()
 }
@@ -86,6 +93,78 @@ class LocalTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject 
         Failure Reason: \(error.localizedFailureReason ?? "")
         Suggestions: \(error.localizedRecoverySuggestion ?? "")
         """)
+    }
+  }
+}
+
+class FirebaseTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject {
+  var db = Firestore.firestore()
+  
+  @Injected var authenticationService: AuthenticationService
+  var userTasksPath: String = "tasks"
+  
+  private var cancellables = Set<AnyCancellable>()
+  
+  override init() {
+    super.init()
+    
+    // compute path to task if user changes
+    authenticationService.$user
+      .compactMap { user in
+        user?.uid
+      }
+      .map { userId in
+        "users/\(userId)/tasks"
+      }
+      .assign(to: \.userTasksPath, on: self)
+      .store(in: &cancellables)
+    
+    // (re)load data if user changes
+    authenticationService.$user
+      .receive(on: DispatchQueue.main)
+      .sink { user in
+        self.loadData()
+      }
+      .store(in: &cancellables)
+  }
+  
+  private func loadData() {
+    db.collection(userTasksPath).order(by: "createdTime").addSnapshotListener { (querySnapshot, error) in
+      if let querySnapshot = querySnapshot {
+        self.tasks = querySnapshot.documents.compactMap { document -> Task? in
+          try? document.data(as: Task.self)
+        }
+      }
+    }
+  }
+  
+  func addTask(_ task: Task) {
+    do {
+      let _ = try db.collection(userTasksPath).addDocument(from: task)
+    }
+    catch {
+      print("There was an error while trying to save a task \(error.localizedDescription).")
+    }
+  }
+  
+  func removeTask(_ task: Task) {
+    if let taskID = task.id {
+      db.collection(userTasksPath).document(taskID).delete { (error) in
+        if let error = error {
+          print("Error removing document: \(error.localizedDescription)")
+        }
+      }
+    }
+  }
+  
+  func updateTask(_ task: Task) {
+    if let taskID = task.id {
+      do {
+        try db.collection(userTasksPath).document(taskID).setData(from: task)
+      }
+      catch {
+        print("There was an error while trying to update a task \(error.localizedDescription).")
+      }
     }
   }
 }
