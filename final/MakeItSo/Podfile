@@ -9,6 +9,7 @@ target 'MakeItSo' do
   pod 'Resolver'
   pod 'Disk', '~> 0.6.4'
   
+  pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
