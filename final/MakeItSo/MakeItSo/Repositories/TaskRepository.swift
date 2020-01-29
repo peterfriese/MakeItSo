@@ -143,7 +143,7 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
       let _ = try db.collection(userTasksPath).addDocument(from: task)
     }
     catch {
-      print("There was an error while trying to save a task \(error.localizedDescription).")
+      fatalError("Unable to encode task: \(error.localizedDescription).")
     }
   }
   
@@ -151,7 +151,7 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
     if let taskID = task.id {
       db.collection(userTasksPath).document(taskID).delete { (error) in
         if let error = error {
-          print("Error removing document: \(error.localizedDescription)")
+          print("Unable to remove document: \(error.localizedDescription)")
         }
       }
     }
@@ -163,7 +163,7 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
         try db.collection(userTasksPath).document(taskID).setData(from: task)
       }
       catch {
-        print("There was an error while trying to update a task \(error.localizedDescription).")
+        fatalError("Unable to encode task: \(error.localizedDescription).")
       }
     }
   }
