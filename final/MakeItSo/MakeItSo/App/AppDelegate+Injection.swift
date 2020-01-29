@@ -14,6 +14,6 @@ extension Resolver: ResolverRegistering {
 //    register { TestDataTaskRepository() as TaskRepository }.scope(application)
 //    register { LocalTaskRepository() as TaskRepository }.scope(application)
     register { AuthenticationService() }.scope(application)
-    register { FirebaseTaskRepository() as TaskRepository }.scope(application)
+    register { FirestoreTaskRepository() as TaskRepository }.scope(application)
   }
 }

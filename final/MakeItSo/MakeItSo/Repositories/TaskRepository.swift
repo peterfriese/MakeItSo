@@ -97,7 +97,7 @@ class LocalTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject 
   }
 }
 
-class FirebaseTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject {
+class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject {
   var db = Firestore.firestore()
   
   @Injected var authenticationService: AuthenticationService
