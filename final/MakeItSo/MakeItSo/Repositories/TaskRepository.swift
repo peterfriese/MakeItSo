@@ -12,6 +12,7 @@ import Disk
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseFunctions
 
 import Combine
 import Resolver
@@ -30,7 +31,6 @@ class TestDataTaskRepository: BaseTaskRepository, TaskRepository, ObservableObje
   override init() {
     super.init()
     self.tasks = testDataTasks
-    
   }
   
   func addTask(_ task: Task) {
@@ -98,12 +98,14 @@ class LocalTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject 
 }
 
 class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObject {
-  var db = Firestore.firestore()
-  
+  @Injected var db: Firestore
   @Injected var authenticationService: AuthenticationService
+  @LazyInjected var functions: Functions
+
   var tasksPath: String = "tasks"
   var userId: String = "unknown"
   
+  private var listenerRegistration: ListenerRegistration?
   private var cancellables = Set<AnyCancellable>()
   
   override init() {
@@ -126,7 +128,10 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
   }
   
   private func loadData() {
-    db.collection(tasksPath)
+    if listenerRegistration != nil {
+      listenerRegistration?.remove()
+    }
+    listenerRegistration = db.collection(tasksPath)
       .whereField("userId", isEqualTo: self.userId)
       .order(by: "createdTime")
       .addSnapshotListener { (querySnapshot, error) in
@@ -167,6 +172,16 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
       catch {
         fatalError("Unable to encode task: \(error.localizedDescription).")
       }
+    }
+  }
+  
+  func migrateTasks(fromUserId: String) {
+    let data = ["previousUserId": fromUserId]
+    functions.httpsCallable("migrateTasks").call(data) { (result, error) in
+      if let error = error as NSError? {
+        print("Error: \(error.localizedDescription)")
+      }
+      print("Function result: \(result?.data ?? "(empty)")")
     }
   }
 }

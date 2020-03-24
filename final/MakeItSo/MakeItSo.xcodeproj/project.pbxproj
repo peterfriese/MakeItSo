@@ -17,10 +17,15 @@
 		88169CDD23C8A455009CFC9C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88169CDC23C8A455009CFC9C /* Task.swift */; };
 		8825908123D9A51900AB7022 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8825908023D9A51900AB7022 /* AuthenticationService.swift */; };
 		886471E923D606BC0095AD8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 886471E823D606BC0095AD8E /* GoogleService-Info.plist */; };
+		88B508EF23FDD19E00AC508B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC1C2223FDCD210045F6A8 /* SettingsViewModel.swift */; };
 		88D22F5D23CCC5D5003C6D03 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D22F5C23CCC5D5003C6D03 /* TaskListViewModel.swift */; };
 		88D22F5F23CCC5E6003C6D03 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D22F5E23CCC5E6003C6D03 /* TaskCellViewModel.swift */; };
 		88D22F8223CDDC73003C6D03 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D22F8123CDDC73003C6D03 /* TaskRepository.swift */; };
 		88D22F8423CDDE13003C6D03 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D22F8323CDDE13003C6D03 /* AppDelegate+Injection.swift */; };
+		88DF00BC23FC45D00007B71E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF00BA23FC45D00007B71E /* SignInView.swift */; };
+		88DF00BD23FC45D00007B71E /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF00BB23FC45D00007B71E /* SignInWithAppleButton.swift */; };
+		88DF00C323FC46FE0007B71E /* EnvironmentKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF00C223FC46FE0007B71E /* EnvironmentKeys.swift */; };
+		88EC1C1F23FD86B20045F6A8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC1C1E23FD86B20045F6A8 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +46,13 @@
 		88D22F5E23CCC5E6003C6D03 /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
 		88D22F8123CDDC73003C6D03 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		88D22F8323CDDE13003C6D03 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
+		88DF00BA23FC45D00007B71E /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		88DF00BB23FC45D00007B71E /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButton.swift; sourceTree = "<group>"; };
+		88DF00C223FC46FE0007B71E /* EnvironmentKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentKeys.swift; sourceTree = "<group>"; };
+		88EB713C23FC4C1200146A0F /* Make It So.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Make It So.entitlements"; sourceTree = "<group>"; };
+		88EC1C1E23FD86B20045F6A8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		88EC1C2223FDCD210045F6A8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		A4864AFE6C02396F83AF7044 /* Pods-MakeItSo.emulators.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.emulators.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.emulators.xcconfig"; sourceTree = "<group>"; };
 		C1A857703B87962FBD745FCB /* Pods-MakeItSo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.debug.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				88169CD923C8A0D6009CFC9C /* App */,
+				88DF00C123FC46E70007B71E /* Utilities */,
 				8825907F23D9A4FE00AB7022 /* Services */,
 				88D22F8023CDDC4B003C6D03 /* Repositories */,
 				88169CDB23C8A1B7009CFC9C /* Models */,
@@ -87,6 +100,7 @@
 				88169CD023C8A083009CFC9C /* LaunchScreen.storyboard */,
 				88169CD323C8A083009CFC9C /* Info.plist */,
 				886471E823D606BC0095AD8E /* GoogleService-Info.plist */,
+				88EB713C23FC4C1200146A0F /* Make It So.entitlements */,
 				88169CCD23C8A083009CFC9C /* Preview Content */,
 			);
 			path = MakeItSo;
@@ -114,6 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				88169CC923C8A081009CFC9C /* TaskListView.swift */,
+				88EC1C1E23FD86B20045F6A8 /* SettingsView.swift */,
+				88DF00BA23FC45D00007B71E /* SignInView.swift */,
+				88DF00BB23FC45D00007B71E /* SignInWithAppleButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -139,6 +156,7 @@
 			children = (
 				88D22F5C23CCC5D5003C6D03 /* TaskListViewModel.swift */,
 				88D22F5E23CCC5E6003C6D03 /* TaskCellViewModel.swift */,
+				88EC1C2223FDCD210045F6A8 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -149,6 +167,14 @@
 				88D22F8123CDDC73003C6D03 /* TaskRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		88DF00C123FC46E70007B71E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				88DF00C223FC46FE0007B71E /* EnvironmentKeys.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		8EB657D5200F4D51FDA2B8F1 /* Frameworks */ = {
@@ -164,6 +190,7 @@
 			children = (
 				C1A857703B87962FBD745FCB /* Pods-MakeItSo.debug.xcconfig */,
 				6CA57FACA66B563CF5EFACEC /* Pods-MakeItSo.release.xcconfig */,
+				A4864AFE6C02396F83AF7044 /* Pods-MakeItSo.emulators.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -288,11 +315,16 @@
 				88169CDD23C8A455009CFC9C /* Task.swift in Sources */,
 				88169CC623C8A081009CFC9C /* AppDelegate.swift in Sources */,
 				8825908123D9A51900AB7022 /* AuthenticationService.swift in Sources */,
+				88DF00BC23FC45D00007B71E /* SignInView.swift in Sources */,
 				88D22F5D23CCC5D5003C6D03 /* TaskListViewModel.swift in Sources */,
 				88D22F5F23CCC5E6003C6D03 /* TaskCellViewModel.swift in Sources */,
 				88169CC823C8A081009CFC9C /* SceneDelegate.swift in Sources */,
+				88DF00BD23FC45D00007B71E /* SignInWithAppleButton.swift in Sources */,
+				88DF00C323FC46FE0007B71E /* EnvironmentKeys.swift in Sources */,
 				88169CCA23C8A081009CFC9C /* TaskListView.swift in Sources */,
 				88D22F8223CDDC73003C6D03 /* TaskRepository.swift in Sources */,
+				88EC1C1F23FD86B20045F6A8 /* SettingsView.swift in Sources */,
+				88B508EF23FDD19E00AC508B /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +461,7 @@
 			baseConfigurationReference = C1A857703B87962FBD745FCB /* Pods-MakeItSo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "MakeItSo/Make It So.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MakeItSo/Preview Content\"";
 				DEVELOPMENT_TEAM = YGAZHQXHH4;
@@ -438,7 +471,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.peterfriese.MakeItSo;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D NO_USE_FIREBASE_EMULATORS";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.peterfriese.MakeItSo2;
 				PRODUCT_NAME = "Make It So";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -450,6 +484,7 @@
 			baseConfigurationReference = 6CA57FACA66B563CF5EFACEC /* Pods-MakeItSo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "MakeItSo/Make It So.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MakeItSo/Preview Content\"";
 				DEVELOPMENT_TEAM = YGAZHQXHH4;
@@ -459,7 +494,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.peterfriese.MakeItSo;
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.peterfriese.MakeItSo2;
 				PRODUCT_NAME = "Make It So";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

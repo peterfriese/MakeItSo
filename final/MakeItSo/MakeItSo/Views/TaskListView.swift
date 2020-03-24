@@ -10,7 +10,9 @@ import SwiftUI
 
 struct TaskListView: View {
   @ObservedObject var taskListVM = TaskListViewModel()
+  
   @State var presentAddNewItem = false
+  @State var showSettingsScreen = false
   
   var body: some View {
     NavigationView {
@@ -42,7 +44,17 @@ struct TaskListView: View {
         .padding()
         .accentColor(Color(UIColor.systemRed))
       }
+      .navigationBarItems(trailing:
+        Button(action: {
+          self.showSettingsScreen.toggle()
+        }) {
+          Image(systemName: "gear")
+        }
+      )
       .navigationBarTitle("Tasks")
+      .sheet(isPresented: $showSettingsScreen) {
+        SettingsView()
+      }
     }
   }
 }
