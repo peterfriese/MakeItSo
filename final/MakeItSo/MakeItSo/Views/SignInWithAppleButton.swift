@@ -44,7 +44,7 @@ fileprivate struct SignInWithAppleButtonInternal: UIViewRepresentable {
 }
 
 struct SignInWithAppleButton_Previews: PreviewProvider {
-    static var previews: some View {
-        SignInWithAppleButton()
-    }
+  static var previews: some View {
+    SignInWithAppleButton()
+  }
 }

@@ -65,11 +65,9 @@ struct SignInView: View {
   
   func signInWithAppleButtonTapped() {
     signInHandler = SignInWithAppleCoordinator(window: self.window)
-    if let signInHandler = self.signInHandler {
-      signInHandler.link { (user) in
-        print("Yo, you signed in, mate")
-        self.presentationMode.wrappedValue.dismiss()
-      }
+    signInHandler?.link { (user) in
+      print("User signed in. UID: \(user.uid), email: \(user.email ?? "(empty)")")
+      self.presentationMode.wrappedValue.dismiss()
     }
   }
 }

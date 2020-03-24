@@ -127,10 +127,10 @@
 		88169CDA23C8A0EA009CFC9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88169CC923C8A081009CFC9C /* TaskListView.swift */,
 				88EC1C1E23FD86B20045F6A8 /* SettingsView.swift */,
 				88DF00BA23FC45D00007B71E /* SignInView.swift */,
 				88DF00BB23FC45D00007B71E /* SignInWithAppleButton.swift */,
-				88169CC923C8A081009CFC9C /* TaskListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

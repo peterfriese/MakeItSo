@@ -34,7 +34,27 @@ class AuthenticationService: ObservableObject {
       try Auth.auth().signOut()
     }
     catch {
-      print("Error when trying to sing out: \(error.localizedDescription)")
+      print("Error when trying to sign out: \(error.localizedDescription)")
+    }
+  }
+  
+  func updateDisplayName(displayName: String, completionHandler: @escaping (Result<User, Error>) -> Void) {
+    if let user = Auth.auth().currentUser {
+      let changeRequest = user.createProfileChangeRequest()
+      changeRequest.displayName = displayName
+      changeRequest.commitChanges { error in
+        if let error = error {
+          completionHandler(.failure(error))
+        }
+        else {
+          if let updatedUser = Auth.auth().currentUser {
+            print("Successfully updated display name for user [\(user.uid)] to [\(updatedUser.displayName ?? "(empty)")]")
+            // force update the local user to trigger the publisher
+            self.user = updatedUser
+            completionHandler(.success(updatedUser))
+          }
+        }
+      }
     }
   }
   
@@ -48,7 +68,7 @@ class AuthenticationService: ObservableObject {
       
       if let user = user {
         let anonymous = user.isAnonymous ? "anonymously " : ""
-        print("User signed in \(anonymous)with user ID \(user.uid).")
+        print("User signed in \(anonymous)with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
       }
       else {
         print("User signed out.")
@@ -66,10 +86,11 @@ enum SignInState: String {
 }
 
 class SignInWithAppleCoordinator: NSObject {
-  @Injected private var taskRepository: TaskRepository
+  @LazyInjected private var taskRepository: TaskRepository
+  @LazyInjected private var authenticationService: AuthenticationService
   
   private weak var window: UIWindow!
-  private var onSignedIn: ((User) -> Void)?
+  private var onSignedInHandler: ((User) -> Void)?
 
   private var currentNonce: String?
   
@@ -90,8 +111,8 @@ class SignInWithAppleCoordinator: NSObject {
     return request
   }
 
-  func signIn(onSignedIn: @escaping (User) -> Void) {
-    self.onSignedIn = onSignedIn
+  func signIn(onSignedInHandler: @escaping (User) -> Void) {
+    self.onSignedInHandler = onSignedInHandler
     
     let request = appleIDRequest(withState: .signIn)
 
@@ -101,8 +122,8 @@ class SignInWithAppleCoordinator: NSObject {
     authorizationController.performRequests()
   }
   
-  func link(onSignedIn: @escaping (User) -> Void) {
-    self.onSignedIn = onSignedIn
+  func link(onSignedInHandler: @escaping (User) -> Void) {
+    self.onSignedInHandler = onSignedInHandler
     
     let request = appleIDRequest(withState: .link)
     let authorizationController = ASAuthorizationController(authorizationRequests: [request])
@@ -119,12 +140,12 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
       guard let nonce = currentNonce else {
         fatalError("Invalid state: A login callback was received, but no login request was sent.")
       }
-      guard let appleIdToken = appleIDCredential.identityToken else {
+      guard let appleIDToken = appleIDCredential.identityToken else {
         print("Unable to fetch identity token")
         return
       }
-      guard let idTokenString = String(data: appleIdToken, encoding: .utf8) else {
-        print("Unable to serialise token string from data: \(appleIdToken.debugDescription)")
+      guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+        print("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
         return
       }
       guard let stateRaw = appleIDCredential.state, let state = SignInState(rawValue: stateRaw) else {
@@ -144,8 +165,8 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
             return
           }
           if let user = result?.user {
-            if let onSignedIn = self.onSignedIn {
-              onSignedIn(user)
+            if let onSignedInHandler = self.onSignedInHandler {
+              onSignedInHandler(user)
             }
           }
         }
@@ -166,18 +187,18 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                   if let user = result?.user {
                     let previousUserId = currentUser.uid
                     (self.taskRepository as? FirestoreTaskRepository)?.migrateTasks(fromUserId: previousUserId)
-                    if let onSignedIn = self.onSignedIn {
-                      onSignedIn(user)
-                    }
+                    
+                    self.doSignIn(appleIDCredential: appleIDCredential, user: user)
                   }
                 }
               }
             }
+            else if let error = error {
+              print("Error trying to link user: \(error.localizedDescription)")
+            }
             else {
               if let user = result?.user {
-                if let onSignedIn = self.onSignedIn {
-                  onSignedIn(user)
-                }
+                self.doSignIn(appleIDCredential: appleIDCredential, user: user)
               }
             }
           }
@@ -189,12 +210,36 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
             return
           }
           if let user = result?.user {
-            if let onSignedIn = self.onSignedIn {
-              onSignedIn(user)
-            }
+            self.doSignIn(appleIDCredential: appleIDCredential, user: user)
           }
         })
       }
+    }
+  }
+  
+  private func doSignIn(appleIDCredential: ASAuthorizationAppleIDCredential, user: User) {
+    if let fullName = appleIDCredential.fullName {
+      if let givenName = fullName.givenName, let familyName = fullName.familyName {
+        let displayName = "\(givenName) \(familyName)"
+        self.authenticationService.updateDisplayName(displayName: displayName) { result in
+          switch result {
+          case .success(let user):
+            print("Succcessfully update the user's display name: \(String(describing: user.displayName))")
+          case .failure(let error):
+            print("Error when trying to update the display name: \(error.localizedDescription)")
+          }
+          self.callSignInHandler(user: user)
+        }
+      }
+      else {
+        self.callSignInHandler(user: user)
+      }
+    }
+  }
+  
+  private func callSignInHandler(user: User) {
+    if let onSignedInHandler = self.onSignedInHandler {
+      onSignedInHandler(user)
     }
   }
   

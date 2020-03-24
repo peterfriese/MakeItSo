@@ -15,6 +15,7 @@ class SettingsViewModel: ObservableObject {
   @Published var user: User?
   @Published var isAnonymous = true
   @Published var email: String = ""
+  @Published var displayName: String = ""
   
   @Published private var authenticationService: AuthenticationService = Resolver.resolve()
   
@@ -32,6 +33,13 @@ class SettingsViewModel: ObservableObject {
     }
     .assign(to: \.email, on: self)
     .store(in: &cancellables)
+    
+    authenticationService.$user.compactMap { user in
+      user?.displayName
+    }
+    .assign(to: \.displayName, on: self)
+    .store(in: &cancellables)
+
   }
   
   func logout() {

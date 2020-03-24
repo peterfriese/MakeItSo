@@ -96,10 +96,9 @@ struct AccountSection: View {
         Text("You're not logged in.")
       }
       else {
-        HStack {
-          Text("Logged in as")
-          Text("\(self.settingsViewModel.email)")
-            .fontWeight(.bold)
+        VStack {
+          Text("Thanks for using Make It So, \(self.settingsViewModel.displayName)!")
+          Text("Logged in as \(self.settingsViewModel.email)")
         }
       }
       Spacer()

@@ -12,7 +12,7 @@ struct TaskListView: View {
   @ObservedObject var taskListVM = TaskListViewModel()
   
   @State var presentAddNewItem = false
-  @State var showSignInScreen = false
+  @State var showSettingsScreen = false
   
   var body: some View {
     NavigationView {
@@ -46,13 +46,13 @@ struct TaskListView: View {
       }
       .navigationBarItems(trailing:
         Button(action: {
-          self.showSignInScreen.toggle()
+          self.showSettingsScreen.toggle()
         }) {
           Image(systemName: "gear")
         }
       )
       .navigationBarTitle("Tasks")
-      .sheet(isPresented: $showSignInScreen) {
+      .sheet(isPresented: $showSettingsScreen) {
         SettingsView()
       }
     }
