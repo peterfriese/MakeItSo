@@ -176,17 +176,11 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
             if let error = error, (error as NSError).code == AuthErrorCode.credentialAlreadyInUse.rawValue {
               print("The user you're signing in with has already been linked, signing in to the new user and migrating the anonymous users [\(currentUser.uid)] tasks.")
               
-              // TODO: callback to UI and ask user if they would like to
-              // (a) continue signing in to the selected account and (1) merge or (2) not merge data
-              // or
-              // (b) sign in using a different account (i.e. abort and start over)
-              
               if let updatedCredential = (error as NSError).userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? OAuthCredential {
                 print("Signing in using the updated credentials")
                 Auth.auth().signIn(with: updatedCredential) { (result, error) in
                   if let user = result?.user {
-                    let previousUserId = currentUser.uid
-                    (self.taskRepository as? FirestoreTaskRepository)?.migrateTasks(fromUserId: previousUserId)
+                    // future feature: migrate the anonymous user's tasks to the permanent account
                     
                     self.doSignIn(appleIDCredential: appleIDCredential, user: user)
                   }
