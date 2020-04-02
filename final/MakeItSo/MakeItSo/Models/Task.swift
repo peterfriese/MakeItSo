@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseFirestore
+import Firebase
 import FirebaseFirestoreSwift
 
 enum TaskPriority: Int, Codable {
