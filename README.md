@@ -1,4 +1,6 @@
 <!-- PROJECT SHIELDS -->
+[![Xcode][xcode-shield]][xcode-url]
+[![Swift][swift-shield]][swift-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -125,6 +127,12 @@ Project Link: [https://github.com/peterfriese/MakeItSo](https://github.com/peter
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[xcode-shield]: https://img.shields.io/badge/xcode-v11.4.1-blue
+[xcode-url]: https://developer.apple.com/xcode/
+
+[swift-shield]: https://img.shields.io/badge/swift-v5.2-%23fe4b2d
+[swift-url]: https://swift.org/
+
 [contributors-shield]: https://img.shields.io/github/contributors/peterfriese/MakeItSo.svg?style=flat-square
 [contributors-url]: https://github.com/peterfriese/MakeItSo/graphs/contributors
 
