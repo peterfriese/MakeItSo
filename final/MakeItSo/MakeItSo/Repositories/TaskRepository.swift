@@ -101,7 +101,7 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
   @Injected var db: Firestore
   @Injected var authenticationService: AuthenticationService
   @LazyInjected var functions: Functions
-
+  
   var tasksPath: String = "tasks"
   var userId: String = "unknown"
   
@@ -133,7 +133,10 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
       .snapshotPublisher()
       .map(\.documents)
       .decodeAll(as: Task.self)
-      .replaceError(with: [Task]())
+      .catch { error -> Empty<[Task], Never> in
+        print("An error has occurred: \(error.localizedDescription)")
+        return Empty<[Task], Never>()
+      }
       .assign(to: \.tasks, on: self)
       .store(in: &cancellables)
   }
