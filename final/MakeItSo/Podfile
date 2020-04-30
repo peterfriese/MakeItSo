@@ -8,11 +8,13 @@ target 'MakeItSo' do
   # Pods for MakeItSo
   pod 'Resolver'
   pod 'Disk', '~> 0.6.4'
-  
+
+  pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
-  pod 'FirebaseFirestoreSwift'
-  
   pod 'Firebase/Functions'
+  
+  # pod 'FirebaseFirestoreSwift'
+  pod 'FirebaseFirestoreSwift', :path => '../../../firebase-ios-sdk/pf-combine/firebase-ios-sdk'
 end

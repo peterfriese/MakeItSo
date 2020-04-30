@@ -105,7 +105,6 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
   var tasksPath: String = "tasks"
   var userId: String = "unknown"
   
-  private var listenerRegistration: ListenerRegistration?
   private var cancellables = Set<AnyCancellable>()
   
   override init() {
@@ -128,19 +127,15 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
   }
   
   private func loadData() {
-    if listenerRegistration != nil {
-      listenerRegistration?.remove()
-    }
-    listenerRegistration = db.collection(tasksPath)
+    db.collection(tasksPath)
       .whereField("userId", isEqualTo: self.userId)
       .order(by: "createdTime")
-      .addSnapshotListener { (querySnapshot, error) in
-        if let querySnapshot = querySnapshot {
-          self.tasks = querySnapshot.documents.compactMap { document -> Task? in
-            try? document.data(as: Task.self)
-          }
-        }
-      }
+      .snapshotPublisher()
+      .map(\.documents)
+      .decodeAll(as: Task.self)
+      .replaceError(with: [Task]())
+      .assign(to: \.tasks, on: self)
+      .store(in: &cancellables)
   }
   
   func addTask(_ task: Task) {
