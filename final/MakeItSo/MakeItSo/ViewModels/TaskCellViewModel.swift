@@ -40,8 +40,8 @@ class TaskCellViewModel: ObservableObject, Identifiable  {
     $task
       .dropFirst()
       .debounce(for: 0.8, scheduler: RunLoop.main)
-      .sink { task in
-        self.taskRepository.updateTask(task)
+      .sink { [weak self] task in
+        self?.taskRepository.updateTask(task)
       }
       .store(in: &cancellables)
   }
