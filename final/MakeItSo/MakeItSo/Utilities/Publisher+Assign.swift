@@ -1,5 +1,5 @@
 //
-//  PublisherExtension.swift
+//  Publisher+Assign.swift
 //  MakeItSo
 //
 //  Created by Jeremy Gale on 2020-05-14.
