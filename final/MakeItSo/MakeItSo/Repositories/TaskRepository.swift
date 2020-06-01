@@ -121,8 +121,8 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
     // (re)load data if user changes
     authenticationService.$user
       .receive(on: DispatchQueue.main)
-        .sink { [weak self] user in
-            self?.loadData()
+      .sink { [weak self] user in
+        self?.loadData()
       }
       .store(in: &cancellables)
   }
