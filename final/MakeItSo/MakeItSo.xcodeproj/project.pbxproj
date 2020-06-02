@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3584A215246D911000B41569 /* Publisher+Assign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3584A214246D911000B41569 /* Publisher+Assign.swift */; };
 		60758A2524BA8CE6B4A6DED7 /* Pods_MakeItSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7389934F4E83C47499E91BB4 /* Pods_MakeItSo.framework */; };
 		88169CC623C8A081009CFC9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88169CC523C8A081009CFC9C /* AppDelegate.swift */; };
 		88169CC823C8A081009CFC9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88169CC723C8A081009CFC9C /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3584A214246D911000B41569 /* Publisher+Assign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Assign.swift"; sourceTree = "<group>"; };
 		6CA57FACA66B563CF5EFACEC /* Pods-MakeItSo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.release.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.release.xcconfig"; sourceTree = "<group>"; };
 		7389934F4E83C47499E91BB4 /* Pods_MakeItSo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MakeItSo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88169CC223C8A081009CFC9C /* Make It So.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Make It So.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				88DF00C223FC46FE0007B71E /* EnvironmentKeys.swift */,
+				3584A214246D911000B41569 /* Publisher+Assign.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				88169CCA23C8A081009CFC9C /* TaskListView.swift in Sources */,
 				88D22F8223CDDC73003C6D03 /* TaskRepository.swift in Sources */,
 				88EC1C1F23FD86B20045F6A8 /* SettingsView.swift in Sources */,
+				3584A215246D911000B41569 /* Publisher+Assign.swift in Sources */,
 				88B508EF23FDD19E00AC508B /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
