@@ -542,3 +542,5 @@ hs_err_pid*
 # End of https://www.gitignore.io/api/node,swift,xcode,macos,appcode,android,objective-c,androidstudio,visualstudiocode
 /archive
 /research
+/final/MakeItSo/MakeItSo/GoogleService-Info.plist
+/final/backend/.firebaserc
