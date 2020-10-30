@@ -180,9 +180,12 @@ extension SignInWithAppleCoordinator: ASAuthorizationControllerDelegate {
                 print("Signing in using the updated credentials")
                 Auth.auth().signIn(with: updatedCredential) { (result, error) in
                   if let user = result?.user {
-                    let previousUserId = currentUser.uid
-                    (self.taskRepository as? FirestoreTaskRepository)?.migrateTasks(fromUserId: previousUserId)
-                    self.doSignIn(appleIDCredential: appleIDCredential, user: user)
+                    currentUser.getIDToken { (token, error) in
+                      if let idToken = token {
+                        (self.taskRepository as? FirestoreTaskRepository)?.migrateTasks(from: idToken)
+                        self.doSignIn(appleIDCredential: appleIDCredential, user: user)
+                      }
+                    }
                   }
                 }
               }
