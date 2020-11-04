@@ -176,8 +176,8 @@ class FirestoreTaskRepository: BaseTaskRepository, TaskRepository, ObservableObj
   }
   
   func migrateTasks(from idToken: String) {
-    let data = ["idToken": idToken]
-    functions.httpsCallable("migrateTasks").call(data) { (result, error) in
+    let parameters = ["idToken": idToken]
+    functions.httpsCallable("migrateTasks").call(parameters) { (result, error) in
       if let error = error as NSError? {
         print("Error: \(error.localizedDescription)")
       }
