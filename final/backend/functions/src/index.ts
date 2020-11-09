@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin'
 
 let db: FirebaseFirestore.Firestore
 const logger = functions.logger
-const gracePeriod = 60 * 60 * 1000
+const gracePeriod = 5 * 60 * 1000
 let initialized = false
 
 function initialize() {
@@ -74,7 +74,7 @@ async function verifyPermanentUserIdToken(permanentAccountIdToken: admin.auth.De
   if (timeSinceSignIn > gracePeriod) {
     throw new functions.https.HttpsError(
       'invalid-argument', 
-      `Sign in must be within the past ${gracePeriod} miliseconds`, 
+      `This operation requires a recent sign-in.`,
       permanentAccountIdToken)
   }
   
