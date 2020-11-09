@@ -33,6 +33,7 @@ struct TaskListView: View {
             }
           }
         }
+        .listStyle(PlainListStyle())
         Button(action: { self.presentAddNewItem.toggle() }) {
           HStack {
             Image(systemName: "plus.circle.fill")
