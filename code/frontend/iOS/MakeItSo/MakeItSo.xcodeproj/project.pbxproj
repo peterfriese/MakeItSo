@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3584A215246D911000B41569 /* Publisher+Assign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3584A214246D911000B41569 /* Publisher+Assign.swift */; };
-		60758A2524BA8CE6B4A6DED7 /* Pods_MakeItSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7389934F4E83C47499E91BB4 /* Pods_MakeItSo.framework */; };
 		88169CC623C8A081009CFC9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88169CC523C8A081009CFC9C /* AppDelegate.swift */; };
 		88169CC823C8A081009CFC9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88169CC723C8A081009CFC9C /* SceneDelegate.swift */; };
 		88169CCA23C8A081009CFC9C /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88169CC923C8A081009CFC9C /* TaskListView.swift */; };
@@ -27,12 +26,12 @@
 		88DF00BD23FC45D00007B71E /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF00BB23FC45D00007B71E /* SignInWithAppleButton.swift */; };
 		88DF00C323FC46FE0007B71E /* EnvironmentKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF00C223FC46FE0007B71E /* EnvironmentKeys.swift */; };
 		88EC1C1F23FD86B20045F6A8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC1C1E23FD86B20045F6A8 /* SettingsView.swift */; };
+		9D513CA987D20F4505770A3E /* Pods_MakeItSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381A2B3631E833E40345CA51 /* Pods_MakeItSo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3584A214246D911000B41569 /* Publisher+Assign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Assign.swift"; sourceTree = "<group>"; };
-		6CA57FACA66B563CF5EFACEC /* Pods-MakeItSo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.release.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.release.xcconfig"; sourceTree = "<group>"; };
-		7389934F4E83C47499E91BB4 /* Pods_MakeItSo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MakeItSo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		381A2B3631E833E40345CA51 /* Pods_MakeItSo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MakeItSo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88169CC223C8A081009CFC9C /* Make It So.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Make It So.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88169CC523C8A081009CFC9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88169CC723C8A081009CFC9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,8 +53,8 @@
 		88EB713C23FC4C1200146A0F /* Make It So.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Make It So.entitlements"; sourceTree = "<group>"; };
 		88EC1C1E23FD86B20045F6A8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		88EC1C2223FDCD210045F6A8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		A4864AFE6C02396F83AF7044 /* Pods-MakeItSo.emulators.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.emulators.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.emulators.xcconfig"; sourceTree = "<group>"; };
-		C1A857703B87962FBD745FCB /* Pods-MakeItSo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.debug.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.debug.xcconfig"; sourceTree = "<group>"; };
+		AC8E10B9A3B07624130F3F5D /* Pods-MakeItSo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.debug.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.debug.xcconfig"; sourceTree = "<group>"; };
+		B1708EC891943A8E541F9FA3 /* Pods-MakeItSo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MakeItSo.release.xcconfig"; path = "Target Support Files/Pods-MakeItSo/Pods-MakeItSo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,20 +62,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60758A2524BA8CE6B4A6DED7 /* Pods_MakeItSo.framework in Frameworks */,
+				9D513CA987D20F4505770A3E /* Pods_MakeItSo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		390E72369AF69F8CDDEED3EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				381A2B3631E833E40345CA51 /* Pods_MakeItSo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		88169CB923C8A081009CFC9C = {
 			isa = PBXGroup;
 			children = (
 				88169CC423C8A081009CFC9C /* MakeItSo */,
 				88169CC323C8A081009CFC9C /* Products */,
 				E4370257533039127F1E8557 /* Pods */,
-				8EB657D5200F4D51FDA2B8F1 /* Frameworks */,
+				390E72369AF69F8CDDEED3EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,20 +187,11 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		8EB657D5200F4D51FDA2B8F1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7389934F4E83C47499E91BB4 /* Pods_MakeItSo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		E4370257533039127F1E8557 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C1A857703B87962FBD745FCB /* Pods-MakeItSo.debug.xcconfig */,
-				6CA57FACA66B563CF5EFACEC /* Pods-MakeItSo.release.xcconfig */,
-				A4864AFE6C02396F83AF7044 /* Pods-MakeItSo.emulators.xcconfig */,
+				AC8E10B9A3B07624130F3F5D /* Pods-MakeItSo.debug.xcconfig */,
+				B1708EC891943A8E541F9FA3 /* Pods-MakeItSo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -205,11 +203,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88169CD623C8A083009CFC9C /* Build configuration list for PBXNativeTarget "MakeItSo" */;
 			buildPhases = (
-				0D06D6534C5AA8A0AFD4877A /* [CP] Check Pods Manifest.lock */,
+				7701AC480C3BABE05A8E7ADC /* [CP] Check Pods Manifest.lock */,
 				88169CBE23C8A081009CFC9C /* Sources */,
 				88169CBF23C8A081009CFC9C /* Frameworks */,
 				88169CC023C8A081009CFC9C /* Resources */,
-				CF9E99170C808E6B2B8B9853 /* [CP] Embed Pods Frameworks */,
+				CD2924D914E684BBC7275C85 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -268,7 +266,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D06D6534C5AA8A0AFD4877A /* [CP] Check Pods Manifest.lock */ = {
+		7701AC480C3BABE05A8E7ADC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -290,7 +288,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF9E99170C808E6B2B8B9853 /* [CP] Embed Pods Frameworks */ = {
+		CD2924D914E684BBC7275C85 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -462,7 +460,7 @@
 		};
 		88169CD723C8A083009CFC9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1A857703B87962FBD745FCB /* Pods-MakeItSo.debug.xcconfig */;
+			baseConfigurationReference = AC8E10B9A3B07624130F3F5D /* Pods-MakeItSo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "MakeItSo/Make It So.entitlements";
@@ -485,7 +483,7 @@
 		};
 		88169CD823C8A083009CFC9C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CA57FACA66B563CF5EFACEC /* Pods-MakeItSo.release.xcconfig */;
+			baseConfigurationReference = B1708EC891943A8E541F9FA3 /* Pods-MakeItSo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "MakeItSo/Make It So.entitlements";

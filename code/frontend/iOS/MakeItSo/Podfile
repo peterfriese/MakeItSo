@@ -12,7 +12,7 @@ target 'MakeItSo' do
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
-  pod 'FirebaseFirestoreSwift'
+  pod 'FirebaseFirestoreSwift', '~> 7.1.0-beta'
   
   pod 'Firebase/Functions'
 end
