@@ -13,6 +13,8 @@
 		88FEECDD27275ABD00ED368C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECCB27275ABC00ED368C /* ContentView.swift */; };
 		88FEECDE27275ABD00ED368C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88FEECCC27275ABD00ED368C /* Assets.xcassets */; };
 		88FEECDF27275ABD00ED368C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88FEECCC27275ABD00ED368C /* Assets.xcassets */; };
+		88FEECE927275B4900ED368C /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECE827275B4900ED368C /* SwiftUIView.swift */; };
+		88FEECEA27275B4900ED368C /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECE827275B4900ED368C /* SwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		88FEECD127275ABD00ED368C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88FEECD727275ABD00ED368C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88FEECD927275ABD00ED368C /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		88FEECE827275B4900ED368C /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,7 @@
 				88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */,
 				88FEECCB27275ABC00ED368C /* ContentView.swift */,
 				88FEECCC27275ABD00ED368C /* Assets.xcassets */,
+				88FEECE827275B4900ED368C /* SwiftUIView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -178,6 +182,7 @@
 			files = (
 				88FEECDC27275ABD00ED368C /* ContentView.swift in Sources */,
 				88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
+				88FEECE927275B4900ED368C /* SwiftUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +192,7 @@
 			files = (
 				88FEECDD27275ABD00ED368C /* ContentView.swift in Sources */,
 				88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
+				88FEECEA27275B4900ED368C /* SwiftUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//	SwiftUIView.swift
 //  MakeItSo
 //
 //  Created by Peter Friese on 25.10.21.
@@ -19,15 +19,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
-  var body: some View {
-    Text("Hello, world!")
-      .padding()
-  }
+struct SwiftUIView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+struct SwiftUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        SwiftUIView()
+    }
 }
