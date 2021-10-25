@@ -14,93 +14,28 @@
     <img src="assets/logo/MakeItSo.png" alt="Logo">
   </a>
 
-  <h3 align="center">Make It So</h3>
+  <h3 align="center">Make It So - Again!</h3>
 
   <p align="center">
-    This is the source code for <i>Make It So</i>, the sample app accompanying my blog post "Replicating the iOS Reminders App Using SwiftUI and Firebase"
+    This is the source code for <i>Make It So</i>, a sample app that demonstrates how to use Firebase in a SwiftUI app that runs on all (most) of Apple's platforms.
     <br />
     <a href="https://github.com/peterfriese/MakeItSo"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/peterfriese/MakeItSo#Demo">View Demo</a>
-    ·
     <a href="https://github.com/peterfriese/MakeItSo/issues">Report Bug</a>
     ·
     <a href="https://github.com/peterfriese/MakeItSo/issues">Request Feature</a>
   </p>
 </p>
 
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
+## Where is the previous version?
+If you are interested in the previous version, you can find it in the [`previous`](https://github.com/peterfriese/MakeItSo/tree/previous) branch.
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  <!-- * [Prerequisites](#prerequisites) -->
-  * [Installation](#installation)
-<!-- * [Usage](#usage) -->
-<!-- * [Roadmap](#roadmap) -->
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+## Why a complete rewrite?
+Because both SwiftUI and Firebase have evolved quite a bit since I implemented the original version, and I wanted to create an up-to-date version without having to carry the baggage of the legacy version.
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Screenshot][product-screenshot]
-
-### Built With
-
-* [SwiftUI](https://developer.apple.com/xcode/swiftui/)
-* [Combine](https://developer.apple.com/documentation/combine)
-* [Firebase](https://firebase.google.com)
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these steps.
-
-### Prerequisites
-
-This project uses Cocoapods to manage dependencies.
-
-* If you haven't done so already, install Cocoapods:
-
-  ``` bash
-  sudo gem install cocoapods
-  ```
-
-### Installation
-
-1. Clone the repo
-2. Navigate to the project folder
-3. Install dependencies
-4. Open the project
-
-``` bash
-git clone https://github.com/peterfriese/MakeItSo.git
-cd final/MakeItSo
-pod install
-xed .
-```
-
-<!-- Demo -->
-## Demo
-
-![Demo][product-demo]
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a pull request
 
 <!-- LICENSE -->
 ## License
