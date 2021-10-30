@@ -23,21 +23,74 @@ import SwiftUI
 
 class TasksListViewModel: ObservableObject {
   @Published var tasks: [Task]
+  @Published var focusedTask: Focusable?
+  var previousFocusedTask: Focusable?
   
   private var cancellables = Set<AnyCancellable>()
   
   init(tasks: [Task]) {
     self.tasks = tasks
     
-    $tasks.sink { newValue in
-      self.dump(newValue)
-      self.performUpdates(newValue)
-    }
-    .store(in: &cancellables)
+    // This is the beginning of some magic Firestore sauce
+    //    $tasks.sink { newValue in
+    //      self.dump(newValue)
+    //      self.performUpdates(newValue)
+    //    }
+    //    .store(in: &cancellables)
+    
+    // the following pipeline removes empty tasks when the respecive row in the list view loses focus
+    $focusedTask
+      .removeDuplicates()
+      .compactMap { focusedTask -> Int? in
+        defer { self.previousFocusedTask = focusedTask }
+        
+        guard focusedTask != nil else { return nil }
+        guard case .row(let previousId) = self.previousFocusedTask else { return nil }
+        guard let previousIndex = self.tasks.firstIndex(where: { $0.id == previousId } ) else { return nil }
+        guard self.tasks[previousIndex].title.isEmpty else { return nil }
+        
+        return previousIndex
+      }
+      .delay(for: 0.01, scheduler: RunLoop.main) // <-- this helps reduce the visual jank
+      .sink { index in
+        self.tasks.remove(at: index)
+      }
+      .store(in: &cancellables)
+
+// This is the unoptimised version. It results in visual jank.
+//    $focusedTask
+//      .removeDuplicates()
+//      .sink { focusedTask in
+//        if case .row(let previousId) = self.previousFocusedTask, case .row(let currentId) = focusedTask {
+//          print("Previous: \(previousId)")
+//          print("Current: \(currentId)")
+//          if let previousIndex = self.tasks.firstIndex(where: { $0.id == previousId } ) {
+//            if self.tasks[previousIndex].title.isEmpty {
+//              self.tasks.remove(at: previousIndex)
+//            }
+//          }
+//        }
+//        self.previousFocusedTask = focusedTask
+//      }
+//      .store(in: &cancellables)
   }
   
   func createNewTask() {
-    self.tasks.append(Task(title: ""))
+    let newTask = Task(title: "")
+
+    // if any row is focused, insert the new task after the focused row
+    if case .row(let id) = focusedTask {
+      if let index = tasks.firstIndex(where: { $0.id == id } ) {
+        tasks.insert(newTask, at: index + 1)
+      }
+    }
+    // no row focused: append at the end of the list
+    else {
+      tasks.append(newTask)
+    }
+    
+    // focus the new task
+    focusedTask = .row(id: newTask.id)
   }
   
   func deleteTask(_ task: Task) {

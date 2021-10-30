@@ -23,6 +23,9 @@ struct TasksListView: View {
   @EnvironmentObject
   var viewModel: TasksListViewModel
   
+  @FocusState
+  var focusedTask: Focusable?
+  
   init() {
     // Turn this into a view modifier. See [Navigation Bar Styling in SwiftUI - YouTube](https://youtu.be/kCJyhG8zjvY)
     let navBarAppearance = UINavigationBarAppearance()
@@ -34,6 +37,10 @@ struct TasksListView: View {
     List {
       ForEach($viewModel.tasks) { $task in
         TaskListRowView(task: $task)
+          .focused($focusedTask, equals: .row(id: task.id))
+          .onSubmit {
+            viewModel.createNewTask()
+          }
           .swipeActions {
             Button(role: .destructive, action: { viewModel.deleteTask(task) }) {
               Label("Delete", systemImage: "trash")
@@ -49,6 +56,7 @@ struct TasksListView: View {
           }
       }
     }
+    .sync($viewModel.focusedTask, $focusedTask)
     .animation(.default, value: viewModel.tasks)
     .listStyle(.plain)
     .navigationTitle("Tasks")
