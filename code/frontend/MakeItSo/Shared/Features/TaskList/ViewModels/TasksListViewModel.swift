@@ -81,6 +81,15 @@ class TasksListViewModel: ObservableObject {
     // if any row is focused, insert the new task after the focused row
     if case .row(let id) = focusedTask {
       if let index = tasks.firstIndex(where: { $0.id == id } ) {
+        
+        // If the currently selected task is empty, unfocus it.
+        // This will kick off the pipeline that removes empty tasks.
+        let currentTask = tasks[index]
+        guard !currentTask.title.isEmpty else {
+          focusedTask = Focusable.none
+          return
+        }
+        
         tasks.insert(newTask, at: index + 1)
       }
     }

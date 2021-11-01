@@ -21,6 +21,7 @@ import SwiftUI
 
 /// Used to manage focus in a `List` view
 enum Focusable: Hashable {
+  case none
   case row(id: String)
 }
 
