@@ -23,6 +23,7 @@ import SwiftUI
 
 class TasksListViewModel: ObservableObject {
   @Published var tasks: [Task]
+  @Published var selectedTask: Task?
   @Published var focusedTask: Focusable?
   var previousFocusedTask: Focusable?
   
@@ -114,6 +115,12 @@ class TasksListViewModel: ObservableObject {
   func flagTask(_ task: Task) {
     if let index = tasks.firstIndex(of: task) {
       tasks[index].flagged.toggle()
+    }
+  }
+  
+  func updateTask(_ task: Task) {
+    if let index = tasks.firstIndex(where: { $0.id == task.id} ) {
+      tasks[index] = task
     }
   }
   

@@ -31,6 +31,7 @@ struct TaskListRowView: View {
           task.completed.toggle()
         }
       TextField("", text: $task.title)
+        .lineLimit(3)
         .padding(.trailing, task.flagged ? 20 : 0)
         .overlay {
           if task.flagged {

@@ -49,7 +49,7 @@ struct TasksListView: View {
               Label("Flag", systemImage: "flag")
             }
             .tint(Color(UIColor.systemOrange))
-            Button(action: {}) {
+            Button(action: { viewModel.selectedTask = task }) {
               Label("Details", systemImage: "ellipsis")
             }
             .tint(Color(UIColor.systemGray))
@@ -60,6 +60,11 @@ struct TasksListView: View {
     .animation(.default, value: viewModel.tasks)
     .listStyle(.plain)
     .navigationTitle("Tasks")
+    .sheet(item: $viewModel.selectedTask) { selecetdTask in
+      TaskDetailsView(task: selecetdTask) { task in
+        viewModel.updateTask(task)
+      }
+    }
     .toolbar {
       ToolbarItemGroup(placement: .bottomBar) {
         Button(action: { viewModel.createNewTask() }) {

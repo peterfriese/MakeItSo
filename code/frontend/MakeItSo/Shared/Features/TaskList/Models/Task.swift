@@ -36,8 +36,8 @@ struct Location {
 struct Task {
   var id: String = UUID().uuidString
   var title: String
-  var notes: String?
-  var url: URL?
+  var notes: String = ""
+  var url: String = ""
   
   var dueDate: Date?
   var dueTime: Date?
@@ -59,6 +59,37 @@ struct Task {
 
   var completed: Bool = false
   var order: Int = 0
+}
+
+extension Task {
+  var hasDueDate: Bool {
+    get {
+      dueDate != nil
+    }
+    set {
+      if newValue == true {
+        dueDate = Date()
+      }
+      else {
+        dueDate = nil
+      }
+    }
+  }
+  
+  var hasDueTime: Bool {
+    get {
+      dueTime != nil
+    }
+    set {
+      if newValue == true {
+        dueTime = Date()
+      }
+      else {
+        dueTime = nil
+      }
+    }
+  }
+
 }
 
 extension Priority: Codable, Equatable {

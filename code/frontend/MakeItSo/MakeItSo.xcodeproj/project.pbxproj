@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8816B25A272BF329009D3C98 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816B259272BF329009D3C98 /* TaskDetailsView.swift */; };
+		8816B25B272BF329009D3C98 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816B259272BF329009D3C98 /* TaskDetailsView.swift */; };
+		8816B25D272BF43A009D3C98 /* TaskDetailsViewModelswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816B25C272BF43A009D3C98 /* TaskDetailsViewModelswift.swift */; };
 		881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EF5BC272DC399004761E5 /* View+Focus.swift */; };
+		8816B25E272BF43A009D3C98 /* TaskDetailsViewModelswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816B25C272BF43A009D3C98 /* TaskDetailsViewModelswift.swift */; };
 		88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */; };
 		88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */; };
 		88FEECDE27275ABD00ED368C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88FEECCC27275ABD00ED368C /* Assets.xcassets */; };
@@ -24,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		881EF5BC272DC399004761E5 /* View+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Focus.swift"; sourceTree = "<group>"; };
+		8816B259272BF329009D3C98 /* TaskDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsView.swift; sourceTree = "<group>"; };
+		8816B25C272BF43A009D3C98 /* TaskDetailsViewModelswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewModelswift.swift; sourceTree = "<group>"; };
 		88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
 		88FEECCC27275ABD00ED368C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88FEECD127275ABD00ED368C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +135,7 @@
 			children = (
 				88FEECF22728044100ED368C /* TasksListView.swift */,
 				88FEECF927280F3D00ED368C /* TaskListRowView.swift */,
+				8816B259272BF329009D3C98 /* TaskDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				88FEECF62728072D00ED368C /* TasksListViewModel.swift */,
+				8816B25C272BF43A009D3C98 /* TaskDetailsViewModelswift.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -241,9 +249,11 @@
 			files = (
 				88FEECF02727FEFF00ED368C /* Task.swift in Sources */,
 				88FEECFA27280F3D00ED368C /* TaskListRowView.swift in Sources */,
+				8816B25A272BF329009D3C98 /* TaskDetailsView.swift in Sources */,
 				88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
 				881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */,
 				88FEECF32728044100ED368C /* TasksListView.swift in Sources */,
+				8816B25D272BF43A009D3C98 /* TaskDetailsViewModelswift.swift in Sources */,
 				88FEECF72728072D00ED368C /* TasksListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,8 +264,10 @@
 			files = (
 				88FEECF12727FEFF00ED368C /* Task.swift in Sources */,
 				88FEECFB27280F3D00ED368C /* TaskListRowView.swift in Sources */,
+				8816B25B272BF329009D3C98 /* TaskDetailsView.swift in Sources */,
 				88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
 				88FEECF42728044100ED368C /* TasksListView.swift in Sources */,
+				8816B25E272BF43A009D3C98 /* TaskDetailsViewModelswift.swift in Sources */,
 				88FEECF82728072D00ED368C /* TasksListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
