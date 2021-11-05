@@ -105,7 +105,11 @@ struct TaskDetailsView: View {
         }
         
         Section {
-          Text("TODO: Priority")
+          Picker("Priority", selection: $viewModel.task.priority) {
+            ForEach(Priority.allCases) { prio in
+              Text(prio.rawValue.capitalized)
+            }
+          }
         }
         
         Section {

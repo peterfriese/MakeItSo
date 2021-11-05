@@ -20,21 +20,27 @@
 import SwiftUI
 
 struct TaskListRowView: View {
-  @Binding var task: Task
+  @ObservedObject var viewModel: TaskListRowViewModel
+  
+  init(task: Binding<Task>) {
+    viewModel = TaskListRowViewModel(task: task)
+  }
   
   var body: some View {
     HStack {
-      Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
-        .foregroundColor(task.completed ? Color(UIColor.systemRed) : .gray)
+      Image(systemName: viewModel.task.completed ? "checkmark.circle.fill" : "circle")
+        .foregroundColor(viewModel.task.completed ? Color(UIColor.systemRed) : .gray)
         .font(.title3)
         .onTapGesture {
-          task.completed.toggle()
+          viewModel.task.completed.toggle()
         }
-      TextField("", text: $task.title)
+      Text(viewModel.priorityAdornment)
+        .foregroundColor(.accentColor)
+      TextField("", text: $viewModel.task.title)
         .lineLimit(3)
-        .padding(.trailing, task.flagged ? 20 : 0)
+        .padding(.trailing, viewModel.task.flagged ? 20 : 0)
         .overlay {
-          if task.flagged {
+          if viewModel.task.flagged {
           HStack {
             Spacer()
             Image(systemName: "flag.fill")
@@ -51,6 +57,10 @@ struct TaskListRowView_Previews: PreviewProvider {
     NavigationView {
       List {
         TaskListRowView(task: .constant(Task.samples[0]))
+        TaskListRowView(task: .constant(Task.samples[1]))
+        TaskListRowView(task: .constant(Task.samples[2]))
+        TaskListRowView(task: .constant(Task.samples[3]))
+        TaskListRowView(task: .constant(Task.samples[4]))
       }
       .listStyle(.plain)
       .navigationTitle("Tasks")

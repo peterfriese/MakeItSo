@@ -19,7 +19,7 @@
 
 import Foundation
 
-enum Priority {
+enum Priority: String {
   case none
   case low
   case medium
@@ -92,7 +92,20 @@ extension Task {
 
 }
 
-extension Priority: Codable, Equatable {
+extension Priority: Codable, Equatable, Identifiable {
+  var id: Priority { self }
+}
+
+// Conforming Priority to CaseIterable allows us to use it inside a `Picker` view
+extension Priority: CaseIterable { }
+
+// This allows us to determine the index of a case inside an enum.
+// For example, this is used to compute the representation of a
+// task priority (!, !!, !!!, or en empty string for "no priority").
+extension CaseIterable where Self: Equatable {
+  var index: Self.AllCases.Index? {
+    return Self.allCases.firstIndex { self == $0 }
+  }
 }
 
 extension Tag: Codable, Equatable {
@@ -113,10 +126,10 @@ extension Task: Hashable {
 
 extension Task {
   static let samples = [
-    Task(title: "Build sample app"),
+    Task(title: "Build sample app", priority: .high),
     Task(title: "Tweet about surprising findings", flagged: true),
-    Task(title: "Write newsletter"),
-    Task(title: "Run YouTube video series"),
+    Task(title: "Write newsletter", priority: .medium),
+    Task(title: "Run YouTube video series", priority: .low),
     Task(title: "???"),
 //    Task(title: "PROFIT!!")
   ]

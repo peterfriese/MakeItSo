@@ -37,6 +37,7 @@ struct TasksListView: View {
     List {
       ForEach($viewModel.tasks) { $task in
         TaskListRowView(task: $task)
+          .accentColor(Color(UIColor.systemRed))
           .focused($focusedTask, equals: .row(id: task.id))
           .onSubmit {
             viewModel.createNewTask()
