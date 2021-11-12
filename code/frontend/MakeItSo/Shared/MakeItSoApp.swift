@@ -27,9 +27,8 @@ struct MakeItSoApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        EmptyStateDemo()
-//        TasksListView()
-//          .environmentObject(viewModel)
+        TasksListView()
+          .environmentObject(viewModel)
       }
     }
   }
