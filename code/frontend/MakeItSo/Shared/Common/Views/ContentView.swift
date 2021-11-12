@@ -1,8 +1,8 @@
 //
-//  MakeItSoApp.swift
-//  MakeItSo
+//	DemoView01.swift
+//  MakeItSo (iOS)
 //
-//  Created by Peter Friese on 25.10.21.
+//  Created by Peter Friese on 12.11.21.
 //  Copyright © 2021 Google LLC. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,18 +19,21 @@
 
 import SwiftUI
 
-@main
-struct MakeItSoApp: App {
-  @StateObject
-  var viewModel = TasksListViewModel(tasks: Task.samples)
-  
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        EmptyStateDemo()
-//        TasksListView()
-//          .environmentObject(viewModel)
+struct ContentView: View {
+  @State var isEmpty = true
+  var body: some View {
+    VStack {
+      if isEmpty {
+        Text("Hello, World!")
+      } else {
+        EmptyView()
       }
     }
+  }
+}
+
+struct ContentView_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView()
   }
 }

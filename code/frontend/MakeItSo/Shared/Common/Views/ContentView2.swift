@@ -1,8 +1,8 @@
 //
-//  MakeItSoApp.swift
-//  MakeItSo
+//	ContentView2.swift
+//  MakeItSo (iOS)
 //
-//  Created by Peter Friese on 25.10.21.
+//  Created by Peter Friese on 12.11.21.
 //  Copyright © 2021 Google LLC. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,18 +19,18 @@
 
 import SwiftUI
 
-@main
-struct MakeItSoApp: App {
-  @StateObject
-  var viewModel = TasksListViewModel(tasks: Task.samples)
-  
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        EmptyStateDemo()
-//        TasksListView()
-//          .environmentObject(viewModel)
+struct ContentView2: View {
+  @State var isEmpty = true
+  var body: some View {
+    Text("Hello, World!")
+      .emptyState($isEmpty) {
+        Text("Sorry - no content available")
       }
-    }
+  }
+}
+
+struct ContentView2_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView2()
   }
 }
