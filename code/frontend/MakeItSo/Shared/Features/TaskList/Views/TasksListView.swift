@@ -56,7 +56,7 @@ struct TasksListView: View {
           }
       }
     }
-    .emptyState(!$viewModel.tasks.isEmpty) {
+    .emptyState($viewModel.tasks.isEmpty) {
       Text("No Reminders")
         .font(.title3)
         .foregroundColor(Color.secondary)
