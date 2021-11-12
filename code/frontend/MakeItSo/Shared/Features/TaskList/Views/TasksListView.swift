@@ -56,6 +56,11 @@ struct TasksListView: View {
           }
       }
     }
+    .emptyState(!$viewModel.tasks.isEmpty) {
+      Text("No Reminders")
+        .font(.title3)
+        .foregroundColor(Color.secondary)
+    }
     .sync($viewModel.focusedTask, $focusedTask)
     .animation(.default, value: viewModel.tasks)
     .listStyle(.plain)
