@@ -22,8 +22,14 @@ import Combine
 
 class ReminderDetailsViewModel: ObservableObject {
   @Published var reminder: Reminder
+  private var original: Reminder
   
   init(reminder: Reminder) {
     self.reminder = reminder
+    original = reminder
+  }
+  
+  var isModified: Bool {
+    original != reminder
   }
 }
