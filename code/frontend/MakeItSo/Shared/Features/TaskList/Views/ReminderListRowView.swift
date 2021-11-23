@@ -1,5 +1,5 @@
 //
-//	TaskListRowView.swift
+//	ReminderListRowView.swift
 //  MakeItSo
 //
 //  Created by Peter Friese on 26.10.21.
@@ -19,21 +19,21 @@
 
 import SwiftUI
 
-struct TaskListRowView: View {
-  @Binding var task: Task
+struct ReminderListRowView: View {
+  @Binding var reminder: Reminder
   
   var body: some View {
     HStack {
-      Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
-        .foregroundColor(task.completed ? Color(UIColor.systemRed) : .gray)
+      Image(systemName: reminder.completed ? "checkmark.circle.fill" : "circle")
+        .foregroundColor(reminder.completed ? Color(UIColor.systemRed) : .gray)
         .font(.title3)
         .onTapGesture {
-          task.completed.toggle()
+          reminder.completed.toggle()
         }
-      TextField("", text: $task.title)
-        .padding(.trailing, task.flagged ? 20 : 0)
+      TextField("", text: $reminder.title)
+        .padding(.trailing, reminder.flagged ? 20 : 0)
         .overlay {
-          if task.flagged {
+          if reminder.flagged {
           HStack {
             Spacer()
             Image(systemName: "flag.fill")
@@ -45,14 +45,14 @@ struct TaskListRowView: View {
   }
 }
 
-struct TaskListRowView_Previews: PreviewProvider {
+struct ReminderListRowView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
       List {
-        TaskListRowView(task: .constant(Task.samples[0]))
+        ReminderListRowView(reminder: .constant(Reminder.samples[0]))
       }
       .listStyle(.plain)
-      .navigationTitle("Tasks")
+      .navigationTitle("Reminders")
     }
   }
 }

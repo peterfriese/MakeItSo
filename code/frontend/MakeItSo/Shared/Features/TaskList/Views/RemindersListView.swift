@@ -1,5 +1,5 @@
 //
-//	TasksListView.swift
+//	RemindersListView.swift
 //  MakeItSo
 //
 //  Created by Peter Friese on 26.10.21.
@@ -19,12 +19,12 @@
 
 import SwiftUI
 
-struct TasksListView: View {
+struct RemindersListView: View {
   @EnvironmentObject
-  var viewModel: TasksListViewModel
+  var viewModel: RemindersListViewModel
   
   @FocusState
-  var focusedTask: Focusable?
+  var focusedReminder: Focusable?
   
   init() {
     // Turn this into a view modifier. See [Navigation Bar Styling in SwiftUI - YouTube](https://youtu.be/kCJyhG8zjvY)
@@ -35,17 +35,17 @@ struct TasksListView: View {
   
   var body: some View {
     List {
-      ForEach($viewModel.tasks) { $task in
-        TaskListRowView(task: $task)
-          .focused($focusedTask, equals: .row(id: task.id))
+      ForEach($viewModel.reminders) { $reminder in
+        ReminderListRowView(reminder: $reminder)
+          .focused($focusedReminder, equals: .row(id: reminder.id))
           .onSubmit {
-            viewModel.createNewTask()
+            viewModel.createNewReminder()
           }
           .swipeActions {
-            Button(role: .destructive, action: { viewModel.deleteTask(task) }) {
+            Button(role: .destructive, action: { viewModel.deleteReminder(reminder) }) {
               Label("Delete", systemImage: "trash")
             }
-            Button(action: { viewModel.flagTask(task) }) {
+            Button(action: { viewModel.flagReminder(reminder) }) {
               Label("Flag", systemImage: "flag")
             }
             .tint(Color(UIColor.systemOrange))
@@ -56,18 +56,18 @@ struct TasksListView: View {
           }
       }
     }
-    .emptyState($viewModel.tasks.isEmpty) {
+    .emptyState($viewModel.reminders.isEmpty) {
       Text("No Reminders")
         .font(.title3)
         .foregroundColor(Color.secondary)
     }
-    .sync($viewModel.focusedTask, $focusedTask)
-    .animation(.default, value: viewModel.tasks)
+    .sync($viewModel.focusedReminder, $focusedReminder)
+    .animation(.default, value: viewModel.reminders)
     .listStyle(.plain)
-    .navigationTitle("Tasks")
+    .navigationTitle("Reminders")
     .toolbar {
       ToolbarItemGroup(placement: .bottomBar) {
-        Button(action: { viewModel.createNewTask() }) {
+        Button(action: { viewModel.createNewReminder() }) {
           HStack {
             Image(systemName: "plus.circle.fill")
             Text("New Reminder")
@@ -81,12 +81,12 @@ struct TasksListView: View {
   }
 }
 
-struct TasksListView_Previews: PreviewProvider {
-  static var viewModel = TasksListViewModel(tasks: Task.samples)
+struct ReminderssListView_Previews: PreviewProvider {
+  static var viewModel = RemindersListViewModel(reminders: Reminder.samples)
   
   static var previews: some View {
     NavigationView {
-      TasksListView()
+      RemindersListView()
         .environmentObject(viewModel)
     }
   }

@@ -1,5 +1,5 @@
 //
-//	Task.swift
+//	Reminder.swift
 //  MakeItSo
 //
 //  Created by Peter Friese on 26.10.21.
@@ -33,7 +33,7 @@ struct Tag {
 struct Location {
 }
 
-struct Task {
+struct Reminder {
   var id: String = UUID().uuidString
   var title: String
   var notes: String?
@@ -53,7 +53,7 @@ struct Task {
   var priority: Priority = .none
   // TODO: parent list
 
-  // TODO: subtasks
+  // TODO: subtasks (it's interesting to note that these are actually called "subtasks" in the UI of Apple's Reminders app!
 
   // TOOD: images
 
@@ -70,23 +70,23 @@ extension Tag: Codable, Equatable {
 extension Location: Codable, Equatable {
 }
 
-extension Task: Codable, Identifiable, Equatable {
+extension Reminder: Codable, Identifiable, Equatable {
 }
 
 // so we can use Array.difference
-extension Task: Hashable {
+extension Reminder: Hashable {
   func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 }
 
-extension Task {
+extension Reminder {
   static let samples = [
-    Task(title: "Build sample app"),
-    Task(title: "Tweet about surprising findings", flagged: true),
-    Task(title: "Write newsletter"),
-    Task(title: "Run YouTube video series"),
-    Task(title: "???"),
-//    Task(title: "PROFIT!!")
+    Reminder(title: "Build sample app"),
+    Reminder(title: "Tweet about surprising findings", flagged: true),
+    Reminder(title: "Write newsletter"),
+    Reminder(title: "Run YouTube video series"),
+    Reminder(title: "???"),
+//    Reminder(title: "PROFIT!!")
   ]
 }

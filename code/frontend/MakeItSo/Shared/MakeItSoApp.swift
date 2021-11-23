@@ -22,12 +22,12 @@ import SwiftUI
 @main
 struct MakeItSoApp: App {
   @StateObject
-  var viewModel = TasksListViewModel(tasks: Task.samples)
+  var viewModel = RemindersListViewModel(reminders: Reminder.samples)
   
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        TasksListView()
+        RemindersListView()
           .environmentObject(viewModel)
       }
     }
