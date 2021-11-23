@@ -49,7 +49,7 @@ struct RemindersListView: View {
               Label("Flag", systemImage: "flag")
             }
             .tint(Color(UIColor.systemOrange))
-            Button(action: {}) {
+            Button(action: { viewModel.selectedReminder = reminder }) {
               Label("Details", systemImage: "ellipsis")
             }
             .tint(Color(UIColor.systemGray))
@@ -65,6 +65,11 @@ struct RemindersListView: View {
     .animation(.default, value: viewModel.reminders)
     .listStyle(.plain)
     .navigationTitle("Reminders")
+    .sheet(item: $viewModel.selectedReminder) { reminder in
+      ReminderDetailsView(reminder: reminder) { updatedReminder in
+        viewModel.updateReminder(updatedReminder)
+      }
+    }
     .toolbar {
       ToolbarItemGroup(placement: .bottomBar) {
         Button(action: { viewModel.createNewReminder() }) {

@@ -34,11 +34,11 @@ struct ReminderListRowView: View {
         .padding(.trailing, reminder.flagged ? 20 : 0)
         .overlay {
           if reminder.flagged {
-          HStack {
-            Spacer()
-            Image(systemName: "flag.fill")
-              .foregroundColor(Color(UIColor.systemOrange))
-          }
+            HStack {
+              Spacer()
+              Image(systemName: "flag.fill")
+                .foregroundColor(Color(UIColor.systemOrange))
+            }
           }
         }
     }

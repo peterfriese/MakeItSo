@@ -23,6 +23,7 @@ import SwiftUI
 
 class RemindersListViewModel: ObservableObject {
   @Published var reminders: [Reminder]
+  @Published var selectedReminder: Reminder?
   @Published var focusedReminder: Focusable?
   var previousFocusedReminder: Focusable?
   
@@ -109,6 +110,12 @@ class RemindersListViewModel: ObservableObject {
         self.reminders.removeAll { $0.id == reminder.id }
       }
       .store(in: &cancellables)
+  }
+  
+  func updateReminder(_ reminder: Reminder) {
+    if let index = reminders.firstIndex(where: { $0.id == reminder.id} ) {
+      reminders[index] = reminder
+    }
   }
   
   func flagReminder(_ reminder: Reminder) {
