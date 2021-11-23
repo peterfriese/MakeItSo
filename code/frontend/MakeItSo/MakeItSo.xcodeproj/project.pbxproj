@@ -121,19 +121,19 @@
 		88FEECEB2727FEC100ED368C /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				88FEECEC2727FECA00ED368C /* TaskList */,
+				88FEECEC2727FECA00ED368C /* ReminderList */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		88FEECEC2727FECA00ED368C /* TaskList */ = {
+		88FEECEC2727FECA00ED368C /* ReminderList */ = {
 			isa = PBXGroup;
 			children = (
 				88FEECED2727FED500ED368C /* Models */,
 				88FEECF52728070600ED368C /* ViewModels */,
 				88FEECEE2727FEDE00ED368C /* Views */,
 			);
-			path = TaskList;
+			path = ReminderList;
 			sourceTree = "<group>";
 		};
 		88FEECED2727FED500ED368C /* Models */ = {
