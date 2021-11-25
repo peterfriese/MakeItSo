@@ -15,6 +15,7 @@
 		88E7B7BE274CF30A00AF477D /* ReminderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */; };
 		88E7B7BF274CF30A00AF477D /* ReminderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */; };
 		88FA998D274D63A400670474 /* View+ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA998C274D63A400670474 /* View+ConfirmationDialog.swift */; };
+		88FA99922750090200670474 /* View+InteractiveDismissDisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FA99912750090200670474 /* View+InteractiveDismissDisable.swift */; };
 		88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */; };
 		88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */; };
 		88FEECDE27275ABD00ED368C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88FEECCC27275ABD00ED368C /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		88C30CD5274D1B4500E6694D /* ReminderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsViewModel.swift; sourceTree = "<group>"; };
 		88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsView.swift; sourceTree = "<group>"; };
 		88FA998C274D63A400670474 /* View+ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ConfirmationDialog.swift"; sourceTree = "<group>"; };
+		88FA99912750090200670474 /* View+InteractiveDismissDisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+InteractiveDismissDisable.swift"; sourceTree = "<group>"; };
 		88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
 		88FEECCC27275ABD00ED368C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88FEECD127275ABD00ED368C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +71,7 @@
 			children = (
 				881EF5BC272DC399004761E5 /* View+Focus.swift */,
 				88FA998C274D63A400670474 /* View+ConfirmationDialog.swift */,
+				88FA99912750090200670474 /* View+InteractiveDismissDisable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				88FEECF02727FEFF00ED368C /* Reminder.swift in Sources */,
 				88FA998D274D63A400670474 /* View+ConfirmationDialog.swift in Sources */,
 				88FEECFA27280F3D00ED368C /* ReminderListRowView.swift in Sources */,
+				88FA99922750090200670474 /* View+InteractiveDismissDisable.swift in Sources */,
 				887B6FAD273ED4180028263D /* EmptyStateView.swift in Sources */,
 				88E7B7BE274CF30A00AF477D /* ReminderDetailsView.swift in Sources */,
 				88C30CD6274D1B4500E6694D /* ReminderDetailsViewModel.swift in Sources */,

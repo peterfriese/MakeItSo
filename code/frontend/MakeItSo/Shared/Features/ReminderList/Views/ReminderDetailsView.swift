@@ -31,29 +31,27 @@ struct ReminderDetailsView: View {
   }
   
   var body: some View {
-    NavigationView {
-      Form {
-        Section {
-          TextField("Title", text: $viewModel.reminder.title)
-        }
-        Section {
-          Toggle(isOn: $viewModel.reminder.flagged) {
-            HStack {
-              Image(systemName: "flag.fill")
-                .frame(width: 26, height: 26, alignment: .center)
-                .background(.orange)
-                .foregroundColor(.white)
-                .cornerRadius(4)
-              Text("Flag")
-            }
+    Form {
+      Section {
+        TextField("Title", text: $viewModel.reminder.title)
+      }
+      Section {
+        Toggle(isOn: $viewModel.reminder.flagged) {
+          HStack {
+            Image(systemName: "flag.fill")
+              .frame(width: 26, height: 26, alignment: .center)
+              .background(.orange)
+              .foregroundColor(.white)
+              .cornerRadius(4)
+            Text("Flag")
           }
         }
       }
-      .navigationTitle("Details")
-      .navigationBarTitleDisplayMode(.inline)
-      .confirmationDialog(isModified: viewModel.isModified) {
-        onCommit(viewModel.reminder)
-      }
+    }
+    .navigationTitle("Details")
+    .navigationBarTitleDisplayMode(.inline)
+    .confirmationDialog(isModified: viewModel.isModified) {
+      onCommit(viewModel.reminder)
     }
   }
 }

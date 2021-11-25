@@ -38,27 +38,34 @@ struct ConfirmationDialog: ViewModifier {
   }
   
   func body(content: Content) -> some View {
-    content
-      .toolbar {
-        ToolbarItem(placement: .cancellationAction) {
-          Button("Cancel", role: .cancel) {
-            if isModified {
-              presentingConfirmationDialog.toggle()
-            }
-            else {
-              doCancel()
+    NavigationView {
+      content
+        .toolbar {
+          ToolbarItem(placement: .cancellationAction) {
+            Button("Cancel", role: .cancel) {
+              if isModified {
+                presentingConfirmationDialog.toggle()
+              }
+              else {
+                doCancel()
+              }
             }
           }
+          ToolbarItem(placement: .confirmationAction) {
+            Button("Done", action: doCommit)
+          }
         }
-        ToolbarItem(placement: .confirmationAction) {
-          Button("Done", action: doCommit)
+        .confirmationDialog("", isPresented: $presentingConfirmationDialog) {
+          Button("Discard Changes", role: .destructive, action: doCancel)
+          Button("Cancel", role: .cancel, action: { })
         }
-      }
-      .interactiveDismissDisabled(isModified)
-      .confirmationDialog("", isPresented: $presentingConfirmationDialog) {
-        Button("Discard Changes", role: .destructive, action: doCancel)
-        Button("Cancel", role: .cancel, action: { })
-      }
+    }
+    // Option 1: use a closure to handle the attempt to dismiss
+//    .interactiveDismissDisabled(isModified) {
+//      presentingConfirmationDialog.toggle()
+//    }
+    // Option 2: bind attempt to dismiss to a boolean state variable that drives the UI
+    .interactiveDismissDisabled(isModified, attemptToDismiss: $presentingConfirmationDialog)
   }
 }
 
