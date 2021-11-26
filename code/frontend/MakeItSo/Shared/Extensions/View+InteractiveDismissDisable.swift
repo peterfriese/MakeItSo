@@ -19,7 +19,19 @@
 
 import SwiftUI
 
-struct InteractiveDismissableView<T: View>: UIViewControllerRepresentable {
+extension View {
+  public func interactiveDismissDisabled(_ isDisabled: Bool = true, onAttemptToDismiss: (() -> Void)? = nil) -> some View {
+    InteractiveDismissableView(view: self, isDisabled: isDisabled, onAttemptToDismiss: onAttemptToDismiss)
+  }
+  
+  public func interactiveDismissDisabled(_ isDisabled: Bool = true, attemptToDismiss: Binding<Bool>) -> some View {
+    InteractiveDismissableView(view: self, isDisabled: isDisabled) {
+      attemptToDismiss.wrappedValue.toggle()
+    }
+  }
+}
+
+private struct InteractiveDismissableView<T: View>: UIViewControllerRepresentable {
   let view: T
   let isDisabled: Bool
   let onAttemptToDismiss: (() -> Void)?
@@ -55,15 +67,75 @@ struct InteractiveDismissableView<T: View>: UIViewControllerRepresentable {
   }
 }
 
-extension View {
-  public func interactiveDismissDisabled(_ isDisabled: Bool = true, onAttemptToDismiss: (() -> Void)? = nil) -> some View {
-    InteractiveDismissableView(view: self, isDisabled: isDisabled, onAttemptToDismiss: onAttemptToDismiss)
-  }
-  
-  public func interactiveDismissDisabled(_ isDisabled: Bool = true, attemptToDismiss: Binding<Bool>) -> some View {
-    InteractiveDismissableView(view: self, isDisabled: isDisabled) {
-      attemptToDismiss.wrappedValue.toggle()
+struct ContentView: View {
+  @State var showingSheet = false
+  @State var name: String = "Johnny Appleseed"
+  var body: some View {
+    Form {
+      Section("User Profile") {
+        Text(name)
+      }
+      Button("Edit", action: { showingSheet.toggle() })
+    }
+    .sheet(isPresented: $showingSheet) {
+      EditView(name: $name)
     }
   }
+}
 
+private class ViewModel: ObservableObject {
+  @Published var name: String
+  private var original: String
+  
+  var isModified: Bool {
+    print("\(name) - \(original)")
+    return name != original
+  }
+  
+  init(name: String) {
+    self.name = name
+    self.original = name
+  }
+}
+
+private struct EditView: View {
+  @Environment(\.dismiss)  var dismiss
+  @Binding var name: String
+  
+  @StateObject private var viewModel: ViewModel
+  @State var showingConfirmationDialog = false
+  
+  init(name: Binding<String>) {
+    self._name = name
+    self._viewModel = StateObject(wrappedValue: ViewModel(name: name.wrappedValue))
+  }
+  
+  var body: some View {
+    NavigationView {
+      Form {
+        TextField("Enter your name", text: $viewModel.name)
+      }
+      .navigationTitle("Edit")
+      .navigationBarTitleDisplayMode(.inline)
+    }
+    .interactiveDismissDisabled(viewModel.isModified) {
+      showingConfirmationDialog.toggle()
+    }
+    .confirmationDialog("", isPresented: $showingConfirmationDialog) {
+      Button("Save") {
+        name = viewModel.name
+        dismiss()
+      }
+      Button("Discard", role: .destructive) {
+        dismiss()
+      }
+      Button("Cancel", role: .cancel) { }
+    }
+  }
+}
+
+struct ContentView_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView()
+  }
 }
