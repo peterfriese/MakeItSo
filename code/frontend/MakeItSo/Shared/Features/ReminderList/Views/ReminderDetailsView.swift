@@ -20,50 +20,38 @@
 import SwiftUI
 
 struct ReminderDetailsView: View {
-  @Environment(\.dismiss) private var dismiss
   @ObservedObject private var viewModel: ReminderDetailsViewModel
   
+  private var onCancel: (() -> Void)?
   private var onCommit: (Reminder) -> Void
   
-  init(reminder: Reminder, onCommit: @escaping (Reminder) -> Void) {
+  init(reminder: Reminder, onCancel: (() -> Void)? = nil, onCommit: @escaping (Reminder) -> Void) {
     self.viewModel = ReminderDetailsViewModel(reminder: reminder)
     self.onCommit = onCommit
   }
   
   var body: some View {
-    NavigationView {
-      Form {
-        Section {
-          TextField("Title", text: $viewModel.reminder.title)
-        }
-        Section {
-          Toggle(isOn: $viewModel.reminder.flagged) {
-            HStack {
-              Image(systemName: "flag.fill")
-                .frame(width: 26, height: 26, alignment: .center)
-                .background(.orange)
-                .foregroundColor(.white)
-                .cornerRadius(4)
-              Text("Flag")
-            }
+    Form {
+      Section {
+        TextField("Title", text: $viewModel.reminder.title)
+      }
+      Section {
+        Toggle(isOn: $viewModel.reminder.flagged) {
+          HStack {
+            Image(systemName: "flag.fill")
+              .frame(width: 26, height: 26, alignment: .center)
+              .background(.orange)
+              .foregroundColor(.white)
+              .cornerRadius(4)
+            Text("Flag")
           }
         }
       }
-      .navigationTitle("Details")
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        ToolbarItem(placement: .cancellationAction) {
-          Button("Cancel", role: .cancel) {
-            dismiss()
-          }
-        }
-        ToolbarItem(placement: .confirmationAction) {
-          Button("Done") {
-            onCommit(viewModel.reminder)
-            dismiss()
-          }
-        }
-      }
+    }
+    .navigationTitle("Details")
+    .navigationBarTitleDisplayMode(.inline)
+    .confirmationDialog(isModified: viewModel.isModified) {
+      onCommit(viewModel.reminder)
     }
   }
 }
