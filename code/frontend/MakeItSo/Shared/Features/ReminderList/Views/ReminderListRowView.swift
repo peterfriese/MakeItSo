@@ -20,27 +20,44 @@
 import SwiftUI
 
 struct ReminderListRowView: View {
-  @Binding var reminder: Reminder
+  @ObservedObject var viewModel: ReminderListRowViewModel
+  
+  init(reminder: Binding<Reminder>) {
+    viewModel = ReminderListRowViewModel(reminder: reminder)
+  }
   
   var body: some View {
-    HStack {
-      Image(systemName: reminder.completed ? "checkmark.circle.fill" : "circle")
-        .foregroundColor(reminder.completed ? Color(UIColor.systemRed) : .gray)
+    HStack(alignment: .top) {
+      Image(systemName: viewModel.reminder.completed ? "checkmark.circle.fill" : "circle")
+        .foregroundColor(viewModel.reminder.completed ? Color(UIColor.systemRed) : .gray)
         .font(.title3)
         .onTapGesture {
-          reminder.completed.toggle()
+          viewModel.reminder.completed.toggle()
         }
-      TextField("", text: $reminder.title)
-        .padding(.trailing, reminder.flagged ? 20 : 0)
-        .overlay {
-          if reminder.flagged {
-            HStack {
-              Spacer()
-              Image(systemName: "flag.fill")
-                .foregroundColor(Color(UIColor.systemOrange))
-            }
+      VStack(alignment: .leading) {
+        HStack {
+          if viewModel.reminder.priority > .none {
+            Text(viewModel.priorityAdornment)
+              .foregroundColor(.accentColor)
           }
+          TextField("", text: $viewModel.reminder.title)
+            .padding(.trailing, viewModel.reminder.flagged ? 20 : 0)
+            .overlay {
+              if viewModel.reminder.flagged {
+                HStack {
+                  Spacer()
+                  Image(systemName: "flag.fill")
+                    .foregroundColor(Color(UIColor.systemOrange))
+                }
+              }
+            }
         }
+        if viewModel.hasDueDate {
+          Text(viewModel.formattedDueDate)
+            .font(.caption)
+            .foregroundColor(Color(UIColor.systemGray))
+        }
+      }
     }
   }
 }
@@ -50,6 +67,8 @@ struct ReminderListRowView_Previews: PreviewProvider {
     NavigationView {
       List {
         ReminderListRowView(reminder: .constant(Reminder.samples[0]))
+        ReminderListRowView(reminder: .constant(Reminder.samples[1]))
+        ReminderListRowView(reminder: .constant(Reminder.samples[2]))
       }
       .listStyle(.plain)
       .navigationTitle("Reminders")

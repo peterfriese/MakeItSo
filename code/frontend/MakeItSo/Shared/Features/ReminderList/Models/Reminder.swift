@@ -19,7 +19,7 @@
 
 import Foundation
 
-enum Priority {
+enum Priority: String {
   case none
   case low
   case medium
@@ -37,10 +37,10 @@ struct Reminder {
   var id: String = UUID().uuidString
   var title: String
   var notes: String?
-  var url: URL?
+  var url: String?
   
   var dueDate: Date?
-  var dueTime: Date?
+  var hasDueTime: Bool = false
 
   var tags: [Tag]?
 
@@ -61,7 +61,27 @@ struct Reminder {
   var order: Int = 0
 }
 
-extension Priority: Codable, Equatable {
+extension Priority: Codable, Equatable, Identifiable {
+  var id: Priority { self }
+}
+
+extension Priority: Comparable {
+  static func < (lhs: Priority, rhs: Priority) -> Bool {
+    guard let l = lhs.index, let r = rhs.index else { return false }
+    return l < r
+  }
+}
+
+// Conforming Priority to CaseIterable allows us to use it inside a `Picker` view
+extension Priority: CaseIterable { }
+
+// This allows us to determine the index of a case inside an enum.
+// For example, this is used to compute the representation of a
+// task priority (!, !!, !!!, or en empty string for "no priority").
+extension CaseIterable where Self: Equatable {
+  var index: Self.AllCases.Index? {
+    return Self.allCases.firstIndex { self == $0 }
+  }
 }
 
 extension Tag: Codable, Equatable {
@@ -82,9 +102,9 @@ extension Reminder: Hashable {
 
 extension Reminder {
   static let samples = [
-    Reminder(title: "Build sample app"),
-    Reminder(title: "Tweet about surprising findings", flagged: true),
-    Reminder(title: "Write newsletter"),
+    Reminder(title: "Build sample app", dueDate: Date.now, priority: .high),
+    Reminder(title: "Tweet about surprising findings", dueDate: Date.now, flagged: true),
+    Reminder(title: "Write newsletter", priority: .medium),
     Reminder(title: "Run YouTube video series"),
     Reminder(title: "???"),
 //    Reminder(title: "PROFIT!!")

@@ -37,6 +37,7 @@ struct RemindersListView: View {
     List {
       ForEach($viewModel.reminders) { $reminder in
         ReminderListRowView(reminder: $reminder)
+          .accentColor(Color(UIColor.systemRed))
           .focused($focusedReminder, equals: .row(id: reminder.id))
           .onSubmit {
             viewModel.createNewReminder()
