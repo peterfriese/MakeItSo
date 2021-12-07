@@ -24,12 +24,27 @@ struct MakeItSoApp: App {
   @StateObject
   var viewModel = RemindersListViewModel(reminders: Reminder.samples)
   
+  init() {
+    let navBarAppearance = UINavigationBarAppearance()
+    
+    navBarAppearance.largeTitleTextAttributes[.font] = UIFont.roundedLargeTitle()
+    navBarAppearance.largeTitleTextAttributes[.foregroundColor] = UIColor(Color.accentColor)
+    navBarAppearance.titleTextAttributes[.font] = UIFont.roundedHeadline()
+    // Purposefully don't set the foreground color for normal text nav bar -
+    // in Reminders.app, this isn't tinted as well!
+    // navBarAppearance.titleTextAttributes[.foregroundColor] = foregroundColor
+    
+    UINavigationBar.appearance().standardAppearance = navBarAppearance
+  }
+
   var body: some Scene {
     WindowGroup {
       NavigationView {
         RemindersListView()
+          .font(.system(.body, design: .rounded))
           .environmentObject(viewModel)
       }
+      .accentColor(.red)
     }
   }
 }

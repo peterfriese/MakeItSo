@@ -26,18 +26,10 @@ struct RemindersListView: View {
   @FocusState
   var focusedReminder: Focusable?
   
-  init() {
-    // Turn this into a view modifier. See [Navigation Bar Styling in SwiftUI - YouTube](https://youtu.be/kCJyhG8zjvY)
-    let navBarAppearance = UINavigationBarAppearance()
-    navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemRed]
-    UINavigationBar.appearance().standardAppearance = navBarAppearance
-  }
-  
   var body: some View {
     List {
       ForEach($viewModel.reminders) { $reminder in
         ReminderListRowView(reminder: $reminder)
-          .accentColor(Color(UIColor.systemRed))
           .focused($focusedReminder, equals: .row(id: reminder.id))
           .onSubmit {
             viewModel.createNewReminder()
@@ -79,7 +71,6 @@ struct RemindersListView: View {
             Text("New Reminder")
           }
         }
-        .accentColor(Color(UIColor.systemRed))
         // needed to push the button to the left
         Spacer()
       }
