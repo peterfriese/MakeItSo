@@ -27,7 +27,7 @@ class ReminderListRowViewModel: ObservableObject {
   }
   
   var priorityAdornment: String {
-    String(repeating: "!", count: (reminder.priority.index ?? 0))
+     String(repeating: "!", count: (reminder.priority.index ))
   }
   
   var hasDueDate: Bool {

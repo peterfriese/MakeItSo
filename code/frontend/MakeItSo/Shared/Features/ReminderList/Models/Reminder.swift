@@ -16,72 +16,75 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 import Foundation
 
-enum Priority: String {
-  case none
-  case low
-  case medium
-  case high
+enum Priority: String, Pickable, Codable {
+   case none, low, medium, high
+}
+extension Priority: Comparable {
+   static func < (lhs: Priority, rhs: Priority) -> Bool {
+      lhs.index < rhs.index
+   }
+
+   var index: Int {
+      switch self {
+         case .none: return 0
+         case .low: return 1
+         case .medium: return 2
+         case .high: return 3
+      }
+   }
+}
+
+enum Repeat: String, Pickable, Codable {
+   case never, daily, weekdays, weekends, weekly, fortnightly, monthly, every3months, every6months, yearly
+
+   var description: String {
+      switch self {
+         case .every3months: return "Every 3 months"
+         case .every6months: return "Every 6 months"
+         default:  return self.rawValue.capitalized
+      }
+   }
 }
 
 struct Tag {
-  var title: String
+   var title: String
 }
 
 struct Location {
 }
 
 struct Reminder {
-  var id: String = UUID().uuidString
-  var title: String
-  var notes: String?
-  var url: String?
-  
-  var dueDate: Date?
-  var hasDueTime: Bool = false
+   var id: String = UUID().uuidString
+   var title: String
+   var notes: String?
+   var url: String?
 
-  var tags: [Tag]?
+   var dueDate: Date?
+   var hasDueTime: Bool = false
 
-  var location: Location?
+   var repeatFrequency: Repeat = .never
+   var repeatEndDate: Date?
 
-  // TODO: when messaging
+   var tags: [Tag]?
 
-  var flagged: Bool = false
+   var location: Location?
 
-  var priority: Priority = .none
-  // TODO: parent list
+   // TODO: when messaging
 
-  // TODO: subtasks (it's interesting to note that these are actually called "subtasks" in the UI of Apple's Reminders app!
+   var flagged: Bool = false
 
-  // TOOD: images
+   var priority: Priority = .none
+   // TODO: parent list
 
-  var completed: Bool = false
-  var order: Int = 0
-}
+   // TODO: subtasks (it's interesting to note that these are actually
+   //       called "subtasks" in the UI of Apple's Reminders app!
 
-extension Priority: Codable, Equatable, Identifiable {
-  var id: Priority { self }
-}
+   // TOOD: images
 
-extension Priority: Comparable {
-  static func < (lhs: Priority, rhs: Priority) -> Bool {
-    guard let l = lhs.index, let r = rhs.index else { return false }
-    return l < r
-  }
-}
-
-// Conforming Priority to CaseIterable allows us to use it inside a `Picker` view
-extension Priority: CaseIterable { }
-
-// This allows us to determine the index of a case inside an enum.
-// For example, this is used to compute the representation of a
-// task priority (!, !!, !!!, or en empty string for "no priority").
-extension CaseIterable where Self: Equatable {
-  var index: Self.AllCases.Index? {
-    return Self.allCases.firstIndex { self == $0 }
-  }
+   var completed: Bool = false
+   var order: Int = 0
 }
 
 extension Tag: Codable, Equatable {
@@ -95,18 +98,18 @@ extension Reminder: Codable, Identifiable, Equatable {
 
 // so we can use Array.difference
 extension Reminder: Hashable {
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
+   func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
+   }
 }
 
 extension Reminder {
-  static let samples = [
-    Reminder(title: "Build sample app", dueDate: Date.now, priority: .high),
-    Reminder(title: "Tweet about surprising findings", dueDate: Date.now, flagged: true),
-    Reminder(title: "Write newsletter", priority: .medium),
-    Reminder(title: "Run YouTube video series"),
-    Reminder(title: "???"),
-//    Reminder(title: "PROFIT!!")
-  ]
+   static let samples = [
+      Reminder(title: "Build sample app", dueDate: Date.now, priority: .high),
+      Reminder(title: "Tweet about surprising findings", dueDate: Date.now, flagged: true),
+      Reminder(title: "Write newsletter", priority: .medium),
+      Reminder(title: "Run YouTube video series"),
+      Reminder(title: "???")
+      //    Reminder(title: "PROFIT!!")
+   ]
 }

@@ -20,15 +20,16 @@
 import SwiftUI
 
 struct ReminderDetailsView: View {
-  @ObservedObject private var viewModel: ReminderDetailsViewModel
-  
-  private var onCancel: (() -> Void)?
-  private var onCommit: (Reminder) -> Void
-  
-  init(reminder: Reminder, onCancel: (() -> Void)? = nil, onCommit: @escaping (Reminder) -> Void) {
-    self.viewModel = ReminderDetailsViewModel(reminder: reminder)
-    self.onCommit = onCommit
-  }
+   @StateObject private var viewModel: ReminderDetailsViewModel
+
+   private var onCancel: (() -> Void)?
+   private var onCommit: (Reminder) -> Void
+
+   init(reminder: Reminder, onCancel: (() -> Void)? = nil, onCommit: @escaping (Reminder) -> Void) {
+      self._viewModel = StateObject(wrappedValue: ReminderDetailsViewModel(reminder: reminder))
+      self.onCommit = onCommit
+      self.onCancel = onCancel
+   }
   
   var body: some View {
     Form {
@@ -38,59 +39,18 @@ struct ReminderDetailsView: View {
         TextField("URL", text: $viewModel.url)
       }
       Section {
-        Toggle(isOn: $viewModel.hasDueDate) {
-          HStack {
-            Image(systemName: "calendar")
-              .frame(width: 26, height: 26, alignment: .center)
-              .background(.red)
-              .foregroundColor(.white)
-              .cornerRadius(4)
-            VStack(alignment: .leading) {
-              Text("Date")
-              if viewModel.hasDueDate {
-                Text(viewModel.dueDate.formattedRelativeToday())
-                  .font(.caption2)
-                  .foregroundColor(.blue)
-              }            }
+        DateTimeSection()
+      }
+      Section {
+          InsetPicker("Repeat", selection: $viewModel.repeatFrequency)
+          if viewModel.repeatFrequency != .never {
+             DatePicker("EndDate", selection: $viewModel.repeatEndDate, displayedComponents: .date)
+                .datePickerStyle(.graphical)
           }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          withAnimation {
-            viewModel.toggleDatePicker()
-          }
-        }
-        if viewModel.hasDueDate && viewModel.isShowingDatePicker {
-          DatePicker("Date", selection: $viewModel.dueDate, displayedComponents: .date)
-            .datePickerStyle(.graphical)
-        }
-        
-        Toggle(isOn: $viewModel.hasDueTime) {
-          HStack {
-            Image(systemName: "clock")
-              .frame(width: 26, height: 26, alignment: .center)
-              .background(.blue)
-              .foregroundColor(.white)
-              .cornerRadius(4)
-            VStack(alignment: .leading) {
-              Text("Time")
-              if (viewModel.hasDueTime) {
-                Text(viewModel.dueTime, style: .time)
-                  .font(.caption2)
-                  .foregroundColor(.blue)
-              }            }
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          withAnimation {
-            viewModel.toggleTimePicker()
-          }
-        }
-        if viewModel.hasDueTime && viewModel.isShowingTimePicker {
-          DatePicker("Date", selection: $viewModel.dueTime, displayedComponents: .hourAndMinute)
-            .datePickerStyle(.wheel)
-        }
+      }
+      Section {
+          // Tags
+          Text("Tags placeholder")
       }
       Section {
         Toggle(isOn: $viewModel.reminder.flagged) {
@@ -105,13 +65,15 @@ struct ReminderDetailsView: View {
         }
       }
       Section {
-        Picker("Priority", selection: $viewModel.reminder.priority) {
-          ForEach(Priority.allCases) { prio in
-            Text(prio.rawValue.capitalized)
-          }
-        }
+        InsetPicker("Priority", selection: $viewModel.reminder.priority)
+//        Picker("Priority", selection: $viewModel.reminder.priority) {
+//          ForEach(Priority.allCases) { prio in
+//            Text(prio.rawValue.capitalized)
+//          }
+//        }
       }
     }
+    .environmentObject(viewModel)
     .animation(.default, value: viewModel.reminder)
     .navigationTitle("Details")
     .navigationBarTitleDisplayMode(.inline)

@@ -18,157 +18,147 @@
 // limitations under the License.
 
 import Foundation
-import Combine
 
-extension Date {
-  func formattedRelativeToday() -> String {
-    if Calendar.autoupdatingCurrent.isDateInToday(self)
-        || Calendar.autoupdatingCurrent.isDateInYesterday(self)
-        || Calendar.autoupdatingCurrent.isDateInTomorrow(self) {
-      
-      let formatStyle = Date.RelativeFormatStyle(
-        presentation: .named,
-        unitsStyle: .wide,
-        capitalizationContext: .beginningOfSentence)
-      
-      return self.formatted(formatStyle)
-    }
-    else {
-      return self.formatted(date: .complete, time: .omitted)
-    }
-  }
-  
-  func nearestHour() -> Date? {
-    var components = NSCalendar.current.dateComponents([.minute], from: self)
-    let minute = components.minute ?? 0
-    components.minute = minute >= 30 ? 60 - minute : -minute
-    return Calendar.current.date(byAdding: components, to: self)
-  }
-  
-  func nextHour(basedOn date: Date? = nil) -> Date? {
-    let other = date ?? self
-    
-    var timeComponents = Calendar.current.dateComponents([.hour, .minute], from: other)
-    let minute = timeComponents.minute ?? 0
-    timeComponents.minute = minute >= 0 ? 60 : 0
-    
-    let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-
-    let newDateComponents = DateComponents(calendar: Calendar.current,
-                                           year: dateComponents.year,
-                                           month: dateComponents.month,
-                                           day: dateComponents.day,
-                                           hour: timeComponents.hour,
-                                           minute: timeComponents.minute)
-    
-    return Calendar.current.date(from: newDateComponents)
-  }
-  
-  func startOfDay() -> Date {
-    Calendar.current.startOfDay(for: self)
-  }
+// We should never display the date picker and the time picker together
+// so define an enum to control view state of the pickers
+enum PickerState {
+   case none, date, time
 }
 
-
 class ReminderDetailsViewModel: ObservableObject {
-  @Published var reminder: Reminder
-  private var original: Reminder
-  
-  init(reminder: Reminder) {
-    self.reminder = reminder
-    original = reminder
-  }
-  
-  var isModified: Bool {
-    original != reminder
-  }
-  
-  // The `notes` attribute on the Reminder model is optional.
-  // Using this approach allows us to bind the notes to SwiftUI
-  // views.
-  var notes: String {
-    get {
-      reminder.notes ?? ""
-    }
-    set {
-      reminder.notes = newValue
-    }
-  }
-  
-  var url: String {
-    get {
-      reminder.url ?? ""
-    }
-    set {
-      reminder.url = newValue
-    }
-  }
-  
-  var dueDate: Date {
-    get {
-      return reminder.dueDate ?? Date()
-    }
-    set {
-      reminder.dueDate = newValue
-    }
-  }
-  
-  var dueTime: Date {
-    get {
-      return dueDate
-    }
-    set {
-      dueDate = newValue
-    }
-  }
-  
-  var hasDueDate: Bool {
-    get {
-      reminder.dueDate != nil
-    }
-    set {
-      if newValue == true {
-        reminder.dueDate = Date()
-        isShowingDatePicker = true
-      }
-      else {
-        hasDueTime = false
-        reminder.dueDate = nil
-        isShowingDatePicker = false
-      }
-    }
-  }
-  
-  var hasDueTime: Bool {
-    get {
-      reminder.hasDueTime
-    }
-    set {
-      if newValue == true {
-        guard let nearestHour = dueDate.nextHour(basedOn: Date()) else { return }
-        dueDate = nearestHour
-        reminder.hasDueTime = true
-        isShowingTimePicker = true
-      }
-      else {
-        dueDate = dueDate.startOfDay()
-        reminder.hasDueTime = false
-        isShowingTimePicker = false
-      }
-    }
-  }
-  
-  @Published var isShowingDatePicker: Bool = false
-  @Published var isShowingTimePicker: Bool = false
-  
-  func toggleTimePicker() {
-    isShowingTimePicker.toggle()
-    isShowingDatePicker = false
-  }
-  
-  func toggleDatePicker() {
-    isShowingDatePicker.toggle()
-    isShowingTimePicker = false
-  }
+   @Published var reminder: Reminder
+   private var original: Reminder
+   @Published var pickerState: PickerState = .none
 
+   init(reminder: Reminder) {
+      self.reminder = reminder
+      original = reminder
+      // sync Picker display to date/time in reminder
+      //      if reminder.hasDueTime {
+      //         pickerState = .time
+      //      } else if reminder.dueDate != nil {
+      //         pickerState = .date
+      //      }
+   }
+
+   var isModified: Bool {
+      original != reminder
+   }
+
+   // The `notes` attribute on the Reminder model is optional.
+   // Using this approach allows us to bind the notes to SwiftUI
+   // views.
+   var notes: String {
+      get {
+         reminder.notes ?? ""
+      }
+      set {
+         reminder.notes = newValue
+      }
+   }
+
+   var url: String {
+      get {
+         reminder.url ?? ""
+      }
+      set {
+         reminder.url = newValue
+      }
+   }
+
+   var dueDate: Date {
+      get {
+         return reminder.dueDate ?? Date()
+      }
+      set {
+         reminder.dueDate = newValue
+      }
+   }
+
+   var tags: [Tag] {
+      get {
+         return reminder.tags ?? []
+      }
+      set {
+         reminder.tags = newValue
+      }
+   }
+
+   var repeatFrequency: Repeat {
+      get { reminder.repeatFrequency }
+      set { reminder.repeatFrequency = newValue }
+   }
+   var repeatEndDate: Date {
+      get { reminder.repeatEndDate ?? Date() }
+      set { reminder.repeatEndDate = newValue }
+   }
+
+   //   var dueTime: Date {
+   //      get {
+   //         return dueDate
+   //      }
+   //      set {
+   //         dueDate = newValue
+   //      }
+   //   }
+   //
+   var hasDueDate: Bool {
+      get {
+         reminder.dueDate != nil
+      }
+      set {
+         if newValue == true {
+            reminder.dueDate = Date()
+            setPickerState(.date)
+         } else {
+            reminder.dueDate = nil
+            reminder.hasDueTime = false
+            setPickerState(.none)
+         }
+      }
+   }
+
+   var hasDueTime: Bool {
+      get {
+         reminder.hasDueTime
+      }
+      set {
+         if newValue == true {
+            guard let nearestHour = dueDate.nextHour(basedOn: Date()) else { return }
+            dueDate = nearestHour
+            reminder.hasDueTime = true
+            setPickerState(.time)
+         } else {
+            dueDate = dueDate.startOfDay()
+            reminder.hasDueTime = false
+            setPickerState(.none)
+         }
+      }
+   }
+
+   /*==========Functions: date/time presses on labels ======================*/
+
+   func setPickerState(_ newvalue: PickerState) {
+      withOptionalAnimation {
+         pickerState = newvalue
+      }
+   }
+
+   // Toggle the display when a date value is pressed
+   func datePressed() {
+      if pickerState == .date {
+         setPickerState(.none)
+      } else {
+         setPickerState(.date)
+      }
+   }
+
+   // Toggle the display when a time value is pressed
+   func timePressed() {
+      if pickerState == .time {
+         setPickerState(.none)
+      } else {
+         setPickerState(.time)
+      }
+   }
 }
