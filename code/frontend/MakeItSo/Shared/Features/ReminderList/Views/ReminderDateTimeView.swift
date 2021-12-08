@@ -62,7 +62,6 @@ struct ReminderDateTimeView: View {
       }
     }
   }
-
   var timeToggleLabel: some View {
     HStack {
       Image(systemName: "clock")

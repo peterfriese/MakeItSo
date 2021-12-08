@@ -71,16 +71,17 @@ struct ReminderDetailsView: View {
   }
 }
 
+// Commented out modal sheet presentation so that preview will run correctly.
 struct ReminderDetailsView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      Text("Dummy screen content")
-        .navigationTitle("Dummy screen")
-        .sheet(isPresented: .constant(true)) {
+//      Text("Dummy screen content")
+//        .navigationTitle("Dummy screen")
+//        .sheet(isPresented: .constant(true)) {
           ReminderDetailsView(reminder: Reminder.samples[0]) { updatedReminder in
             print(updatedReminder)
           }
         }
-    }
+//    }
   }
 }

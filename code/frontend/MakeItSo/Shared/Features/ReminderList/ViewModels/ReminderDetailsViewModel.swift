@@ -181,7 +181,6 @@ class ReminderDetailsViewModel: ObservableObject {
   func datePressed() {
     pickerState = pickerState == .date ? .none : .date
   }
-  
   // Toggle the display when a time value is pressed
   func timePressed() {
     pickerState = pickerState == .time ? .none : .time
