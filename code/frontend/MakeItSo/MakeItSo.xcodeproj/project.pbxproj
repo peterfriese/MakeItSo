@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49281E992760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */; };
+		49281E9A2760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */; };
 		881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EF5BC272DC399004761E5 /* View+Focus.swift */; };
 		887B6FAD273ED4180028263D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B6FA9273ED4180028263D /* EmptyStateView.swift */; };
 		887B6FAE273ED4180028263D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B6FA9273ED4180028263D /* EmptyStateView.swift */; };
@@ -33,11 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReminderDateTimeView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		881EF5BC272DC399004761E5 /* View+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Focus.swift"; sourceTree = "<group>"; };
 		887B6FA9273ED4180028263D /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		88A1B7422756541400DB0494 /* ReminderListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListRowViewModel.swift; sourceTree = "<group>"; };
-		88C30CD5274D1B4500E6694D /* ReminderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsViewModel.swift; sourceTree = "<group>"; };
-		88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsView.swift; sourceTree = "<group>"; };
+		88C30CD5274D1B4500E6694D /* ReminderDetailsViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReminderDetailsViewModel.swift; sourceTree = "<group>"; tabWidth = 2; };
+		88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReminderDetailsView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		88FA998C274D63A400670474 /* View+ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ConfirmationDialog.swift"; sourceTree = "<group>"; };
 		88FA99912750090200670474 /* View+InteractiveDismissDisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+InteractiveDismissDisable.swift"; sourceTree = "<group>"; };
 		88FEECCA27275ABC00ED368C /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
@@ -45,7 +48,7 @@
 		88FEECD127275ABD00ED368C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88FEECD727275ABD00ED368C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88FEECD927275ABD00ED368C /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		88FEECEF2727FEFF00ED368C /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		88FEECEF2727FEFF00ED368C /* Reminder.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; tabWidth = 2; };
 		88FEECF22728044100ED368C /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
 		88FEECF62728072D00ED368C /* RemindersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListViewModel.swift; sourceTree = "<group>"; };
 		88FEECF927280F3D00ED368C /* ReminderListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListRowView.swift; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 				88FEECF22728044100ED368C /* RemindersListView.swift */,
 				88FEECF927280F3D00ED368C /* ReminderListRowView.swift */,
 				88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */,
+				49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,7 +230,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					88FEECD027275ABD00ED368C = {
 						CreatedOnToolsVersion = 13.1;
@@ -291,6 +295,7 @@
 				88C30CD6274D1B4500E6694D /* ReminderDetailsViewModel.swift in Sources */,
 				88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
 				881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */,
+				49281E992760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */,
 				88FEECF32728044100ED368C /* RemindersListView.swift in Sources */,
 				88FEECF72728072D00ED368C /* RemindersListViewModel.swift in Sources */,
 			);
@@ -305,6 +310,7 @@
 				88FEECFB27280F3D00ED368C /* ReminderListRowView.swift in Sources */,
 				88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
 				88FEECF42728044100ED368C /* RemindersListView.swift in Sources */,
+				49281E9A2760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */,
 				88FEECF82728072D00ED368C /* RemindersListViewModel.swift in Sources */,
 				88A1B7442756541400DB0494 /* ReminderListRowViewModel.swift in Sources */,
 				887B6FAE273ED4180028263D /* EmptyStateView.swift in Sources */,
@@ -493,6 +499,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -521,6 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

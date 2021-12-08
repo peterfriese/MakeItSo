@@ -18,7 +18,7 @@
 // limitations under the License.
 
 import Foundation
-import Combine
+import SwiftUI
 
 extension Date {
   func formattedRelativeToday() -> String {
@@ -53,7 +53,7 @@ extension Date {
     timeComponents.minute = minute >= 0 ? 60 : 0
     
     let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-
+    
     let newDateComponents = DateComponents(calendar: Calendar.current,
                                            year: dateComponents.year,
                                            month: dateComponents.month,
@@ -69,6 +69,11 @@ extension Date {
   }
 }
 
+// We should never display the date picker and the time picker together
+// so define an enum to control view state of the pickers
+enum PickerState {
+  case none, date, time
+}
 
 class ReminderDetailsViewModel: ObservableObject {
   @Published var reminder: Reminder
@@ -129,12 +134,13 @@ class ReminderDetailsViewModel: ObservableObject {
     set {
       if newValue == true {
         reminder.dueDate = Date()
-        isShowingDatePicker = true
+        setPickerState(.date)
       }
-      else {
-        hasDueTime = false
+      else
+      {
         reminder.dueDate = nil
-        isShowingDatePicker = false
+        reminder.hasDueTime = false
+        setPickerState(.none)
       }
     }
   }
@@ -148,27 +154,51 @@ class ReminderDetailsViewModel: ObservableObject {
         guard let nearestHour = dueDate.nextHour(basedOn: Date()) else { return }
         dueDate = nearestHour
         reminder.hasDueTime = true
-        isShowingTimePicker = true
+        setPickerState(.time)
       }
-      else {
+      else
+      {
         dueDate = dueDate.startOfDay()
         reminder.hasDueTime = false
-        isShowingTimePicker = false
+        setPickerState(.none)
       }
     }
   }
   
-  @Published var isShowingDatePicker: Bool = false
-  @Published var isShowingTimePicker: Bool = false
+  // We should never display the date picker and the time picker together
+  // so define an enum to control view state of the pickers
+  @Published var pickerState: PickerState = .none
   
-  func toggleTimePicker() {
-    isShowingTimePicker.toggle()
-    isShowingDatePicker = false
+  func setPickerState(_ newValue: PickerState) {
+    // Dont animate if transitioning from state where date picker is shown
+    if pickerState == .date {
+      pickerState = newValue
+    }
+    else
+    {
+      // Animate transition if Accessibility setting allows.
+      withOptionalAnimation {
+        pickerState = newValue
+      }
+    }
   }
   
-  func toggleDatePicker() {
-    isShowingDatePicker.toggle()
-    isShowingTimePicker = false
+  // Toggle the display when a date value is pressed
+  func datePressed() {
+    pickerState = pickerState == .date ? .none : .date
+  }
+  // Toggle the display when a time value is pressed
+  func timePressed() {
+    pickerState = pickerState == .time ? .none : .time
   }
 
+  func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+    if UIAccessibility.isReduceMotionEnabled {
+      return try body()
+    }
+    else
+    {
+      return try withAnimation(animation, body)
+    }
+  }
 }
