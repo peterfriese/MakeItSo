@@ -20,13 +20,13 @@
 import SwiftUI
 
 struct ReminderDetailsView: View {
-  @ObservedObject private var viewModel: ReminderDetailsViewModel
+  @StateObject private var viewModel: ReminderDetailsViewModel
   
   private var onCancel: (() -> Void)?
   private var onCommit: (Reminder) -> Void
   
   init(reminder: Reminder, onCancel: (() -> Void)? = nil, onCommit: @escaping (Reminder) -> Void) {
-    self.viewModel = ReminderDetailsViewModel(reminder: reminder)
+    self._viewModel = StateObject(wrappedValue: ReminderDetailsViewModel(reminder: reminder))
     self.onCommit = onCommit
   }
   
