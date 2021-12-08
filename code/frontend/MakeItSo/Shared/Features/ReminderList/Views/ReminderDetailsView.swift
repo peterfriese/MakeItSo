@@ -37,60 +37,9 @@ struct ReminderDetailsView: View {
         TextField("Notes", text: $viewModel.notes)
         TextField("URL", text: $viewModel.url)
       }
+      // Date and Time Toggles and Pickers refactored to separate view
       Section {
-        Toggle(isOn: $viewModel.hasDueDate) {
-          HStack {
-            Image(systemName: "calendar")
-              .frame(width: 26, height: 26, alignment: .center)
-              .background(.red)
-              .foregroundColor(.white)
-              .cornerRadius(4)
-            VStack(alignment: .leading) {
-              Text("Date")
-              if viewModel.hasDueDate {
-                Text(viewModel.dueDate.formattedRelativeToday())
-                  .font(.caption2)
-                  .foregroundColor(.blue)
-              }            }
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          withAnimation {
-            viewModel.toggleDatePicker()
-          }
-        }
-        if viewModel.hasDueDate && viewModel.isShowingDatePicker {
-          DatePicker("Date", selection: $viewModel.dueDate, displayedComponents: .date)
-            .datePickerStyle(.graphical)
-        }
-        
-        Toggle(isOn: $viewModel.hasDueTime) {
-          HStack {
-            Image(systemName: "clock")
-              .frame(width: 26, height: 26, alignment: .center)
-              .background(.blue)
-              .foregroundColor(.white)
-              .cornerRadius(4)
-            VStack(alignment: .leading) {
-              Text("Time")
-              if (viewModel.hasDueTime) {
-                Text(viewModel.dueTime, style: .time)
-                  .font(.caption2)
-                  .foregroundColor(.blue)
-              }            }
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          withAnimation {
-            viewModel.toggleTimePicker()
-          }
-        }
-        if viewModel.hasDueTime && viewModel.isShowingTimePicker {
-          DatePicker("Date", selection: $viewModel.dueTime, displayedComponents: .hourAndMinute)
-            .datePickerStyle(.wheel)
-        }
+        ReminderDateTimeView()
       }
       Section {
         Toggle(isOn: $viewModel.reminder.flagged) {
@@ -112,6 +61,7 @@ struct ReminderDetailsView: View {
         }
       }
     }
+    .environmentObject(viewModel) //pass view model to refactored subview DateTimeView
     .animation(.default, value: viewModel.reminder)
     .navigationTitle("Details")
     .navigationBarTitleDisplayMode(.inline)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49281E992760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */; };
+		49281E9A2760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */; };
 		881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EF5BC272DC399004761E5 /* View+Focus.swift */; };
 		887B6FAD273ED4180028263D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B6FA9273ED4180028263D /* EmptyStateView.swift */; };
 		887B6FAE273ED4180028263D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887B6FA9273ED4180028263D /* EmptyStateView.swift */; };
@@ -33,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReminderDateTimeView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		881EF5BC272DC399004761E5 /* View+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Focus.swift"; sourceTree = "<group>"; };
 		887B6FA9273ED4180028263D /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		88A1B7422756541400DB0494 /* ReminderListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListRowViewModel.swift; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 				88FEECF22728044100ED368C /* RemindersListView.swift */,
 				88FEECF927280F3D00ED368C /* ReminderListRowView.swift */,
 				88E7B7BD274CF30A00AF477D /* ReminderDetailsView.swift */,
+				49281E982760EBCB0046A465 /* ReminderDateTimeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +295,7 @@
 				88C30CD6274D1B4500E6694D /* ReminderDetailsViewModel.swift in Sources */,
 				88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
 				881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */,
+				49281E992760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */,
 				88FEECF32728044100ED368C /* RemindersListView.swift in Sources */,
 				88FEECF72728072D00ED368C /* RemindersListViewModel.swift in Sources */,
 			);
@@ -305,6 +310,7 @@
 				88FEECFB27280F3D00ED368C /* ReminderListRowView.swift in Sources */,
 				88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
 				88FEECF42728044100ED368C /* RemindersListView.swift in Sources */,
+				49281E9A2760EBCB0046A465 /* ReminderDateTimeView.swift in Sources */,
 				88FEECF82728072D00ED368C /* RemindersListViewModel.swift in Sources */,
 				88A1B7442756541400DB0494 /* ReminderListRowViewModel.swift in Sources */,
 				887B6FAE273ED4180028263D /* EmptyStateView.swift in Sources */,
