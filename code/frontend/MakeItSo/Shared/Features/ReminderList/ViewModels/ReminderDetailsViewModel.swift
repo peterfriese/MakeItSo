@@ -18,7 +18,7 @@
 // limitations under the License.
 
 import Foundation
-import Combine
+import SwiftUI
 
 extension Date {
   func formattedRelativeToday() -> String {
@@ -167,7 +167,7 @@ class ReminderDetailsViewModel: ObservableObject {
   
   func setPickerState(_ newvalue: PickerState) {
     // Dont animate if transitioning from state where date picker is shown
-    if pickerState = .date {
+    if pickerState == .date {
       pickerState = newvalue
     } else {
       // Animate transition if Accessibility setting allows.
@@ -185,5 +185,13 @@ class ReminderDetailsViewModel: ObservableObject {
   // Toggle the display when a time value is pressed
   func timePressed() {
     pickerState = pickerState == .time ? .none : .time
+  }
+
+  func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+    if UIAccessibility.isReduceMotionEnabled {
+      return try body()
+    } else {
+      return try withAnimation(animation, body)
+    }
   }
 }
