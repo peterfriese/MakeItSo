@@ -135,7 +135,9 @@ class ReminderDetailsViewModel: ObservableObject {
       if newValue == true {
         reminder.dueDate = Date()
         setPickerState(.date)
-      } else {
+      }
+      else
+      {
         reminder.dueDate = nil
         reminder.hasDueTime = false
         setPickerState(.none)
@@ -153,7 +155,9 @@ class ReminderDetailsViewModel: ObservableObject {
         dueDate = nearestHour
         reminder.hasDueTime = true
         setPickerState(.time)
-      } else {
+      }
+      else
+      {
         dueDate = dueDate.startOfDay()
         reminder.hasDueTime = false
         setPickerState(.none)
@@ -165,14 +169,16 @@ class ReminderDetailsViewModel: ObservableObject {
   // so define an enum to control view state of the pickers
   @Published var pickerState: PickerState = .none
   
-  func setPickerState(_ newvalue: PickerState) {
+  func setPickerState(_ newValue: PickerState) {
     // Dont animate if transitioning from state where date picker is shown
     if pickerState == .date {
-      pickerState = newvalue
-    } else {
+      pickerState = newValue
+    }
+    else
+    {
       // Animate transition if Accessibility setting allows.
       withOptionalAnimation {
-        pickerState = newvalue
+        pickerState = newValue
       }
     }
   }
@@ -189,7 +195,9 @@ class ReminderDetailsViewModel: ObservableObject {
   func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
     if UIAccessibility.isReduceMotionEnabled {
       return try body()
-    } else {
+    }
+    else
+    {
       return try withAnimation(animation, body)
     }
   }
