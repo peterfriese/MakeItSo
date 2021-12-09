@@ -52,7 +52,7 @@ class RemindersListViewModel: ObservableObject {
         
         return previousIndex
       }
-      .delay(for: 0.01, scheduler: RunLoop.main) // <-- this helps reduce the visual jank
+//      .delay(for: 0.01, scheduler: RunLoop.main) // <-- this helps reduce the visual jank
       .sink { index in
         self.reminders.remove(at: index)
       }
