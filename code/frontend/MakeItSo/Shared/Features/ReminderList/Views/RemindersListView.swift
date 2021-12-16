@@ -34,6 +34,9 @@ struct RemindersListView: View {
           .onSubmit {
             viewModel.createNewReminder()
           }
+          .onChange(of: reminder) { value in
+            viewModel.updateReminder(reminder)
+          }
           .swipeActions {
             Button(role: .destructive, action: { viewModel.deleteReminder(reminder) }) {
               Label("Delete", systemImage: "trash")

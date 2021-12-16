@@ -1,8 +1,8 @@
 //
-//	View+Focus.swift
-//  MakeItSo (iOS)
+//	MakeItSoApp+Injection.swift
+//  MakeItSo
 //
-//  Created by Peter Friese on 30.10.21.
+//  Created by Peter Friese on 16.12.21.
 //  Copyright © 2021 Google LLC. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,20 +17,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import SwiftUI
+import Foundation
+import Resolver
+import Firebase
 
-/// Used to manage focus in a `List` view
-enum Focusable: Hashable {
-  case none
-  case row(id: String?)
-}
-
-extension View {
-  /// Mirror changes between an @Published variable (typically in your View Model) and
-  /// an @FocusedState variable in a view
-  func sync<T: Equatable>(_ field1: Binding<T>, _ field2: FocusState<T>.Binding ) -> some View {
-    self
-      .onChange(of: field1.wrappedValue) { field2.wrappedValue = $0 }
-      .onChange(of: field2.wrappedValue) { field1.wrappedValue = $0 }
+extension Resolver: ResolverRegistering {
+  public static func registerAllServices() {
+    // register Firebase services
+    register { Firestore.firestore().enableLogging(on: false) }.scope(.application)
+    
+    // register application components
+    register { AuthenticationService() }.scope(.application)
+    
+    register { ReminderRepository() }.scope(.application)
   }
 }
+
+extension Firestore {
+  func enableLogging(on: Bool = true) -> Firestore {
+    Self.enableLogging(on)
+    return self
+  }
+}
+

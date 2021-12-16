@@ -20,8 +20,11 @@
 import Foundation
 import Combine
 import SwiftUI
+import Resolver
 
 class RemindersListViewModel: ObservableObject {
+  @Published var remindersRepository: ReminderRepository
+  
   @Published var reminders: [Reminder]
   @Published var selectedReminder: Reminder?
   @Published var focusedReminder: Focusable?
@@ -31,6 +34,11 @@ class RemindersListViewModel: ObservableObject {
   
   init(reminders: [Reminder]) {
     self.reminders = reminders
+    
+    remindersRepository = Resolver.resolve()
+    remindersRepository.subscribe()
+    remindersRepository.$reminders
+      .assign(to: &$reminders)
     
     // This is the beginning of some magic Firestore sauce
     //    $reminders.sink { newValue in
@@ -98,16 +106,22 @@ class RemindersListViewModel: ObservableObject {
     else {
       reminders.append(newReminder)
     }
+    remindersRepository.addReminder(newReminder)
     
     // focus the new reminder
-    focusedReminder = .row(id: newReminder.id)
+    if let reminderId = newReminder.id {
+      focusedReminder = .row(id: reminderId)
+    }
   }
   
   func deleteReminder(_ reminder: Reminder) {
     Just(reminder)
       .delay(for: .seconds(0.25), scheduler: RunLoop.main)
       .sink { reminder in
-        self.reminders.removeAll { $0.id == reminder.id }
+        if let index = self.reminders.firstIndex(of: reminder) {
+          self.reminders.remove(at: index)
+          self.remindersRepository.removeReminder(reminder)
+        }
       }
       .store(in: &cancellables)
   }
@@ -115,6 +129,7 @@ class RemindersListViewModel: ObservableObject {
   func updateReminder(_ reminder: Reminder) {
     if let index = reminders.firstIndex(where: { $0.id == reminder.id} ) {
       reminders[index] = reminder
+      remindersRepository.updateReminder(reminder)
     }
   }
   

@@ -18,6 +18,7 @@
 // limitations under the License.
 
 import Foundation
+import FirebaseFirestoreSwift
 
 enum Priority: String {
   case none
@@ -34,7 +35,7 @@ struct Location {
 }
 
 struct Reminder {
-  var id: String = UUID().uuidString
+  @DocumentID var id = UUID().uuidString
   var title: String
   var notes: String?
   var url: String?
@@ -59,6 +60,8 @@ struct Reminder {
 
   var completed: Bool = false
   var order: Int = 0
+  
+  var userId: String?
 }
 
 extension Priority: Codable, Equatable, Identifiable {
