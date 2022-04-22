@@ -35,7 +35,12 @@ struct Location {
 }
 
 struct Reminder {
-  @DocumentID var id = UUID().uuidString
+  /// We need the Firestore document ID so we can update / delete the document
+  @DocumentID var docId: String?
+  
+  /// The `id` is required to make the `Reminder` identifiable. We also need to persist this, otherwise
+  /// it would get lost when round-tripping to Firestore, which would result in the item losing focus.
+  var id: String? = UUID().uuidString
   var title: String
   var notes: String?
   var url: String?

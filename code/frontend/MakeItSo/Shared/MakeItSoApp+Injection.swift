@@ -24,12 +24,11 @@ import Firebase
 extension Resolver: ResolverRegistering {
   public static func registerAllServices() {
     // register Firebase services
-    register { Firestore.firestore().enableLogging(on: false) }.scope(.application)
+    register { Firestore.firestore().enableLogging(on: true) }.scope(.application)
     
     // register application components
     register { AuthenticationService() }.scope(.application)
-    
-    register { ReminderRepository() }.scope(.application)
+    register { RemindersRepository() }.scope(.application)
   }
 }
 

@@ -1,5 +1,5 @@
 //
-//	ReminderRepository.swift
+//	RemindersRepository.swift
 //  MakeItSo
 //
 //  Created by Peter Friese on 16.12.21.
@@ -24,7 +24,7 @@ import FirebaseFirestoreSwift
 import Resolver
 import os
 
-class ReminderRepository: ObservableObject {
+class RemindersRepository: ObservableObject {
   // MARK: - Dependencies
   @Injected var db: Firestore
   @Injected var authenticationService: AuthenticationService
@@ -132,7 +132,7 @@ class ReminderRepository: ObservableObject {
   }
   
   func updateReminder(_ reminder: Reminder) {
-    if let documentId = reminder.id {
+    if let documentId = reminder.docId {
       do {
         try db.collection("reminders").document(documentId).setData(from: reminder)
       }
@@ -143,7 +143,7 @@ class ReminderRepository: ObservableObject {
   }
   
   func removeReminder(_ reminder: Reminder) {
-    if let documentId = reminder.id {
+    if let documentId = reminder.docId {
       db.collection("reminders").document(documentId).delete() { error in
         if let error = error {
           self.logger.debug("Unable to remove document \(error.localizedDescription)")

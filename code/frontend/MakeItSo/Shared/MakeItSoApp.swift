@@ -41,6 +41,7 @@ struct MakeItSoApp: App {
     
     UINavigationBar.appearance().standardAppearance = navBarAppearance
     
+    FirebaseConfiguration.shared.setLoggerLevel(.min)
     FirebaseApp.configure()
     authenticationService.signIn()
   }
