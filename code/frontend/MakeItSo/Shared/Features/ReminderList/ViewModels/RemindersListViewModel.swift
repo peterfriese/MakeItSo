@@ -179,6 +179,10 @@ class RemindersListViewModel: ObservableObject {
     }
   }
   
+  func unfocus() {
+    self.focusedReminder = nil
+  }
+  
 }
 
 

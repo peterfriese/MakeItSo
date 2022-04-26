@@ -67,6 +67,13 @@ struct RemindersListView: View {
       }
     }
     .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        if focusedReminder != nil {
+          Button(action: viewModel.unfocus ) {
+            Text("Done")
+          }
+        }
+      }
       ToolbarItemGroup(placement: .bottomBar) {
         Button(action: { viewModel.createNewReminder() }) {
           HStack {
