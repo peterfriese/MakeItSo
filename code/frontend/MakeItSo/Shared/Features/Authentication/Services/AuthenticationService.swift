@@ -25,7 +25,7 @@ import CryptoKit
 import Resolver
 
 public class AuthenticationService: ObservableObject {
-  private let logger = Logger(subsystem: "dev.peterfriese.MakeItSo.dev", category: "authentication")
+  private let logger = Logger(subsystem: "dev.peterfriese.MakeItSo", category: "authentication")
   
   @Published public var user: User?
   
@@ -71,7 +71,13 @@ public class AuthenticationService: ObservableObject {
     }
   }
   
-  private let accessGroup = "YGAZHQXHH4.dev.peterfriese.MakeItSo"
+  private var accessGroup: String {
+    get {
+      let info = KeyChainAccessGroupHelper.getAccessGroupInfo()
+      let prefix = info?.prefix ?? "unknown"
+      return prefix + "." + (Bundle.main.bundleIdentifier ?? "unknown")
+    }
+  }
   
   private func setupKeychainSharing() {
     do {

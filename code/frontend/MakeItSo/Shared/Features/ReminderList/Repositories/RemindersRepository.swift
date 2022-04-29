@@ -37,7 +37,7 @@ class RemindersRepository: ObservableObject {
   private var listenerRegistration: ListenerRegistration?
   private var cancellables = Set<AnyCancellable>()
   
-  let logger = Logger(subsystem: "dev.peterfriese.MakeItSo.dev", category: "persistence")
+  let logger = Logger(subsystem: "dev.peterfriese.MakeItSo", category: "persistence")
   
   init() {
     // observe user ID
