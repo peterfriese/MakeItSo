@@ -34,6 +34,9 @@ struct RemindersListView: View {
           .onSubmit {
             viewModel.createNewReminder()
           }
+          .onChange(of: reminder) { value in
+            viewModel.updateReminder(reminder)
+          }
           .swipeActions {
             Button(role: .destructive, action: { viewModel.deleteReminder(reminder) }) {
               Label("Delete", systemImage: "trash")
@@ -64,6 +67,13 @@ struct RemindersListView: View {
       }
     }
     .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        if focusedReminder != nil {
+          Button(action: viewModel.unfocus ) {
+            Text("Done")
+          }
+        }
+      }
       ToolbarItemGroup(placement: .bottomBar) {
         Button(action: { viewModel.createNewReminder() }) {
           HStack {

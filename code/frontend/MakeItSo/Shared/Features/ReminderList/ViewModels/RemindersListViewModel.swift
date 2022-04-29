@@ -20,8 +20,42 @@
 import Foundation
 import Combine
 import SwiftUI
+import Resolver
+
+enum SortingMode {
+  case manual
+  case byDeadline
+  case byCreationDate
+  case byPriority
+  case byTitle
+  
+  func sorted(lhs: Reminder, rhs: Reminder) -> Bool {
+    return lhs.order < rhs.order
+  }
+}
+
+extension Array where Element == Reminder {
+  func computeOrder(for reminder: Reminder) -> Int {
+    let index = self.endIndex == 0 ? 0 : self.endIndex - 1
+    return self.computeOrder(for: reminder, after: index)
+  }
+  
+  func computeOrder(for reminder: Reminder, after index: Int) -> Int {
+    guard self.count > 0 else { return 0 }
+    let currentOrder = self[index].order
+    
+    let nextIndex = self.index(after: index)
+    let nextOrder = nextIndex < self.endIndex ? self[nextIndex].order : currentOrder + 1_000
+    
+    return (currentOrder + nextOrder) / 2
+  }
+}
 
 class RemindersListViewModel: ObservableObject {
+  @Published var remindersRepository: RemindersRepository
+  
+  @Published var sortingMode: SortingMode = .manual
+  
   @Published var reminders: [Reminder]
   @Published var selectedReminder: Reminder?
   @Published var focusedReminder: Focusable?
@@ -32,6 +66,15 @@ class RemindersListViewModel: ObservableObject {
   init(reminders: [Reminder]) {
     self.reminders = reminders
     
+    remindersRepository = Resolver.resolve()
+    remindersRepository.subscribe()
+    remindersRepository.$reminders
+      .combineLatest($sortingMode)
+      .map { reminders, sortingMode in
+        reminders.sorted(by: sortingMode.sorted)
+      }
+      .assign(to: &$reminders)
+    
     // This is the beginning of some magic Firestore sauce
     //    $reminders.sink { newValue in
     //      self.dump(newValue)
@@ -39,7 +82,7 @@ class RemindersListViewModel: ObservableObject {
     //    }
     //    .store(in: &cancellables)
     
-    // the following pipeline removes empty reminder when the respecive row in the list view loses focus
+    // the following pipeline removes empty reminder when the respective row in the list view loses focus
     $focusedReminder
       .removeDuplicates()
       .compactMap { focusedReminder -> Int? in
@@ -54,6 +97,7 @@ class RemindersListViewModel: ObservableObject {
       }
       .delay(for: 0.01, scheduler: RunLoop.main) // <-- this helps reduce the visual jank
       .sink { index in
+        self.remindersRepository.removeReminder(self.reminders[index])
         self.reminders.remove(at: index)
       }
       .store(in: &cancellables)
@@ -77,7 +121,7 @@ class RemindersListViewModel: ObservableObject {
   }
   
   func createNewReminder() {
-    let newReminder = Reminder(title: "")
+    var newReminder = Reminder(title: "")
 
     // if any row is focused, insert the new reminder after the focused row
     if case .row(let id) = focusedReminder {
@@ -91,23 +135,33 @@ class RemindersListViewModel: ObservableObject {
           return
         }
         
+        // compute median of the elements before and after the new one
+        newReminder.order = reminders.computeOrder(for: newReminder, after: index)
+        
         reminders.insert(newReminder, at: index + 1)
       }
     }
     // no row focused: append at the end of the list
     else {
+      newReminder.order = reminders.computeOrder(for: newReminder)
       reminders.append(newReminder)
     }
+    remindersRepository.addReminder(newReminder)
     
     // focus the new reminder
-    focusedReminder = .row(id: newReminder.id)
+    if let reminderId = newReminder.id {
+      focusedReminder = .row(id: reminderId)
+    }
   }
   
   func deleteReminder(_ reminder: Reminder) {
     Just(reminder)
       .delay(for: .seconds(0.25), scheduler: RunLoop.main)
       .sink { reminder in
-        self.reminders.removeAll { $0.id == reminder.id }
+        if let index = self.reminders.firstIndex(of: reminder) {
+          self.reminders.remove(at: index)
+          self.remindersRepository.removeReminder(reminder)
+        }
       }
       .store(in: &cancellables)
   }
@@ -115,6 +169,7 @@ class RemindersListViewModel: ObservableObject {
   func updateReminder(_ reminder: Reminder) {
     if let index = reminders.firstIndex(where: { $0.id == reminder.id} ) {
       reminders[index] = reminder
+      remindersRepository.updateReminder(reminder)
     }
   }
   
@@ -122,6 +177,10 @@ class RemindersListViewModel: ObservableObject {
     if let index = reminders.firstIndex(of: reminder) {
       reminders[index].flagged.toggle()
     }
+  }
+  
+  func unfocus() {
+    self.focusedReminder = nil
   }
   
 }

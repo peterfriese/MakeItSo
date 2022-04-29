@@ -18,9 +18,14 @@
 // limitations under the License.
 
 import SwiftUI
+import Firebase
+import Resolver
 
 @main
 struct MakeItSoApp: App {
+  @LazyInjected
+  var authenticationService: AuthenticationService
+  
   @StateObject
   var viewModel = RemindersListViewModel(reminders: Reminder.samples)
   
@@ -35,6 +40,10 @@ struct MakeItSoApp: App {
     // navBarAppearance.titleTextAttributes[.foregroundColor] = foregroundColor
     
     UINavigationBar.appearance().standardAppearance = navBarAppearance
+    
+    FirebaseConfiguration.shared.setLoggerLevel(.min)
+    FirebaseApp.configure()
+    authenticationService.signIn()
   }
 
   var body: some Scene {
