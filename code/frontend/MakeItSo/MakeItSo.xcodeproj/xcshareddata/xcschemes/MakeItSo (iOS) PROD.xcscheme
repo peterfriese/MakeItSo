@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8873A5C9281BDF46000ED21B"
-               BuildableName = "MakeItSo (iOS) copy.app"
+               BuildableName = "Make It So.app"
                BlueprintName = "MakeItSo (iOS) PROD"
                ReferencedContainer = "container:MakeItSo.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8873A5C9281BDF46000ED21B"
-            BuildableName = "MakeItSo (iOS) copy.app"
+            BuildableName = "Make It So.app"
             BlueprintName = "MakeItSo (iOS) PROD"
             ReferencedContainer = "container:MakeItSo.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8873A5C9281BDF46000ED21B"
-            BuildableName = "MakeItSo (iOS) copy.app"
+            BuildableName = "Make It So.app"
             BlueprintName = "MakeItSo (iOS) PROD"
             ReferencedContainer = "container:MakeItSo.xcodeproj">
          </BuildableReference>
