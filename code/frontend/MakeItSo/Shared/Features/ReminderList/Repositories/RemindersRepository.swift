@@ -89,16 +89,8 @@ class RemindersRepository: ObservableObject {
           
           switch result {
           case .success(let reminder):
-            if let reminder = reminder {
-              // A `Reminder` value was successfully initialized from the DocumentSnapshot.
-              return reminder
-            }
-            else {
-              // A nil value was successfully initialized from the DocumentSnapshot,
-              // or the DocumentSnapshot was nil.
-              print("Document doesn't exist.")
-              return nil
-            }
+            // A `Reminder` value was successfully initialized from the DocumentSnapshot.
+            return reminder
           case .failure(let error):
             // A `Reminder` value could not be initialized from the DocumentSnapshot.
             switch error {
