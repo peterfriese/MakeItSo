@@ -18,11 +18,12 @@
 // limitations under the License.
 
 import Foundation
-import Firebase
 import os
 import AuthenticationServices
 import CryptoKit
 import Resolver
+import FirebaseCore
+import FirebaseAuth
 
 public class AuthenticationService: ObservableObject {
   private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "authentication")

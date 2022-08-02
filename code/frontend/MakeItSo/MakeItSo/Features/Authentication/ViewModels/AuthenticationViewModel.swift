@@ -147,13 +147,22 @@ extension AuthenticationViewModel {
 
 // MARK: - Sign in with Apple
 
+enum SignInState: String {
+  case signIn
+  case link
+  case reauth
+}
+
 extension AuthenticationViewModel {
 
-  func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest) {
+  func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest, withState: SignInState = .signIn) {
     request.requestedScopes = [.fullName, .email]
+    
     let nonce = randomNonceString()
     currentNonce = nonce
     request.nonce = sha256(nonce)
+    
+    request.state = withState.rawValue
   }
 
   func handleSignInWithAppleCompletion(_ result: Result<ASAuthorization, Error>) {
@@ -173,20 +182,66 @@ extension AuthenticationViewModel {
           print("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
           return
         }
+        guard let stateRaw = appleIDCredential.state, let state = SignInState(rawValue: stateRaw) else {
+          print("Invalid state: request must be started with one of the SignInStates")
+          return
+        }
 
         let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                   idToken: idTokenString,
                                                   rawNonce: nonce)
-        Task {
-          do {
-            let result = try await Auth.auth().signIn(with: credential)
-            try await result.user.updateDisplayName(with: appleIDCredential)
-            displayName = result.user.displayName ?? ""
+        
+        switch state {
+        case .signIn:
+          Task {
+            do {
+              let result = try await Auth.auth().signIn(with: credential)
+              try await result.user.updateDisplayName(with: appleIDCredential)
+              displayName = result.user.displayName ?? ""
+            }
+            catch {
+              print("Error: \(error.localizedDescription)")
+            }
           }
-          catch {
-            print("Error: \(error.localizedDescription)")
+        case .link:
+          guard let currentUser = Auth.auth().currentUser else { return }
+          Task {
+            do {
+              let result = try await currentUser.link(with: credential)
+              try await result.user.updateDisplayName(with: appleIDCredential)
+              displayName = result.user.displayName ?? ""
+            }
+            catch {
+              print("Error: \(error.localizedDescription)")
+              if (error as NSError).code == AuthErrorCode.credentialAlreadyInUse.rawValue {
+                print("The user you're signing in with has already been linked, signing in to the new user and migrating the anonymous users [\(currentUser.uid)] tasks.")
+                guard let updatedCredential = (error as NSError).userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? OAuthCredential else { return }
+                print("Signing in using the updated credential")
+                do {
+                  let result = try await Auth.auth().signIn(with: updatedCredential)
+                  try await result.user.updateDisplayName(with: appleIDCredential)
+                  displayName = result.user.displayName ?? ""
+                }
+                catch {
+                  print("Error: \(error.localizedDescription)")
+                }
+              }
+            }
+          }
+        case .reauth:
+          guard let currentUser = Auth.auth().currentUser else { return }
+          Task {
+            do {
+              let result = try await currentUser.reauthenticate(with: credential)
+              try await result.user.updateDisplayName(with: appleIDCredential)
+              displayName = result.user.displayName ?? ""
+            }
+            catch {
+              print("Error: \(error.localizedDescription)")
+            }
           }
         }
+        
       }
     }
   }
