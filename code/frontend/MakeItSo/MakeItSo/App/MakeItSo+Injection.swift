@@ -28,6 +28,7 @@ extension Resolver: ResolverRegistering {
     
     // register application components
     register { AuthenticationService() }.scope(.application)
+    register { ConfigurationService() }.scope(.application)
     register { TodosRepository() }.scope(.application)
   }
 }
