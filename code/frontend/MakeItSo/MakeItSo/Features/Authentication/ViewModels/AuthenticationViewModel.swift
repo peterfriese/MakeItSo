@@ -191,6 +191,7 @@ extension AuthenticationViewModel {
                                                   idToken: idTokenString,
                                                   rawNonce: nonce)
         
+        // TODO: turn the enum into a type that can act on its own state (write a blog post about this pattern?)
         switch state {
         case .signIn:
           Task {

@@ -114,6 +114,8 @@ struct LoginView: View {
       SignInWithAppleButton(.signIn) { request in
         viewModel.handleSignInWithAppleRequest(request, withState: .link)
       } onCompletion: { result in
+        
+        // TODO: return true if signin / linking was successful, and then call dismiss
         viewModel.handleSignInWithAppleCompletion(result)
       }
       .signInWithAppleButtonStyle(colorScheme == .light ? .black : .white)
