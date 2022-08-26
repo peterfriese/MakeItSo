@@ -111,8 +111,7 @@ extension AuthenticationViewModel {
   func signUpWithEmailPassword() async -> Bool {
     authenticationState = .authenticating
     do  {
-//      try await authenticationService.signUp(withEmail: email, password: password)
-      try await authenticationService.link(withEmail: email, password: password)
+      try await authenticationService.signUp(withEmail: email, password: password)
       return true
     }
     catch {

@@ -24,6 +24,7 @@ import CryptoKit
 import Resolver
 import FirebaseCore
 import FirebaseAuth
+import Combine
 
 public class AuthenticationService: ObservableObject {
   private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "authentication")
@@ -35,37 +36,47 @@ public class AuthenticationService: ObservableObject {
   private var authStateHandler: AuthStateDidChangeListenerHandle?
   private var currentNonce: String?
   
+  private var cancellables = Set<AnyCancellable>()
+  
   init() {
     registerAuthStateHandler()
     verifySignInWithAppleAuthenticationState()
     registerCredentialRevocationListener()
+    
+    $user
+      .map { user in
+        user?.displayName ?? user?.email ?? ""
+      }
+      .assign(to: &$displayName)
+    
+    $user
+      .sink { user in
+        if user == nil {
+          self.logger.debug("User signed out.")
+          // sign in anonymously
+          self.signIn()
+        }
+      }
+      .store(in: &cancellables)
+    
+    $user
+      .compactMap { $0 }
+      .map { user in
+        user.isAnonymous
+          ? AuthenticationState.unauthenticated
+          : .authenticated
+      }
+      .assign(to: &$authenticationState)
   }
   
   private func registerAuthStateHandler() {
     if authStateHandler == nil {
       authStateHandler = Auth.auth().addStateDidChangeListener { auth, user in
         self.user = user
-        self.displayName = user?.displayName ?? user?.email ?? ""
-        
-        if let user = user {
-          if user.isAnonymous {
-            self.logger.debug("User signed in anonymously with user ID \(user.uid).")
-            self.authenticationState = .unauthenticated
-          }
-          else {
-            self.logger.debug("User signed in with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
-            self.authenticationState = .authenticated
-          }
-        }
-        else {
-          self.logger.debug("User signed out.")
-          
-          // sign in anonymously
-          self.signIn()
-        }
       }
     }
   }
+  
 }
 
 // MARK: - Generic account operations
@@ -91,17 +102,35 @@ extension AuthenticationService {
 // MARK: - Sign in with Email and Password
 
 extension AuthenticationService {
+  
+  /// Signs in using an email address and a password.
+  /// - Parameters:
+  ///   - email: The user's email
+  ///   - password: The user's password
   func signIn(withEmail email: String, password: String) async throws {
     try await Auth.auth().signIn(withEmail: email, password: password)
   }
 
+  /// Signs up using an email address and a password. If the current user is an anonymous user,
+  /// upgrades the anonymous user to a full account by linking it using the given email and password.
+  /// - Parameters:
+  ///   - email: The user's email
+  ///   - password: The user's password
   func signUp(withEmail email: String, password: String) async throws {
-    try await Auth.auth().createUser(withEmail: email, password: password)
+    if let user, user.isAnonymous {
+      try await link(withEmail: email, password: password)
+    }
+    else {
+      try await Auth.auth().createUser(withEmail: email, password: password)
+    }
   }
   
   func link(withEmail email: String, password: String) async throws {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-    try await user?.link(with: credential)
+    let result = try await user?.link(with: credential)
+    await MainActor.run {
+      self.user = result?.user
+    }
   }
 }
 
