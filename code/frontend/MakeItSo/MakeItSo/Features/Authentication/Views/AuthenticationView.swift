@@ -22,6 +22,7 @@ import Combine
 
 struct AuthenticationView: View {
   @StateObject var viewModel = AuthenticationViewModel()
+  @Environment(\.dismiss) var dismiss
 
   var body: some View {
     VStack {
@@ -32,6 +33,11 @@ struct AuthenticationView: View {
       case .signUp:
         SignupView()
           .environmentObject(viewModel)
+      }
+    }
+    .onReceive(viewModel.$authenticationState) { state in
+      if state == .authenticated {
+        dismiss()
       }
     }
   }

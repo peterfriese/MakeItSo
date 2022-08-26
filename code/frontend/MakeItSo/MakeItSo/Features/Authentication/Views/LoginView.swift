@@ -36,12 +36,10 @@ struct LoginView: View {
 
   private func signInWithEmailPassword() {
     Task {
-      if await viewModel.signInWithEmailPassword() == true {
-        dismiss()
-      }
+      await viewModel.signInWithEmailPassword()
     }
   }
-
+  
   var body: some View {
     VStack {
       Image("Login")
@@ -114,8 +112,6 @@ struct LoginView: View {
       SignInWithAppleButton(.signIn) { request in
         viewModel.handleSignInWithAppleRequest(request, withState: .link)
       } onCompletion: { result in
-        
-        // TODO: return true if signin / linking was successful, and then call dismiss
         viewModel.handleSignInWithAppleCompletion(result)
       }
       .signInWithAppleButtonStyle(colorScheme == .light ? .black : .white)

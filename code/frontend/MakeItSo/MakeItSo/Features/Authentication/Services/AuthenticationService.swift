@@ -45,19 +45,22 @@ public class AuthenticationService: ObservableObject {
     if authStateHandler == nil {
       authStateHandler = Auth.auth().addStateDidChangeListener { auth, user in
         self.user = user
-        self.authenticationState = user == nil ? .unauthenticated : .authenticated
         self.displayName = user?.displayName ?? user?.email ?? ""
         
         if let user = user {
           if user.isAnonymous {
             self.logger.debug("User signed in anonymously with user ID \(user.uid).")
+            self.authenticationState = .unauthenticated
           }
           else {
             self.logger.debug("User signed in with user ID \(user.uid). Email: \(user.email ?? "(empty)"), display name: [\(user.displayName ?? "(empty)")]")
+            self.authenticationState = .authenticated
           }
         }
         else {
           self.logger.debug("User signed out.")
+          
+          // sign in anonymously
           self.signIn()
         }
       }
@@ -68,6 +71,8 @@ public class AuthenticationService: ObservableObject {
 // MARK: - Generic account operations
 
 extension AuthenticationService {
+  
+  /// If no user is signed in, sign in anonymously
   func signIn() {
     if Auth.auth().currentUser == nil {
       Auth.auth().signInAnonymously()
