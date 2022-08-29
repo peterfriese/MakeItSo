@@ -110,7 +110,7 @@ struct LoginView: View {
       }
 
       SignInWithAppleButton(.signIn) { request in
-        viewModel.handleSignInWithAppleRequest(request, withState: .link)
+        viewModel.handleSignInWithAppleRequest(request, withStrategy: .link)
       } onCompletion: { result in
         viewModel.handleSignInWithAppleCompletion(result)
       }

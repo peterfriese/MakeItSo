@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		882973EB28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882973EA28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift */; };
+		882973ED28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882973EC28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift */; };
 		888EB7022890069E00C2A49C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB7012890069E00C2A49C /* MakeItSoApp.swift */; };
 		888EB7062890069F00C2A49C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EB7052890069F00C2A49C /* Assets.xcassets */; };
 		888EB7092890069F00C2A49C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EB7082890069F00C2A49C /* Preview Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		882973EA28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticationService+EmailPassword.swift"; sourceTree = "<group>"; };
+		882973EC28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticationService+SignInWithApple.swift"; sourceTree = "<group>"; };
 		888EB6FE2890069E00C2A49C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		888EB7012890069E00C2A49C /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
 		888EB7052890069F00C2A49C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				888EB7442890217E00C2A49C /* AuthenticationService.swift */,
+				882973EA28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift */,
+				882973EC28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				888EB72C28900E3700C2A49C /* TodoDetailsView.swift in Sources */,
 				888EB7512891477F00C2A49C /* TodosListViewModel.swift in Sources */,
 				888EB73828901FEE00C2A49C /* LoginView.swift in Sources */,
+				882973ED28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift in Sources */,
 				888EB73928901FEE00C2A49C /* SignupView.swift in Sources */,
 				888EB72628900AD800C2A49C /* TodoRepository.swift in Sources */,
 				888EB72828900B0800C2A49C /* TodosListView.swift in Sources */,
@@ -346,6 +353,7 @@
 				888EB73B28901FEE00C2A49C /* UserProfileView.swift in Sources */,
 				888EB75328917A3A00C2A49C /* TodoDetailsViewModel.swift in Sources */,
 				888EB74C28912F4F00C2A49C /* SettingsView.swift in Sources */,
+				882973EB28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift in Sources */,
 				888EB73A28901FEE00C2A49C /* AuthenticationView.swift in Sources */,
 				888EB723289009AA00C2A49C /* Todo.swift in Sources */,
 				888EB7022890069E00C2A49C /* MakeItSoApp.swift in Sources */,
