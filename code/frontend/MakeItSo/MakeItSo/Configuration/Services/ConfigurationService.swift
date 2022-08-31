@@ -37,17 +37,23 @@ public class ConfigurationService: ObservableObject {
     #endif
   }
     
-  func fetchConfigurationData() async throws {
-    let status = try await RemoteConfig.remoteConfig().fetch()
-    if status == .success {
-      try await RemoteConfig.remoteConfig().activate()
-      DispatchQueue.main.async {
-        self.showDetailsButton = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.showDetailsButtonKey).boolValue
-        self.todoCheckShape = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.todoCheckShapeKey).stringValue ?? ConfigurationDefaults.todoCheckShapeValue
+  @MainActor
+  func fetchConfigurationData() {
+    Task {
+      do {
+        let status = try await RemoteConfig.remoteConfig().fetch()
+        if status == .success {
+          try await RemoteConfig.remoteConfig().activate()
+          self.showDetailsButton = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.showDetailsButtonKey).boolValue
+          self.todoCheckShape = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.todoCheckShapeKey).stringValue ?? ConfigurationDefaults.todoCheckShapeValue
+        }
+        else {
+          self.logger.debug("Could not fetch configuration data")
+        }
       }
-    }
-    else {
-      self.logger.debug("Could not fetch configuration data")
+      catch {
+        logger.error("Error when fetching remote configuration \(error.localizedDescription)")
+      }
     }
   }
 }
