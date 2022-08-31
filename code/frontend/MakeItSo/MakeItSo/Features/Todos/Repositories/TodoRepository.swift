@@ -37,7 +37,7 @@ class TodosRepository: ObservableObject {
   private var listenerRegistration: ListenerRegistration?
   private var cancellables = Set<AnyCancellable>()
   
-  let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "persistence")
+  let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "persistence")
   
   init() {
     // observe user ID

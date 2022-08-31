@@ -27,7 +27,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   @LazyInjected var authenticationService: AuthenticationService
   @LazyInjected var configurationService: ConfigurationService
     
-  let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "persistence")
+  let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "persistence")
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -50,7 +50,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct MakeItSoApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @LazyInjected var authenticationService: AuthenticationService
   
   var body: some Scene {
     WindowGroup {

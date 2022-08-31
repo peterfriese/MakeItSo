@@ -22,7 +22,7 @@ import os
 import FirebaseRemoteConfig
 
 public class ConfigurationService: ObservableObject {
-  private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "configuration")
+  private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "configuration")
     
   @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
   @Published var todoCheckShape: String = ConfigurationDefaults.todoCheckShapeValue

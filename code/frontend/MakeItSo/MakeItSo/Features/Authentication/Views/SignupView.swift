@@ -35,9 +35,7 @@ struct SignupView: View {
 
   private func signUpWithEmailPassword() {
     Task {
-      if await viewModel.signUpWithEmailPassword() == true {
-        dismiss()
-      }
+      await viewModel.signUpWithEmailPassword()
     }
   }
 
