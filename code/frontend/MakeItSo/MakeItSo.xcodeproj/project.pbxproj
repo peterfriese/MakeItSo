@@ -10,7 +10,7 @@
 		1223C1FF28AFE168006037A2 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1223C1FE28AFE168006037A2 /* ConfigurationService.swift */; };
 		1223C20228AFE70F006037A2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 1223C20128AFE70F006037A2 /* FirebaseRemoteConfig */; };
 		1223C20428AFE70F006037A2 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1223C20328AFE70F006037A2 /* FirebaseRemoteConfigSwift */; };
-		1223C20628AFEF61006037A2 /* remote_config_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1223C20528AFEF61006037A2 /* remote_config_defaults.plist */; };
+		1223C20628AFEF61006037A2 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1223C20528AFEF61006037A2 /* RemoteConfigDefaults.plist */; };
 		1223C20828AFF7A7006037A2 /* ConfigurationDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1223C20728AFF7A7006037A2 /* ConfigurationDefaults.swift */; };
 		8872D38128A1564600C2DDD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */; };
 		888EB7022890069E00C2A49C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB7012890069E00C2A49C /* MakeItSoApp.swift */; };
@@ -45,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		1223C1FE28AFE168006037A2 /* ConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
-		1223C20528AFEF61006037A2 /* remote_config_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = remote_config_defaults.plist; sourceTree = "<group>"; };
+		1223C20528AFEF61006037A2 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		1223C20728AFF7A7006037A2 /* ConfigurationDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDefaults.swift; sourceTree = "<group>"; };
 		8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		888EB6FE2890069E00C2A49C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +143,7 @@
 				888EB710289006C700C2A49C /* Features */,
 				888EB7052890069F00C2A49C /* Assets.xcassets */,
 				8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */,
-				1223C20528AFEF61006037A2 /* remote_config_defaults.plist */,
+				1223C20528AFEF61006037A2 /* RemoteConfigDefaults.plist */,
 				888EB7072890069F00C2A49C /* Preview Content */,
 			);
 			path = MakeItSo;
@@ -361,7 +361,7 @@
 			files = (
 				888EB7092890069F00C2A49C /* Preview Assets.xcassets in Resources */,
 				888EB7062890069F00C2A49C /* Assets.xcassets in Resources */,
-				1223C20628AFEF61006037A2 /* remote_config_defaults.plist in Resources */,
+				1223C20628AFEF61006037A2 /* RemoteConfigDefaults.plist in Resources */,
 				8872D38128A1564600C2DDD7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,16 +21,28 @@ import SwiftUI
 import Resolver
 import FirebaseCore
 import AuthenticationServices
+import os
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   @LazyInjected var authenticationService: AuthenticationService
   @LazyInjected var configurationService: ConfigurationService
+    
+  let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "persistence")
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
-    configurationService.fetchConfigurationData()
     authenticationService.signIn()
+      
+    Task {
+      do {
+        try await configurationService.fetchConfigurationData()
+      }
+      catch {
+        logger.debug("Could not fetch configuration data")
+      }
+    }
+
     return true
   }
 }

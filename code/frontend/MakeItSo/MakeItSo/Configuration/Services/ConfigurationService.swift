@@ -22,27 +22,30 @@ import os
 import FirebaseRemoteConfig
 
 public class ConfigurationService: ObservableObject {
-    private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "configuration")
+  private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "configuration")
     
-    @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
+  @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
 
-    init() {
-        RemoteConfig.remoteConfig().setDefaults(fromPlist: "remote_config_defaults")
-        
-        // Only used for testing, should never deploy this code to production:
-        let settings = RemoteConfigSettings()
-        settings.minimumFetchInterval = 0
-        RemoteConfig.remoteConfig().configSettings = settings
-    }
+  init() {
+    RemoteConfig.remoteConfig().setDefaults(fromPlist: "RemoteConfigDefaults")
+      
+    #if DEBUG
+      let settings = RemoteConfigSettings()
+      settings.minimumFetchInterval = 0
+      RemoteConfig.remoteConfig().configSettings = settings
+    #endif
+  }
     
-    func fetchConfigurationData() {
-        RemoteConfig.remoteConfig().fetch { (status, error) -> Void in
-          if status == .success {
-              RemoteConfig.remoteConfig().activate()
-              self.showDetailsButton = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.showDetailsButtonKey).boolValue
-          } else {
-              self.logger.debug("Could not fetch configuration data")
-          }
-        }
+  func fetchConfigurationData() async throws {
+    let status = try await RemoteConfig.remoteConfig().fetch()
+    if status == .success {
+      try await RemoteConfig.remoteConfig().activate()
+      DispatchQueue.main.async {
+        self.showDetailsButton = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.showDetailsButtonKey).boolValue
+      }
     }
+    else {
+      self.logger.debug("Could not fetch configuration data")
+    }
+  }
 }
