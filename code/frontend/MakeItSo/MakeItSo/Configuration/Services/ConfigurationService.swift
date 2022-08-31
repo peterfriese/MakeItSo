@@ -30,11 +30,11 @@ public class ConfigurationService: ObservableObject {
   init() {
     RemoteConfig.remoteConfig().setDefaults(fromPlist: "RemoteConfigDefaults")
       
-  //  #if DEBUG
+    #if DEBUG
       let settings = RemoteConfigSettings()
       settings.minimumFetchInterval = 0
       RemoteConfig.remoteConfig().configSettings = settings
-  //  #endif
+    #endif
   }
     
   func fetchConfigurationData() async throws {
