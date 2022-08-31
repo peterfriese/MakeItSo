@@ -29,7 +29,8 @@ struct TodoListRowView: View {
 
   var body: some View {
     HStack(alignment: .top) {
-      Image(systemName: viewModel.todo.completed ? "checkmark.circle.fill" : "circle")
+        let shape = viewModel.todoCheckShape
+        Image(systemName: viewModel.todo.completed ? "checkmark.\(shape).fill" : shape)
         .foregroundColor(viewModel.todo.completed ? Color(UIColor.systemRed) : .gray)
         .font(.title3)
         .onTapGesture {

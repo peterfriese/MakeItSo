@@ -25,15 +25,16 @@ public class ConfigurationService: ObservableObject {
   private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "configuration")
     
   @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
+  @Published var todoCheckShape: String = ConfigurationDefaults.todoCheckShapeValue
 
   init() {
     RemoteConfig.remoteConfig().setDefaults(fromPlist: "RemoteConfigDefaults")
       
-    #if DEBUG
+  //  #if DEBUG
       let settings = RemoteConfigSettings()
       settings.minimumFetchInterval = 0
       RemoteConfig.remoteConfig().configSettings = settings
-    #endif
+  //  #endif
   }
     
   func fetchConfigurationData() async throws {
@@ -42,6 +43,7 @@ public class ConfigurationService: ObservableObject {
       try await RemoteConfig.remoteConfig().activate()
       DispatchQueue.main.async {
         self.showDetailsButton = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.showDetailsButtonKey).boolValue
+        self.todoCheckShape = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.todoCheckShapeKey).stringValue ?? ConfigurationDefaults.todoCheckShapeValue
       }
     }
     else {

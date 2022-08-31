@@ -22,4 +22,7 @@ import Foundation
 struct ConfigurationDefaults {
   static let showDetailsButtonKey = "ShowDetailsButton"
   static let showDetailsButtonValue = true
+    
+  static let todoCheckShapeKey = "TodoCheckShape"
+  static let todoCheckShapeValue = "circle"
 }
