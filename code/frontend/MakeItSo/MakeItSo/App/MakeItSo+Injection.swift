@@ -20,11 +20,13 @@
 import Foundation
 import Resolver
 import Firebase
+import FirebaseRemoteConfig
 
 extension Resolver: ResolverRegistering {
   public static func registerAllServices() {
     // register Firebase services
     register { Firestore.firestore().enableLogging(on: true) }.scope(.application)
+    register { RemoteConfig.remoteConfig().configure() }.scope(.application)
     
     // register application components
     register { AuthenticationService() }.scope(.application)
@@ -36,6 +38,20 @@ extension Resolver: ResolverRegistering {
 extension Firestore {
   func enableLogging(on: Bool = true) -> Firestore {
     Self.enableLogging(on)
+    return self
+  }
+}
+
+extension RemoteConfig {
+  func configure() -> RemoteConfig {
+    self.setDefaults(fromPlist: "RemoteConfigDefaults")
+        
+    #if DEBUG
+      let settings = RemoteConfigSettings()
+      settings.minimumFetchInterval = 0
+      self.configSettings = settings
+    #endif
+        
     return self
   }
 }

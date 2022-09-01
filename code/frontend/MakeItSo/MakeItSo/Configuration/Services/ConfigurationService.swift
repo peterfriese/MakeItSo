@@ -18,35 +18,31 @@
 // limitations under the License.
 
 import Foundation
+import Resolver
 import os
 import FirebaseRemoteConfig
 import FirebaseRemoteConfigSwift
 
 public class ConfigurationService: ObservableObject {
-  private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "configuration")
-    
+  // MARK: - Dependencies
+  @Injected var rc: RemoteConfig
+  
+  // MARK: - Publishers
   @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
   @Published var todoCheckShape = ConfigurationDefaults.todoCheckShapeValue
-
-  init() {
-    RemoteConfig.remoteConfig().setDefaults(fromPlist: "RemoteConfigDefaults")
-      
-    #if DEBUG
-      let settings = RemoteConfigSettings()
-      settings.minimumFetchInterval = 0
-      RemoteConfig.remoteConfig().configSettings = settings
-    #endif
-  }
+    
+  // MARK: - Private attributes
+  private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "configuration")
     
   @MainActor
   func fetchConfigurationData() {
     Task {
       do {
-        let status = try await RemoteConfig.remoteConfig().fetch()
+        let status = try await rc.fetch()
         if status == .success {
-          try await RemoteConfig.remoteConfig().activate()
-          self.showDetailsButton = RemoteConfig.remoteConfig()[ConfigurationDefaults.showDetailsButtonKey].boolValue
-          self.todoCheckShape = try RemoteConfig.remoteConfig()[ConfigurationDefaults.todoCheckShapeKey].decoded(asType: TodoCheckShape.self)
+          try await rc.activate()
+          self.showDetailsButton = rc[ConfigurationDefaults.showDetailsButtonKey].boolValue
+          self.todoCheckShape = try rc[ConfigurationDefaults.todoCheckShapeKey].decoded(asType: TodoCheckShape.self)
         }
         else {
           self.logger.debug("Could not fetch configuration data")
