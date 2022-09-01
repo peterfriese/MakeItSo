@@ -20,12 +20,13 @@
 import Foundation
 import os
 import FirebaseRemoteConfig
+import FirebaseRemoteConfigSwift
 
 public class ConfigurationService: ObservableObject {
   private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "configuration")
     
   @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
-  @Published var todoCheckShape: String = ConfigurationDefaults.todoCheckShapeValue
+  @Published var todoCheckShape = ConfigurationDefaults.todoCheckShapeValue
 
   init() {
     RemoteConfig.remoteConfig().setDefaults(fromPlist: "RemoteConfigDefaults")
@@ -44,8 +45,8 @@ public class ConfigurationService: ObservableObject {
         let status = try await RemoteConfig.remoteConfig().fetch()
         if status == .success {
           try await RemoteConfig.remoteConfig().activate()
-          self.showDetailsButton = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.showDetailsButtonKey).boolValue
-          self.todoCheckShape = RemoteConfig.remoteConfig().configValue(forKey: ConfigurationDefaults.todoCheckShapeKey).stringValue ?? ConfigurationDefaults.todoCheckShapeValue
+          self.showDetailsButton = RemoteConfig.remoteConfig()[ConfigurationDefaults.showDetailsButtonKey].boolValue
+          self.todoCheckShape = try RemoteConfig.remoteConfig()[ConfigurationDefaults.todoCheckShapeKey].decoded(asType: TodoCheckShape.self)
         }
         else {
           self.logger.debug("Could not fetch configuration data")

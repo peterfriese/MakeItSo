@@ -24,5 +24,15 @@ struct ConfigurationDefaults {
   static let showDetailsButtonValue = true
     
   static let todoCheckShapeKey = "TodoCheckShape"
-  static let todoCheckShapeValue = "circle"
+  static let todoCheckShapeValue = TodoCheckShape.circle
+}
+
+enum TodoCheckShape: String, Decodable {
+  case circle
+  case square
+  
+  func iconName(completed: Bool) -> String {
+    let shape = self.rawValue
+    return completed ? "checkmark.\(shape).fill" : shape
+  }
 }

@@ -22,7 +22,7 @@ import SwiftUI
 import Resolver
 
 class TodoListRowViewModel: ObservableObject {
-  @Published var todoCheckShape: String = ConfigurationDefaults.todoCheckShapeValue
+  @Published var todoCheckShape = ConfigurationDefaults.todoCheckShapeValue
     
   @LazyInjected private var repository: TodosRepository
   @LazyInjected private var configurationService: ConfigurationService
@@ -34,7 +34,6 @@ class TodoListRowViewModel: ObservableObject {
       
     configurationService
       .$todoCheckShape
-      .filter { $0 == "circle" || $0 == "square" }
       .assign(to: &$todoCheckShape)
   }
   
