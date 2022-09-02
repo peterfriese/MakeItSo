@@ -14,7 +14,6 @@
 		1223C20828AFF7A7006037A2 /* ConfigurationDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1223C20728AFF7A7006037A2 /* ConfigurationDefaults.swift */; };
 		882973EB28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882973EA28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift */; };
 		882973ED28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882973EC28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift */; };
-		8872D38128A1564600C2DDD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */; };
 		888EB7022890069E00C2A49C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB7012890069E00C2A49C /* MakeItSoApp.swift */; };
 		888EB7062890069F00C2A49C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EB7052890069F00C2A49C /* Assets.xcassets */; };
 		888EB7092890069F00C2A49C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EB7082890069F00C2A49C /* Preview Assets.xcassets */; };
@@ -43,6 +42,7 @@
 		888EB7512891477F00C2A49C /* TodosListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB7502891477F00C2A49C /* TodosListViewModel.swift */; };
 		888EB75328917A3A00C2A49C /* TodoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB75228917A3A00C2A49C /* TodoDetailsViewModel.swift */; };
 		888EB75528917AD000C2A49C /* TodoListRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB75428917AD000C2A49C /* TodoListRowViewModel.swift */; };
+		88C7AB0328C24498007D77F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88C7AB0228C24498007D77F1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +51,6 @@
 		1223C20728AFF7A7006037A2 /* ConfigurationDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDefaults.swift; sourceTree = "<group>"; };
 		882973EA28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticationService+EmailPassword.swift"; sourceTree = "<group>"; };
 		882973EC28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticationService+SignInWithApple.swift"; sourceTree = "<group>"; };
-		8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		888EB6FE2890069E00C2A49C /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		888EB7012890069E00C2A49C /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
 		888EB7052890069F00C2A49C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		888EB7502891477F00C2A49C /* TodosListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosListViewModel.swift; sourceTree = "<group>"; };
 		888EB75228917A3A00C2A49C /* TodoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsViewModel.swift; sourceTree = "<group>"; };
 		888EB75428917AD000C2A49C /* TodoListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListRowViewModel.swift; sourceTree = "<group>"; };
+		88C7AB0228C24498007D77F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +146,7 @@
 				1223C1FC28AFE101006037A2 /* Configuration */,
 				888EB710289006C700C2A49C /* Features */,
 				888EB7052890069F00C2A49C /* Assets.xcassets */,
-				8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */,
+				88C7AB0228C24498007D77F1 /* GoogleService-Info.plist */,
 				1218CD6928BFC0B400F52E4C /* RemoteConfigDefaults.plist */,
 				888EB7072890069F00C2A49C /* Preview Content */,
 			);
@@ -368,7 +368,7 @@
 				888EB7092890069F00C2A49C /* Preview Assets.xcassets in Resources */,
 				1218CD6A28BFC0B500F52E4C /* RemoteConfigDefaults.plist in Resources */,
 				888EB7062890069F00C2A49C /* Assets.xcassets in Resources */,
-				8872D38128A1564600C2DDD7 /* GoogleService-Info.plist in Resources */,
+				88C7AB0328C24498007D77F1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +546,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.quickstart.MakeItSo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.workshop.MakeItSo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -577,7 +577,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.quickstart.MakeItSo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.workshop.MakeItSo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -24,7 +24,7 @@ import FirebaseAuth
 import Combine
 
 public class AuthenticationService: ObservableObject {
-  private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "authentication")
+  private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "authentication")
   
   @Published var user: User?
   @Published var displayName: String = ""

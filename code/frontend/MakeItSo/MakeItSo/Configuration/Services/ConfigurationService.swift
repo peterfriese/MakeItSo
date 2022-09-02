@@ -32,7 +32,7 @@ public class ConfigurationService: ObservableObject {
   @Published var todoCheckShape = ConfigurationDefaults.todoCheckShapeValue
     
   // MARK: - Private attributes
-  private let logger = Logger(subsystem: "com.google.firebase.quickstart.MakeItSo", category: "configuration")
+  private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "configuration")
     
   @MainActor
   func fetchConfigurationData() {
