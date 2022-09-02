@@ -118,31 +118,6 @@ struct LoginView: View {
       .frame(maxWidth: .infinity, minHeight: 50)
       .cornerRadius(8)
 
-      // IDEA: implement a FirebaseSiwA button with a flexible layout
-//      Button(action: { }) {
-//        Text("Sign in with Apple")
-//          .padding(.vertical, 8)
-//          .frame(maxWidth: .infinity)
-//          .background(alignment: .leading) {
-//            Image(systemName: "applelogo")
-//              .frame(width: 30, alignment: .center)
-//          }
-//      }
-//      .foregroundColor(.black)
-//      .buttonStyle(.bordered)
-
-      //      Button(action: { }) {
-      //        Text("Sign in with Google")
-      //          .padding(.vertical, 8)
-      //          .frame(maxWidth: .infinity)
-      //          .background(alignment: .leading) {
-      //            Image("Google")
-      //              .frame(width: 30, alignment: .center)
-      //          }
-      //      }
-      //      .foregroundColor(.black)
-      //      .buttonStyle(.bordered)
-
       HStack {
         Text("Don't have an account yet?")
         Button(action: { viewModel.switchFlow() }) {

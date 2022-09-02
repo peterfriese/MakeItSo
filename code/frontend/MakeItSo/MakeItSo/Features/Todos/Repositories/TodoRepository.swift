@@ -113,7 +113,6 @@ class TodosRepository: ObservableObject {
       }
   }
   
-  // TODO clean this up
   @discardableResult
   func addTodo(_ todo: Todo) -> Todo? {
     do {

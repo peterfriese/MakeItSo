@@ -49,7 +49,7 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
 
   var body: some View {
     switch viewModel.authenticationState {
-    case .unauthenticated, .authenticating:
+    case .unauthenticated:
       VStack {
         if let unauthenticated = unauthenticated {
           unauthenticated
@@ -66,8 +66,8 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
         AuthenticationView()
           .environmentObject(viewModel)
       }
-//    case .authenticating:
-//      Text("Logging in, please wait...")
+    case .authenticating:
+      Text("Logging in, please wait...")
     case .authenticated:
       VStack {
         content()

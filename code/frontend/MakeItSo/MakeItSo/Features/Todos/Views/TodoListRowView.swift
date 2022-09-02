@@ -34,7 +34,6 @@ struct TodoListRowView: View {
         .font(.title3)
         .onTapGesture {
           viewModel.toggleCompletion()
-//          todo.completed.toggle()
         }
       VStack(alignment: .leading) {
         HStack {
