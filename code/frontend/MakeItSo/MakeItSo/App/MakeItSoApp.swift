@@ -24,10 +24,12 @@ import AuthenticationServices
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   @LazyInjected var authenticationService: AuthenticationService
+  @LazyInjected var configurationService: ConfigurationService
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
+    configurationService.fetchConfigurationData()
     authenticationService.signIn()
     return true
   }
@@ -36,7 +38,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct MakeItSoApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @LazyInjected var authenticationService: AuthenticationService
   
   var body: some Scene {
     WindowGroup {

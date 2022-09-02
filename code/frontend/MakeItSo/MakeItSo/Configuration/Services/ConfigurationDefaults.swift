@@ -1,8 +1,8 @@
 //
-//  TodoListRowViewModel.swift
+//  ConfigurationDefaults.swift
 //  MakeItSo
 //
-//  Created by Peter Friese on 27.07.22.
+//  Created by Marina Coelho on 19.08.22.
 //  Copyright © 2022 Google LLC. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,29 +18,21 @@
 // limitations under the License.
 
 import Foundation
-import SwiftUI
-import Resolver
 
-class TodoListRowViewModel: ObservableObject {
-  @Published var todoCheckShape = ConfigurationDefaults.todoCheckShapeValue
+struct ConfigurationDefaults {
+  static let showDetailsButtonKey = "ShowDetailsButton"
+  static let showDetailsButtonValue = true
     
-  @LazyInjected private var repository: TodosRepository
-  @LazyInjected private var configurationService: ConfigurationService
+  static let todoCheckShapeKey = "TodoCheckShape"
+  static let todoCheckShapeValue = TodoCheckShape.circle
+}
+
+enum TodoCheckShape: String, Decodable {
+  case circle
+  case square
   
-  @Binding var todo: Todo
-  
-  init(todo: Binding<Todo>) {
-    self._todo = todo
-      
-    configurationService
-      .$todoCheckShape
-      .assign(to: &$todoCheckShape)
+  func iconName(completed: Bool) -> String {
+    let shape = self.rawValue
+    return completed ? "checkmark.\(shape).fill" : shape
   }
-  
-  func toggleCompletion() {
-    var userTodo = todo
-    userTodo.completed.toggle()
-    repository.updateTodo(userTodo)
-  }
-  
 }

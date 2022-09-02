@@ -14,7 +14,7 @@
     <img src="assets/hero/repo-hero.png" alt="Logo">
   </a>
 
-  <h1 align="center">Make It So - Again!</h1>
+  <h1 align="center">Make It So - Workshop</h1>
 
   <p align="center">
     This is the source code for <i>Make It So</i>, a sample app that demonstrates how to use Firebase in a SwiftUI app that runs on all (most) of Apple's platforms.
@@ -34,12 +34,13 @@ This app requires a Firebase project, which you can create at no cost using the 
 
 1. Clone the repo
 1. Create a Firebase project
-2. Create a Cloud Firestore database in the new Firebase project ([link](https://console.firebase.google.com/project/_/firestore/))
-2. Enable Anonymous Authentication ([link](https://console.firebase.google.com/project/_/authentication/providers))
+1. Create a Cloud Firestore database in the new Firebase project ([link](https://console.firebase.google.com/project/_/firestore/))
+1. Enable Anonymous Authentication ([link](https://console.firebase.google.com/project/_/authentication/providers))
+1. Enable Sign in with Apple ([link](https://console.firebase.google.com/project/_/authentication/providers))
 1. Register the iOS app in the Firebase project
 1. Download the `GoogleService-Info.plist` file to the `code/frontend/Configuration/Firebase/Development` folder
 1. Open `MakeItSo.xcodeproj` in Xcode
-1. Select the `MakeItSo (iOS) DEV` target
+1. Select the `MakeItSo` target
 1. Run the app
 
 # About the project

@@ -22,13 +22,19 @@ import Resolver
 
 class TodosListViewModel: ObservableObject {
   @Published var todos = [Todo]()
+  @Published var showDetailsButton: Bool = ConfigurationDefaults.showDetailsButtonValue
   
   @LazyInjected private var repository: TodosRepository
+  @LazyInjected private var configurationService: ConfigurationService
   
   init() {
     repository
       .$todos
       .assign(to: &$todos)
+      
+      configurationService
+        .$showDetailsButton
+        .assign(to: &$showDetailsButton)
   }
   
   func addTodo(_ todo: Todo) {

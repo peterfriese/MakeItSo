@@ -34,10 +34,12 @@ struct TodosListView: View {
           Button(role: .destructive, action: { viewModel.removeTodo(todo) }) {
             Label("Delete", systemImage: "trash")
           }
-          Button(action: { path = [todo] }) {
-            Label("Details", systemImage: "ellipsis")
+          if (viewModel.showDetailsButton) {
+            Button(action: { path = [todo] }) {
+              Label("Details", systemImage: "ellipsis")
+            }
+            .tint(Color(UIColor.systemGray))
           }
-          .tint(Color(UIColor.systemGray))
         }
       }
       .listStyle(.plain)

@@ -16,7 +16,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 import Foundation
 import os
 import Resolver
@@ -78,7 +77,6 @@ public class AuthenticationService: ObservableObject {
 }
 
 // MARK: - Generic account operations
-
 extension AuthenticationService {
   
   /// If no user is signed in, sign in anonymously

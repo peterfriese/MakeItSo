@@ -29,12 +29,11 @@ struct TodoListRowView: View {
 
   var body: some View {
     HStack(alignment: .top) {
-      Image(systemName: viewModel.todo.completed ? "checkmark.circle.fill" : "circle")
+      Image(systemName: viewModel.todoCheckShape.iconName(completed: viewModel.todo.completed))
         .foregroundColor(viewModel.todo.completed ? Color(UIColor.systemRed) : .gray)
         .font(.title3)
         .onTapGesture {
           viewModel.toggleCompletion()
-//          todo.completed.toggle()
         }
       VStack(alignment: .leading) {
         HStack {

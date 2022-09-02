@@ -16,7 +16,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 import Foundation
 import Resolver
 import FirebaseAuth
@@ -92,7 +91,6 @@ class AuthenticationViewModel: ObservableObject {
 }
 
 // MARK: - Generic account operations
-
 extension AuthenticationViewModel {
   func signOut() {
     do {
@@ -117,7 +115,6 @@ extension AuthenticationViewModel {
 }
 
 // MARK: - Sign in with Email and Password
-
 extension AuthenticationViewModel {
   func signInWithEmailPassword() async -> Bool {
     authenticationState = .authenticating
@@ -149,7 +146,6 @@ extension AuthenticationViewModel {
 }
 
 // MARK: - Sign in with Apple
-
 extension AuthenticationViewModel {
 
   func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest, withStrategy strategy: AuthenticationStrategy = .signIn) {
