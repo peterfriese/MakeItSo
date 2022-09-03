@@ -68,7 +68,6 @@
 		888EB73F2890200B00C2A49C /* FirebaseSignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseSignInWithAppleButton.swift; sourceTree = "<group>"; };
 		888EB7442890217E00C2A49C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		888EB746289022CC00C2A49C /* MakeItSo+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MakeItSo+Injection.swift"; sourceTree = "<group>"; };
-		888EB74828912D1E00C2A49C /* MakeItSo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MakeItSo.entitlements; sourceTree = "<group>"; };
 		888EB74B28912F4F00C2A49C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		888EB74E2891364B00C2A49C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		888EB7502891477F00C2A49C /* TodosListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosListViewModel.swift; sourceTree = "<group>"; };
@@ -139,7 +138,6 @@
 		888EB7002890069E00C2A49C /* MakeItSo */ = {
 			isa = PBXGroup;
 			children = (
-				888EB74828912D1E00C2A49C /* MakeItSo.entitlements */,
 				888EB70F289006C100C2A49C /* App */,
 				1223C1FC28AFE101006037A2 /* Configuration */,
 				888EB710289006C700C2A49C /* Features */,
@@ -524,7 +522,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MakeItSo/MakeItSo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MakeItSo/Preview Content\"";
@@ -555,7 +552,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MakeItSo/MakeItSo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MakeItSo/Preview Content\"";

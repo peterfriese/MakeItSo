@@ -42,7 +42,6 @@
 		888EB7512891477F00C2A49C /* TodosListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB7502891477F00C2A49C /* TodosListViewModel.swift */; };
 		888EB75328917A3A00C2A49C /* TodoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB75228917A3A00C2A49C /* TodoDetailsViewModel.swift */; };
 		888EB75528917AD000C2A49C /* TodoListRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB75428917AD000C2A49C /* TodoListRowViewModel.swift */; };
-		88C7AB0328C24498007D77F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88C7AB0228C24498007D77F1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,13 +68,11 @@
 		888EB73F2890200B00C2A49C /* FirebaseSignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseSignInWithAppleButton.swift; sourceTree = "<group>"; };
 		888EB7442890217E00C2A49C /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		888EB746289022CC00C2A49C /* MakeItSo+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MakeItSo+Injection.swift"; sourceTree = "<group>"; };
-		888EB74828912D1E00C2A49C /* MakeItSo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MakeItSo.entitlements; sourceTree = "<group>"; };
 		888EB74B28912F4F00C2A49C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		888EB74E2891364B00C2A49C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		888EB7502891477F00C2A49C /* TodosListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosListViewModel.swift; sourceTree = "<group>"; };
 		888EB75228917A3A00C2A49C /* TodoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsViewModel.swift; sourceTree = "<group>"; };
 		888EB75428917AD000C2A49C /* TodoListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListRowViewModel.swift; sourceTree = "<group>"; };
-		88C7AB0228C24498007D77F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +138,6 @@
 		888EB7002890069E00C2A49C /* MakeItSo */ = {
 			isa = PBXGroup;
 			children = (
-				888EB74828912D1E00C2A49C /* MakeItSo.entitlements */,
 				888EB70F289006C100C2A49C /* App */,
 				1223C1FC28AFE101006037A2 /* Configuration */,
 				888EB710289006C700C2A49C /* Features */,
@@ -365,7 +361,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				888EB7092890069F00C2A49C /* Preview Assets.xcassets in Resources */,
-				1218CD6A28BFC0B500F52E4C /* RemoteConfigDefaults.plist in Resources */,
 				888EB7062890069F00C2A49C /* Assets.xcassets in Resources */,
 				8872D38128A1564600C2DDD7 /* GoogleService-Info.plist in Resources */,
 			);
@@ -527,7 +522,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MakeItSo/MakeItSo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MakeItSo/Preview Content\"";
@@ -558,7 +552,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MakeItSo/MakeItSo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MakeItSo/Preview Content\"";
