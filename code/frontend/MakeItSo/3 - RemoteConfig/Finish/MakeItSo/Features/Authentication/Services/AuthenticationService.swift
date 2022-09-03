@@ -24,7 +24,11 @@ import FirebaseAuth
 import Combine
 
 public class AuthenticationService: ObservableObject {
+<<<<<<< HEAD:code/frontend/MakeItSo/3 - RemoteConfig/Finish/MakeItSo/Features/Authentication/Services/AuthenticationService.swift
   private let logger = Logger(subsystem: "com.google.firebase.codelab.MakeItSo", category: "authentication")
+=======
+  private let logger = Logger(subsystem: "com.google.firebase.workshop.MakeItSo", category: "authentication")
+>>>>>>> origin/workshop/develop:code/frontend/MakeItSo/MakeItSo/Features/Authentication/Services/AuthenticationService.swift
   
   @Published var user: User?
   @Published var displayName: String = ""
