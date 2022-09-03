@@ -25,7 +25,7 @@ import FirebaseRemoteConfig
 extension Resolver: ResolverRegistering {
   public static func registerAllServices() {
     // register Firebase services
-    register { Firestore.firestore().enableLogging(on: true) }.scope(.application)
+    register { Firestore.firestore().enableLogging(on: false) }.scope(.application)
     register { RemoteConfig.remoteConfig().configure() }.scope(.application)
     
     // register application components
