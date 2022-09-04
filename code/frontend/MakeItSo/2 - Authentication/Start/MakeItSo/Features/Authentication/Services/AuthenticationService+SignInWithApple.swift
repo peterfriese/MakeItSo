@@ -56,13 +56,7 @@ enum AuthenticationStrategy: String {
 
 extension AuthenticationService {
   func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest, withStrategy strategy: AuthenticationStrategy = .signIn) {
-    request.requestedScopes = [.fullName, .email]
-    
-    let nonce = randomNonceString()
-    currentNonce = nonce
-    request.nonce = sha256(nonce)
-    
-    request.state = strategy.rawValue
+
   }
   
   func handleSignInWithAppleCompletion(_ result: Result<ASAuthorization, Error>) throws {
@@ -87,20 +81,8 @@ extension AuthenticationService {
           return
         }
         
-        let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                  idToken: idTokenString,
-                                                  rawNonce: nonce)
-        
-        Task {
-          let authResult = try await strategy.handleAuthentication(with: credential)
-          
-          try await authResult.user.updateDisplayName(with: appleIDCredential)
-          await MainActor.run {
-            displayName = authResult.user.displayName ?? ""
-            user = authResult.user
-          }
-        }
-        
+          // Create credential and call handleAuthentication
+
       }
     }
   }
