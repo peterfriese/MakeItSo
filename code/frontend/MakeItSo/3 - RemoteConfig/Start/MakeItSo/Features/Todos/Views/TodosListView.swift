@@ -25,9 +25,9 @@ struct TodosListView: View {
   @State private var path = [Todo]()
   
   var body: some View {
-    NavigationStack(path: $path) {
+    NavigationView {
       List($viewModel.todos) { $todo in
-        NavigationLink(value: todo) {
+        NavigationLink(destination: TodoDetailsView(todo: todo)) {
           TodoListRowView(todo: $todo)
         }
         .swipeActions {
@@ -42,9 +42,6 @@ struct TodosListView: View {
       }
       .listStyle(.plain)
       .navigationTitle("Todos")
-      .navigationDestination(for: Todo.self) { todo in
-        TodoDetailsView(todo: todo)
-      }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: { presentingSetttingsScreen.toggle() }) {
@@ -72,7 +69,7 @@ struct TodosListView: View {
 
 struct TodoListView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    NavigationView {
       TodosListView()
     }
   }

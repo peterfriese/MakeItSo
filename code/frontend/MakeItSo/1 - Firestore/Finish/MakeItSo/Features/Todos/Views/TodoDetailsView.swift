@@ -46,7 +46,7 @@ struct TodoDetailsView: View {
 
 struct TodoDetailsView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    NavigationView {
       TodoDetailsView(todo: Todo.samples[0])
     }
   }
