@@ -37,7 +37,7 @@ extension AuthenticationService {
   ///   - email: The user's email
   ///   - password: The user's password
   func signUp(withEmail email: String, password: String) async throws {
-    if let user, user.isAnonymous {
+    if let user = user, user.isAnonymous {
       try await link(withEmail: email, password: password)
     }
     else {

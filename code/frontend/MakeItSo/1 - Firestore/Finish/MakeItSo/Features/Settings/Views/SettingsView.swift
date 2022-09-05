@@ -24,7 +24,7 @@ struct SettingsView: View {
   @StateObject private var viewModel = SettingsViewModel()
   
   var body: some View {
-    NavigationStack {
+    NavigationView {
       Form {
         Section {
           NavigationLink(destination: UserProfileView()) {
