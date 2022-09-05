@@ -139,19 +139,11 @@ extension AuthenticationViewModel {
 extension AuthenticationViewModel {
 
   func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest, withStrategy strategy: AuthenticationStrategy = .signIn) {
-    authenticationState = .authenticating
-    authenticationService.handleSignInWithAppleRequest(request, withStrategy: strategy)
+ 
   }
 
   func handleSignInWithAppleCompletion(_ result: Result<ASAuthorization, Error>) {
-    do  {
-      try authenticationService.handleSignInWithAppleCompletion(result)
-      authenticationState = .authenticated
-    }
-    catch {
-      errorMessage = error.localizedDescription
-      authenticationState = .unauthenticated
-    }
+
   }
 
 }
