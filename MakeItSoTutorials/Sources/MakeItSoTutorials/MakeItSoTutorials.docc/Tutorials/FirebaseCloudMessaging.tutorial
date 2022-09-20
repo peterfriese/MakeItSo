@@ -1,0 +1,242 @@
+@Tutorial(time: 30) {
+  @Intro(title: "Add Push Notifications to an iOS app") {
+    Firebase Cloud Messaging (FCM) is a cross-platform messaging solution that lets you reliably send messages at no cost.
+    
+    Using FCM, you can notify a client app that new email or other data is available to sync. You can send notification messages to drive user re-engagement and retention. For use cases such as instant messaging, a message can transfer a payload of up to 4000 bytes to a client app.
+    
+    In this tutorial, you're going to add push notifications to the _Make It So_ app, and send a test message from the Firebase console.
+    
+    @Image(source: fcm-intro, alt: "A paper aeroplane.")
+  }
+  
+  @Section(title: "Configure APNS") {
+    @ContentAndMedia {
+      This section describes how to generate an authentication key for an App ID enabled for Push Notifications. If you have an existing key, you can use that key instead of generating a new one.
+    }
+      
+    @Steps {
+      First, create an authentication key:
+      @Step {
+        In your [Apple developer account](https://developer.apple.com/account/), go to **Certificates, Identifiers & Profiles**, and navigate to **[Keys](https://developer.apple.com/account/resources/authkeys/list)**.
+        
+        @Image(source: apns-keys, alt: "")
+      }
+      @Step {
+        Tap on the **+** button.
+        @Image(source: apns-keys-2, alt: "")
+      }
+      @Step {
+        Enter a description for the key, e.g. `Make It So APNs`
+        @Image(source: apns-keys-3, alt: "")
+      }
+      @Step {
+        Under Key Services, select the APNs checkbox, and click **Continue**.
+        @Image(source: apns-keys-4, alt: "")
+      }
+      @Step {
+        Click **Register**.
+        @Image(source: apns-keys-5, alt: "")
+      }
+      @Step {
+        Take a note of the **Key ID**. Click **Download**, and save your key in a secure place. This is a one-time download, and the key cannot be retrieved later.
+        @Image(source: apns-keys-6, alt: "")
+      }
+      
+      Then, add Push Notification and Background capabilities to your app.
+      
+      @Step {
+        Go to the project navigator in Xcode and select your project, then select _MakeItSo_ in the list of targets, and go to the **Signing & Capabilities** tab.
+        @Image(source: xcode-add-capability-1, alt: "")
+      }
+      @Step {
+        Click on **+ Add Capability**, then search for _Push Notifications_. Double click on the capability to add it to your project.
+        @Image(source: xcode-add-capability-2, alt: "")
+      }
+      @Comment {
+        Do we need to configure the Apple Push Notification service SSL Certificate in the developer console (https://developer.apple.com/account/resources/identifiers/bundleId/edit/935FGYLKWX)?
+      }
+      @Step {
+        Click on **+ Add Capability** again, then search for _Background Modes_. Double click on the capability to add it to your project.
+        @Image(source: xcode-add-capability-3, alt: "")
+      }
+      @Step {
+        In the list of background modes, select **Remote notifications**.  
+        @Image(source: xcode-add-capability-4, alt: "")
+      }
+      
+      Finally, upload your APNs key.
+      @Step {
+        In the Firebase console: go to your project settings (gear icon > **Project Settinga**), then select the **Cloud Messaging** tab. Scroll down to the **Apple app configuration** and tap **Upload** to upload your APNs key (the _.p8_ file you downloaded from your Apple Developer account earlier.)
+        @Image(source: upload-apns-key, alt: "")
+      }
+      
+      @Step {
+        Browse for your `.p8` file, and insert the **Key ID** (you can find it in the Apple Developer console in the **[Keys section](https://developer.apple.com/account/resources/authkeys/list)**. Finally, enter your Apple Developer account **Team ID**, which you can find at the top right hand corner in the [Apple Developer account](https://developer.apple.com/account/resources/certificates/list).
+        
+        @Image(source: upload-apns-key-2, alt: "")
+      }
+      
+    }
+  }
+    
+  @Section(title: "Add Firebase Cloud Messaging to your app") {
+    @ContentAndMedia {
+      Before you can use Firebase Cloud Messaging, you need to add it to your app.
+    }
+      
+    @Steps {
+      First, you need to add the Firebase Messaging library to your app.
+      @Step {
+        In Xcode, select your project in the project navigator, then select _MakeItSo_ in the **TARGETS** list. Scroll down to **Frameworks, Libraries, and Embedded Content**.
+        
+        @Image(source: xcode-add-library, alt: "")
+      }
+      @Step {
+        Tap on the **+** button, then search for _FirebaseMessaging_ and click on the **Add** button to add the library to your target
+        
+        @Image(source: xcode-add-library-2, alt: "")
+      }
+      @Step {
+        Open `MakeItSoApp.swift`
+        
+        @Code(name: "MakeItSoApp.swift", file: 01_app_01.swift)
+      }
+      @Step {
+        Import `FirebaseMessaging`
+        
+        @Code(name: "MakeItSoApp.swift", file: 01_app_02.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Turn off Swizzling") {
+    @ContentAndMedia {
+      Firebase uses method siwzzling to make the setup flow easier. Unfortunately, this doesn't work well in SwiftUI apps, so we'll have to turn it off in the next step.
+    }
+        
+    @Steps {
+      @Step {
+        In Xcode, select your project in the project navigator, then select _MakeItSo_ in the **TARGETS** list, and go to the **Info** tab.
+        @Image(source: xcode-disable-swizzling, alt: "")
+      }
+      
+      @Step {
+        Add a new key by clicking on the plus button on any of the lines in the **Custom iOS Target Properties**.
+
+        @Image(source: xcode-disable-swizzling-2, alt: "")
+      }
+      
+      @Step {
+        Add a new _Boolean_ key named `FirebaseAppDelegateProxyEnabled`, and set its value to `NO`
+
+        @Image(source: xcode-disable-swizzling-3, alt: "")
+      }
+      
+      @Step {
+        Open `MakeItSoApp.swift`.
+        
+        @Code(name: "MakeItSoApp.swift", file: 02_app_00.swift)
+      }
+      
+      @Step {
+        Since we're no longer relying on method swizzling to handle the setup flow for us, we now need to handle this ourselves. Add the following piece of code right after the `AppDelegate` implementation to conform to `UNUserNotificationCenterDelegate`.
+        
+        These methods will be called when new notifications arrive, or when the user taps on them to jump back into the app.
+        
+        @Code(name: "MakeItSoApp.swift", file: 02_app_01.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Register for remote notifications") {
+    @ContentAndMedia {
+      Firebase uses method siwzzling to make the setup flow easier. Unfortunately, this doesn't work well in SwiftUI apps, so we'll have to turn it off in the next step.
+    }
+        
+    @Steps {
+      
+      @Step {
+        Open `MakeItSoApp.swift`.
+        
+        @Code(name: "MakeItSoApp.swift", file: 02_app_00.swift)
+      }
+
+      @Step {
+        Go back to the top of the file
+        @Code(name: "MakeItSoApp.swift", file: 02_app_01.swift)
+      }
+
+      @Step {
+        Add the following code to the end of the `application(:didFinishLaunchingWithOptions)` method in `AppDelegate`:
+        @Code(name: "MakeItSoApp.swift", file: 02_app_02.swift)
+      }
+      
+      @Step {
+        Add the following code to access the FCM registration token. Firebase will call the methods on this class whenever your application starts up or when the token is being refreshed.
+        @Code(name: "MakeItSoApp.swift", file: 02_app_03.swift)
+      }
+      
+      @Step {
+        At the end of `application(:didFinishLaunchingWithOptions)` method in `AppDelegate`, set the `Messaging` delegate
+        @Code(name: "MakeItSoApp.swift", file: 02_app_04.swift)        
+      }
+    }
+  }
+    
+  @Section(title: "Send a test message") {
+    @ContentAndMedia {
+      Run the app and send a test message.
+    }
+        
+    @Steps {
+      @Step {
+        Run your app on a physical device. After the app launches, put it into the background.
+      }
+      
+      @Step {
+        Once the application has started, find the line in the Xcode console that contains the **Firebase registration token**. Copy the registration token.
+          @Image(source: console-fcm-send-msg-00, alt: "")
+      }
+      
+
+      @Step {
+        Go to the Firebase console and navigate to the **Messaging** category in the **Engage** section.
+          @Image(source: console-fcm-send-msg-01, alt: "")
+      }
+      
+      @Step {
+        Click on **Send your first message**.
+        @Image(source: console-fcm-send-msg-02, alt: "")
+      }
+      
+      @Step {
+        In the Messaging dashboard, click on **New campaign**.
+        @Image(source: console-fcm-send-msg-03, alt: "")
+      }
+      
+      @Step {
+        Select **Notifications** in the dropdown.
+        @Image(source: console-fcm-send-msg-04, alt: "")
+      }
+      
+      @Step {
+        Compose a new messages.
+        > Note: You only need to provide the **Notification title** and the **Notification text**, the other fields are optional.
+        @Image(source: console-fcm-send-msg-05, alt: "")
+      }
+      
+      @Step {
+        Click on **Send test message**.
+        > Warning: Do not click on **Next** - you want to send a test message instead!
+        @Image(source: console-fcm-send-msg-06, alt: "")
+      }
+      
+      @Step {
+        The message should appear on your phone. Tap on the message to go into the app.
+        @Image(source: notification_device, alt: "")
+      }
+    }
+  }
+
+    
+}

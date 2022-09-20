@@ -1,0 +1,29 @@
+@Tutorials(name: "Improve Your App's Quality") {
+    @Intro(title: "Improve Your App's Quality") {
+      Do your customers complain about specific crashes, but you cannot reproduce it, and you wish you could see a stack trace to help you find the root cause?
+      
+      Your customers say your app is too slow, but this is not the case on your testing device?
+      
+      Your app works flawlessly on your testing device, but it crashes on your customers's devices?
+
+        Learn how to use Firebase to improve the quality of your app. 
+        
+        @Image(source: <#file#>, alt: "<#accessible description#>")
+    }
+    
+    @Chapter(name: "Firebase Cloud Messaging") {
+      Send push notifications to your app
+        
+        @Image(source: <#file#>, alt: "<#accessible description#>")
+        
+        @TutorialReference(tutorial: "doc:FirebaseCloudMessaging")
+    }
+    
+    @Chapter(name: "Crashlytics") {
+      Track, prioritize, and fix crashes faster
+        
+        @Image(source: <#file#>, alt: "<#accessible description#>")
+        
+        @TutorialReference(tutorial: "doc:Crashlytics")
+    }
+}

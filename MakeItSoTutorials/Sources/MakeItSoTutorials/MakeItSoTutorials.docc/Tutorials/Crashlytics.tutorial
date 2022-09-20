@@ -1,0 +1,155 @@
+@Tutorial(time: 30) {
+  @Intro(title: "Tracking crashes with Crashlytics") {
+    This tutorial guides you through setting up Firebase Crashlytics in your app with the Firebase Crashlytics SDK so that you can get comprehensive crash reports in the Firebase console.
+    
+    Setting up Crashlytics requires tasks both in the Firebase console and your IDE (like adding a Firebase configuration file and the Crashlytics SDK). To finish setup, you'll need to force a test crash to send your first crash report to Firebase.
+    
+    @Image(source: crashlytics-intro, alt: "A developer catching a butterfly.")
+  }
+  
+  @Section(title: "Add the Crashlytics SDK to your app") {
+    @ContentAndMedia {
+      Before you can use Crashlytics, you need to add it to your project.
+    }
+      
+    @Steps {
+      @Step {
+        Navigate to `04_Crashlytics/Start`.
+        @Code(name: "Shell", file: 01-goto-folder.sh)
+      }
+      @Step {
+        Open the `MakeItSo.xcodeproj` project.
+        @Code(name: "Shell", file: 02-open-xcode.sh)
+      }
+      @Step {
+        Select `MakeItSo` in the target list
+        @Image(source: select-target, alt: "")
+      }
+      @Step {
+        Tap the *+* icon below the _Frameworks, Libraries, and Embedded Content_ section.
+        @Image(source: select-target, alt: "")
+      }
+      @Step {
+        Select _FirebaseCrashlytics_ and tap the _Add_ button to add the library to your project.
+        @Image(source: select-target, alt: "")
+      }
+    }
+  }
+    
+  @Section(title: "Set up Xcode to automatically upload dSYM files") {
+    To generate human readable crash reports, Crashlytics needs your project's debug symbol (dSYM) files. The following steps describe how to configure Xcode to automatically produce your dSYMs, process them, and upload the files whenever you build your app.
+    
+    @Steps {
+      @Step {
+        Select `MakeItSo` in the target list
+        @Image(source: select-target, alt: "")
+      }
+      @Step {
+        Click the _Build Settings_ tab, then complete the following steps so that Xcode produces dSYMs for your builds.
+      }
+      @Step {
+        Click _All_, then search for _debug information format_.
+      }
+      @Step {
+        Set _Debug Information Format_ to `DWARF with dSYM File` for all your build types.
+      }
+      @Step {
+        Click the _Build Phases_ tab, then complete the following steps so that Xcode can process your dSYMs and upload the files.      
+      }
+      @Step {
+        Click the *+* icon and then select _New Run Script Phase_.
+        Make sure this new Run Script phase is your project's last build phase; otherwise, Crashlytics can't properly process dSYMs.
+      }
+      @Step {
+        Expand the new _Run Script_ section
+      }
+      @Step {
+        In the script field (located under the _Shell_ label), add the following run script.
+        This script processes your project's dSYM files and uploads the files to Crashlytics.
+        @Code(name: "", file: 03-upload-script.sh)
+      }
+      @Step {
+        In the Input Files section, add the paths for the locations of the following files:
+        The location of your project's dSYM files: `${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}`
+        Providing the location of your project's dSYM files enables Crashlytics to process dSYMs for large apps more quickly.
+      }
+      @Step {
+        The location of your project's built Info.plist file: `$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)`
+        Providing the location of your project's built Info.plist file enables Crashlytics to associate an app version with the dSYMs.
+      }
+    }
+  }
+  
+  @Section(title: "Add code to force a crash") {
+    To finish setting up Crashlytics and see initial data in the Crashlytics dashboard of the Firebase console, you need to force a test crash.
+    
+    @Steps {
+      First, you will add a piece of code to the `SettingsViewModel` that will force the app to crash.
+      
+      @Step {
+        Open `SettingsViewModel.swift`. 
+        @Code(name: "SettingsViewModel.swift", file: 05_settingsviewmodel_01.swift)
+      }
+      @Step {
+        Add a method `crash` - this is the method we will call to crash the app.
+        
+        > Note: To avoid shipping code that crashes the app, it is recommended to wrap this piece of code in a conditional statement.
+        @Code(name: "SettingsViewModel.swift", file: 05_settingsviewmodel_02.swift)
+      }
+      @Step {
+        Call `fatalError` to crash the app. 
+        @Code(name: "SettingsViewModel.swift", file: 05_settingsviewmodel_03.swift)
+      }
+      
+      Next, you will update the `SettingsViewModel` to allow the user to crash the app by clicking on a button on the _Settings_ screen. 
+      
+      @Step {
+        Open `SettingsView.swift`.
+        @Code(name: "SettingsView.swift", file: 04_settingsview_01.swift)
+      }
+      @Step {
+        Add an `#if DEBUG` block do avoid shipping a button that crashes your app in the release build of your app!
+        @Code(name: "SettingsView.swift", file: 04_settingsview_02.swift)
+      }
+      @Step {
+        Add a button to trigger the crash. 
+        @Code(name: "SettingsView.swift", file: 04_settingsview_03.swift) {
+          @Image(source: settings_screen_preview.png, alt: "A screenshot from the Xcode preview as it would appear on iPhone, with a button labelled 'Force crash'.")
+        }
+      }
+      @Step {
+        Call `viewModel.crash` on the view model to crash the app. 
+        @Code(name: "SettingsView.swift", file: 04_settingsview_04.swift) {
+          @Image(source: settings_screen_preview.png, alt: "A screenshot from the Xcode preview as it would appear on iPhone, with a button labelled 'Force crash'.")
+        }
+      }
+    }
+  }
+  @Section(title: "Run the app and force a crash to finishg setup") {
+    To finish setting up Crashlytics and see initial data in the Crashlytics dashboard of the Firebase console, you need to force a test crash.
+    
+    @Steps {
+      @Step {
+        Build the app and run it on a Simulator.
+      }
+      @Step {
+        Once the app runs, terminate it by clicking on the _Stop_ (the black square) button in Xcode.
+        > Note: This is important, as the Xcode debugger captures crashes, preventing them from being sent to Crashlytics.
+        
+        > Tip: You can also press `CMD + .` (think: _"command: full stop!"_) in Xcode to stop the app.
+      }
+      @Step {
+        Launch the app again, but this time start it by tapping the app's icon on the Simulator.
+        > Note: Don't run the app from inside Xcode, as the debugger will capture the crash.
+      }
+      @Step {
+        Open the _Settings_ screen of the app, and then tap on the _Force crash_ button to force the app to crash. The app should terminate.
+        
+        @Image(source: settings_screen_force_crash, alt: "A screenshot of the app running on the Simulator, with the settins screen open.")
+        
+        > Note: If you end up in Xcode, with the debugger showoing a breakpoint, you forgot to stop the app in the previous step. Stop the app and run it again from the Simulator's home screen, then try again.
+      }
+
+    }    
+  }
+}
