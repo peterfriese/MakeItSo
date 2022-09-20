@@ -14,55 +14,39 @@
     <img src="assets/hero/repo-hero.png" alt="Logo">
   </a>
 
-  <h1 align="center">Make It So - Workshop</h1>
+  <h1 align="center">Make It So - Codelab</h1>
 
   <p align="center">
-    This is the source code for <i>Make It So</i>, a sample app that demonstrates how to use Firebase in a SwiftUI app that runs on all (most) of Apple's platforms.
-    <br />
-    <a href="https://twitter.com/peterfriese/status/1453467058302291975"><strong>Follow along on Twitter as I code the app »</strong></a>
+    This is a tutorial that demonstrates how to build a todo list application with SwiftUI and Firebase.
     <br />
     <br />
-    <a href="https://github.com/peterfriese/MakeItSo/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/peterfriese/MakeItSo/issues">Request Feature</a>
+    <h2 align="center"><a href="https://peterfriese.github.io/MakeItSo/tutorials/tutorial-table-of-contents">Launch the tutorials</a></h2>
+    <br />
+    <br />
   </p>
 </p>
 
-# Getting started
+## Updating the Tutorials
 
-This app requires a Firebase project, which you can create at no cost using the [Firebase Console](https://console.firebase.google.com). Here are the steps. For a more detailed description of how to add Firebase to an iOS project, refer to the [official Firebase docs for iOS and Apple's other platforms](https://firebase.google.com/docs/ios/setup).
+If you cane here to work on the tutorials, use the following steps. This set of tutorials uses [DocC](https://developer.apple.com/documentation/docc), Apple's open source documentation generator. 
 
-1. Clone the repo
-1. Create a Firebase project
-1. Create a Cloud Firestore database in the new Firebase project ([link](https://console.firebase.google.com/project/_/firestore/))
-1. Enable Anonymous Authentication ([link](https://console.firebase.google.com/project/_/authentication/providers))
-1. Enable Sign in with Apple ([link](https://console.firebase.google.com/project/_/authentication/providers))
-1. Register the iOS app in the Firebase project
-1. Download the `GoogleService-Info.plist` file to the `code/frontend/Configuration/Firebase/Development` folder
-1. Open `MakeItSo.xcodeproj` in Xcode
-1. Select the `MakeItSo` target
-1. Run the app
+1. Check out the repo
+1. Switch to the `tutorials` branch
+1. Open `MakeItSoTutorials/Package.swift`
+1. Make changes to the tutorials
+1. Generate the static site using the `MakeItSoTutorials/generate-docs.sh` script
+1. Push to GitHub to update the GitHub pages for the project with the generated docs / tutorials.
 
-# About the project
-
-
-<!-- LICENSE -->
 ## License
 
 See [LICENSE](LICENSE)
 
-<!-- Disclaimer -->
 ## Disclaimer
 
 This is not an official Google product.
 
-<!-- CONTACT -->
 ## Contact
 Peter Friese - [@peterfriese](https://twitter.com/peterfriese)
-
-Project Link: [https://github.com/peterfriese/MakeItSo](https://github.com/peterfriese/MakeItSo)
-
-<!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
 
