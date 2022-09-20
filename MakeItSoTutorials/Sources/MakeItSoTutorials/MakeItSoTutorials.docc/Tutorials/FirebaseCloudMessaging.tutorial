@@ -1,4 +1,6 @@
 @Tutorial(time: 30) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  
   @Intro(title: "Add Push Notifications to an iOS app") {
     Firebase Cloud Messaging (FCM) is a cross-platform messaging solution that lets you reliably send messages at no cost.
     
@@ -7,6 +9,32 @@
     In this tutorial, you're going to add push notifications to the _Make It So_ app, and send a test message from the Firebase console.
     
     @Image(source: fcm-intro, alt: "A paper aeroplane.")
+  }
+  
+  @Section(title: "Download the project") {
+    @ContentAndMedia {
+      To help you get started, we've prepared a starter project for you. 
+    }
+      
+    @Steps {
+      @Step {
+        Clone the project and check out the `codelab/main` branch.
+        
+        @Code(name: "Shell", file: checkout_fcm_01.sh)
+      }
+      
+      @Step {
+        Navigate into the folder containing the starter project for this tutorial
+        
+        @Code(name: "Shell", file: checkout_fcm_02.sh)
+      }
+      
+      @Step {
+        Open the project in Xcode
+        
+        @Code(name: "Shell", file: checkout_fcm_03.sh)
+      }
+    }
   }
   
   @Section(title: "Configure APNS") {
