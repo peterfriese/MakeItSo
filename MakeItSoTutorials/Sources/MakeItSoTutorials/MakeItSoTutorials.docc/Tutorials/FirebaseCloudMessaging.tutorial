@@ -162,36 +162,28 @@
       
       @Step {
         Open `MakeItSoApp.swift`.
-        
         @Code(name: "MakeItSoApp.swift", file: 02_app_00.swift)
       }
       
       @Step {
         Since we're no longer relying on method swizzling to handle the setup flow for us, we now need to handle this ourselves. Add the following piece of code right after the `AppDelegate` implementation to conform to `UNUserNotificationCenterDelegate`.
-        
         These methods will be called when new notifications arrive, or when the user taps on them to jump back into the app.
-        
         @Code(name: "MakeItSoApp.swift", file: 02_app_01.swift)
       }
+      
     }
   }
     
   @Section(title: "Register for remote notifications") {
     @ContentAndMedia {
-      Firebase uses method siwzzling to make the setup flow easier. Unfortunately, this doesn't work well in SwiftUI apps, so we'll have to turn it off in the next step.
+      Either at startup, or at the desired point in your application flow, register your app for remote notifications, and call `registerForRemoteNotifications`.
     }
         
     @Steps {
       
       @Step {
-        Open `MakeItSoApp.swift`.
-        
-        @Code(name: "MakeItSoApp.swift", file: 02_app_00.swift)
-      }
-
-      @Step {
         Go back to the top of the file
-        @Code(name: "MakeItSoApp.swift", file: 02_app_01.swift)
+        @Code(name: "MakeItSoApp.swift", file: 02_app_01b.swift)
       }
 
       @Step {

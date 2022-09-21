@@ -8,7 +8,7 @@
 
         Learn how to use Firebase to improve the quality of your app. 
         
-        @Image(source: <#file#>, alt: "<#accessible description#>")
+        @Image(source: <#file#>, alt: "")
     }
     
     @Chapter(name: "Firebase Cloud Messaging") {
@@ -22,7 +22,7 @@
     @Chapter(name: "Crashlytics") {
       Track, prioritize, and fix crashes faster
         
-        @Image(source: <#file#>, alt: "<#accessible description#>")
+        @Image(source: crashlytics, alt: "")
         
         @TutorialReference(tutorial: "doc:Crashlytics")
     }
@@ -30,9 +30,17 @@
     @Chapter(name: "Performance Monitoring") {
       Gain insight into your app's performance issues
         
-        @Image(source: <#file#>, alt: "<#accessible description#>")
+        @Image(source: perfmon, alt: "")
         
         @TutorialReference(tutorial: "doc:PerformanceMonitoring")
+    }
+    
+    @Chapter(name: "Test Lab") {
+      Test your app on devices hosted in a Google data center.
+        
+        @Image(source: testlab, alt: "")
+        
+        @TutorialReference(tutorial: "doc:TestLab")
     }
     
 }

@@ -1,0 +1,97 @@
+@Tutorial(time: 15) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  
+  @Intro(title: "Test your app on devices hosted in a Google data center") {
+    Firebase Test Lab is a cloud-based app testing infrastructure that lets you test your app on a range of devices and configurations, so you can get a better idea of how it'll perform in the hands of live users.    
+    
+    @Image(source: fcm-intro, alt: "")
+  }
+  
+  @Section(title: "Download the project") {
+    @ContentAndMedia {
+      To help you get started, we've prepared a starter project for you. 
+    }
+      
+    @Steps {
+      @Step {
+        Clone the project and check out the `codelab/main` branch.
+        
+        @Code(name: "Shell", file: checkout_testlab_01.sh)
+      }
+      
+      @Step {
+        Navigate into the folder containing the starter project for this tutorial
+        
+        @Code(name: "Shell", file: checkout_testlab_02.sh)
+      }
+      
+      @Step {
+        Open the project in Xcode
+        
+        @Code(name: "Shell", file: checkout_testlab_03.sh)
+      }
+    }
+  }
+  
+  @Section(title: "Build the app for testing") {
+    @ContentAndMedia {
+      The starter project contains some example UI test cases. In this step, you will create a script to compile your app and bundle it up so you can upload it to Firebase Test Lab.
+    }
+      
+    @Steps {
+      Build and package your test for upload to Test Lab by compressing the test files you built into a .zip file.
+      @Step {
+        In the root folder of your Xcode project, you will find an empty `build.sh` file. Open this file in a text editor and make the following changes.
+        @Code(name: "build.sh", file: build-00.sh)
+      }
+      @Step {
+        Add the following line to compile your project for testing.
+        @Code(name: "build.sh", file: build-01.sh)
+      }
+      @Step {
+        Add the following line to zip it for upload to Test Lab.
+        @Code(name: "build.sh", file: build-02.sh)
+      }
+      @Step {
+        Add the following line open the folder with the zip file once it has been created.
+        @Code(name: "build.sh", file: build-03.sh)
+      }
+      @Step {
+        Run the `build.sh` script. Once it has finished running, a new Finder window will open for the folder that contains your zip file.
+      }
+    }
+  }
+    
+  @Section(title: "Upload and run your test") {
+    @ContentAndMedia {
+      The starter project contains some example UI test cases. In this step, you will create a script to compile your app and bundle it up so you can upload it to Firebase Test Lab.
+    }
+      
+    @Steps {
+      Build and package your test for upload to Test Lab by compressing the test files you built into a .zip file.
+      @Step {
+        Open [Test Lab](https://console.firebase.google.com/project/_/testlab) in the Firebase console.
+      }
+      @Step {
+        If it's your first test, click **Get Started** under iOS. If it isn't, click **Run a Test**, and then select **Run an XCTest**.
+        @Image(source: 03_perfmon_runatest_01 alt: "")
+      }
+      @Step {
+        Click **Browse**, and find the .zip file you created.
+        @Image(source: 03_perfmon_runatest_02 alt: "")
+      }
+      @Step {
+        Check the box for each device, version, orientation, and locale you'd like to test against.
+        @Image(source: 03_perfmon_runatest_03 alt: "")
+      }
+      @Step {
+        Click **Start Tests**.
+        @Image(source: 03_perfmon_runatest_04 alt: "")
+      }
+      @Step {
+        After a while, the tests will finish running, and you can inspect the test results.
+        @Image(source: 03_perfmon_runatest_05 alt: "")
+      }
+    }
+  }
+}

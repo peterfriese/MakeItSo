@@ -41,15 +41,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                    didFailToRegisterForRemoteNotificationsWithError error: Error) {
     print(error)
   }
-}
-
-@main
-struct MakeItSoApp: App {
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
   
-  var body: some Scene {
-    WindowGroup {
-      TodosListView()
+  @main
+  struct MakeItSoApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    var body: some Scene {
+      WindowGroup {
+        TodosListView()
+      }
     }
   }
 }
