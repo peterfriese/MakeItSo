@@ -150,7 +150,7 @@
     }
   }
   
-  @Section(title: "Run the app and force a crash to finishg setup") {
+  @Section(title: "Run the app and force a crash to finish setup") {
     To finish setting up Crashlytics and see initial data in the Crashlytics dashboard of the Firebase console, you need to force a test crash.
     
     @Steps {

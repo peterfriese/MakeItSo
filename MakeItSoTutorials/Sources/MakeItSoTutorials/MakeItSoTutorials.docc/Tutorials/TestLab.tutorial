@@ -4,7 +4,7 @@
   @Intro(title: "Test your app on devices hosted in a Google data center") {
     Firebase Test Lab is a cloud-based app testing infrastructure that lets you test your app on a range of devices and configurations, so you can get a better idea of how it'll perform in the hands of live users.    
     
-    @Image(source: fcm-intro, alt: "")
+    @Image(source: testlab-intro, alt: "")
   }
   
   @Section(title: "Download the project") {

@@ -1,46 +1,54 @@
-@Tutorials(name: "Improve Your App's Quality") {
-    @Intro(title: "Improve Your App's Quality") {
-      Do your customers complain about specific crashes, but you cannot reproduce it, and you wish you could see a stack trace to help you find the root cause?
-      
-      Your customers say your app is too slow, but this is not the case on your testing device?
-      
-      Your app works flawlessly on your testing device, but it crashes on your customers's devices?
-
-        Learn how to use Firebase to improve the quality of your app. 
-        
-        @Image(source: <#file#>, alt: "")
-    }
+@Tutorials(name: "MakeItSo") {
+  @Intro(title: "Build a Todo List Application with SwiftUI and Firebase") {
+    In this free course, you will learn how to build a todo list application with SwiftUI and Firebase.
+    
+    @Image(source: hero, alt: "")
+  }
+  
+  @Volume(name: "Engange Your Users") {
+    Learn how to optimize your app experience and keep users happy.
     
     @Chapter(name: "Firebase Cloud Messaging") {
       Send push notifications to your app
-        
-        @Image(source: fcm, alt: "")
-        
-        @TutorialReference(tutorial: "doc:FirebaseCloudMessaging")
+      @Image(source: fcm, alt: "")
+      @TutorialReference(tutorial: "doc:FirebaseCloudMessaging")
     }
+  }
+  
+  @Volume(name: "Improve Your App's Quality") {
+    Learn how to improve app quality in less time with less effort.
     
-    @Chapter(name: "Crashlytics") {
-      Track, prioritize, and fix crashes faster
+      
+      @Chapter(name: "Crashlytics") {
+        Track, prioritize, and fix crashes faster
         
         @Image(source: crashlytics, alt: "")
         
         @TutorialReference(tutorial: "doc:Crashlytics")
-    }
-    
-    @Chapter(name: "Performance Monitoring") {
-      Gain insight into your app's performance issues
+      }
+      
+      @Chapter(name: "Performance Monitoring") {
+        Gain insight into your app's performance issues
         
         @Image(source: perfmon, alt: "")
         
         @TutorialReference(tutorial: "doc:PerformanceMonitoring")
-    }
-    
-    @Chapter(name: "Test Lab") {
-      Test your app on devices hosted in a Google data center.
+      }
+      
+      @Chapter(name: "Test Lab") {
+        Test your app on devices hosted in a Google data center.
         
         @Image(source: testlab, alt: "")
         
         @TutorialReference(tutorial: "doc:TestLab")
-    }
+      }
+      
+      <!--    @Chapter(name: "App Distribution") {-->
+      <!--      Distribute pre-release versions of your app to your trusted testers.-->
+      <!--        -->
+      <!--        @Image(source: appdistro, alt: "")-->
+      <!--        @TutorialReference(tutorial: "doc:AppDistribution")-->
+      <!--    }-->
+  }
     
 }
