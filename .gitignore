@@ -610,3 +610,4 @@ hs_err_pid*
 
 ### Manually added
 GoogleService-Info.plist
+*.p8
