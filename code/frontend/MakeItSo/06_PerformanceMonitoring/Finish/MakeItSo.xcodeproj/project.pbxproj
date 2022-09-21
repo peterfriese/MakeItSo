@@ -15,6 +15,7 @@
 		8811DD2828DACE8E0006815E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8811DD2728DACE8E0006815E /* FirebaseCrashlytics */; };
 		882973EB28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882973EA28BD14BB00FE67C4 /* AuthenticationService+EmailPassword.swift */; };
 		882973ED28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882973EC28BD15A500FE67C4 /* AuthenticationService+SignInWithApple.swift */; };
+		885B6C1A28DAF7E300106159 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 885B6C1928DAF7E300106159 /* FirebasePerformance */; };
 		8872D38128A1564600C2DDD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8872D38028A1564600C2DDD7 /* GoogleService-Info.plist */; };
 		888C1E1C28D9932300100E84 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 888C1E1B28D9932300100E84 /* FirebaseMessaging */; };
 		888EB7022890069E00C2A49C /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EB7012890069E00C2A49C /* MakeItSoApp.swift */; };
@@ -85,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885B6C1A28DAF7E300106159 /* FirebasePerformance in Frameworks */,
 				888C1E1C28D9932300100E84 /* FirebaseMessaging in Frameworks */,
 				888EB7432890208A00C2A49C /* Resolver in Frameworks */,
 				1223C20428AFE70F006037A2 /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -325,6 +327,7 @@
 				1223C20328AFE70F006037A2 /* FirebaseRemoteConfigSwift */,
 				888C1E1B28D9932300100E84 /* FirebaseMessaging */,
 				8811DD2728DACE8E0006815E /* FirebaseCrashlytics */,
+				885B6C1928DAF7E300106159 /* FirebasePerformance */,
 			);
 			productName = MakeItSo;
 			productReference = 888EB6FE2890069E00C2A49C /* MakeItSo.app */;
@@ -674,6 +677,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 888EB713289007E600C2A49C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		885B6C1928DAF7E300106159 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 888EB713289007E600C2A49C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 		888C1E1B28D9932300100E84 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
