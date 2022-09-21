@@ -7,30 +7,48 @@
     @Image(source: crashlytics-intro, alt: "A developer catching a butterfly.")
   }
   
-  @Section(title: "Add the Crashlytics SDK to your app") {
+  @Section(title: "Download the project") {
     @ContentAndMedia {
-      Before you can use Crashlytics, you need to add it to your project.
+      To help you get started, we've prepared a starter project for you. 
     }
       
     @Steps {
       @Step {
-        Navigate to `04_Crashlytics/Start`.
-        @Code(name: "Shell", file: 01-goto-folder.sh)
+        Clone the project and check out the `codelab/main` branch.
+        
+        @Code(name: "Shell", file: checkout_crashlytics_01.sh)
       }
+      
       @Step {
-        Open the `MakeItSo.xcodeproj` project.
-        @Code(name: "Shell", file: 02-open-xcode.sh)
+        Navigate into the folder containing the starter project for this tutorial
+        
+        @Code(name: "Shell", file: checkout_crashlytics_02.sh)
       }
+      
       @Step {
-        Select `MakeItSo` in the target list
+        Open the project in Xcode
+        
+        @Code(name: "Shell", file: checkout_crashlytics_03.sh)
+      }
+    }
+  }
+    
+  @Section(title: "Add the Crashlytics SDK to your app") {
+    @ContentAndMedia {
+      Before you can use Crashlytics, you need to add it to your project.
+    }
+    
+    @Steps {
+      @Step {
+        Select `MakeItSo` in the **TARGETS** list
         @Image(source: select-target, alt: "")
       }
       @Step {
-        Tap the *+* icon below the _Frameworks, Libraries, and Embedded Content_ section.
+        Tap the *+* icon below the **Frameworks, Libraries, and Embedded Content** section.
         @Image(source: select-target, alt: "")
       }
       @Step {
-        Select _FirebaseCrashlytics_ and tap the _Add_ button to add the library to your project.
+        Select _FirebaseCrashlytics_ and tap the **Add** button to add the library to your project.
         @Image(source: select-target, alt: "")
       }
     }
@@ -41,41 +59,47 @@
     
     @Steps {
       @Step {
-        Select `MakeItSo` in the target list
+        Select `MakeItSo` in the **TARGETS** list
         @Image(source: select-target, alt: "")
       }
       @Step {
-        Click the _Build Settings_ tab, then complete the following steps so that Xcode produces dSYMs for your builds.
+        Click the **Build Settings** tab, then complete the following steps so that Xcode produces dSYMs for your builds.
       }
       @Step {
-        Click _All_, then search for _debug information format_.
+        Click **All**, then search for _debug information format_.
       }
       @Step {
-        Set _Debug Information Format_ to `DWARF with dSYM File` for all your build types.
+        Set **Debug Information Format** to `DWARF with dSYM File` for all your build types.
       }
       @Step {
-        Click the _Build Phases_ tab, then complete the following steps so that Xcode can process your dSYMs and upload the files.      
+        Click the **Build Phases** tab, then complete the following steps so that Xcode can process your dSYMs and upload the files.      
       }
       @Step {
-        Click the *+* icon and then select _New Run Script Phase_.
+        Click the **+** icon and then select **New Run Script Phase**.
         Make sure this new Run Script phase is your project's last build phase; otherwise, Crashlytics can't properly process dSYMs.
       }
       @Step {
-        Expand the new _Run Script_ section
+        Expand the new **Run Script** section
       }
       @Step {
         In the script field (located under the _Shell_ label), add the following run script.
         This script processes your project's dSYM files and uploads the files to Crashlytics.
         @Code(name: "", file: 03-upload-script.sh)
       }
+      
+      Add the paths for the locations of the following files.
+      
       @Step {
-        In the Input Files section, add the paths for the locations of the following files:
-        The location of your project's dSYM files: `${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}`
-        Providing the location of your project's dSYM files enables Crashlytics to process dSYMs for large apps more quickly.
+        Add the location of your project's dSYM files to the **Input Files** section.
+        @Code(name: "", file: 03_phase-location.sh)
+
+        > Note: Providing the location of your project's dSYM files enables Crashlytics to process dSYMs for large apps more quickly.
       }
       @Step {
-        The location of your project's built Info.plist file: `$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)`
-        Providing the location of your project's built Info.plist file enables Crashlytics to associate an app version with the dSYMs.
+        Add the location of your project's built 'Info.plist' file.
+        @Code(name: "", file: 03_phase_info-plist.sh)
+        
+        > Note: Providing the location of your project's built Info.plist file enables Crashlytics to associate an app version with the dSYMs.
       }
     }
   }
@@ -125,6 +149,7 @@
       }
     }
   }
+  
   @Section(title: "Run the app and force a crash to finishg setup") {
     To finish setting up Crashlytics and see initial data in the Crashlytics dashboard of the Firebase console, you need to force a test crash.
     
@@ -145,11 +170,29 @@
       @Step {
         Open the _Settings_ screen of the app, and then tap on the _Force crash_ button to force the app to crash. The app should terminate.
         
-        @Image(source: settings_screen_force_crash, alt: "A screenshot of the app running on the Simulator, with the settins screen open.")
+        @Image(source: settings_screen_force_crash_framed, alt: "A screenshot of the app running on the Simulator, with the settins screen open.")
         
-        > Note: If you end up in Xcode, with the debugger showoing a breakpoint, you forgot to stop the app in the previous step. Stop the app and run it again from the Simulator's home screen, then try again.
+        > Note: If you end up in Xcode, with the debugger showoing a breakpoint, you forgot to stop the app in the previous step. Stop the app and run it again from the Simulator's home screen, then try again!
       }
-
+      @Step {
+        Open the [Crashlytics console for your project](https://console.firebase.google.com/project/_/crashlytics/app/ios:com.google.firebase.codelab.MakeItSo/issues?state=open&time=last-seven-days&tag=all). You should now see a chart with the crashes that happened within the last 7 days.
+        
+        @Image(source: crashlytics_console, alt: "")
+      }
+      @Step {
+        Click on a crash to explore its details.
+        
+        @Image(source: crashlytics_console-02, alt: "")
+      }
+      
     }    
   }
+      
+  @Comment {
+    Add custom key
+    Add log
+    Add Non Fatal crash report
+    Customize velocity alerts?
+  }      
+  
 }

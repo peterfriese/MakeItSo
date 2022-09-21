@@ -14,7 +14,7 @@
     @Chapter(name: "Firebase Cloud Messaging") {
       Send push notifications to your app
         
-        @Image(source: <#file#>, alt: "<#accessible description#>")
+        @Image(source: fcm, alt: "")
         
         @TutorialReference(tutorial: "doc:FirebaseCloudMessaging")
     }
@@ -26,4 +26,13 @@
         
         @TutorialReference(tutorial: "doc:Crashlytics")
     }
+    
+    @Chapter(name: "Performance Monitoring") {
+      Gain insight into your app's performance issues
+        
+        @Image(source: <#file#>, alt: "<#accessible description#>")
+        
+        @TutorialReference(tutorial: "doc:PerformanceMonitoring")
+    }
+    
 }

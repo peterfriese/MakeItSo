@@ -1,0 +1,84 @@
+@Tutorial(time: 15) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  
+  @Intro(title: "Gain insight into your app's performance issues") {
+    Firebase Performance Monitoring is a service that helps you to gain insight into the performance characteristics of your Apple, Android, and web apps.
+    You use the Performance Monitoring SDK to collect performance data from your app, then review and analyze that data in the Firebase console. Performance Monitoring helps you to understand in real time where the performance of your app can be improved so that you can use that information to fix performance issues.    
+    
+    @Image(source: fcm-intro, alt: "")
+  }
+  
+  @Section(title: "Download the project") {
+    @ContentAndMedia {
+      To help you get started, we've prepared a starter project for you. 
+    }
+      
+    @Steps {
+      @Step {
+        Clone the project and check out the `codelab/main` branch.
+        
+        @Code(name: "Shell", file: checkout_perfmon_01.sh)
+      }
+      
+      @Step {
+        Navigate into the folder containing the starter project for this tutorial
+        
+        @Code(name: "Shell", file: checkout_perfmon_02.sh)
+      }
+      
+      @Step {
+        Open the project in Xcode
+        
+        @Code(name: "Shell", file: checkout_perfmon_03.sh)
+      }
+    }
+  }
+  
+  @Section(title: "Add Firebase Performance Monitoring to your app") {
+    @ContentAndMedia {
+      Before you can use Firebase Performance Monitoring, you need to add it to your app.
+    }
+      
+    @Steps {
+      First, you need to add the Firebase Performance Monitoring library to your app.
+      @Step {
+        In Xcode, select your project in the project navigator, then select _MakeItSo_ in the **TARGETS** list. Scroll down to **Frameworks, Libraries, and Embedded Content**.
+        
+        @Image(source: 01_perfmon_add_01, alt: "")
+      }
+      @Step {
+        Tap on the **+** button, then search for _FirebasePerformance_ and click on the **Add** button to add the library to your target
+        
+        @Image(source: 01_perfmon_add_01, alt: "")
+      }
+    }
+  }
+    
+  @Section(title: "Generate performance events for initial data display") {
+    @ContentAndMedia {
+      Firebase starts processing the events when you successfully add the SDK to your app. If you're still developing locally, interact with your app to generate events for initial data collection and processing.
+    }
+      
+    @Steps {
+      First, you need to add the Firebase Performance Monitoring library to your app.
+      @Step {
+        Continue to develop your app using a simulator or test device..
+      }
+      @Step {
+        Generate events by switching your app between background and foreground several times, interacting with your app by navigating across screens, and/or triggering network requests.
+      }
+      @Step {
+        Go to the [Performance dashboard](https://firebase.google.com/u/0/project/_/performance) of the Firebase console. You should see your initial data display within a few minutes.
+        
+        @Image(source: 02_perfmon_dashboard, alt: "")
+      }
+    }
+  }
+      
+  @Comment {
+    Trace specific app code
+    Trace specific app code and add custom metrics
+    Add custom attributes
+  }
+    
+}
