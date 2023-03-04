@@ -25,7 +25,7 @@ import CryptoKit
 import Resolver
 
 public class AuthenticationService: ObservableObject {
-  private let logger = Logger(subsystem: "dev.peterfriese.MakeItSo", category: "authentication")
+  private let logger = Logger(subsystem: "com.StudioNext.TodoAI", category: "authentication")
   
   @Published public var user: User?
   

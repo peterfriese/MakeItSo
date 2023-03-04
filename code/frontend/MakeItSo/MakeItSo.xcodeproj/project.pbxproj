@@ -7,6 +7,243 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41DD989629B3AA7500B4F0B4 /* XelaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983529B3AA7500B4F0B4 /* XelaTextField.swift */; };
+		41DD989729B3AA7500B4F0B4 /* XelaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983529B3AA7500B4F0B4 /* XelaTextField.swift */; };
+		41DD989829B3AA7500B4F0B4 /* XelaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983529B3AA7500B4F0B4 /* XelaTextField.swift */; };
+		41DD989929B3AA7500B4F0B4 /* XelaAccordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983629B3AA7500B4F0B4 /* XelaAccordion.swift */; };
+		41DD989A29B3AA7500B4F0B4 /* XelaAccordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983629B3AA7500B4F0B4 /* XelaAccordion.swift */; };
+		41DD989B29B3AA7500B4F0B4 /* XelaAccordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983629B3AA7500B4F0B4 /* XelaAccordion.swift */; };
+		41DD989C29B3AA7500B4F0B4 /* XelaSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983729B3AA7500B4F0B4 /* XelaSteps.swift */; };
+		41DD989D29B3AA7500B4F0B4 /* XelaSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983729B3AA7500B4F0B4 /* XelaSteps.swift */; };
+		41DD989E29B3AA7500B4F0B4 /* XelaSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983729B3AA7500B4F0B4 /* XelaSteps.swift */; };
+		41DD989F29B3AA7500B4F0B4 /* XelaCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983829B3AA7500B4F0B4 /* XelaCheckbox.swift */; };
+		41DD98A029B3AA7500B4F0B4 /* XelaCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983829B3AA7500B4F0B4 /* XelaCheckbox.swift */; };
+		41DD98A129B3AA7500B4F0B4 /* XelaCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983829B3AA7500B4F0B4 /* XelaCheckbox.swift */; };
+		41DD98A229B3AA7500B4F0B4 /* XelaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983929B3AA7500B4F0B4 /* XelaAlert.swift */; };
+		41DD98A329B3AA7500B4F0B4 /* XelaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983929B3AA7500B4F0B4 /* XelaAlert.swift */; };
+		41DD98A429B3AA7500B4F0B4 /* XelaAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983929B3AA7500B4F0B4 /* XelaAlert.swift */; };
+		41DD98A529B3AA7500B4F0B4 /* XelaTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983C29B3AA7500B4F0B4 /* XelaTab.swift */; };
+		41DD98A629B3AA7500B4F0B4 /* XelaTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983C29B3AA7500B4F0B4 /* XelaTab.swift */; };
+		41DD98A729B3AA7500B4F0B4 /* XelaTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983C29B3AA7500B4F0B4 /* XelaTab.swift */; };
+		41DD98A829B3AA7500B4F0B4 /* XelaTabsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983D29B3AA7500B4F0B4 /* XelaTabsItem.swift */; };
+		41DD98A929B3AA7500B4F0B4 /* XelaTabsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983D29B3AA7500B4F0B4 /* XelaTabsItem.swift */; };
+		41DD98AA29B3AA7500B4F0B4 /* XelaTabsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983D29B3AA7500B4F0B4 /* XelaTabsItem.swift */; };
+		41DD98AB29B3AA7500B4F0B4 /* XelaTooltipAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983F29B3AA7500B4F0B4 /* XelaTooltipAlign.swift */; };
+		41DD98AC29B3AA7500B4F0B4 /* XelaTooltipAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983F29B3AA7500B4F0B4 /* XelaTooltipAlign.swift */; };
+		41DD98AD29B3AA7500B4F0B4 /* XelaTooltipAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD983F29B3AA7500B4F0B4 /* XelaTooltipAlign.swift */; };
+		41DD98AE29B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift */; };
+		41DD98AF29B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift */; };
+		41DD98B029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift */; };
+		41DD98B129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift */; };
+		41DD98B229B3AA7500B4F0B4 /* XelaTooltipTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift */; };
+		41DD98B329B3AA7500B4F0B4 /* XelaTooltipTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift */; };
+		41DD98B429B3AA7500B4F0B4 /* XelaRadioButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984329B3AA7500B4F0B4 /* XelaRadioButtonState.swift */; };
+		41DD98B529B3AA7500B4F0B4 /* XelaRadioButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984329B3AA7500B4F0B4 /* XelaRadioButtonState.swift */; };
+		41DD98B629B3AA7500B4F0B4 /* XelaRadioButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984329B3AA7500B4F0B4 /* XelaRadioButtonState.swift */; };
+		41DD98B729B3AA7500B4F0B4 /* XelaRadioButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984429B3AA7500B4F0B4 /* XelaRadioButtonItem.swift */; };
+		41DD98B829B3AA7500B4F0B4 /* XelaRadioButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984429B3AA7500B4F0B4 /* XelaRadioButtonItem.swift */; };
+		41DD98B929B3AA7500B4F0B4 /* XelaRadioButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984429B3AA7500B4F0B4 /* XelaRadioButtonItem.swift */; };
+		41DD98BA29B3AA7500B4F0B4 /* XelaRadioButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984529B3AA7500B4F0B4 /* XelaRadioButtonSize.swift */; };
+		41DD98BB29B3AA7500B4F0B4 /* XelaRadioButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984529B3AA7500B4F0B4 /* XelaRadioButtonSize.swift */; };
+		41DD98BC29B3AA7500B4F0B4 /* XelaRadioButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984529B3AA7500B4F0B4 /* XelaRadioButtonSize.swift */; };
+		41DD98BD29B3AA7500B4F0B4 /* XelaRoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984629B3AA7500B4F0B4 /* XelaRoundedCorner.swift */; };
+		41DD98BE29B3AA7500B4F0B4 /* XelaRoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984629B3AA7500B4F0B4 /* XelaRoundedCorner.swift */; };
+		41DD98BF29B3AA7500B4F0B4 /* XelaRoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984629B3AA7500B4F0B4 /* XelaRoundedCorner.swift */; };
+		41DD98C029B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984829B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift */; };
+		41DD98C129B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984829B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift */; };
+		41DD98C229B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984829B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift */; };
+		41DD98C329B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984929B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift */; };
+		41DD98C429B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984929B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift */; };
+		41DD98C529B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984929B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift */; };
+		41DD98C629B3AA7500B4F0B4 /* XelaDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984B29B3AA7500B4F0B4 /* XelaDatePickerCell.swift */; };
+		41DD98C729B3AA7500B4F0B4 /* XelaDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984B29B3AA7500B4F0B4 /* XelaDatePickerCell.swift */; };
+		41DD98C829B3AA7500B4F0B4 /* XelaDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984B29B3AA7500B4F0B4 /* XelaDatePickerCell.swift */; };
+		41DD98C929B3AA7500B4F0B4 /* XelaDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984C29B3AA7500B4F0B4 /* XelaDateManager.swift */; };
+		41DD98CA29B3AA7500B4F0B4 /* XelaDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984C29B3AA7500B4F0B4 /* XelaDateManager.swift */; };
+		41DD98CB29B3AA7500B4F0B4 /* XelaDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984C29B3AA7500B4F0B4 /* XelaDateManager.swift */; };
+		41DD98CC29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984D29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift */; };
+		41DD98CD29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984D29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift */; };
+		41DD98CE29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984D29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift */; };
+		41DD98CF29B3AA7500B4F0B4 /* XelaDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984E29B3AA7500B4F0B4 /* XelaDate.swift */; };
+		41DD98D029B3AA7500B4F0B4 /* XelaDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984E29B3AA7500B4F0B4 /* XelaDate.swift */; };
+		41DD98D129B3AA7500B4F0B4 /* XelaDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984E29B3AA7500B4F0B4 /* XelaDate.swift */; };
+		41DD98D229B3AA7500B4F0B4 /* XelaColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984F29B3AA7500B4F0B4 /* XelaColorSettings.swift */; };
+		41DD98D329B3AA7500B4F0B4 /* XelaColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984F29B3AA7500B4F0B4 /* XelaColorSettings.swift */; };
+		41DD98D429B3AA7500B4F0B4 /* XelaColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD984F29B3AA7500B4F0B4 /* XelaColorSettings.swift */; };
+		41DD98D529B3AA7500B4F0B4 /* XelaMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985029B3AA7500B4F0B4 /* XelaMonth.swift */; };
+		41DD98D629B3AA7500B4F0B4 /* XelaMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985029B3AA7500B4F0B4 /* XelaMonth.swift */; };
+		41DD98D729B3AA7500B4F0B4 /* XelaMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985029B3AA7500B4F0B4 /* XelaMonth.swift */; };
+		41DD98D829B3AA7500B4F0B4 /* XelaLineDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985229B3AA7500B4F0B4 /* XelaLineDatasets.swift */; };
+		41DD98D929B3AA7500B4F0B4 /* XelaLineDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985229B3AA7500B4F0B4 /* XelaLineDatasets.swift */; };
+		41DD98DA29B3AA7500B4F0B4 /* XelaLineDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985229B3AA7500B4F0B4 /* XelaLineDatasets.swift */; };
+		41DD98DB29B3AA7500B4F0B4 /* XelaChartDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985329B3AA7500B4F0B4 /* XelaChartDataset.swift */; };
+		41DD98DC29B3AA7500B4F0B4 /* XelaChartDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985329B3AA7500B4F0B4 /* XelaChartDataset.swift */; };
+		41DD98DD29B3AA7500B4F0B4 /* XelaChartDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985329B3AA7500B4F0B4 /* XelaChartDataset.swift */; };
+		41DD98DE29B3AA7500B4F0B4 /* XelaChartLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985429B3AA7500B4F0B4 /* XelaChartLineShape.swift */; };
+		41DD98DF29B3AA7500B4F0B4 /* XelaChartLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985429B3AA7500B4F0B4 /* XelaChartLineShape.swift */; };
+		41DD98E029B3AA7500B4F0B4 /* XelaChartLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985429B3AA7500B4F0B4 /* XelaChartLineShape.swift */; };
+		41DD98E129B3AA7500B4F0B4 /* XelaBarDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985529B3AA7500B4F0B4 /* XelaBarDatasets.swift */; };
+		41DD98E229B3AA7500B4F0B4 /* XelaBarDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985529B3AA7500B4F0B4 /* XelaBarDatasets.swift */; };
+		41DD98E329B3AA7500B4F0B4 /* XelaBarDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985529B3AA7500B4F0B4 /* XelaBarDatasets.swift */; };
+		41DD98E429B3AA7500B4F0B4 /* XelaPieDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985629B3AA7500B4F0B4 /* XelaPieDatasets.swift */; };
+		41DD98E529B3AA7500B4F0B4 /* XelaPieDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985629B3AA7500B4F0B4 /* XelaPieDatasets.swift */; };
+		41DD98E629B3AA7500B4F0B4 /* XelaPieDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985629B3AA7500B4F0B4 /* XelaPieDatasets.swift */; };
+		41DD98E729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift */; };
+		41DD98E829B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift */; };
+		41DD98E929B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift */; };
+		41DD98EA29B3AA7500B4F0B4 /* XelaBarChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985829B3AA7500B4F0B4 /* XelaBarChartBody.swift */; };
+		41DD98EB29B3AA7500B4F0B4 /* XelaBarChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985829B3AA7500B4F0B4 /* XelaBarChartBody.swift */; };
+		41DD98EC29B3AA7500B4F0B4 /* XelaBarChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985829B3AA7500B4F0B4 /* XelaBarChartBody.swift */; };
+		41DD98ED29B3AA7500B4F0B4 /* XelaChartPieItemShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985929B3AA7500B4F0B4 /* XelaChartPieItemShape.swift */; };
+		41DD98EE29B3AA7500B4F0B4 /* XelaChartPieItemShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985929B3AA7500B4F0B4 /* XelaChartPieItemShape.swift */; };
+		41DD98EF29B3AA7500B4F0B4 /* XelaChartPieItemShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985929B3AA7500B4F0B4 /* XelaChartPieItemShape.swift */; };
+		41DD98F029B3AA7500B4F0B4 /* XelaChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985A29B3AA7500B4F0B4 /* XelaChartType.swift */; };
+		41DD98F129B3AA7500B4F0B4 /* XelaChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985A29B3AA7500B4F0B4 /* XelaChartType.swift */; };
+		41DD98F229B3AA7500B4F0B4 /* XelaChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985A29B3AA7500B4F0B4 /* XelaChartType.swift */; };
+		41DD98F329B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985B29B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift */; };
+		41DD98F429B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985B29B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift */; };
+		41DD98F529B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985B29B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift */; };
+		41DD98F629B3AA7500B4F0B4 /* XelaLineChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985C29B3AA7500B4F0B4 /* XelaLineChartBody.swift */; };
+		41DD98F729B3AA7500B4F0B4 /* XelaLineChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985C29B3AA7500B4F0B4 /* XelaLineChartBody.swift */; };
+		41DD98F829B3AA7500B4F0B4 /* XelaLineChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985C29B3AA7500B4F0B4 /* XelaLineChartBody.swift */; };
+		41DD98F929B3AA7500B4F0B4 /* XelaPieChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985D29B3AA7500B4F0B4 /* XelaPieChartBody.swift */; };
+		41DD98FA29B3AA7500B4F0B4 /* XelaPieChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985D29B3AA7500B4F0B4 /* XelaPieChartBody.swift */; };
+		41DD98FB29B3AA7500B4F0B4 /* XelaPieChartBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985D29B3AA7500B4F0B4 /* XelaPieChartBody.swift */; };
+		41DD98FC29B3AA7500B4F0B4 /* XelaChipSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985F29B3AA7500B4F0B4 /* XelaChipSize.swift */; };
+		41DD98FD29B3AA7500B4F0B4 /* XelaChipSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985F29B3AA7500B4F0B4 /* XelaChipSize.swift */; };
+		41DD98FE29B3AA7500B4F0B4 /* XelaChipSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD985F29B3AA7500B4F0B4 /* XelaChipSize.swift */; };
+		41DD98FF29B3AA7500B4F0B4 /* XelaCheckboxSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986129B3AA7500B4F0B4 /* XelaCheckboxSize.swift */; };
+		41DD990029B3AA7500B4F0B4 /* XelaCheckboxSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986129B3AA7500B4F0B4 /* XelaCheckboxSize.swift */; };
+		41DD990129B3AA7500B4F0B4 /* XelaCheckboxSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986129B3AA7500B4F0B4 /* XelaCheckboxSize.swift */; };
+		41DD990229B3AA7500B4F0B4 /* XelaCheckboxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986229B3AA7500B4F0B4 /* XelaCheckboxState.swift */; };
+		41DD990329B3AA7500B4F0B4 /* XelaCheckboxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986229B3AA7500B4F0B4 /* XelaCheckboxState.swift */; };
+		41DD990429B3AA7500B4F0B4 /* XelaCheckboxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986229B3AA7500B4F0B4 /* XelaCheckboxState.swift */; };
+		41DD990529B3AA7500B4F0B4 /* XelaTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986429B3AA7500B4F0B4 /* XelaTextFieldState.swift */; };
+		41DD990629B3AA7500B4F0B4 /* XelaTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986429B3AA7500B4F0B4 /* XelaTextFieldState.swift */; };
+		41DD990729B3AA7500B4F0B4 /* XelaTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986429B3AA7500B4F0B4 /* XelaTextFieldState.swift */; };
+		41DD990829B3AA7500B4F0B4 /* XelaToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986629B3AA7500B4F0B4 /* XelaToggleStyle.swift */; };
+		41DD990929B3AA7500B4F0B4 /* XelaToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986629B3AA7500B4F0B4 /* XelaToggleStyle.swift */; };
+		41DD990A29B3AA7500B4F0B4 /* XelaToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986629B3AA7500B4F0B4 /* XelaToggleStyle.swift */; };
+		41DD990B29B3AA7500B4F0B4 /* XelaToggleSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986729B3AA7500B4F0B4 /* XelaToggleSize.swift */; };
+		41DD990C29B3AA7500B4F0B4 /* XelaToggleSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986729B3AA7500B4F0B4 /* XelaToggleSize.swift */; };
+		41DD990D29B3AA7500B4F0B4 /* XelaToggleSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986729B3AA7500B4F0B4 /* XelaToggleSize.swift */; };
+		41DD990E29B3AA7500B4F0B4 /* XelaTextareaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986929B3AA7500B4F0B4 /* XelaTextareaState.swift */; };
+		41DD990F29B3AA7500B4F0B4 /* XelaTextareaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986929B3AA7500B4F0B4 /* XelaTextareaState.swift */; };
+		41DD991029B3AA7500B4F0B4 /* XelaTextareaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986929B3AA7500B4F0B4 /* XelaTextareaState.swift */; };
+		41DD991129B3AA7500B4F0B4 /* XelaButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986B29B3AA7500B4F0B4 /* XelaButtonType.swift */; };
+		41DD991229B3AA7500B4F0B4 /* XelaButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986B29B3AA7500B4F0B4 /* XelaButtonType.swift */; };
+		41DD991329B3AA7500B4F0B4 /* XelaButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986B29B3AA7500B4F0B4 /* XelaButtonType.swift */; };
+		41DD991429B3AA7500B4F0B4 /* XelaButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986C29B3AA7500B4F0B4 /* XelaButtonState.swift */; };
+		41DD991529B3AA7500B4F0B4 /* XelaButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986C29B3AA7500B4F0B4 /* XelaButtonState.swift */; };
+		41DD991629B3AA7500B4F0B4 /* XelaButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986C29B3AA7500B4F0B4 /* XelaButtonState.swift */; };
+		41DD991729B3AA7500B4F0B4 /* XelaButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986D29B3AA7500B4F0B4 /* XelaButtonSize.swift */; };
+		41DD991829B3AA7500B4F0B4 /* XelaButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986D29B3AA7500B4F0B4 /* XelaButtonSize.swift */; };
+		41DD991929B3AA7500B4F0B4 /* XelaButtonSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986D29B3AA7500B4F0B4 /* XelaButtonSize.swift */; };
+		41DD991A29B3AA7500B4F0B4 /* XelaStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986F29B3AA7500B4F0B4 /* XelaStep.swift */; };
+		41DD991B29B3AA7500B4F0B4 /* XelaStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986F29B3AA7500B4F0B4 /* XelaStep.swift */; };
+		41DD991C29B3AA7500B4F0B4 /* XelaStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD986F29B3AA7500B4F0B4 /* XelaStep.swift */; };
+		41DD991D29B3AA7500B4F0B4 /* XelaStepsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987029B3AA7500B4F0B4 /* XelaStepsItems.swift */; };
+		41DD991E29B3AA7500B4F0B4 /* XelaStepsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987029B3AA7500B4F0B4 /* XelaStepsItems.swift */; };
+		41DD991F29B3AA7500B4F0B4 /* XelaStepsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987029B3AA7500B4F0B4 /* XelaStepsItems.swift */; };
+		41DD992029B3AA7500B4F0B4 /* XelaStepsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987129B3AA7500B4F0B4 /* XelaStepsState.swift */; };
+		41DD992129B3AA7500B4F0B4 /* XelaStepsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987129B3AA7500B4F0B4 /* XelaStepsState.swift */; };
+		41DD992229B3AA7500B4F0B4 /* XelaStepsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987129B3AA7500B4F0B4 /* XelaStepsState.swift */; };
+		41DD992329B3AA7500B4F0B4 /* XelaStepsOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987229B3AA7500B4F0B4 /* XelaStepsOrientation.swift */; };
+		41DD992429B3AA7500B4F0B4 /* XelaStepsOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987229B3AA7500B4F0B4 /* XelaStepsOrientation.swift */; };
+		41DD992529B3AA7500B4F0B4 /* XelaStepsOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987229B3AA7500B4F0B4 /* XelaStepsOrientation.swift */; };
+		41DD992629B3AA7500B4F0B4 /* XelaStepItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987329B3AA7500B4F0B4 /* XelaStepItem.swift */; };
+		41DD992729B3AA7500B4F0B4 /* XelaStepItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987329B3AA7500B4F0B4 /* XelaStepItem.swift */; };
+		41DD992829B3AA7500B4F0B4 /* XelaStepItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987329B3AA7500B4F0B4 /* XelaStepItem.swift */; };
+		41DD992929B3AA7500B4F0B4 /* XelaDividerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987529B3AA7500B4F0B4 /* XelaDividerStyle.swift */; };
+		41DD992A29B3AA7500B4F0B4 /* XelaDividerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987529B3AA7500B4F0B4 /* XelaDividerStyle.swift */; };
+		41DD992B29B3AA7500B4F0B4 /* XelaDividerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987529B3AA7500B4F0B4 /* XelaDividerStyle.swift */; };
+		41DD992C29B3AA7500B4F0B4 /* XelaDividerOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987629B3AA7500B4F0B4 /* XelaDividerOrientation.swift */; };
+		41DD992D29B3AA7500B4F0B4 /* XelaDividerOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987629B3AA7500B4F0B4 /* XelaDividerOrientation.swift */; };
+		41DD992E29B3AA7500B4F0B4 /* XelaDividerOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987629B3AA7500B4F0B4 /* XelaDividerOrientation.swift */; };
+		41DD992F29B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987829B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift */; };
+		41DD993029B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987829B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift */; };
+		41DD993129B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987829B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift */; };
+		41DD993229B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987929B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift */; };
+		41DD993329B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987929B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift */; };
+		41DD993429B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987929B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift */; };
+		41DD993529B3AA7500B4F0B4 /* XelaUserAvatarSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987A29B3AA7500B4F0B4 /* XelaUserAvatarSize.swift */; };
+		41DD993629B3AA7500B4F0B4 /* XelaUserAvatarSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987A29B3AA7500B4F0B4 /* XelaUserAvatarSize.swift */; };
+		41DD993729B3AA7500B4F0B4 /* XelaUserAvatarSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987A29B3AA7500B4F0B4 /* XelaUserAvatarSize.swift */; };
+		41DD993829B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987B29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift */; };
+		41DD993929B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987B29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift */; };
+		41DD993A29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987B29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift */; };
+		41DD993B29B3AA7500B4F0B4 /* XelaColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987C29B3AA7500B4F0B4 /* XelaColor.swift */; };
+		41DD993C29B3AA7500B4F0B4 /* XelaColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987C29B3AA7500B4F0B4 /* XelaColor.swift */; };
+		41DD993D29B3AA7500B4F0B4 /* XelaColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987C29B3AA7500B4F0B4 /* XelaColor.swift */; };
+		41DD993E29B3AA7500B4F0B4 /* XelaNumberInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987E29B3AA7500B4F0B4 /* XelaNumberInputState.swift */; };
+		41DD993F29B3AA7500B4F0B4 /* XelaNumberInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987E29B3AA7500B4F0B4 /* XelaNumberInputState.swift */; };
+		41DD994029B3AA7500B4F0B4 /* XelaNumberInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987E29B3AA7500B4F0B4 /* XelaNumberInputState.swift */; };
+		41DD994129B3AA7500B4F0B4 /* XelaNumberInputControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987F29B3AA7500B4F0B4 /* XelaNumberInputControls.swift */; };
+		41DD994229B3AA7500B4F0B4 /* XelaNumberInputControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987F29B3AA7500B4F0B4 /* XelaNumberInputControls.swift */; };
+		41DD994329B3AA7500B4F0B4 /* XelaNumberInputControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD987F29B3AA7500B4F0B4 /* XelaNumberInputControls.swift */; };
+		41DD994429B3AA7500B4F0B4 /* XelaColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988029B3AA7500B4F0B4 /* XelaColorModel.swift */; };
+		41DD994529B3AA7500B4F0B4 /* XelaColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988029B3AA7500B4F0B4 /* XelaColorModel.swift */; };
+		41DD994629B3AA7500B4F0B4 /* XelaColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988029B3AA7500B4F0B4 /* XelaColorModel.swift */; };
+		41DD994729B3AA7500B4F0B4 /* XelaTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988129B3AA7500B4F0B4 /* XelaTooltip.swift */; };
+		41DD994829B3AA7500B4F0B4 /* XelaTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988129B3AA7500B4F0B4 /* XelaTooltip.swift */; };
+		41DD994929B3AA7500B4F0B4 /* XelaTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988129B3AA7500B4F0B4 /* XelaTooltip.swift */; };
+		41DD994A29B3AA7500B4F0B4 /* XelaBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988229B3AA7500B4F0B4 /* XelaBadge.swift */; };
+		41DD994B29B3AA7500B4F0B4 /* XelaBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988229B3AA7500B4F0B4 /* XelaBadge.swift */; };
+		41DD994C29B3AA7500B4F0B4 /* XelaBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988229B3AA7500B4F0B4 /* XelaBadge.swift */; };
+		41DD994D29B3AA7500B4F0B4 /* XelaRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988329B3AA7500B4F0B4 /* XelaRangeSlider.swift */; };
+		41DD994E29B3AA7500B4F0B4 /* XelaRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988329B3AA7500B4F0B4 /* XelaRangeSlider.swift */; };
+		41DD994F29B3AA7500B4F0B4 /* XelaRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988329B3AA7500B4F0B4 /* XelaRangeSlider.swift */; };
+		41DD995029B3AA7500B4F0B4 /* XelaDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988429B3AA7500B4F0B4 /* XelaDivider.swift */; };
+		41DD995129B3AA7500B4F0B4 /* XelaDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988429B3AA7500B4F0B4 /* XelaDivider.swift */; };
+		41DD995229B3AA7500B4F0B4 /* XelaDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988429B3AA7500B4F0B4 /* XelaDivider.swift */; };
+		41DD995329B3AA7500B4F0B4 /* XelaToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988529B3AA7500B4F0B4 /* XelaToast.swift */; };
+		41DD995429B3AA7500B4F0B4 /* XelaToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988529B3AA7500B4F0B4 /* XelaToast.swift */; };
+		41DD995529B3AA7500B4F0B4 /* XelaToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988529B3AA7500B4F0B4 /* XelaToast.swift */; };
+		41DD995629B3AA7500B4F0B4 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988729B3AA7500B4F0B4 /* TextExtensions.swift */; };
+		41DD995729B3AA7500B4F0B4 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988729B3AA7500B4F0B4 /* TextExtensions.swift */; };
+		41DD995829B3AA7500B4F0B4 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988729B3AA7500B4F0B4 /* TextExtensions.swift */; };
+		41DD995929B3AA7500B4F0B4 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988829B3AA7500B4F0B4 /* ColorExtensions.swift */; };
+		41DD995A29B3AA7500B4F0B4 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988829B3AA7500B4F0B4 /* ColorExtensions.swift */; };
+		41DD995B29B3AA7500B4F0B4 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988829B3AA7500B4F0B4 /* ColorExtensions.swift */; };
+		41DD995C29B3AA7500B4F0B4 /* OtherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988929B3AA7500B4F0B4 /* OtherExtensions.swift */; };
+		41DD995D29B3AA7500B4F0B4 /* OtherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988929B3AA7500B4F0B4 /* OtherExtensions.swift */; };
+		41DD995E29B3AA7500B4F0B4 /* OtherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988929B3AA7500B4F0B4 /* OtherExtensions.swift */; };
+		41DD995F29B3AA7500B4F0B4 /* XelaNumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988A29B3AA7500B4F0B4 /* XelaNumberInput.swift */; };
+		41DD996029B3AA7500B4F0B4 /* XelaNumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988A29B3AA7500B4F0B4 /* XelaNumberInput.swift */; };
+		41DD996129B3AA7500B4F0B4 /* XelaNumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988A29B3AA7500B4F0B4 /* XelaNumberInput.swift */; };
+		41DD996229B3AA7500B4F0B4 /* XelaUserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988B29B3AA7500B4F0B4 /* XelaUserAvatar.swift */; };
+		41DD996329B3AA7500B4F0B4 /* XelaUserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988B29B3AA7500B4F0B4 /* XelaUserAvatar.swift */; };
+		41DD996429B3AA7500B4F0B4 /* XelaUserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988B29B3AA7500B4F0B4 /* XelaUserAvatar.swift */; };
+		41DD996529B3AA7500B4F0B4 /* XelaDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988C29B3AA7500B4F0B4 /* XelaDatePicker.swift */; };
+		41DD996629B3AA7500B4F0B4 /* XelaDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988C29B3AA7500B4F0B4 /* XelaDatePicker.swift */; };
+		41DD996729B3AA7500B4F0B4 /* XelaDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988C29B3AA7500B4F0B4 /* XelaDatePicker.swift */; };
+		41DD996829B3AA7500B4F0B4 /* XelaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988D29B3AA7500B4F0B4 /* XelaButton.swift */; };
+		41DD996929B3AA7500B4F0B4 /* XelaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988D29B3AA7500B4F0B4 /* XelaButton.swift */; };
+		41DD996A29B3AA7500B4F0B4 /* XelaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988D29B3AA7500B4F0B4 /* XelaButton.swift */; };
+		41DD996B29B3AA7500B4F0B4 /* XelaDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988E29B3AA7500B4F0B4 /* XelaDialog.swift */; };
+		41DD996C29B3AA7500B4F0B4 /* XelaDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988E29B3AA7500B4F0B4 /* XelaDialog.swift */; };
+		41DD996D29B3AA7500B4F0B4 /* XelaDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988E29B3AA7500B4F0B4 /* XelaDialog.swift */; };
+		41DD996E29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift */; };
+		41DD996F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift */; };
+		41DD997029B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD988F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift */; };
+		41DD997129B3AA7500B4F0B4 /* XelaChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989029B3AA7500B4F0B4 /* XelaChart.swift */; };
+		41DD997229B3AA7500B4F0B4 /* XelaChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989029B3AA7500B4F0B4 /* XelaChart.swift */; };
+		41DD997329B3AA7500B4F0B4 /* XelaChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989029B3AA7500B4F0B4 /* XelaChart.swift */; };
+		41DD997429B3AA7500B4F0B4 /* XelaChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989129B3AA7500B4F0B4 /* XelaChip.swift */; };
+		41DD997529B3AA7500B4F0B4 /* XelaChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989129B3AA7500B4F0B4 /* XelaChip.swift */; };
+		41DD997629B3AA7500B4F0B4 /* XelaChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989129B3AA7500B4F0B4 /* XelaChip.swift */; };
+		41DD997729B3AA7500B4F0B4 /* XelaTextarea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989229B3AA7500B4F0B4 /* XelaTextarea.swift */; };
+		41DD997829B3AA7500B4F0B4 /* XelaTextarea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989229B3AA7500B4F0B4 /* XelaTextarea.swift */; };
+		41DD997929B3AA7500B4F0B4 /* XelaTextarea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989229B3AA7500B4F0B4 /* XelaTextarea.swift */; };
+		41DD997A29B3AA7500B4F0B4 /* XelaSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989329B3AA7500B4F0B4 /* XelaSlider.swift */; };
+		41DD997B29B3AA7500B4F0B4 /* XelaSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989329B3AA7500B4F0B4 /* XelaSlider.swift */; };
+		41DD997C29B3AA7500B4F0B4 /* XelaSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989329B3AA7500B4F0B4 /* XelaSlider.swift */; };
+		41DD997D29B3AA7500B4F0B4 /* XelaTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989429B3AA7500B4F0B4 /* XelaTabs.swift */; };
+		41DD997E29B3AA7500B4F0B4 /* XelaTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989429B3AA7500B4F0B4 /* XelaTabs.swift */; };
+		41DD997F29B3AA7500B4F0B4 /* XelaTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989429B3AA7500B4F0B4 /* XelaTabs.swift */; };
+		41DD998029B3AA7500B4F0B4 /* XelaSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989529B3AA7500B4F0B4 /* XelaSegmentedControll.swift */; };
+		41DD998129B3AA7500B4F0B4 /* XelaSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989529B3AA7500B4F0B4 /* XelaSegmentedControll.swift */; };
+		41DD998229B3AA7500B4F0B4 /* XelaSegmentedControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DD989529B3AA7500B4F0B4 /* XelaSegmentedControll.swift */; };
 		881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EF5BC272DC399004761E5 /* View+Focus.swift */; };
 		88700F74276B4DE10088F006 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88700F73276B4DE10088F006 /* FirebaseAnalytics */; };
 		88700F76276B4DE10088F006 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 88700F75276B4DE10088F006 /* FirebaseAuth */; };
@@ -73,6 +310,85 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41DD983529B3AA7500B4F0B4 /* XelaTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTextField.swift; sourceTree = "<group>"; };
+		41DD983629B3AA7500B4F0B4 /* XelaAccordion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaAccordion.swift; sourceTree = "<group>"; };
+		41DD983729B3AA7500B4F0B4 /* XelaSteps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaSteps.swift; sourceTree = "<group>"; };
+		41DD983829B3AA7500B4F0B4 /* XelaCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaCheckbox.swift; sourceTree = "<group>"; };
+		41DD983929B3AA7500B4F0B4 /* XelaAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaAlert.swift; sourceTree = "<group>"; };
+		41DD983C29B3AA7500B4F0B4 /* XelaTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTab.swift; sourceTree = "<group>"; };
+		41DD983D29B3AA7500B4F0B4 /* XelaTabsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTabsItem.swift; sourceTree = "<group>"; };
+		41DD983F29B3AA7500B4F0B4 /* XelaTooltipAlign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTooltipAlign.swift; sourceTree = "<group>"; };
+		41DD984029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTooltipArrowAlign.swift; sourceTree = "<group>"; };
+		41DD984129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTooltipTriangle.swift; sourceTree = "<group>"; };
+		41DD984329B3AA7500B4F0B4 /* XelaRadioButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaRadioButtonState.swift; sourceTree = "<group>"; };
+		41DD984429B3AA7500B4F0B4 /* XelaRadioButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaRadioButtonItem.swift; sourceTree = "<group>"; };
+		41DD984529B3AA7500B4F0B4 /* XelaRadioButtonSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaRadioButtonSize.swift; sourceTree = "<group>"; };
+		41DD984629B3AA7500B4F0B4 /* XelaRoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaRoundedCorner.swift; sourceTree = "<group>"; };
+		41DD984829B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaSegmentedControllItem.swift; sourceTree = "<group>"; };
+		41DD984929B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaSegmentedControllButton.swift; sourceTree = "<group>"; };
+		41DD984B29B3AA7500B4F0B4 /* XelaDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDatePickerCell.swift; sourceTree = "<group>"; };
+		41DD984C29B3AA7500B4F0B4 /* XelaDateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDateManager.swift; sourceTree = "<group>"; };
+		41DD984D29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaWeekdayHeader.swift; sourceTree = "<group>"; };
+		41DD984E29B3AA7500B4F0B4 /* XelaDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDate.swift; sourceTree = "<group>"; };
+		41DD984F29B3AA7500B4F0B4 /* XelaColorSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaColorSettings.swift; sourceTree = "<group>"; };
+		41DD985029B3AA7500B4F0B4 /* XelaMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaMonth.swift; sourceTree = "<group>"; };
+		41DD985229B3AA7500B4F0B4 /* XelaLineDatasets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaLineDatasets.swift; sourceTree = "<group>"; };
+		41DD985329B3AA7500B4F0B4 /* XelaChartDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChartDataset.swift; sourceTree = "<group>"; };
+		41DD985429B3AA7500B4F0B4 /* XelaChartLineShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChartLineShape.swift; sourceTree = "<group>"; };
+		41DD985529B3AA7500B4F0B4 /* XelaBarDatasets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaBarDatasets.swift; sourceTree = "<group>"; };
+		41DD985629B3AA7500B4F0B4 /* XelaPieDatasets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaPieDatasets.swift; sourceTree = "<group>"; };
+		41DD985729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDoughnutChartBody.swift; sourceTree = "<group>"; };
+		41DD985829B3AA7500B4F0B4 /* XelaBarChartBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaBarChartBody.swift; sourceTree = "<group>"; };
+		41DD985929B3AA7500B4F0B4 /* XelaChartPieItemShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChartPieItemShape.swift; sourceTree = "<group>"; };
+		41DD985A29B3AA7500B4F0B4 /* XelaChartType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChartType.swift; sourceTree = "<group>"; };
+		41DD985B29B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDoughnutDatasets.swift; sourceTree = "<group>"; };
+		41DD985C29B3AA7500B4F0B4 /* XelaLineChartBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaLineChartBody.swift; sourceTree = "<group>"; };
+		41DD985D29B3AA7500B4F0B4 /* XelaPieChartBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaPieChartBody.swift; sourceTree = "<group>"; };
+		41DD985F29B3AA7500B4F0B4 /* XelaChipSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChipSize.swift; sourceTree = "<group>"; };
+		41DD986129B3AA7500B4F0B4 /* XelaCheckboxSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaCheckboxSize.swift; sourceTree = "<group>"; };
+		41DD986229B3AA7500B4F0B4 /* XelaCheckboxState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaCheckboxState.swift; sourceTree = "<group>"; };
+		41DD986429B3AA7500B4F0B4 /* XelaTextFieldState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTextFieldState.swift; sourceTree = "<group>"; };
+		41DD986629B3AA7500B4F0B4 /* XelaToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaToggleStyle.swift; sourceTree = "<group>"; };
+		41DD986729B3AA7500B4F0B4 /* XelaToggleSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaToggleSize.swift; sourceTree = "<group>"; };
+		41DD986929B3AA7500B4F0B4 /* XelaTextareaState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTextareaState.swift; sourceTree = "<group>"; };
+		41DD986B29B3AA7500B4F0B4 /* XelaButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaButtonType.swift; sourceTree = "<group>"; };
+		41DD986C29B3AA7500B4F0B4 /* XelaButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaButtonState.swift; sourceTree = "<group>"; };
+		41DD986D29B3AA7500B4F0B4 /* XelaButtonSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaButtonSize.swift; sourceTree = "<group>"; };
+		41DD986F29B3AA7500B4F0B4 /* XelaStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaStep.swift; sourceTree = "<group>"; };
+		41DD987029B3AA7500B4F0B4 /* XelaStepsItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaStepsItems.swift; sourceTree = "<group>"; };
+		41DD987129B3AA7500B4F0B4 /* XelaStepsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaStepsState.swift; sourceTree = "<group>"; };
+		41DD987229B3AA7500B4F0B4 /* XelaStepsOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaStepsOrientation.swift; sourceTree = "<group>"; };
+		41DD987329B3AA7500B4F0B4 /* XelaStepItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaStepItem.swift; sourceTree = "<group>"; };
+		41DD987529B3AA7500B4F0B4 /* XelaDividerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDividerStyle.swift; sourceTree = "<group>"; };
+		41DD987629B3AA7500B4F0B4 /* XelaDividerOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDividerOrientation.swift; sourceTree = "<group>"; };
+		41DD987829B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaUserAvatarDecoration.swift; sourceTree = "<group>"; };
+		41DD987929B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaUserAvatarStyle.swift; sourceTree = "<group>"; };
+		41DD987A29B3AA7500B4F0B4 /* XelaUserAvatarSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaUserAvatarSize.swift; sourceTree = "<group>"; };
+		41DD987B29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaUserAvatarDecorationPosition.swift; sourceTree = "<group>"; };
+		41DD987C29B3AA7500B4F0B4 /* XelaColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaColor.swift; sourceTree = "<group>"; };
+		41DD987E29B3AA7500B4F0B4 /* XelaNumberInputState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaNumberInputState.swift; sourceTree = "<group>"; };
+		41DD987F29B3AA7500B4F0B4 /* XelaNumberInputControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaNumberInputControls.swift; sourceTree = "<group>"; };
+		41DD988029B3AA7500B4F0B4 /* XelaColorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaColorModel.swift; sourceTree = "<group>"; };
+		41DD988129B3AA7500B4F0B4 /* XelaTooltip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTooltip.swift; sourceTree = "<group>"; };
+		41DD988229B3AA7500B4F0B4 /* XelaBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaBadge.swift; sourceTree = "<group>"; };
+		41DD988329B3AA7500B4F0B4 /* XelaRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaRangeSlider.swift; sourceTree = "<group>"; };
+		41DD988429B3AA7500B4F0B4 /* XelaDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDivider.swift; sourceTree = "<group>"; };
+		41DD988529B3AA7500B4F0B4 /* XelaToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaToast.swift; sourceTree = "<group>"; };
+		41DD988729B3AA7500B4F0B4 /* TextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		41DD988829B3AA7500B4F0B4 /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		41DD988929B3AA7500B4F0B4 /* OtherExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherExtensions.swift; sourceTree = "<group>"; };
+		41DD988A29B3AA7500B4F0B4 /* XelaNumberInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaNumberInput.swift; sourceTree = "<group>"; };
+		41DD988B29B3AA7500B4F0B4 /* XelaUserAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaUserAvatar.swift; sourceTree = "<group>"; };
+		41DD988C29B3AA7500B4F0B4 /* XelaDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDatePicker.swift; sourceTree = "<group>"; };
+		41DD988D29B3AA7500B4F0B4 /* XelaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaButton.swift; sourceTree = "<group>"; };
+		41DD988E29B3AA7500B4F0B4 /* XelaDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaDialog.swift; sourceTree = "<group>"; };
+		41DD988F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaRadioButtonGroup.swift; sourceTree = "<group>"; };
+		41DD989029B3AA7500B4F0B4 /* XelaChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChart.swift; sourceTree = "<group>"; };
+		41DD989129B3AA7500B4F0B4 /* XelaChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaChip.swift; sourceTree = "<group>"; };
+		41DD989229B3AA7500B4F0B4 /* XelaTextarea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTextarea.swift; sourceTree = "<group>"; };
+		41DD989329B3AA7500B4F0B4 /* XelaSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaSlider.swift; sourceTree = "<group>"; };
+		41DD989429B3AA7500B4F0B4 /* XelaTabs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaTabs.swift; sourceTree = "<group>"; };
+		41DD989529B3AA7500B4F0B4 /* XelaSegmentedControll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XelaSegmentedControll.swift; sourceTree = "<group>"; };
 		881EF5BC272DC399004761E5 /* View+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Focus.swift"; sourceTree = "<group>"; };
 		88700F7C276B4FF90088F006 /* RemindersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersRepository.swift; sourceTree = "<group>"; };
 		88700F81276B517F0088F006 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -134,6 +450,236 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41DD983429B3AA7500B4F0B4 /* XelaUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				41DD983529B3AA7500B4F0B4 /* XelaTextField.swift */,
+				41DD983629B3AA7500B4F0B4 /* XelaAccordion.swift */,
+				41DD983729B3AA7500B4F0B4 /* XelaSteps.swift */,
+				41DD983829B3AA7500B4F0B4 /* XelaCheckbox.swift */,
+				41DD983929B3AA7500B4F0B4 /* XelaAlert.swift */,
+				41DD983A29B3AA7500B4F0B4 /* Models */,
+				41DD988129B3AA7500B4F0B4 /* XelaTooltip.swift */,
+				41DD988229B3AA7500B4F0B4 /* XelaBadge.swift */,
+				41DD988329B3AA7500B4F0B4 /* XelaRangeSlider.swift */,
+				41DD988429B3AA7500B4F0B4 /* XelaDivider.swift */,
+				41DD988529B3AA7500B4F0B4 /* XelaToast.swift */,
+				41DD988629B3AA7500B4F0B4 /* Extentions */,
+				41DD988A29B3AA7500B4F0B4 /* XelaNumberInput.swift */,
+				41DD988B29B3AA7500B4F0B4 /* XelaUserAvatar.swift */,
+				41DD988C29B3AA7500B4F0B4 /* XelaDatePicker.swift */,
+				41DD988D29B3AA7500B4F0B4 /* XelaButton.swift */,
+				41DD988E29B3AA7500B4F0B4 /* XelaDialog.swift */,
+				41DD988F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift */,
+				41DD989029B3AA7500B4F0B4 /* XelaChart.swift */,
+				41DD989129B3AA7500B4F0B4 /* XelaChip.swift */,
+				41DD989229B3AA7500B4F0B4 /* XelaTextarea.swift */,
+				41DD989329B3AA7500B4F0B4 /* XelaSlider.swift */,
+				41DD989429B3AA7500B4F0B4 /* XelaTabs.swift */,
+				41DD989529B3AA7500B4F0B4 /* XelaSegmentedControll.swift */,
+			);
+			path = XelaUIKit;
+			sourceTree = "<group>";
+		};
+		41DD983A29B3AA7500B4F0B4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				41DD983B29B3AA7500B4F0B4 /* Tabs */,
+				41DD983E29B3AA7500B4F0B4 /* Tooltip */,
+				41DD984229B3AA7500B4F0B4 /* RadioButton */,
+				41DD984629B3AA7500B4F0B4 /* XelaRoundedCorner.swift */,
+				41DD984729B3AA7500B4F0B4 /* SegmentedControll */,
+				41DD984A29B3AA7500B4F0B4 /* DatePicker */,
+				41DD985129B3AA7500B4F0B4 /* Chart */,
+				41DD985E29B3AA7500B4F0B4 /* Chip */,
+				41DD986029B3AA7500B4F0B4 /* Checkbox */,
+				41DD986329B3AA7500B4F0B4 /* TextField */,
+				41DD986529B3AA7500B4F0B4 /* Toggle */,
+				41DD986829B3AA7500B4F0B4 /* Textarea */,
+				41DD986A29B3AA7500B4F0B4 /* Button */,
+				41DD986E29B3AA7500B4F0B4 /* Steps */,
+				41DD987429B3AA7500B4F0B4 /* Divider */,
+				41DD987729B3AA7500B4F0B4 /* UserAvatar */,
+				41DD987C29B3AA7500B4F0B4 /* XelaColor.swift */,
+				41DD987D29B3AA7500B4F0B4 /* NumberInput */,
+				41DD988029B3AA7500B4F0B4 /* XelaColorModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		41DD983B29B3AA7500B4F0B4 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				41DD983C29B3AA7500B4F0B4 /* XelaTab.swift */,
+				41DD983D29B3AA7500B4F0B4 /* XelaTabsItem.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		41DD983E29B3AA7500B4F0B4 /* Tooltip */ = {
+			isa = PBXGroup;
+			children = (
+				41DD983F29B3AA7500B4F0B4 /* XelaTooltipAlign.swift */,
+				41DD984029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift */,
+				41DD984129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift */,
+			);
+			path = Tooltip;
+			sourceTree = "<group>";
+		};
+		41DD984229B3AA7500B4F0B4 /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				41DD984329B3AA7500B4F0B4 /* XelaRadioButtonState.swift */,
+				41DD984429B3AA7500B4F0B4 /* XelaRadioButtonItem.swift */,
+				41DD984529B3AA7500B4F0B4 /* XelaRadioButtonSize.swift */,
+			);
+			path = RadioButton;
+			sourceTree = "<group>";
+		};
+		41DD984729B3AA7500B4F0B4 /* SegmentedControll */ = {
+			isa = PBXGroup;
+			children = (
+				41DD984829B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift */,
+				41DD984929B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift */,
+			);
+			path = SegmentedControll;
+			sourceTree = "<group>";
+		};
+		41DD984A29B3AA7500B4F0B4 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				41DD984B29B3AA7500B4F0B4 /* XelaDatePickerCell.swift */,
+				41DD984C29B3AA7500B4F0B4 /* XelaDateManager.swift */,
+				41DD984D29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift */,
+				41DD984E29B3AA7500B4F0B4 /* XelaDate.swift */,
+				41DD984F29B3AA7500B4F0B4 /* XelaColorSettings.swift */,
+				41DD985029B3AA7500B4F0B4 /* XelaMonth.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		41DD985129B3AA7500B4F0B4 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				41DD985229B3AA7500B4F0B4 /* XelaLineDatasets.swift */,
+				41DD985329B3AA7500B4F0B4 /* XelaChartDataset.swift */,
+				41DD985429B3AA7500B4F0B4 /* XelaChartLineShape.swift */,
+				41DD985529B3AA7500B4F0B4 /* XelaBarDatasets.swift */,
+				41DD985629B3AA7500B4F0B4 /* XelaPieDatasets.swift */,
+				41DD985729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift */,
+				41DD985829B3AA7500B4F0B4 /* XelaBarChartBody.swift */,
+				41DD985929B3AA7500B4F0B4 /* XelaChartPieItemShape.swift */,
+				41DD985A29B3AA7500B4F0B4 /* XelaChartType.swift */,
+				41DD985B29B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift */,
+				41DD985C29B3AA7500B4F0B4 /* XelaLineChartBody.swift */,
+				41DD985D29B3AA7500B4F0B4 /* XelaPieChartBody.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		41DD985E29B3AA7500B4F0B4 /* Chip */ = {
+			isa = PBXGroup;
+			children = (
+				41DD985F29B3AA7500B4F0B4 /* XelaChipSize.swift */,
+			);
+			path = Chip;
+			sourceTree = "<group>";
+		};
+		41DD986029B3AA7500B4F0B4 /* Checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				41DD986129B3AA7500B4F0B4 /* XelaCheckboxSize.swift */,
+				41DD986229B3AA7500B4F0B4 /* XelaCheckboxState.swift */,
+			);
+			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		41DD986329B3AA7500B4F0B4 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				41DD986429B3AA7500B4F0B4 /* XelaTextFieldState.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		41DD986529B3AA7500B4F0B4 /* Toggle */ = {
+			isa = PBXGroup;
+			children = (
+				41DD986629B3AA7500B4F0B4 /* XelaToggleStyle.swift */,
+				41DD986729B3AA7500B4F0B4 /* XelaToggleSize.swift */,
+			);
+			path = Toggle;
+			sourceTree = "<group>";
+		};
+		41DD986829B3AA7500B4F0B4 /* Textarea */ = {
+			isa = PBXGroup;
+			children = (
+				41DD986929B3AA7500B4F0B4 /* XelaTextareaState.swift */,
+			);
+			path = Textarea;
+			sourceTree = "<group>";
+		};
+		41DD986A29B3AA7500B4F0B4 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				41DD986B29B3AA7500B4F0B4 /* XelaButtonType.swift */,
+				41DD986C29B3AA7500B4F0B4 /* XelaButtonState.swift */,
+				41DD986D29B3AA7500B4F0B4 /* XelaButtonSize.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		41DD986E29B3AA7500B4F0B4 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				41DD986F29B3AA7500B4F0B4 /* XelaStep.swift */,
+				41DD987029B3AA7500B4F0B4 /* XelaStepsItems.swift */,
+				41DD987129B3AA7500B4F0B4 /* XelaStepsState.swift */,
+				41DD987229B3AA7500B4F0B4 /* XelaStepsOrientation.swift */,
+				41DD987329B3AA7500B4F0B4 /* XelaStepItem.swift */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
+		41DD987429B3AA7500B4F0B4 /* Divider */ = {
+			isa = PBXGroup;
+			children = (
+				41DD987529B3AA7500B4F0B4 /* XelaDividerStyle.swift */,
+				41DD987629B3AA7500B4F0B4 /* XelaDividerOrientation.swift */,
+			);
+			path = Divider;
+			sourceTree = "<group>";
+		};
+		41DD987729B3AA7500B4F0B4 /* UserAvatar */ = {
+			isa = PBXGroup;
+			children = (
+				41DD987829B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift */,
+				41DD987929B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift */,
+				41DD987A29B3AA7500B4F0B4 /* XelaUserAvatarSize.swift */,
+				41DD987B29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift */,
+			);
+			path = UserAvatar;
+			sourceTree = "<group>";
+		};
+		41DD987D29B3AA7500B4F0B4 /* NumberInput */ = {
+			isa = PBXGroup;
+			children = (
+				41DD987E29B3AA7500B4F0B4 /* XelaNumberInputState.swift */,
+				41DD987F29B3AA7500B4F0B4 /* XelaNumberInputControls.swift */,
+			);
+			path = NumberInput;
+			sourceTree = "<group>";
+		};
+		41DD988629B3AA7500B4F0B4 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				41DD988729B3AA7500B4F0B4 /* TextExtensions.swift */,
+				41DD988829B3AA7500B4F0B4 /* ColorExtensions.swift */,
+				41DD988929B3AA7500B4F0B4 /* OtherExtensions.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
 		881EF5BB272DC366004761E5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +751,7 @@
 		8873A5FE281BE78F000ED21B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				41DD983429B3AA7500B4F0B4 /* XelaUIKit */,
 				8873A608281BEEAF000ED21B /* KeychainAccessGroupHelper.swift */,
 			);
 			path = Utilities;
@@ -461,23 +1008,102 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DD993D29B3AA7500B4F0B4 /* XelaColor.swift in Sources */,
+				41DD992E29B3AA7500B4F0B4 /* XelaDividerOrientation.swift in Sources */,
+				41DD98D729B3AA7500B4F0B4 /* XelaMonth.swift in Sources */,
 				8873A5D2281BDF46000ED21B /* Reminder.swift in Sources */,
+				41DD98CB29B3AA7500B4F0B4 /* XelaDateManager.swift in Sources */,
+				41DD994329B3AA7500B4F0B4 /* XelaNumberInputControls.swift in Sources */,
+				41DD995B29B3AA7500B4F0B4 /* ColorExtensions.swift in Sources */,
+				41DD997F29B3AA7500B4F0B4 /* XelaTabs.swift in Sources */,
+				41DD989829B3AA7500B4F0B4 /* XelaTextField.swift in Sources */,
+				41DD994F29B3AA7500B4F0B4 /* XelaRangeSlider.swift in Sources */,
+				41DD990429B3AA7500B4F0B4 /* XelaCheckboxState.swift in Sources */,
 				8873A5D3281BDF46000ED21B /* View+ConfirmationDialog.swift in Sources */,
+				41DD997029B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift in Sources */,
+				41DD994629B3AA7500B4F0B4 /* XelaColorModel.swift in Sources */,
+				41DD98B629B3AA7500B4F0B4 /* XelaRadioButtonState.swift in Sources */,
+				41DD98F529B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift in Sources */,
+				41DD991F29B3AA7500B4F0B4 /* XelaStepsItems.swift in Sources */,
+				41DD992229B3AA7500B4F0B4 /* XelaStepsState.swift in Sources */,
+				41DD98A729B3AA7500B4F0B4 /* XelaTab.swift in Sources */,
+				41DD994929B3AA7500B4F0B4 /* XelaTooltip.swift in Sources */,
+				41DD98EF29B3AA7500B4F0B4 /* XelaChartPieItemShape.swift in Sources */,
 				8873A5D4281BDF46000ED21B /* MakeItSoApp+Injection.swift in Sources */,
 				8873A5D5281BDF46000ED21B /* ReminderListRowView.swift in Sources */,
+				41DD990D29B3AA7500B4F0B4 /* XelaToggleSize.swift in Sources */,
+				41DD98D429B3AA7500B4F0B4 /* XelaColorSettings.swift in Sources */,
+				41DD98C829B3AA7500B4F0B4 /* XelaDatePickerCell.swift in Sources */,
+				41DD98F229B3AA7500B4F0B4 /* XelaChartType.swift in Sources */,
 				8873A5D6281BDF46000ED21B /* ReminderListRowViewModel.swift in Sources */,
+				41DD98BF29B3AA7500B4F0B4 /* XelaRoundedCorner.swift in Sources */,
+				41DD98FB29B3AA7500B4F0B4 /* XelaPieChartBody.swift in Sources */,
 				8873A5D7281BDF46000ED21B /* Font+Rounded.swift in Sources */,
+				41DD997329B3AA7500B4F0B4 /* XelaChart.swift in Sources */,
+				41DD993429B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift in Sources */,
+				41DD98FE29B3AA7500B4F0B4 /* XelaChipSize.swift in Sources */,
+				41DD98EC29B3AA7500B4F0B4 /* XelaBarChartBody.swift in Sources */,
 				8873A5D8281BDF46000ED21B /* View+InteractiveDismissDisable.swift in Sources */,
 				8873A60B281BEEAF000ED21B /* KeychainAccessGroupHelper.swift in Sources */,
 				8873A5D9281BDF46000ED21B /* EmptyStateView.swift in Sources */,
+				41DD993129B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift in Sources */,
 				8873A5DA281BDF46000ED21B /* ReminderDetailsView.swift in Sources */,
+				41DD98B329B3AA7500B4F0B4 /* XelaTooltipTriangle.swift in Sources */,
+				41DD991C29B3AA7500B4F0B4 /* XelaStep.swift in Sources */,
+				41DD991029B3AA7500B4F0B4 /* XelaTextareaState.swift in Sources */,
+				41DD98B929B3AA7500B4F0B4 /* XelaRadioButtonItem.swift in Sources */,
+				41DD996A29B3AA7500B4F0B4 /* XelaButton.swift in Sources */,
+				41DD995529B3AA7500B4F0B4 /* XelaToast.swift in Sources */,
+				41DD990729B3AA7500B4F0B4 /* XelaTextFieldState.swift in Sources */,
+				41DD994029B3AA7500B4F0B4 /* XelaNumberInputState.swift in Sources */,
+				41DD997629B3AA7500B4F0B4 /* XelaChip.swift in Sources */,
+				41DD990129B3AA7500B4F0B4 /* XelaCheckboxSize.swift in Sources */,
+				41DD98D129B3AA7500B4F0B4 /* XelaDate.swift in Sources */,
+				41DD98E629B3AA7500B4F0B4 /* XelaPieDatasets.swift in Sources */,
+				41DD98C529B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift in Sources */,
+				41DD997C29B3AA7500B4F0B4 /* XelaSlider.swift in Sources */,
 				8873A5DB281BDF46000ED21B /* ReminderDetailsViewModel.swift in Sources */,
+				41DD995829B3AA7500B4F0B4 /* TextExtensions.swift in Sources */,
 				8873A5DC281BDF46000ED21B /* AuthenticationService.swift in Sources */,
+				41DD992B29B3AA7500B4F0B4 /* XelaDividerStyle.swift in Sources */,
+				41DD98E029B3AA7500B4F0B4 /* XelaChartLineShape.swift in Sources */,
 				8873A5DD281BDF46000ED21B /* MakeItSoApp.swift in Sources */,
+				41DD995E29B3AA7500B4F0B4 /* OtherExtensions.swift in Sources */,
+				41DD996429B3AA7500B4F0B4 /* XelaUserAvatar.swift in Sources */,
+				41DD997929B3AA7500B4F0B4 /* XelaTextarea.swift in Sources */,
 				8873A5DE281BDF46000ED21B /* View+Focus.swift in Sources */,
+				41DD98AD29B3AA7500B4F0B4 /* XelaTooltipAlign.swift in Sources */,
+				41DD98B029B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift in Sources */,
+				41DD98DA29B3AA7500B4F0B4 /* XelaLineDatasets.swift in Sources */,
+				41DD996129B3AA7500B4F0B4 /* XelaNumberInput.swift in Sources */,
+				41DD98AA29B3AA7500B4F0B4 /* XelaTabsItem.swift in Sources */,
+				41DD996729B3AA7500B4F0B4 /* XelaDatePicker.swift in Sources */,
+				41DD98BC29B3AA7500B4F0B4 /* XelaRadioButtonSize.swift in Sources */,
 				8873A5DF281BDF46000ED21B /* RemindersRepository.swift in Sources */,
+				41DD993729B3AA7500B4F0B4 /* XelaUserAvatarSize.swift in Sources */,
+				41DD998229B3AA7500B4F0B4 /* XelaSegmentedControll.swift in Sources */,
+				41DD98E929B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift in Sources */,
 				8873A5E0281BDF46000ED21B /* RemindersListView.swift in Sources */,
+				41DD991929B3AA7500B4F0B4 /* XelaButtonSize.swift in Sources */,
 				8873A5E1281BDF46000ED21B /* RemindersListViewModel.swift in Sources */,
+				41DD98A429B3AA7500B4F0B4 /* XelaAlert.swift in Sources */,
+				41DD98E329B3AA7500B4F0B4 /* XelaBarDatasets.swift in Sources */,
+				41DD992829B3AA7500B4F0B4 /* XelaStepItem.swift in Sources */,
+				41DD992529B3AA7500B4F0B4 /* XelaStepsOrientation.swift in Sources */,
+				41DD996D29B3AA7500B4F0B4 /* XelaDialog.swift in Sources */,
+				41DD98DD29B3AA7500B4F0B4 /* XelaChartDataset.swift in Sources */,
+				41DD993A29B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift in Sources */,
+				41DD98C229B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift in Sources */,
+				41DD994C29B3AA7500B4F0B4 /* XelaBadge.swift in Sources */,
+				41DD989B29B3AA7500B4F0B4 /* XelaAccordion.swift in Sources */,
+				41DD98A129B3AA7500B4F0B4 /* XelaCheckbox.swift in Sources */,
+				41DD989E29B3AA7500B4F0B4 /* XelaSteps.swift in Sources */,
+				41DD991629B3AA7500B4F0B4 /* XelaButtonState.swift in Sources */,
+				41DD990A29B3AA7500B4F0B4 /* XelaToggleStyle.swift in Sources */,
+				41DD98F829B3AA7500B4F0B4 /* XelaLineChartBody.swift in Sources */,
+				41DD995229B3AA7500B4F0B4 /* XelaDivider.swift in Sources */,
+				41DD98CE29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift in Sources */,
+				41DD991329B3AA7500B4F0B4 /* XelaButtonType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,23 +1111,102 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DD993B29B3AA7500B4F0B4 /* XelaColor.swift in Sources */,
+				41DD992C29B3AA7500B4F0B4 /* XelaDividerOrientation.swift in Sources */,
+				41DD98D529B3AA7500B4F0B4 /* XelaMonth.swift in Sources */,
 				88FEECF02727FEFF00ED368C /* Reminder.swift in Sources */,
+				41DD98C929B3AA7500B4F0B4 /* XelaDateManager.swift in Sources */,
+				41DD994129B3AA7500B4F0B4 /* XelaNumberInputControls.swift in Sources */,
+				41DD995929B3AA7500B4F0B4 /* ColorExtensions.swift in Sources */,
+				41DD997D29B3AA7500B4F0B4 /* XelaTabs.swift in Sources */,
+				41DD989629B3AA7500B4F0B4 /* XelaTextField.swift in Sources */,
+				41DD994D29B3AA7500B4F0B4 /* XelaRangeSlider.swift in Sources */,
+				41DD990229B3AA7500B4F0B4 /* XelaCheckboxState.swift in Sources */,
 				88FA998D274D63A400670474 /* View+ConfirmationDialog.swift in Sources */,
+				41DD996E29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift in Sources */,
+				41DD994429B3AA7500B4F0B4 /* XelaColorModel.swift in Sources */,
+				41DD98B429B3AA7500B4F0B4 /* XelaRadioButtonState.swift in Sources */,
+				41DD98F329B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift in Sources */,
+				41DD991D29B3AA7500B4F0B4 /* XelaStepsItems.swift in Sources */,
+				41DD992029B3AA7500B4F0B4 /* XelaStepsState.swift in Sources */,
+				41DD98A529B3AA7500B4F0B4 /* XelaTab.swift in Sources */,
+				41DD994729B3AA7500B4F0B4 /* XelaTooltip.swift in Sources */,
+				41DD98ED29B3AA7500B4F0B4 /* XelaChartPieItemShape.swift in Sources */,
 				88700F88276B54810088F006 /* MakeItSoApp+Injection.swift in Sources */,
 				88FEECFA27280F3D00ED368C /* ReminderListRowView.swift in Sources */,
+				41DD990B29B3AA7500B4F0B4 /* XelaToggleSize.swift in Sources */,
+				41DD98D229B3AA7500B4F0B4 /* XelaColorSettings.swift in Sources */,
+				41DD98C629B3AA7500B4F0B4 /* XelaDatePickerCell.swift in Sources */,
+				41DD98F029B3AA7500B4F0B4 /* XelaChartType.swift in Sources */,
 				88A1B7432756541400DB0494 /* ReminderListRowViewModel.swift in Sources */,
+				41DD98BD29B3AA7500B4F0B4 /* XelaRoundedCorner.swift in Sources */,
+				41DD98F929B3AA7500B4F0B4 /* XelaPieChartBody.swift in Sources */,
 				88E25439275E494900341C5C /* Font+Rounded.swift in Sources */,
+				41DD997129B3AA7500B4F0B4 /* XelaChart.swift in Sources */,
+				41DD993229B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift in Sources */,
+				41DD98FC29B3AA7500B4F0B4 /* XelaChipSize.swift in Sources */,
+				41DD98EA29B3AA7500B4F0B4 /* XelaBarChartBody.swift in Sources */,
 				88FA99922750090200670474 /* View+InteractiveDismissDisable.swift in Sources */,
 				8873A609281BEEAF000ED21B /* KeychainAccessGroupHelper.swift in Sources */,
 				887B6FAD273ED4180028263D /* EmptyStateView.swift in Sources */,
+				41DD992F29B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift in Sources */,
 				88E7B7BE274CF30A00AF477D /* ReminderDetailsView.swift in Sources */,
+				41DD98B129B3AA7500B4F0B4 /* XelaTooltipTriangle.swift in Sources */,
+				41DD991A29B3AA7500B4F0B4 /* XelaStep.swift in Sources */,
+				41DD990E29B3AA7500B4F0B4 /* XelaTextareaState.swift in Sources */,
+				41DD98B729B3AA7500B4F0B4 /* XelaRadioButtonItem.swift in Sources */,
+				41DD996829B3AA7500B4F0B4 /* XelaButton.swift in Sources */,
+				41DD995329B3AA7500B4F0B4 /* XelaToast.swift in Sources */,
+				41DD990529B3AA7500B4F0B4 /* XelaTextFieldState.swift in Sources */,
+				41DD993E29B3AA7500B4F0B4 /* XelaNumberInputState.swift in Sources */,
+				41DD997429B3AA7500B4F0B4 /* XelaChip.swift in Sources */,
+				41DD98FF29B3AA7500B4F0B4 /* XelaCheckboxSize.swift in Sources */,
+				41DD98CF29B3AA7500B4F0B4 /* XelaDate.swift in Sources */,
+				41DD98E429B3AA7500B4F0B4 /* XelaPieDatasets.swift in Sources */,
+				41DD98C329B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift in Sources */,
+				41DD997A29B3AA7500B4F0B4 /* XelaSlider.swift in Sources */,
 				88C30CD6274D1B4500E6694D /* ReminderDetailsViewModel.swift in Sources */,
+				41DD995629B3AA7500B4F0B4 /* TextExtensions.swift in Sources */,
 				88700F82276B517F0088F006 /* AuthenticationService.swift in Sources */,
+				41DD992929B3AA7500B4F0B4 /* XelaDividerStyle.swift in Sources */,
+				41DD98DE29B3AA7500B4F0B4 /* XelaChartLineShape.swift in Sources */,
 				88FEECDA27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
+				41DD995C29B3AA7500B4F0B4 /* OtherExtensions.swift in Sources */,
+				41DD996229B3AA7500B4F0B4 /* XelaUserAvatar.swift in Sources */,
+				41DD997729B3AA7500B4F0B4 /* XelaTextarea.swift in Sources */,
 				881EF5BD272DC399004761E5 /* View+Focus.swift in Sources */,
+				41DD98AB29B3AA7500B4F0B4 /* XelaTooltipAlign.swift in Sources */,
+				41DD98AE29B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift in Sources */,
+				41DD98D829B3AA7500B4F0B4 /* XelaLineDatasets.swift in Sources */,
+				41DD995F29B3AA7500B4F0B4 /* XelaNumberInput.swift in Sources */,
+				41DD98A829B3AA7500B4F0B4 /* XelaTabsItem.swift in Sources */,
+				41DD996529B3AA7500B4F0B4 /* XelaDatePicker.swift in Sources */,
+				41DD98BA29B3AA7500B4F0B4 /* XelaRadioButtonSize.swift in Sources */,
 				88700F7D276B4FF90088F006 /* RemindersRepository.swift in Sources */,
+				41DD993529B3AA7500B4F0B4 /* XelaUserAvatarSize.swift in Sources */,
+				41DD998029B3AA7500B4F0B4 /* XelaSegmentedControll.swift in Sources */,
+				41DD98E729B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift in Sources */,
 				88FEECF32728044100ED368C /* RemindersListView.swift in Sources */,
+				41DD991729B3AA7500B4F0B4 /* XelaButtonSize.swift in Sources */,
 				88FEECF72728072D00ED368C /* RemindersListViewModel.swift in Sources */,
+				41DD98A229B3AA7500B4F0B4 /* XelaAlert.swift in Sources */,
+				41DD98E129B3AA7500B4F0B4 /* XelaBarDatasets.swift in Sources */,
+				41DD992629B3AA7500B4F0B4 /* XelaStepItem.swift in Sources */,
+				41DD992329B3AA7500B4F0B4 /* XelaStepsOrientation.swift in Sources */,
+				41DD996B29B3AA7500B4F0B4 /* XelaDialog.swift in Sources */,
+				41DD98DB29B3AA7500B4F0B4 /* XelaChartDataset.swift in Sources */,
+				41DD993829B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift in Sources */,
+				41DD98C029B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift in Sources */,
+				41DD994A29B3AA7500B4F0B4 /* XelaBadge.swift in Sources */,
+				41DD989929B3AA7500B4F0B4 /* XelaAccordion.swift in Sources */,
+				41DD989F29B3AA7500B4F0B4 /* XelaCheckbox.swift in Sources */,
+				41DD989C29B3AA7500B4F0B4 /* XelaSteps.swift in Sources */,
+				41DD991429B3AA7500B4F0B4 /* XelaButtonState.swift in Sources */,
+				41DD990829B3AA7500B4F0B4 /* XelaToggleStyle.swift in Sources */,
+				41DD98F629B3AA7500B4F0B4 /* XelaLineChartBody.swift in Sources */,
+				41DD995029B3AA7500B4F0B4 /* XelaDivider.swift in Sources */,
+				41DD98CC29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift in Sources */,
+				41DD991129B3AA7500B4F0B4 /* XelaButtonType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,19 +1214,98 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DD995429B3AA7500B4F0B4 /* XelaToast.swift in Sources */,
+				41DD990329B3AA7500B4F0B4 /* XelaCheckboxState.swift in Sources */,
+				41DD98CA29B3AA7500B4F0B4 /* XelaDateManager.swift in Sources */,
+				41DD98E229B3AA7500B4F0B4 /* XelaBarDatasets.swift in Sources */,
+				41DD997829B3AA7500B4F0B4 /* XelaTextarea.swift in Sources */,
+				41DD98D629B3AA7500B4F0B4 /* XelaMonth.swift in Sources */,
+				41DD98C129B3AA7500B4F0B4 /* XelaSegmentedControllItem.swift in Sources */,
+				41DD996C29B3AA7500B4F0B4 /* XelaDialog.swift in Sources */,
 				88FEECF12727FEFF00ED368C /* Reminder.swift in Sources */,
+				41DD996029B3AA7500B4F0B4 /* XelaNumberInput.swift in Sources */,
+				41DD997B29B3AA7500B4F0B4 /* XelaSlider.swift in Sources */,
+				41DD98D029B3AA7500B4F0B4 /* XelaDate.swift in Sources */,
+				41DD991529B3AA7500B4F0B4 /* XelaButtonState.swift in Sources */,
+				41DD990029B3AA7500B4F0B4 /* XelaCheckboxSize.swift in Sources */,
+				41DD993329B3AA7500B4F0B4 /* XelaUserAvatarStyle.swift in Sources */,
+				41DD996F29B3AA7500B4F0B4 /* XelaRadioButtonGroup.swift in Sources */,
+				41DD989729B3AA7500B4F0B4 /* XelaTextField.swift in Sources */,
 				88700F7E276B4FF90088F006 /* RemindersRepository.swift in Sources */,
+				41DD98DC29B3AA7500B4F0B4 /* XelaChartDataset.swift in Sources */,
+				41DD993F29B3AA7500B4F0B4 /* XelaNumberInputState.swift in Sources */,
+				41DD98D329B3AA7500B4F0B4 /* XelaColorSettings.swift in Sources */,
+				41DD991E29B3AA7500B4F0B4 /* XelaStepsItems.swift in Sources */,
+				41DD993029B3AA7500B4F0B4 /* XelaUserAvatarDecoration.swift in Sources */,
+				41DD98A629B3AA7500B4F0B4 /* XelaTab.swift in Sources */,
+				41DD990929B3AA7500B4F0B4 /* XelaToggleStyle.swift in Sources */,
+				41DD98BB29B3AA7500B4F0B4 /* XelaRadioButtonSize.swift in Sources */,
+				41DD992129B3AA7500B4F0B4 /* XelaStepsState.swift in Sources */,
+				41DD995729B3AA7500B4F0B4 /* TextExtensions.swift in Sources */,
+				41DD98EB29B3AA7500B4F0B4 /* XelaBarChartBody.swift in Sources */,
+				41DD98BE29B3AA7500B4F0B4 /* XelaRoundedCorner.swift in Sources */,
+				41DD992D29B3AA7500B4F0B4 /* XelaDividerOrientation.swift in Sources */,
+				41DD98E829B3AA7500B4F0B4 /* XelaDoughnutChartBody.swift in Sources */,
+				41DD98EE29B3AA7500B4F0B4 /* XelaChartPieItemShape.swift in Sources */,
+				41DD98A929B3AA7500B4F0B4 /* XelaTabsItem.swift in Sources */,
+				41DD98D929B3AA7500B4F0B4 /* XelaLineDatasets.swift in Sources */,
+				41DD993629B3AA7500B4F0B4 /* XelaUserAvatarSize.swift in Sources */,
+				41DD990F29B3AA7500B4F0B4 /* XelaTextareaState.swift in Sources */,
+				41DD989D29B3AA7500B4F0B4 /* XelaSteps.swift in Sources */,
 				88700F89276B54810088F006 /* MakeItSoApp+Injection.swift in Sources */,
+				41DD98F729B3AA7500B4F0B4 /* XelaLineChartBody.swift in Sources */,
+				41DD992729B3AA7500B4F0B4 /* XelaStepItem.swift in Sources */,
+				41DD990C29B3AA7500B4F0B4 /* XelaToggleSize.swift in Sources */,
+				41DD994E29B3AA7500B4F0B4 /* XelaRangeSlider.swift in Sources */,
 				88C30CD7274D1B4500E6694D /* ReminderDetailsViewModel.swift in Sources */,
+				41DD98FD29B3AA7500B4F0B4 /* XelaChipSize.swift in Sources */,
 				88FEECFB27280F3D00ED368C /* ReminderListRowView.swift in Sources */,
+				41DD990629B3AA7500B4F0B4 /* XelaTextFieldState.swift in Sources */,
+				41DD993929B3AA7500B4F0B4 /* XelaUserAvatarDecorationPosition.swift in Sources */,
+				41DD989A29B3AA7500B4F0B4 /* XelaAccordion.swift in Sources */,
+				41DD994229B3AA7500B4F0B4 /* XelaNumberInputControls.swift in Sources */,
 				88700F83276B517F0088F006 /* AuthenticationService.swift in Sources */,
+				41DD98CD29B3AA7500B4F0B4 /* XelaWeekdayHeader.swift in Sources */,
+				41DD995129B3AA7500B4F0B4 /* XelaDivider.swift in Sources */,
+				41DD98F429B3AA7500B4F0B4 /* XelaDoughnutDatasets.swift in Sources */,
+				41DD98B529B3AA7500B4F0B4 /* XelaRadioButtonState.swift in Sources */,
+				41DD991229B3AA7500B4F0B4 /* XelaButtonType.swift in Sources */,
+				41DD994B29B3AA7500B4F0B4 /* XelaBadge.swift in Sources */,
+				41DD997529B3AA7500B4F0B4 /* XelaChip.swift in Sources */,
+				41DD98AC29B3AA7500B4F0B4 /* XelaTooltipAlign.swift in Sources */,
 				88FEECDB27275ABD00ED368C /* MakeItSoApp.swift in Sources */,
+				41DD992429B3AA7500B4F0B4 /* XelaStepsOrientation.swift in Sources */,
+				41DD991829B3AA7500B4F0B4 /* XelaButtonSize.swift in Sources */,
+				41DD98E529B3AA7500B4F0B4 /* XelaPieDatasets.swift in Sources */,
 				88FEECF42728044100ED368C /* RemindersListView.swift in Sources */,
+				41DD996329B3AA7500B4F0B4 /* XelaUserAvatar.swift in Sources */,
+				41DD998129B3AA7500B4F0B4 /* XelaSegmentedControll.swift in Sources */,
+				41DD994829B3AA7500B4F0B4 /* XelaTooltip.swift in Sources */,
+				41DD98B829B3AA7500B4F0B4 /* XelaRadioButtonItem.swift in Sources */,
+				41DD98DF29B3AA7500B4F0B4 /* XelaChartLineShape.swift in Sources */,
+				41DD995A29B3AA7500B4F0B4 /* ColorExtensions.swift in Sources */,
+				41DD997229B3AA7500B4F0B4 /* XelaChart.swift in Sources */,
 				88FEECF82728072D00ED368C /* RemindersListViewModel.swift in Sources */,
+				41DD997E29B3AA7500B4F0B4 /* XelaTabs.swift in Sources */,
+				41DD992A29B3AA7500B4F0B4 /* XelaDividerStyle.swift in Sources */,
+				41DD98B229B3AA7500B4F0B4 /* XelaTooltipTriangle.swift in Sources */,
+				41DD98C429B3AA7500B4F0B4 /* XelaSegmentedControllButton.swift in Sources */,
+				41DD995D29B3AA7500B4F0B4 /* OtherExtensions.swift in Sources */,
+				41DD996929B3AA7500B4F0B4 /* XelaButton.swift in Sources */,
 				88A1B7442756541400DB0494 /* ReminderListRowViewModel.swift in Sources */,
 				8873A60A281BEEAF000ED21B /* KeychainAccessGroupHelper.swift in Sources */,
+				41DD98AF29B3AA7500B4F0B4 /* XelaTooltipArrowAlign.swift in Sources */,
+				41DD98A029B3AA7500B4F0B4 /* XelaCheckbox.swift in Sources */,
 				887B6FAE273ED4180028263D /* EmptyStateView.swift in Sources */,
+				41DD98F129B3AA7500B4F0B4 /* XelaChartType.swift in Sources */,
+				41DD994529B3AA7500B4F0B4 /* XelaColorModel.swift in Sources */,
+				41DD996629B3AA7500B4F0B4 /* XelaDatePicker.swift in Sources */,
+				41DD993C29B3AA7500B4F0B4 /* XelaColor.swift in Sources */,
+				41DD991B29B3AA7500B4F0B4 /* XelaStep.swift in Sources */,
+				41DD98A329B3AA7500B4F0B4 /* XelaAlert.swift in Sources */,
 				88E7B7BF274CF30A00AF477D /* ReminderDetailsView.swift in Sources */,
+				41DD98C729B3AA7500B4F0B4 /* XelaDatePickerCell.swift in Sources */,
+				41DD98FA29B3AA7500B4F0B4 /* XelaPieChartBody.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
