@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8873461229AFCB890019A853 /* MakeItSo.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8873461129AFCB890019A853 /* MakeItSo.docc */; };
 		88955B9829AFB3DE00A6FF15 /* MakeItSoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88955B9729AFB3DE00A6FF15 /* MakeItSoApp.swift */; };
 		88955B9A29AFB3DE00A6FF15 /* RemindersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88955B9929AFB3DE00A6FF15 /* RemindersListView.swift */; };
 		88955B9C29AFB3DE00A6FF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88955B9B29AFB3DE00A6FF15 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8873461129AFCB890019A853 /* MakeItSo.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; name = MakeItSo.docc; path = MakeItSo/MakeItSo.docc; sourceTree = "<group>"; };
 		88955B9429AFB3DE00A6FF15 /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88955B9729AFB3DE00A6FF15 /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
 		88955B9929AFB3DE00A6FF15 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
@@ -39,6 +41,7 @@
 		88955B8B29AFB3DE00A6FF15 = {
 			isa = PBXGroup;
 			children = (
+				8873461129AFCB890019A853 /* MakeItSo.docc */,
 				88955B9629AFB3DE00A6FF15 /* MakeItSo */,
 				88955B9529AFB3DE00A6FF15 /* Products */,
 			);
@@ -178,6 +181,7 @@
 				88955BA929AFB4AC00A6FF15 /* Reminder.swift in Sources */,
 				88955B9A29AFB3DE00A6FF15 /* RemindersListView.swift in Sources */,
 				88955BAC29AFB8E500A6FF15 /* AddReminderView.swift in Sources */,
+				8873461229AFCB890019A853 /* MakeItSo.docc in Sources */,
 				88955B9829AFB3DE00A6FF15 /* MakeItSoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +319,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,6 +349,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
