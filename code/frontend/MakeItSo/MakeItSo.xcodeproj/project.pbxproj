@@ -17,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8842942C29B87CEC002B16B9 /* buildDocs.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = buildDocs.sh; sourceTree = "<group>"; };
 		8873461129AFCB890019A853 /* MakeItSo.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; name = MakeItSo.docc; path = MakeItSo/MakeItSo.docc; sourceTree = "<group>"; };
 		88955B9429AFB3DE00A6FF15 /* MakeItSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88955B9729AFB3DE00A6FF15 /* MakeItSoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeItSoApp.swift; sourceTree = "<group>"; };
@@ -42,7 +41,6 @@
 		88955B8B29AFB3DE00A6FF15 = {
 			isa = PBXGroup;
 			children = (
-				8842942C29B87CEC002B16B9 /* buildDocs.sh */,
 				8873461129AFCB890019A853 /* MakeItSo.docc */,
 				88955B9629AFB3DE00A6FF15 /* MakeItSo */,
 				88955B9529AFB3DE00A6FF15 /* Products */,
