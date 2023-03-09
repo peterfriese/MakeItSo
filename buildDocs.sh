@@ -22,3 +22,19 @@ for ARCHIVE in doc_archives/*.doccarchive; do
     echo "Processing Archive: $ARCHIVE"
     $(xcrun --find docc) process-archive transform-for-static-hosting "$ARCHIVE" --hosting-base-path MakeItSo/ --output-path docs
 done
+
+git fetch
+
+git stash push -u  -- docs doc_archives
+
+git checkout tutorial/pages
+
+rm -rf docs doc_archives
+
+git stash apply
+
+git add docs doc_archives
+
+git commit -m "📝 Updated DocC documentation"
+
+# git push --set-upstream origin tutorial/pages
