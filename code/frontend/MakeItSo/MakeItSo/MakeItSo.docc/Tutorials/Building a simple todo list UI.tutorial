@@ -1,12 +1,12 @@
-@Tutorial(time: 30) {
+@Tutorial(time: 25, projectFiles: building_the_basic_ui.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
-  @Intro(title: "Building a simple todo list UI") {
+  @Intro(title: "Building a Simple Todo List UI") {
     This tutorial guides you through building _Make It So_, a todo list application. You will start by creating s simple UI for displaying todo list items.
     
     @Image(source: building-todo-ui-intro.png, alt: "")
   }
   
-  @Section(title: "Create a new project") {
+  @Section(title: "Create a New Project") {
     @ContentAndMedia {
       Create a new Xcode project that uses SwiftUI. 
       
@@ -36,11 +36,11 @@
     }
   }
   
-  @Section(title: "Create a reminder model and add some test data") {
+  @Section(title: "Create a Reminder Model and Add some Test Data") {
     @ContentAndMedia {
       
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Image(source: sectionintros.001.png, alt: "")
     }
     
     @Steps {
@@ -65,11 +65,11 @@
     }
   }
   
-  @Section(title: "Display a list of reminders") {
+  @Section(title: "Display a List of Reminders") {
     @ContentAndMedia {
       
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Image(source: sectionintros.002.png, alt: "")
     }
     
     @Steps {
@@ -150,7 +150,7 @@
     }
   }
   
-  @Section(title: "Mark reminders as completed") {
+  @Section(title: "Mark Reminders as Completed") {
     @ContentAndMedia {
       The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to mark tasks as `completed`.
       
@@ -201,7 +201,7 @@
     }
   }
   
-  @Section(title: "Create a dialog for adding new reminders") {
+  @Section(title: "Create a Dialog for Adding New Reminders") {
     @ContentAndMedia {
       Adding new reminders is another key feature of any todo list application. In this step, you will create a dialog that allows users to add new reminders.
       
@@ -452,7 +452,7 @@
     }
   }
   
-  @Section(title: "Wrap up") {
+  @Section(title: "Wrap Up") {
     @ContentAndMedia {
       Congratulations!
       
