@@ -7,13 +7,13 @@ struct ContentView: View {
   var body: some View {
     List(reminders) { reminder in
       HStack {
-        Image(systemName: reminder.completed
+        Image(systemName: reminder.isCompleted
               ? "largecircle.fill.circle"
               : "circle")
           .imageScale(.large)
           .foregroundColor(.accentColor)
           .onTapGesture {
-            reminder.completed.toggle()
+            reminder.isCompleted.toggle()
           }
         Text(reminder.title)
       }

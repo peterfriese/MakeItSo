@@ -14,10 +14,10 @@ struct AddReminderView: View {
   @Environment(\.dismiss)
   private var dismiss
 
-  var completion: (_ reminder: Reminder) -> Void
+  var onCommit: (_ reminder: Reminder) -> Void
 
   private func commit() {
-    completion(reminder)
+    onCommit(reminder)
     dismiss()
   }
 

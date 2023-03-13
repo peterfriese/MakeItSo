@@ -94,7 +94,7 @@
       @Step {
         Change the icon to a circle.
         
-        > Note: In a later step in this tutorial, you will use a filled circle and a unfilled circle to indicate the `completed` status of todo items
+        > Note: In a later step in this tutorial, you will use a filled circle and a unfilled circle to indicate the `isCompleted` status of todo items
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-04.swift) {
           @Image(source: building-todo-ui-reminder-02-contentview-04.png, alt: "")
@@ -148,7 +148,7 @@
       The `List` view iterates over all elements of the collection you pass in as the first parameter - in this case, `reminders`. Inside the `List` view's closure, you can access the individual elements of the collection using the closure parameter, `reminder`.
       
       @Step {
-        Update the views inside the `List` view to display the `title` and `completion` state of the current collection element.  
+        Update the views inside the `List` view to display the `title` and `isCompleted` state of the current collection element.  
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-09.swift) {
           @Image(source: building-todo-ui-reminder-02-contentview-08.png, alt: "")
@@ -158,9 +158,9 @@
     }
   }
   
-  @Section(title: "Mark Reminders as Completed") {
+  @Section(title: "Mark Reminders as isCompleted") {
     @ContentAndMedia {
-      The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to mark tasks as `completed`.
+      The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to mark tasks as `isCompleted`.
       
       @Video(source: sectionintros.003.mp4, alt: "")
     }
@@ -181,7 +181,7 @@
       }
       
       @Step {
-        Toogle the `completion` status of the respective reminder.
+        Toogle the `isCompleted` status of the respective reminder.
         
         > Warning: This will result in a compiler error saying that you _cannot use mutating member on immutable value: 'reminder' is a 'let' constant._. You will fix this in the next step.
         
@@ -190,12 +190,12 @@
         }
       }
       
-      Explain this briefly. You can learn more about `List` bindings in this blog post: [SwiftUI List Bindings - Behind the Scenes](https://peterfriese.dev/posts/swiftui-list-item-bindings-behind-the-scenes/)
-      
       @Step {
         Create a list binding by turning the `List` parameter into a `Binding` of type `Array` of `Reminder`, and then accessing the individual elements of the collection as a `Binding` inside the `List` closure.
         
         The compile error should now be resolved, and the error message will disappear.
+        
+        > Tip: You can learn more about `List` bindings in this blog post: [SwiftUI List Bindings - Behind the Scenes](https://peterfriese.dev/posts/swiftui-list-item-bindings-behind-the-scenes/)
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-04.swift)
       }
@@ -285,7 +285,7 @@
     
     @Steps {
       @Step {
-        Define a property `completion` for the completion handler. This handler has one parameter for passing the `Reminder` to the calling view.
+        Define a property `onCommit` for the completion handler. This handler has one parameter for passing the `Reminder` to the calling view.
         
         Adjust the preview provider to make use of the completion handler. 
         
@@ -295,7 +295,7 @@
       }
       
       @Step {
-        Add a new private function `commit`. Inside this function, call the completion handler, passing the `reminder` property.
+        Add a new private function `commit`. Inside this function, call the `onCommit` completion handler, passing the `reminder` property.
         
         Call the `commit` function when the user taps on the _Add_ button. 
         
@@ -369,7 +369,7 @@
       }
       
       @Step {
-        Inside the `completion` closure of the `AddReminderView` view, take the `reminder` parameter and append the new reminder to the list of reminders.
+        Inside the `onCommit` closure of the `AddReminderView` view, take the `reminder` parameter and append the new reminder to the list of reminders.
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-06.swift) {
           @Image(source: building-todo-ui-reminder-05-contentview-present-addreminder-04.png, alt: "")
