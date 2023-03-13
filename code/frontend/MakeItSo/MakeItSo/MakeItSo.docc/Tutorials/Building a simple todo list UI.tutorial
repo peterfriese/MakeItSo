@@ -161,7 +161,7 @@
       @Step {
         In the _Project_ navigator, select `ContentView.swift`.
         
-        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-01.swift) {
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-01.swift, previousFile: building-todo-ui-reminder-03-contentview-00.swift) {
           @Image(source: building-todo-ui-reminder-03-contentview-01.png, alt: "")
         }
       }
