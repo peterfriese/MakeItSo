@@ -32,10 +32,10 @@ struct AddReminderView: View {
   @State
   private var reminder = Reminder(title: "")
 
-  var completion: (_ reminder: Reminder) -> Void
+  var onCommit: (_ reminder: Reminder) -> Void
 
   private func commit() {
-    completion(reminder)
+    onCommit(reminder)
     dismiss()
   }
 

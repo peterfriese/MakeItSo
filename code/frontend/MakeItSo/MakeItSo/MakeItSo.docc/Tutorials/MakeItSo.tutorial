@@ -1,0 +1,14 @@
+@Tutorials(name: "MakeItSo") {
+  @Intro(title: "SwiftUI and Firebase") {
+    Learn how to use Firebase in SwiftUI apps by building _Make It So_, a replica of Apple's Reminders app.
+    
+    @Image(source: make-it-so-intro.png, alt: "An illustration of 3 iPhones in portrait mode, displaying the UI of finding, creating, and taking care of a sloth in Slothy — the sample app that you build in this collection of tutorials.")
+  }
+  
+  @Chapter(name: "Building the UI") {
+    @Image(source: chapter1.png, alt: "A wireframe of an app interface that has an outline of a sloth and four buttons below the sloth. The buttons display the following symbols, from left to right: snowflake, fire, wind, and lightning.")
+    
+    In this chapter, you will learn how to use SwiftUI to create a replica of Apple's Reminders app. 
+    @TutorialReference(tutorial: "doc:Building-a-simple-todo-list-UI")
+  }
+}
