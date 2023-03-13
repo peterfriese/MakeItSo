@@ -17,7 +17,7 @@
     
     @Steps {
       @Step {
-        Open Xccode and either click _Create a new Xcode project_ in Xcode's startup window, or choose _File > New > Project_.
+        Open Xcode and either click _Create a new Xcode project_ in Xcode's startup window, or choose _File > New > Project_.
         
         @Image(source: building-todo-ui-xcode-new-project.png, alt: "")
       }
