@@ -397,7 +397,7 @@
       }
       
       @Step {
-        Add a new private property `focusedField` as an optional `FocusedField` and mark it using the `@FocusState` property wrapper.  
+        Add a new private property `focusedField` as an optional `FocusedField` and mark it using the [`@FocusState`](https://developer.apple.com/documentation/swiftui/focusstate) property wrapper.  
         
         @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-02.swift)
       }
