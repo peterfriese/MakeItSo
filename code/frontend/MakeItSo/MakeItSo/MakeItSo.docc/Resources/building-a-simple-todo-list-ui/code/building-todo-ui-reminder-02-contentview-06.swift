@@ -5,14 +5,13 @@ struct ContentView: View {
   private var reminders = Reminder.samples
 
   var body: some View {
-    List(reminders) { reminder in
-      HStack {
-        Image(systemName: "circle")
-          .imageScale(.large)
-          .foregroundColor(.accentColor)
-        Text("Hello, world!")
-      }
+    HStack {
+      Image(systemName: "circle")
+        .imageScale(.large)
+        .foregroundColor(.accentColor)
+      Text("Hello, world!")
     }
+    // .padding() <-- remove this line
   }
 }
 

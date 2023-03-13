@@ -12,7 +12,7 @@
       
       To preview and interact with views from the canvas in Xcode, and to use all the latest features described throughout the tutorials, ensure your Mac is running macOS Monterey or later.
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Video(source: make-it-so-intro.mov, alt: "")
     }
     
     @Steps {
@@ -29,7 +29,7 @@
       }
       
       @Step {
-        Select _SwiftUI_ from the Interface pop-up menu and _SwiftUI App_ from the Life Cycle pop-up menu, then click _Next_. Choose a location to save the `MakeItSo` project on your Mac.
+        Select _SwiftUI_ from the Interface drop-down menu and _Swift_ from the language drop-down menu, then click _Next_. Choose a location to save the `MakeItSo` project on your Mac.
         
         @Image(source: building-todo-ui-xcode-project-name.png, alt: "")
       }
@@ -112,11 +112,19 @@
       }
       
       @Step {
+        Remove the `.padding()` view modifier. 
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-06.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-04.png, alt: "")
+        }
+      }
+      
+      @Step {
         Wrap the `HStack` in a `List`. 
         
         > Warning: This will result in a compile error saying that `Reminder` is not `Identifiable`. You will fix this in the next step.
         
-        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-06.swift) {
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-07.swift) {
           @Image(source: building-todo-ui-reminder-02-contentview-06.png, alt: "")
         }
       }
@@ -132,7 +140,7 @@
       @Step {
         Navigate back to `ContentView.swift`. The compile error should now be resolved, and the error message will disappear. 
         
-        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-07.swift) {
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-08.swift) {
           @Image(source: building-todo-ui-reminder-02-contentview-07.png, alt: "")
         }
       }
@@ -142,7 +150,7 @@
       @Step {
         Update the views inside the `List` view to display the `title` and `completion` state of the current collection element.  
         
-        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-08.swift) {
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-09.swift) {
           @Image(source: building-todo-ui-reminder-02-contentview-08.png, alt: "")
         }
       }
@@ -154,7 +162,7 @@
     @ContentAndMedia {
       The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to mark tasks as `completed`.
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Video(source: sectionintros.003.mp4, alt: "")
     }
     
     @Steps {
@@ -205,7 +213,7 @@
     @ContentAndMedia {
       Adding new reminders is another key feature of any todo list application. In this step, you will create a dialog that allows users to add new reminders.
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Video(source: sectionintros.004.mp4, alt: "")
     }
     
     @Steps {
@@ -272,7 +280,7 @@
       
       A common way to implement this is by using a completion handler. In this section, you will implement a completion handler and present the _AddReminderView_ from the parent view.
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Image(source: sectionintros.005.png, alt: "")
     }
     
     @Steps {
@@ -320,7 +328,7 @@
     @ContentAndMedia {
       Open the dialog from the reminders lit.
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Image(source: sectionintros.006, alt: "")
     }
     
     @Steps {
@@ -331,13 +339,13 @@
       }
               
       @Step {
-        Add a convenience function for toggling the state of `isAddReminderDialogPresented`
+        Add a helper function for toggling the state of `isAddReminderDialogPresented`
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-02.swift)
       }
       
       @Step {
-        Add a toobar with the _New Reminder_ button. In the `action` of the button, call the convenience function you created in the previous step.
+        Add a toobar with the _New Reminder_ button. In the `action` of the button, call the helper function you created in the previous step.
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-03.swift)
       }
@@ -361,7 +369,7 @@
       }
       
       @Step {
-        Inside the `completion` closure of the `AddReminderView` view, take the `remninder` parameter and append the new reminder to the list of reminders.
+        Inside the `completion` closure of the `AddReminderView` view, take the `reminder` parameter and append the new reminder to the list of reminders.
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-06.swift) {
           @Image(source: building-todo-ui-reminder-05-contentview-present-addreminder-04.png, alt: "")
@@ -385,7 +393,7 @@
       * Add a _Cancel_ button
       * Add a title to the dialog
       
-      @Image(source: placeholder-image.png, alt: "")
+      @Video(source: sectionintros.007.mp4, alt: "")
     }
     
     @Steps {
@@ -445,7 +453,7 @@
       @Step {
         Add a _Cancel_ button to toolbar, and use `.cancellationAction` to place it in the cancellation area of the toolbar. Call the `cancel` function you just created. 
         
-        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-07.swift) {
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-08.swift) {
           @Image(source: building-todo-ui-reminder-06-addreminder-brushup-07.png, alt: "")
         }
       }
@@ -457,8 +465,6 @@
       Congratulations!
       
       You've implemented a fully functional UI for a todo list application in less than 150 lines of SwiftUI code.
-      
-      @Image(source: placeholder-image.png, alt: "")
     }
     
     @Steps {

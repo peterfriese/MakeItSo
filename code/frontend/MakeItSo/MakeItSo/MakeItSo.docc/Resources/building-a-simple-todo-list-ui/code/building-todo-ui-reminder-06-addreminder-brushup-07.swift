@@ -34,11 +34,6 @@ struct AddReminderView: View {
       .navigationTitle("New Reminder")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem(placement: .cancellationAction) {
-          Button(action: cancel) {
-            Text("Cancel")
-          }
-        }
         ToolbarItem(placement: .confirmationAction) {
           Button(action: commit) {
             Text("Add")

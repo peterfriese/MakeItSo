@@ -7,12 +7,10 @@ struct ContentView: View {
   var body: some View {
     List(reminders) { reminder in
       HStack {
-        Image(systemName: reminder.completed
-              ? "largecircle.fill.circle"
-              : "circle")
+        Image(systemName: "circle")
           .imageScale(.large)
           .foregroundColor(.accentColor)
-        Text(reminder.title)
+        Text("Hello, world!")
       }
     }
   }
