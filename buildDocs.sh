@@ -24,7 +24,8 @@ for ARCHIVE in doc_archives/*.doccarchive; do
     }
     ARCHIVE_NAME="$(cmd)"
     echo "Processing Archive: $ARCHIVE"
-    $(xcrun --find docc) process-archive transform-for-static-hosting "$ARCHIVE" --hosting-base-path MakeItSo/ --output-path docs
+    $(xcrun --find docc) process-archive transform-for-static-hosting "$ARCHIVE" \
+      --hosting-base-path MakeItSo/ --output-path docs
 done
 
 git fetch
