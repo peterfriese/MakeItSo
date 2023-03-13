@@ -4,7 +4,11 @@ rm -rf docsData
 
 echo "Building DocC documentation for MakeItSo..."
 
-xcodebuild -project code/frontend/MakeItSo/MakeItSo.xcodeproj -derivedDataPath docsData -scheme MakeItSo -destination 'platform=iOS Simulator,name=iPhone 14 Pro' -parallelizeTargets docbuild
+xcodebuild -project code/frontend/MakeItSo/MakeItSo.xcodeproj \
+  -derivedDataPath docsData \
+  -scheme MakeItSo \
+  -destination 'platform=iOS Simulator,name=iPhone 14 Pro' \
+  -parallelizeTargets docbuild
 
 echo "Copying DocC archives to doc_archives..."
 
