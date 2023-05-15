@@ -1,0 +1,17 @@
+@Tutorials(name: "MakeItSo") {
+  @Intro(title: "SwiftUI and Firebase") {
+    Learn how to use Firebase in SwiftUI apps by building _Make It So_, a replica of Apple's Reminders app.
+    
+    @Image(source: make-it-so-intro.png, alt: "")
+  }
+  
+  @Volume(name: "Creating a Simple Todo List App with SwiftUI and Firebase") {
+    Start building apps with SwiftUI, a declarative UI framework, and Firebase, Google's app development platform. You will build _Make It So_, a simple todo list application. 
+    @Chapter(name: "Building the UI") {
+      @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
+    
+      In this chapter, you will learn how to use SwiftUI to create a simple UI for a todo list application. 
+      @TutorialReference(tutorial: "doc:Building-a-Simple-Todo-List-UI")
+    }
+  }
+}

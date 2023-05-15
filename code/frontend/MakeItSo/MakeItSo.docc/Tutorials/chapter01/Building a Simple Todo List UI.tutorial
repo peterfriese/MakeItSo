@@ -1,0 +1,479 @@
+@Tutorial(time: 25, projectFiles: 01-building-a-simple-todo-list-ui.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Building a Simple Todo List UI") {
+    This tutorial guides you through building _Make It So_, a todo list application. You will start by creating s simple UI for displaying todo list items.
+    
+    @Image(source: building-todo-ui-intro.png, alt: "")
+  }
+  
+  @Section(title: "Create a New Project") {
+    @ContentAndMedia {
+      Create a new Xcode project that uses SwiftUI. 
+      
+      To preview and interact with views from the canvas in Xcode, and to use all the latest features described throughout the tutorials, ensure your Mac is running macOS Monterey or later.
+      
+      @Video(source: make-it-so-intro.mov, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        Open Xcode and either click _Create a new Xcode project_ in Xcode's startup window, or choose _File > New > Project_.
+        
+        @Image(source: building-todo-ui-xcode-new-project.png, alt: "")
+      }
+      
+      @Step {
+        In the template selector, select _iOS_ as the platform, select the _App_ template, and then click _Next_.
+        
+        @Image(source: building-todo-ui-xcode-app-template.png, alt: "")
+      }
+      
+      @Step {
+        Select _SwiftUI_ from the Interface drop-down menu and _Swift_ from the language drop-down menu, then click _Next_. Choose a location to save the `MakeItSo` project on your Mac.
+        
+        @Image(source: building-todo-ui-xcode-project-name.png, alt: "")
+      }
+    }
+  }
+  
+  @Section(title: "Create a Reminder Model and Add some Test Data") {
+    @ContentAndMedia {
+      
+      
+      @Image(source: sectionintros.001.png, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        Choose _File > New > File_ to create a new Swift file in your project and name it `Reminder.swift`. 
+        
+        @Image(source: building-todo-ui-new-swift-file.png, alt: "")
+      }
+      
+      @Step {
+        Define the data model for a reminder.
+        
+        @Code(name: "Reminder.swift", file: building-todo-ui-reminder-01-02.swift, previousFile: building-todo-ui-reminder-01-01.swift)
+      }
+      
+      @Step {
+        Create a Swift extension for the `Reminder` struct and declare a static constant `samples`. Add a couple of todo items. Later in this tutorial, you will use this sample data to display a list of todo items.
+        
+        @Code(name: "Reminder.swift", file: building-todo-ui-reminder-01-03.swift)
+      }
+      
+    }
+  }
+  
+  @Section(title: "Display a List of Reminders") {
+    @ContentAndMedia {
+      
+      
+      @Image(source: sectionintros.002.png, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        In the _Project_ navigator, select `ContentView.swift`.
+        
+        By default, SwiftUI view files declare two structures. The first structure conforms to the `View` protocol and describes the view’s content and layout. The second structure declares a preview for that view.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-02.swift, previousFile: building-todo-ui-reminder-02-contentview-01.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-02.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Inside the `body` property, change the vertical stack to a horizontal stack. 
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-03.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-03.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Change the icon to a circle.
+        
+        > Note: In a later step in this tutorial, you will use a filled circle and a unfilled circle to indicate the `isCompleted` status of todo items
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-04.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add a private `@State` property to hold a list of reminders. 
+        
+        > Note: It is a good practice to mark properties that you don't plan to access from outside a view as `private`. This prevents leaking information, and helps to keep the views initialiser clean, as you will see in a future step.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-05.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Remove the `.padding()` view modifier. 
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-06.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Wrap the `HStack` in a `List`. 
+        
+        > Warning: This will result in a compile error saying that `Reminder` is not `Identifiable`. You will fix this in the next step.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-07.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-06.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Mark `Reminder` as `Identifiable`, and add a constant property `id`.
+        
+        > Note: SwiftUI will use the `id` property of the `Reminder` struct to determine the identity of the list rows inside the `List` view. It is important to keep a view's identity stable, as this will help SwiftUI determine which parts of the UI to update when the data model changes.
+        
+        @Code(name: "Reminder.swift", file: building-todo-ui-reminder-02-reminder-02.swift, previousFile: building-todo-ui-reminder-02-reminder-01.swift)
+      }
+      
+      @Step {
+        Navigate back to `ContentView.swift`. The compile error should now be resolved, and the error message will disappear. 
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-08.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-07.png, alt: "")
+        }
+      }
+      
+      The `List` view iterates over all elements of the collection you pass in as the first parameter - in this case, `reminders`. Inside the `List` view's closure, you can access the individual elements of the collection using the closure parameter, `reminder`.
+      
+      @Step {
+        Update the views inside the `List` view to display the `title` and `isCompleted` state of the current collection element.  
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-02-contentview-09.swift) {
+          @Image(source: building-todo-ui-reminder-02-contentview-08.png, alt: "")
+        }
+      }
+      
+    }
+  }
+  
+  @Section(title: "Mark Reminders as isCompleted") {
+    @ContentAndMedia {
+      The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to mark tasks as `isCompleted`.
+      
+      @Video(source: sectionintros.003.mp4, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        In the _Project_ navigator, select `ContentView.swift`.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-01.swift, previousFile: building-todo-ui-reminder-03-contentview-00.swift) {
+          @Image(source: building-todo-ui-reminder-03-contentview-01.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Use the `onTapGesture` view modifier to register an event handler that gets called when the user taps on the `Image` view.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-02.swift)
+      }
+      
+      @Step {
+        Toogle the `isCompleted` status of the respective reminder.
+        
+        > Warning: This will result in a compiler error saying that you _cannot use mutating member on immutable value: 'reminder' is a 'let' constant._. You will fix this in the next step.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-03.swift) {
+          @Image(source: building-todo-ui-reminder-03-contentview-03.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Create a list binding by turning the `List` parameter into a `Binding` of type `Array` of `Reminder`, and then accessing the individual elements of the collection as a `Binding` inside the `List` closure.
+        
+        The compile error should now be resolved, and the error message will disappear.
+        
+        > Tip: You can learn more about `List` bindings in this blog post: [SwiftUI List Bindings - Behind the Scenes](https://peterfriese.dev/posts/swiftui-list-item-bindings-behind-the-scenes/)
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-04.swift)
+      }
+      
+      @Step {
+        Use the live preview and try out this new functionality by tapping the check boxes.
+        
+        @Video(source: building-todo-ui-reminder-03-contentview-05.mp4)
+      }
+      
+    }
+  }
+  
+  @Section(title: "Create a Dialog for Adding New Reminders") {
+    @ContentAndMedia {
+      Adding new reminders is another key feature of any todo list application. In this step, you will create a dialog that allows users to add new reminders.
+      
+      @Video(source: sectionintros.004.mp4, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        Choose _File > New > File_ to create a new SwiftUI file in your project and name it `AddReminderView.swift`. 
+        
+        @Image(source: building-todo-ui-new-swiftui-file.png, alt: "")
+      }
+      
+      @Step {
+        Wrap the greeting `Text("Hello, World!")` inside a `Form`. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-02.swift, previousFile: building-todo-ui-reminder-04-addreminderview-01.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-01.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Define a new local state variable to contain the new `Reminder`.
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-03.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-01.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Replace the `Text` view with a `TextField`. Set its `title` property to `"Title"`, and bind its `text` property to the `title` property of the `reminder` property.
+        
+        > Note: Since the `title` property of the `reminder` is empty, the `TextField` will display a placeholder text. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-04.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-04.png, alt: "")
+        }
+      }
+      
+      To allow the user to add the reminder to their list, you will next create a toolbar that contains an _Add_ button.
+      
+      @Step {
+        Wrap the `Form` inside a `NavigationStack`, and the `toolbar` view modifier to add a toolbar to the `Form`
+        
+        > Note: To make the toolbar visible, the view needs to be wrapped inside a navigation. Once you add a button to the toolbar, it will become visible. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-05.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add a button for the _Add_ action to the toolbar.
+        
+        > Note: By specifying the `.confirmationAction` placement, the button will be placed on the right side of the toolbar on iOS. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-06.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-06.png, alt: "")
+        }
+      }
+      
+    }
+  }
+  
+  @Section(title: "Pass Data From the Child View") {
+    @ContentAndMedia {
+      When the user taps on the _Add_ button in the _Add Reminder_ dialog, the new reminder needs to be passed to the calling view so it can be added to the list of reminders. 
+      
+      A common way to implement this is by using a completion handler. In this section, you will implement a completion handler and present the _AddReminderView_ from the parent view.
+      
+      @Image(source: sectionintros.005.png, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        Define a property `onCommit` for the completion handler. This handler has one parameter for passing the `Reminder` to the calling view.
+        
+        Adjust the preview provider to make use of the completion handler. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-07.swift, previousFile: building-todo-ui-reminder-04-addreminderview-06) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-06.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add a new private function `commit`. Inside this function, call the `onCommit` completion handler, passing the `reminder` property.
+        
+        Call the `commit` function when the user taps on the _Add_ button. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-08.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-06.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add a new private variable `dismiss` at the top of `AddReminderView`, and use the `@Environment` property wrapper to connect it to the `dismiss` action from the SwiftUI environment.
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-09.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-06.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Call `dismiss()` at the end of the `commit` function, after passing the new reminder to the calling view. This will dismiss the `Add Reminder` dialog after the data has been passed.
+        
+        > Note: This works because the `dismiss` environment value makes use of `callAsFunction`. To learn more about this, check out [How and when to use callAsFunction in Swift 5.2](https://www.donnywals.com/how-and-when-to-use-callasfunction-in-swift-5-2/) or [Callable values of user-defined nominal types – available from Swift 5.2](https://www.hackingwithswift.com/swift/5.2/callasfunction).
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-04-addreminderview-10.swift) {
+          @Image(source: building-todo-ui-reminder-04-addreminderview-06.png, alt: "")
+        }
+      }
+    }
+  }
+  
+  @Section(title: "Present the Add Reminder Dialog") {
+    @ContentAndMedia {
+      Open the dialog from the reminders lit.
+      
+      @Image(source: sectionintros.006, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        Go back to the `ContentView.swift` file, and add a new boolean property `isAddReminderDialogPresented`.  
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-01.swift, previousFile: building-todo-ui-reminder-03-contentview-04.swift)
+      }
+              
+      @Step {
+        Add a helper function for toggling the state of `isAddReminderDialogPresented`
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-02.swift)
+      }
+      
+      @Step {
+        Add a toobar with the _New Reminder_ button. In the `action` of the button, call the helper function you created in the previous step.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-03.swift)
+      }
+      
+      @Step {
+        To be able to see the toolbar, wrap `ContentView` in a `NavigationStack` in the preview provider.
+        
+        > Note: Keep in mind that you own the preview, so you can adjust it to your needs to make it easier to see the view you're working on in the context it will later be used in.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-04.swift) {
+          @Image(source: building-todo-ui-reminder-05-contentview-present-addreminder-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Use the `sheet` view modifier to present the `AddReminderView` dialog. Bind the `isPresented` parameter to the `isAddReminderPresented` property you defined in an earlier step.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-05.swift) {
+          @Image(source: building-todo-ui-reminder-05-contentview-present-addreminder-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Inside the `onCommit` closure of the `AddReminderView` view, take the `reminder` parameter and append the new reminder to the list of reminders.
+        
+        @Code(name: "ContentView.swift", file: building-todo-ui-reminder-05-contentview-present-addreminder-06.swift) {
+          @Image(source: building-todo-ui-reminder-05-contentview-present-addreminder-04.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Use the live preview and try out this new functionality by tapping the _New Reminder_ button to add a new reminder to the list of reminders.
+        
+        @Video(source: building-todo-ui-reminder-05-contentview-present-addreminder-05.mp4)
+      }
+    }
+  }
+  
+  @Section(title: "Brush up the UI") {
+    @ContentAndMedia {
+      To finish this first chapter, refine the UI:
+      
+      * Make sure the `title` input field is active 
+      * Make sure the _Add_ button is only active if the reminder input field is not empty
+      * Add a _Cancel_ button
+      * Add a title to the dialog
+      
+      @Video(source: sectionintros.007.mp4, alt: "")
+    }
+    
+    @Steps {
+      You might have noticed that the input field was not active when the dialog appears. This is inconvenient, especially on larger phones, when the input field might be hard to reach. In the next few steps, you will use SwiftUI's `@FocusState` property wrapper to place the cursor in the first input field when the dialog appears.
+      @Step {
+        Go back to the `AddReminderView.swift` file, and define an enum `FocusableField` whith a single case `title`.  
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-01.swift, previousFile: building-todo-ui-reminder-04-addreminderview-10.swift)
+      }
+      
+      @Step {
+        Add a new private property `focusedField` as an optional `FocusedField` and mark it using the [`@FocusState`](https://developer.apple.com/documentation/swiftui/focusstate) property wrapper.  
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-02.swift)
+      }
+      
+      @Step {
+        Use the `focused` view modifier to bind the focus state `focusedField` to the `TextField`. By using the `.title` enum case in the equality check, you tell SwiftUI to focus this field whenever `focusedField` is equal to `.title`.  
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-03.swift)
+      }
+      
+      @Step {
+        In the final step, add an `onAppear` view modifier to the `Form` and set the `focusedField` property to `.title`.
+        
+        > Note: This makes sure the cursor will be placed inside the _Title_ `TextField` whenever the view appears.
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-04.swift)
+      }
+      
+      In the next step, you will make sure the _Add_ button is only active if the title of the reminder is not empty. This prevents adding empty reminders.
+      
+      @Step {
+        Add a `disabled` view modifier to the _Add_ button and bind it to the the `isEmpty` state of the `title` property of the reminder. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-05.swift) {
+          @Image(source: building-todo-ui-reminder-06-addreminder-brushup-05.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add the `navigationTitle` view modifier to the `Form` to set the dialog title, and set the  `navigationBarTitleDisplayMode` to `.inline`.
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-06.swift) {
+          @Image(source: building-todo-ui-reminder-06-addreminder-brushup-06.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add a private function `cancel`, and call `dismiss()` to dismiss the dialog. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-07.swift) {
+          @Image(source: building-todo-ui-reminder-06-addreminder-brushup-06.png, alt: "")
+        }
+      }
+      
+      @Step {
+        Add a _Cancel_ button to toolbar, and use `.cancellationAction` to place it in the cancellation area of the toolbar. Call the `cancel` function you just created. 
+        
+        @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-08.swift) {
+          @Image(source: building-todo-ui-reminder-06-addreminder-brushup-07.png, alt: "")
+        }
+      }
+    }
+  }
+  
+  @Section(title: "Wrap Up") {
+    @ContentAndMedia {
+      Congratulations!
+      
+      You've implemented a fully functional UI for a todo list application in less than 150 lines of SwiftUI code.
+    }
+    
+    @Steps {
+      @Step {
+        Use the live preview and try out this new functionality by tapping the _New Reminder_ button to add a new reminder to the list of reminders.
+        
+        @Video(source: building-todo-ui-07-finale.mp4)
+      }
+    }
+  }
+  
+}
