@@ -11,7 +11,7 @@
       @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
     
       In this chapter, you will learn how to use SwiftUI to create a simple UI for a todo list application. 
-      @TutorialReference(tutorial: "doc:Building-a-Simple-Todo-List-UI")
+      @TutorialReference(tutorial: "doc:01-Building-a-Simple-Todo-List-UI")
     }
   }
 }
