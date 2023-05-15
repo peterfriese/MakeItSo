@@ -1,5 +1,5 @@
 //
-// MakeItSoApp.swift
+// Reminder.swift
 // MakeItSo
 //
 // Created by Peter Friese on 01.03.23.
@@ -16,16 +16,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import SwiftUI
+import Foundation
 
-@main
-struct MakeItSoApp: App {
-  var body: some Scene {
-    WindowGroup {
-      NavigationStack {
-        RemindersListView()
-          .navigationTitle("Reminders")
-      }
-    }
-  }
+struct Reminder: Identifiable {
+  let id = UUID()
+  var title: String
+  var isCompleted = false
+}
+
+extension Reminder {
+  static let samples = [
+    Reminder(title: "Build sample app", isCompleted: true),
+    Reminder(title: "Create tutorial"),
+    Reminder(title: "???"),
+    Reminder(title: "PROFIT!"),
+  ]
 }
