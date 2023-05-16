@@ -1,4 +1,4 @@
-@Tutorial(time: 15, projectFiles: 03-extract-row-view.zip) {
+@Tutorial(time: 15, projectFiles: 01-extract-row-view.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Extracting the Reminder Row Into a Separate View") {
     @Image(source: building-todo-ui-intro.png, alt: "")
