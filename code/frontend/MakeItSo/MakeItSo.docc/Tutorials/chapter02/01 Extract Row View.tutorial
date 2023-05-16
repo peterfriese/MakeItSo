@@ -1,0 +1,79 @@
+@Tutorial(time: 15, projectFiles: 01-extract-row-view.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Extracting the Reminder Row Into a Separate View") {
+    @Image(source: building-todo-ui-intro.png, alt: "")
+  }
+  
+  @Section(title: "Title") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Comment {
+        # Extract the view
+        * Open RemindersListView
+        * Make sure the preview is visible. Press CMD+Opt+Enter to show it, and CMD+Shift+P to refresh
+        * CMD + Click the HStack, then select Extrac Subview
+        * In Xcode Version 14.3 (14E222b), this doesn't seem to work, so need to rename manually
+        * Rename the new view to RemindersListRowView
+        * Update the call site
+        * reminder is unknown inside RemindersListRowView, so need to add a new property to hold it
+        
+        # Fix the binding
+        * add new property `reminder` and tag as `@Binding`
+          ```swift
+          @Binding
+          var reminder: Reminder
+          ```
+        * Update the call site: `RemindersListRowView(reminder: $reminder)`
+        * Create new SwiftUI file RemindersListRowView
+        * Move RemindersListRowView to this file
+        
+        # Make the preview provider interactive
+        * Update preview provider: `RemindersListRowView(reminder: .constant(Reminder.samples[0]))`
+        * This is nice, but not interactive
+        * Embed the view inside a container
+        ```swift
+        struct RemindersListRowView_Previews: PreviewProvider {
+          struct Container: View {
+            @State var reminder = Reminder.samples[0]
+            var body: some View {
+              RemindersListRowView(reminder: $reminder)
+            }
+          }
+
+          static var previews: some View {
+            Container()
+          }
+        }
+        ```
+        * Show that you have full control over the preview
+        * Embed row in list. Embed container in NavigationStack. Add title
+        ```swift
+        struct RemindersListRowView_Previews: PreviewProvider {
+          struct Container: View {
+            @State var reminder = Reminder.samples[0]
+            var body: some View {
+              List {
+                RemindersListRowView(reminder: $reminder)
+              }
+            }
+          }
+
+          static var previews: some View {
+            NavigationStack {
+              Container()
+                .listStyle(.plain)
+                .navigationTitle("Reminder")
+            }
+          }
+        }
+        ```
+        
+      }
+      @Step {
+        TODO
+      }
+    }
+  }
+}

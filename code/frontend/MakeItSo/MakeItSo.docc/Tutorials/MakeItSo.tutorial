@@ -13,6 +13,7 @@
       In this chapter, you will learn how to use SwiftUI to create a simple UI for a todo list application. 
       @TutorialReference(tutorial: "doc:01-Building-a-Simple-Todo-List-UI")
       @TutorialReference(tutorial: "doc:02-Implementing-MVVM")
+      @TutorialReference(tutorial: "doc:03-Extract-Row-View")
     }
   }
 }
