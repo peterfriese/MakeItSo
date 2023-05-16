@@ -14,7 +14,7 @@ cp -R `find docsData -type d -name "*.doccarchive"` doc_archives
 
 mkdir docs
 
-for ARCHIVE in doc_archives/*.doccarchive; do
+for ARCHIVE in doc_archives/MakeItSo.doccarchive; do
     cmd() {
         echo "$ARCHIVE" | awk -F'.' '{print $1}' | awk -F'/' '{print tolower($2)}'
     }
