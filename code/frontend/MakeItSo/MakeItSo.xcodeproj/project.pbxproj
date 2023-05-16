@@ -14,6 +14,7 @@
 		8842942529AFF792002B16B9 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842942429AFF792002B16B9 /* Reminder.swift */; };
 		8842942729B275B9002B16B9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842942629B275B9002B16B9 /* AddReminderView.swift */; };
 		886FAA722A1278FF004ACF43 /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */; };
+		887D19282A137D500034829D /* RemindersListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887D19272A137D500034829D /* RemindersListRowView.swift */; };
 		88AE85682A12951B0040C93D /* MakeItSo.docc in Sources */ = {isa = PBXBuildFile; fileRef = 88AE85672A12951B0040C93D /* MakeItSo.docc */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		8842942429AFF792002B16B9 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		8842942629B275B9002B16B9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 		886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
+		887D19272A137D500034829D /* RemindersListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListRowView.swift; sourceTree = "<group>"; };
 		88AE85672A12951B0040C93D /* MakeItSo.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MakeItSo.docc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				8842941429AFEEA8002B16B9 /* RemindersListView.swift */,
+				887D19272A137D500034829D /* RemindersListRowView.swift */,
 				8842942629B275B9002B16B9 /* AddReminderView.swift */,
 			);
 			path = Views;
@@ -195,6 +198,7 @@
 				886FAA722A1278FF004ACF43 /* ReminderListViewModel.swift in Sources */,
 				8842942729B275B9002B16B9 /* AddReminderView.swift in Sources */,
 				8842941329AFEEA8002B16B9 /* MakeItSoApp.swift in Sources */,
+				887D19282A137D500034829D /* RemindersListRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
