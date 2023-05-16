@@ -1,0 +1,207 @@
+@Tutorial(time: 25, projectFiles: 01-adding-firebase-to-your-project.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Adding Firebase to Your Project") {
+    _Make It So_ keeps a list of the user's todo items, and stores them in Cloud Firestore. Before the app can store information in the cloud, you need to connect your project to Firebase.
+    
+    In this module, you will create a new Firebase project, and connect it to your local project.
+    
+    Download the starter project and follow along with this tutorial, or open the finished project and explore the code on your own.
+    @Image(source: building-todo-ui-intro.png, alt: "")
+  }
+  
+  @Section(title: "Create a New Firebase Project ") {
+    @ContentAndMedia {
+      A Firebase project is the top-level entity for Firebase. In a project, you can register your Apple, Android, or web apps. After you register your apps with Firebase, you can add the Firebase SDKs for any number of [Firebase products](https://firebase.google.com/products/), like Analytics, Cloud Firestore, Performance Monitoring, or Remote Config.
+      
+      @Image(source: adding-firebase-01-sectionintro.png, alt: "")
+    }
+    
+    @Steps {
+      @Step {
+        Open your browser and point it to [https://console.firebase.google.com](https://console.firebase.google.com) to open the Firebase console.
+        @Image(source: adding-firebase-01-create-a-firebase-project-01.png, alt: "")
+      }
+      @Step {
+        Click on the _+_ button to create a new project.
+        @Image(source: adding-firebase-01-create-a-firebase-project-02.png, alt: "")
+      }
+      @Step {
+        Type in a name for your project, for example _Make It So Tutorial_, then click on _Continue_.
+        
+        > Note: Below the project name, you will see a chip with the project ID. This is a unique ID. If you'd like to change it to a different value, tap the pencil icon.
+        @Image(source: adding-firebase-01-create-a-firebase-project-03.png, alt: "")
+      }
+      @Step {
+        In the next step, you can enable or disable Google Analytics. Leave Google Analytics turned _on_, as you will be using some Firebase features in this tutorial that require Google Analytics. Click on _Continue_.
+        @Image(source: adding-firebase-01-create-a-firebase-project-04.png, alt: "")
+      }
+      @Step {
+        You can now connect your Firebase project to an existing Google Analytics account or create a new one.
+        @Image(source: adding-firebase-01-create-a-firebase-project-05.png, alt: "")
+      }
+      @Step {
+        Click on _Create project_. 
+        @Image(source: adding-firebase-01-create-a-firebase-project-06.png, alt: "")
+      }
+      @Step {
+        Firebase will now provision your project. 
+        @Image(source: adding-firebase-01-create-a-firebase-project-07.png, alt: "")
+      }
+      @Step {
+        After a brief moment, your project is ready. Click on _Continue_ to proceed to the project overview page. 
+        @Image(source: adding-firebase-01-create-a-firebase-project-08.png, alt: "")
+      }
+      @Step {
+        This is the project overview page of your project. On the left hand side, you can see the navigation bar which allows you to navigate to the different Firebase products. 
+        @Image(source: adding-firebase-01-create-a-firebase-project-09.png, alt: "")
+      }
+    }
+  }
+  
+  @Section(title: "Register Your App with Firebase") {
+    @ContentAndMedia {
+      To use Firebase in your iOS app, you need to register your app with your Firebase project. Registering your app is often called "adding" your app to your project.
+    }
+    
+    @Steps {
+      @Step {
+        In the center of the project overview page, click the **iOS+** icon to launch the setup workflow.
+        @Image(source: adding-firebase-02-register-your-app-01.png, alt: "")
+      }
+      @Step {
+        Enter your app's bundle ID in the _bundle ID_ field.
+        
+        > Warning: Make sure to enter the bundle ID that your app is actually using. The bundle ID value is case-sensitive, and it cannot be changed for this Firebase Apple app after it's registered with your Firebase project.
+        @Image(source: adding-firebase-02-register-your-app-02.png, alt: "")
+      }
+      @Step {
+        (Optional) Enter other app information: _App nickname_ and _App Store ID_.
+        
+        > Note: _App nickname_ is an internal, convenience identifier that is only visible to you in the Firebase console. _App Store ID_  is used by Firebase Dynamic Links to [redirect users to your App Store page](https://firebase.google.com/docs/dynamic-links/use-cases) and by Google Analytics to [import conversion events into Google Ads](https://support.google.com/google-ads/answer/6366292). If your app doesn't yet have an App Store ID, you can add the ID later in your [Project settings](https://console.firebase.google.com/project/_/settings/general)
+        @Image(source: adding-firebase-02-register-your-app-03.png, alt: "")
+      }
+      @Step {
+        Click _Register app_
+        @Image(source: adding-firebase-02-register-your-app-04.png, alt: "")
+      }
+    }
+  }
+
+  @Section(title: "Add a Firebase Configuration File") {
+    @ContentAndMedia {
+      Firebase uses a configuration file named `GoogleService-Info.plist` to store information about your project, and use that information to connect your app to the correct Firebase project at startup.
+    }
+    
+    @Steps {
+      @Step {
+        Click _Download GoogleService-Info.plist_ to download the configuration file for your project (`GoogleService-Info.plist`).
+        
+        > Note: The Firebase config file contains unique, but _non-secret_ identifiers for your project. To learn more about this config file, visit [Understand Firebase Projects](https://firebase.google.com/docs/projects/learn-more#config-files-objects).
+        @Image(source: adding-firebase-03-add-config-file-01.png, alt: "")
+      }
+      @Step {
+        Drag your config file into the root of your Xcode project. If prompted, select to add the config file to all targets, making sure to select _Copy if needed_.
+        
+        > Note: If you have multiple bundle IDs in your project, you must associate each bundle ID with a registered app in the Firebase console so that each app can have its own `GoogleService-Info.plist` file.
+        @Image(source: adding-firebase-03-add-config-file-02.png, alt: "")
+        
+        > Warning: Make sure the config file name is not appended with additional characters, like `(2)`.
+      }
+    }
+  }
+
+  @Section(title: "Add Firebase SDKs to Your App") {
+    @ContentAndMedia {
+      Use Swift Package Manager to install and manage Firebase dependencies.
+    }
+    
+    @Steps {
+      @Step {
+        Select the _MakeItSo_ root node (1) in Xcode's _Project Navigator_, then select _MakeItSo_ in the project editor (2). Select the _Package Dependencies_ tab (3). 
+        @Image(source: adding-firebase-04-add-firebase-package-01.png, alt: "")
+      }
+      @Step {
+        Click on the _+_ button to open the _Add package_ dialog 
+        @Image(source: adding-firebase-04-add-firebase-package-02.png, alt: "")
+      }
+      @Step {
+        Paste the package URL for the Firebase package into the search field: `https://github.com/firebase/firebase-ios-sdk`.
+        
+        > Note: This is also the URL of the GitHub repository of the Firebase project.
+        @Image(source: adding-firebase-04-add-firebase-package-03.png, alt: "")
+      }
+      @Step {
+        Make sure to select _Up to Next Major Version_, and then enter `10.9.0` into the _from version_ field.
+        
+        @Image(source: adding-firebase-04-add-firebase-package-04.png, alt: "")
+      }
+      @Step {
+        Xcode will now download Firebase and its dependencies. Once it is finished, select the following _Package Products_: _FirebaseAnalytics_, _FirebaseAnalyticsSwift_, _FirebaseAuth_, _FirebaseFirestore_, _FirebaseFirestoreSwift_.
+        
+        Then, click on _Add Package_.
+        
+        @Image(source: adding-firebase-04-add-firebase-package-04.png, alt: "")
+      }
+    }
+  }
+
+  @Section(title: "Initialize Firebase in Your App") {
+    @ContentAndMedia {
+      The final step is to add initialization code to your application.
+    }
+    
+    @Steps {
+      @Step {
+        In `MakeItSoApp.swift`, import `FirebaseCore`
+        
+        @Code(name: "MakeItSoApp.swift", file: adding-firebase-05-initialise-firebase-01.swift, previousFile: adding-firebase-05-initialise-firebase-00.swift)
+      }
+      
+      @Step {
+        Create a new class named `AppDelegate` in the same file, and conform it to `NSObject` and `UIApplicatioDelegate`.
+        
+        @Code(name: "MakeItSoApp.swift", file: adding-firebase-05-initialise-firebase-02.swift)
+      }
+      
+      @Step {
+        Inside the `AppDelegate`, initialise Firebase.
+        
+        @Code(name: "MakeItSoApp.swift", file: adding-firebase-05-initialise-firebase-03.swift)
+      }
+      
+      @Step {
+        Register the app delegate with the application entry point. 
+        
+        @Code(name: "MakeItSoApp.swift", file: adding-firebase-05-initialise-firebase-04.swift)
+      }
+    }
+  }
+
+  @Section(title: "Launch the App to Verify Setup") {
+    @ContentAndMedia {
+      You can now launch the app to verify you've set up everything correctly.
+    }
+    
+    @Steps {
+      @Step {
+        In Xcode, click on the _Play_ button, or press _CMD+R_ to launch the app on the iOS Simulator.
+        @Image(source: adding-firebase-06-verify-01.png, alt: "")
+      }
+      
+      @Step {
+        If everything went well, you should see output similar to the following in the Xcode debug console.
+        
+        @Code(name: "Debug Console", file: adding-firebase-06-debug-output-01.txt) {
+          @Image(source: adding-firebase-06-verify-03.png, alt: "")
+        }
+      }
+      
+      @Step {
+        You can also go to the [Analytics section in the Firebase console](https://console.firebase.google.com/u/0/project/_/analytics), where you should see at least one user in the last 30 minutes.
+        
+        @Image(source: adding-firebase-06-verify-02.png, alt: "")
+      }
+    }
+  }
+
+}

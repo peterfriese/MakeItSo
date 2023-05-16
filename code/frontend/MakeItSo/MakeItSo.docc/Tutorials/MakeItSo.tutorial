@@ -22,5 +22,13 @@
       @TutorialReference(tutorial: "doc:01-Extract-Row-View")
       @TutorialReference(tutorial: "doc:02-Create-a-Styleable-Toggle")
     }
+    
+    @Chapter(name: "Connecting Your App to Firebase") {
+      @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
+    
+      In this chapter, you will connect your app to Firebase, Google's app development platform.
+      @TutorialReference(tutorial: "doc:01-Adding-Firebase-to-Your-Project")
+    }
+    
   }
 }

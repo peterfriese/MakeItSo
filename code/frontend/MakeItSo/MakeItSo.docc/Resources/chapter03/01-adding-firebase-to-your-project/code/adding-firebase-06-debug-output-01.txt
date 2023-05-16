@@ -1,0 +1,5 @@
+MakeItSo[74483:4336407] 10.9.0 - [FirebaseAnalytics][I-ACS023007] Analytics v.10.9.0 started
+MakeItSo[74483:4336407] 10.9.0 - [FirebaseAnalytics][I-ACS023008] To enable debug logging set the following application argument: -FIRAnalyticsDebugEnabled (see http://goo.gl/RfcP7r)
+MakeItSo[74483:4336407] 10.9.0 - [FirebaseAnalytics][I-ACS800023] No pending snapshot to activate. SDK name: app_measurement
+MakeItSo[74483:4336405] 10.9.0 - [FirebaseAnalytics][I-ACS023012] Analytics collection enabled
+MakeItSo[74483:4336405] 10.9.0 - [FirebaseAnalytics][I-ACS023220] Analytics screen reporting is enabled. Call Analytics.logEvent(AnalyticsEventScreenView, parameters: [...]) to log a screen view event. To disable automatic screen reporting, set the flag FirebaseAutomaticScreenReportingEnabled to NO (boolean) in the Info.plist
