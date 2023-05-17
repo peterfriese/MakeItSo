@@ -1,0 +1,97 @@
+@Tutorial(time: 25, projectFiles: 02-styleable-toggle.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Creating a Styleable Toggle") {
+    @Image(source: building-todo-ui-intro.png, alt: "")
+  }
+  
+  @Section(title: "Title") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Comment {
+        # Create a style
+        * Create a new folder Styles
+        * Create a new SwiftUI file ReminderToggleStyle
+        * Remove the view, and comment the preview provider
+        * Add ReminderToggleStyle and conform it to ToggleStyle
+          ```swift
+          struct ReminderToggleStyle: ToggleStyle {
+            func makeBody(configuration: Configuration) -> some View {
+            }
+          }
+          ```
+        * Add an empty HStack
+        * Add `configuration.label` - we won't use it, but anyway!
+        * Add an Image *before* the label, and use `configuration.isOn` to deterine the icon
+        * make it resizable and set the frame to 24x24
+        * Define two styles for tinting
+          ```swift
+          private let onStyle: AnyShapeStyle = AnyShapeStyle(.tint)
+          private let offStyle: AnyShapeStyle = AnyShapeStyle(.gray)
+          ```
+        * Apply the style based on the state:
+          ```swift
+          .foregroundStyle(configuration.isOn ? onStyle : offStyle)
+          ```
+        * Add an onTapGesture handler
+          ```swift
+          .onTapGesture {
+            configuration.isOn.toggle()
+          }
+          ```
+        * To make it easier to use the style, define an extension
+          ```swift
+          extension ToggleStyle where Self == ReminderToggleStyle {
+            static var reminder: ReminderToggleStyle {
+              ReminderToggleStyle()
+            }
+          }
+          ```
+          
+        # Update the preview provider
+        * Uncomment the provider 
+        * Add a toggle: `Toggle(isOn: .constant(true)) { Text("Hello") }`
+        * Apply the style
+          ```
+          struct ReminderToggleStyle_Previews: PreviewProvider {
+            static var previews: some View {
+              Toggle(isOn: .constant(true)) { Text("Hello") }
+                .toggleStyle(.reminder)
+            }
+          }
+          ```
+        * When you clikc on it, it's not interactive
+        * Use the Container trick you learned in the previous chapter
+          ```
+          struct ReminderToggleStyle_Previews: PreviewProvider {
+            struct Container: View {
+              @State var isOn = false
+              var body: some View {
+                Toggle(isOn: $isOn) { Text("Hello") }
+                  .toggleStyle(.reminder)
+
+              }
+            }
+
+            static var previews: some View {
+              Container()
+            }
+          }
+          ```
+        
+        # Use the new style instead of the Image 
+        * Go to RemindersListRowView
+        * Replace the Image with the following:
+          ```
+          Toggle(isOn: $reminder.isCompleted) { /* no label, on purpose */}
+            .toggleStyle(.reminder)
+            .tint(.red)
+          ```
+      }
+      @Step {
+        TODO
+      }
+    }
+  }
+}

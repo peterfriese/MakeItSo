@@ -7,13 +7,20 @@
   
   @Volume(name: "Creating a Simple Todo List App with SwiftUI and Firebase") {
     Start building apps with SwiftUI, a declarative UI framework, and Firebase, Google's app development platform. You will build _Make It So_, a simple todo list application. 
-    @Chapter(name: "Building the UI") {
+    @Chapter(name: "Building a Simple UI") {
       @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
     
       In this chapter, you will learn how to use SwiftUI to create a simple UI for a todo list application. 
       @TutorialReference(tutorial: "doc:01-Building-a-Simple-Todo-List-UI")
       @TutorialReference(tutorial: "doc:02-Implementing-MVVM")
-      @TutorialReference(tutorial: "doc:03-Extract-Row-View")
+    }
+    
+    @Chapter(name: "Building Reusable UI Components") {
+      @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
+    
+      In this chapter, you will refactor the SwiftUI code you wrote in chapter 1, and make it more reusable. 
+      @TutorialReference(tutorial: "doc:01-Extract-Row-View")
+      @TutorialReference(tutorial: "doc:02-Create-a-Styleable-Toggle")
     }
   }
 }
