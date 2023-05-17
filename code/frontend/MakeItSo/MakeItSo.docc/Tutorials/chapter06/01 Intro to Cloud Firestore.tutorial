@@ -1,0 +1,83 @@
+@Article(time: 5) {
+  @Intro(title: "Intro to Cloud Firestore") {
+    Occaecat ipsum reprehenderit elit culpa. Incididunt enim reprehenderit elit anim duis deserunt aliquip velit irure. Laborum eu Lorem fugiat voluptate esse ipsum non irure commodo. Laboris proident commodo qui. Eiusmod qui consequat non dolore et pariatur aute fugiat amet nulla. Duis culpa irure nisi quis. Laboris pariatur labore sunt magna non in tempor esse incididunt et proident nisi qui deserunt anim.
+    
+    @Image(source: hero-intro-to-cloud-firestore, alt: "")
+  }
+  
+  @ContentAndMedia {
+    @Comment {
+      This element has a sidebart for images - the `@Image` elment will appear in the sidebar.
+    }
+    
+    ## Header
+    
+    Aute aliqua irure mollit enim nulla Lorem aliquip ullamco. Eu dolore elit dolore non culpa duis. Ut sint reprehenderit id sunt irure nostrud do reprehenderit aliqua. Sunt veniam nisi ipsum. Mollit adipisicing officia aliqua est aute commodo qui fugiat sint minim veniam non. Lorem cillum commodo consectetur magna. Elit culpa enim veniam cillum voluptate sit dolor consequat. Cupidatat dolore duis ut incididunt culpa voluptate esse ipsum dolore velit sunt adipisicing reprehenderit culpa dolore.
+    
+    ![](placeholder-image.png)
+        
+    Velit do voluptate sint sunt nostrud eu. Cillum proident ex esse ea pariatur dolor reprehenderit cillum. Magna quis do occaecat non veniam consequat culpa eu voluptate occaecat. Ipsum amet est officia anim dolor laborum. Occaecat dolor officia pariatur nisi enim ut ad veniam commodo anim elit ipsum quis ex eu.
+
+    Dolore ullamco nulla consectetur qui mollit sunt reprehenderit ad commodo est ut mollit. Irure officia velit excepteur proident enim dolore. Consectetur cupidatat quis est ipsum proident nisi velit eu sit cillum anim. Ut qui proident dolor cillum nulla dolore.
+
+    Occaecat nulla exercitation pariatur excepteur excepteur ullamco ea. Pariatur adipisicing proident officia ad ex sint nulla mollit duis pariatur amet nulla. Anim adipisicing ad nisi nisi. Id aute aliquip adipisicing consectetur Lorem esse ad fugiat eu. In aliquip esse ex dolore tempor aliqua aliquip aliqua. Irure dolore commodo proident ut in fugiat sint dolore minim laboris ullamco est pariatur.
+    
+    @Image(source: placeholder-image.png, alt: "")
+  }
+  
+  @Stack {
+    @Comment {
+      If you want a column that spans the entire width of the screen, use a `Stack` to wrap the `ContentAndMedia` element
+    }
+    @ContentAndMedia {
+      ## Header
+      Nulla nisi dolore consequat veniam est est ullamco Lorem. Quis anim aute elit incididunt ipsum commodo anim aute ipsum amet. Ex anim eu excepteur id qui aute incididunt amet aute minim id fugiat sint pariatur reprehenderit. Id est et deserunt laborum non amet proident. Eiusmod ex culpa esse qui aliqua ut ipsum mollit fugiat sit exercitation nostrud proident. Ea esse sit laboris est anim.
+
+      ### Another header
+      Labore tempor est velit consectetur duis aliquip consequat dolor veniam irure. Velit duis laborum in tempor labore occaecat reprehenderit pariatur velit officia eiusmod Lorem commodo. Aliqua proident aute consequat culpa incididunt mollit aliquip do cupidatat ad proident non ullamco. Ullamco in mollit occaecat elit.
+
+      @Image(source: placeholder-image.png, alt: "")
+    }
+  }
+  
+  @ContentAndMedia {
+    ## Header
+    
+    Aute aliqua irure mollit enim nulla Lorem aliquip ullamco. Eu dolore elit dolore non culpa duis. Ut sint reprehenderit id sunt irure nostrud do reprehenderit aliqua. Sunt veniam nisi ipsum. Mollit adipisicing officia aliqua est aute commodo qui fugiat sint minim veniam non. Lorem cillum commodo consectetur magna. Elit culpa enim veniam cillum voluptate sit dolor consequat. Cupidatat dolore duis ut incididunt culpa voluptate esse ipsum dolore velit sunt adipisicing reprehenderit culpa dolore.
+    
+    ![](placeholder-image.png)
+        
+    Velit do voluptate sint sunt nostrud eu. Cillum proident ex esse ea pariatur dolor reprehenderit cillum. Magna quis do occaecat non veniam consequat culpa eu voluptate occaecat. Ipsum amet est officia anim dolor laborum. Occaecat dolor officia pariatur nisi enim ut ad veniam commodo anim elit ipsum quis ex eu.
+
+    Dolore ullamco nulla consectetur qui mollit sunt reprehenderit ad commodo est ut mollit. Irure officia velit excepteur proident enim dolore. Consectetur cupidatat quis est ipsum proident nisi velit eu sit cillum anim. Ut qui proident dolor cillum nulla dolore.
+
+    Occaecat nulla exercitation pariatur excepteur excepteur ullamco ea. Pariatur adipisicing proident officia ad ex sint nulla mollit duis pariatur amet nulla. Anim adipisicing ad nisi nisi. Id aute aliquip adipisicing consectetur Lorem esse ad fugiat eu. In aliquip esse ex dolore tempor aliqua aliquip aliqua. Irure dolore commodo proident ut in fugiat sint dolore minim laboris ullamco est pariatur.
+    
+    @Image(source: placeholder-image.png, alt: "")
+  }
+  
+  @Stack {
+    @Comment {
+      You can use a `Stack` to create multiple columns. Here are two `ContentAndMedia` elements
+    }
+    @ContentAndMedia {
+      ## Header
+      Nulla nisi dolore consequat veniam est est ullamco Lorem. Quis anim aute elit incididunt ipsum commodo anim aute ipsum amet. Ex anim eu excepteur id qui aute incididunt amet aute minim id fugiat sint pariatur reprehenderit. Id est et deserunt laborum non amet proident. Eiusmod ex culpa esse qui aliqua ut ipsum mollit fugiat sit exercitation nostrud proident. Ea esse sit laboris est anim.
+
+      ### Another header
+      Labore tempor est velit consectetur duis aliquip consequat dolor veniam irure. Velit duis laborum in tempor labore occaecat reprehenderit pariatur velit officia eiusmod Lorem commodo. Aliqua proident aute consequat culpa incididunt mollit aliquip do cupidatat ad proident non ullamco. Ullamco in mollit occaecat elit.
+
+      @Image(source: placeholder-image.png, alt: "")
+    }
+    @ContentAndMedia {
+      ## Header
+      Nulla nisi dolore consequat veniam est est ullamco Lorem. Quis anim aute elit incididunt ipsum commodo anim aute ipsum amet. Ex anim eu excepteur id qui aute incididunt amet aute minim id fugiat sint pariatur reprehenderit. Id est et deserunt laborum non amet proident. Eiusmod ex culpa esse qui aliqua ut ipsum mollit fugiat sit exercitation nostrud proident. Ea esse sit laboris est anim.
+
+      ### Another header
+      Labore tempor est velit consectetur duis aliquip consequat dolor veniam irure. Velit duis laborum in tempor labore occaecat reprehenderit pariatur velit officia eiusmod Lorem commodo. Aliqua proident aute consequat culpa incididunt mollit aliquip do cupidatat ad proident non ullamco. Ullamco in mollit occaecat elit.
+
+      @Image(source: placeholder-image.png, alt: "")
+    }
+  }
+
+}

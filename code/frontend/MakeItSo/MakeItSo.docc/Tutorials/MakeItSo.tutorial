@@ -13,5 +13,13 @@
       In this chapter, you will learn how to use SwiftUI to create a simple UI for a todo list application. 
       @TutorialReference(tutorial: "doc:01-Building-a-Simple-Todo-List-UI")
     }
+    
+    @Chapter(name: "Storing Data in the Cloud") {
+      @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
+    
+      In this chapter, you will learn how to store data in the cloud with Cloud Firestore. 
+      @TutorialReference(tutorial: "doc:01-Intro-to-Cloud-Firestore")
+    }
+
   }
 }
