@@ -6,7 +6,7 @@
     In this module, you will create a new Firebase project, and connect it to your local project.
     
     Download the starter project and follow along with this tutorial, or open the finished project and explore the code on your own.
-    @Image(source: building-todo-ui-intro.png, alt: "")
+    @Image(source: hero-adding-firebase-to-your-project.png, alt: "")
   }
   
   @Section(title: "Create a New Firebase Project ") {
