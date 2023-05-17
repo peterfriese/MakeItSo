@@ -1,8 +1,8 @@
 //
-// MakeItSoApp.swift
+// ReminderListViewModel.swift
 // MakeItSo
 //
-// Created by Peter Friese on 01.03.23.
+// Created by Peter Friese on 15.05.23.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,16 +16,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import SwiftUI
+import Foundation
 
-@main
-struct MakeItSoApp: App {
-  var body: some Scene {
-    WindowGroup {
-      NavigationStack {
-        RemindersListView()
-          .navigationTitle("Reminders")
-      }
+class RemindersListViewModel: ObservableObject {
+  @Published
+  var reminders = Reminder.samples
+
+  func addReminder(_ reminder: Reminder) {
+    reminders.append(reminder)
+  }
+
+  func toggleCompleted(_ reminder: Reminder) {
+    if let index = reminders.firstIndex(where: { $0.id == reminder.id} ) {
+      reminders[index].isCompleted.toggle()
     }
   }
 }

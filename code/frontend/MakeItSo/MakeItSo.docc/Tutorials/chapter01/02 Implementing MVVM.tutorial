@@ -1,0 +1,160 @@
+@Tutorial(time: 20, projectFiles: 02-implementing-mvvm.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Implementing Model, View, ViewModel (MVVM)") {
+    With the basic views for displaying and adding todo items set up, it is time to think about the architecture of the app.
+    
+    You will refactor the application to make use of the MVVM (**M**odel, **V**iew, **V**iew **M**odel) pattern.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    
+    @Image(source: building-todo-ui-intro.png, alt: "")
+  }
+  
+  @Section(title: "Organise the Project Files") {
+    @ContentAndMedia {
+      In the first tutorial, you implemented the basic todo list view inside `ContentView.swift`, and created a couple of new files in the root folder of the project. That's fine for a simple project, but as this project will grow in complexity, it is important to keep things nicely organised. 
+      
+      To get started, use the completed project from the previous tutorial. Alternatively, download the project files for this tutorial and use the project in the _starter_ folder.
+      
+      @Comment {
+        Screenshot of neatly organised project folder
+      }
+    }
+    
+    @Steps {
+      In this first step, you will create a number of folders to organise the files in your project. The top level folder will contain sub folders for the individual features of the app. Inside those features, you will create sub folders for organising files according to their architectural role: _Models_, _View Models_, and _Views_.
+      
+      @Step {
+        Select the root folder of your project (named _MakeItSo_), and then create a new folder by selecting _New Group_ in the context menu.
+        
+        Name the folder `Features`.
+        
+        @Image(source: mvvm-01-new-group.png, alt: "")
+      }
+      
+      @Step {
+        Select the `Features` folder, and create a new group named `Reminders` as a child of `Features`.
+        
+        @Image(source: mvvm-01-group-reminders.png, alt: "")
+      }
+      
+      @Step {
+        Inside the `Reminders` folder, create three new groups, naming them `Models`, `ViewModels`, and `Views`.
+        
+        @Image(source: mvvm-01-group-mvvm.png, alt: "")
+      }
+      
+      @Step {
+        The project layout in the _Project Navigator_ should now look like this.
+        
+        @Image(source: mvvm-01-all-groups.png, alt: "")
+      }
+      
+      In the next step, you will move the existing files into the new folders.
+      
+      @Step {
+        Drag and drop `Reminder.swift` into the _Models_ folder.
+        
+        @Image(source: mvvm-02-move-files-reminder.png, alt: "")
+      }
+      
+      @Step {
+        Drag and drop the views `ContentView.swift` and `AddReminderView.swift` into the _Views_ folder.
+        
+        The project structure should now look like this.
+        
+        @Image(source: mvvm-02-move-files.png, alt: "")
+      }
+      
+      So far, you've built the main UI of the app in a file named `ContentView.swift`. However, since this view displays a list of `Reminder`s, it might a better idea to name it `RemindersListView`. In the next step, you will use Xcode's refactoring tools to rename `ContentView` and all its occurrences to `RemindersListView`.      
+
+      @Step {
+        Open `ContentView.swift`, and select the view's name. Open the context menu, and choose _Refactor > Rename_.
+        
+        @Image(source: mvvm-01-refactor-rename.png, alt: "")
+      }
+      
+      @Step {
+        Xcode will find all occurrences of `ContentView` and show them in the _refactoring editor_. Type in the new name for the view, `RemindersListView`.
+        
+        > Tip: If you receive an error message saying that refactoring failed, try building the project first (⌘ + B), and resolve any compilation errors. Then try running the refactoring again.
+        
+        @Image(source: mvvm-01-refactor-rename-reminderslistview.png, alt: "")
+      }
+    }
+  }
+      
+  @Section(title: "Create a View Model and connect it to the RemindersListView") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Step {
+        Select the `ViewModels` folder, and create a Swift file named `RemindersListViewModel` as a child of `ViewModels`.
+        @Image(source: mvvm-01-new-file.png, alt: "")
+      }
+      
+      @Step {
+        Create a class named `RemindersListViewModel`, and conform it to the `ObservableObject` protocol.
+        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-02-reminderslistviewmodel-01.swift)
+      }
+      
+      @Step {
+        Add a new property `reminders`, and assign some sample values from `Reminder.samples`.
+        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-02-reminderslistviewmodel-02.swift)
+      }
+      
+      @Step {
+        Add the `@Published` property wrapper to mark this property as published. 
+        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-02-reminderslistviewmodel-03.swift)
+      }
+      
+      @Step {
+        Add a new property `viewModel` to `RemindersListView`, and instantiate `RemindersListViewModel`. Mark the property as `@StateObject`.
+        
+        > Note: SwiftUI will manage the lifecycle of any properties marked as `@StateObject`, and ensure that they are instantiated only once. This is important, as SwiftUI will create new instances of any view whenever any of the properties it observes change.  
+        @Code(name: "RemindersListView.swift", file: implementing-mvvm-02-reminderslistview-01.swift, previousFile: implementing-mvvm-02-reminderslistview-00.swift)
+      }
+      
+      @Step {
+        Uncomment (or remove) the `reminders` property and its `@State` property wrapper. Then, replace all accesses to `reminders` in `RemindersListView` with an access to the `reminders` property on `viewModel`.
+        @Code(name: "RemindersListView.swift", file: implementing-mvvm-02-reminderslistview-02.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Add a method to the View Model for adding new reminders") {
+    @ContentAndMedia {
+      One of the purposes of view models is to encapsulate any code that manipulates the model. So far, you are only using the view model to access the list of `Reminder`s via the `reminders` property. For addings new reminders, you directly access the `reminders` property. This works, but violates encapsulation. In the next step, you will introduce a method for addings new `Reminder`s to the model.
+    }
+    
+    @Steps {
+      @Step {
+        Add a new method `addReminder` to `RemindersListViewModel`. Calling this method will add the passed `Reminder` to the `reminders` array.
+        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-03-reminderslistviewmodel-01.swift, previousFile: implementing-mvvm-03-reminderslistviewmodel-00.swift)
+      }
+      @Step {
+        In `RemindersListView`, replace the call to `viewModel.reminders.append(reminder)` with a call to `viewModel.addReminder(_ reminder:)`
+        @Code(name: "RemindersListView.swift", file: implementing-mvvm-03-reminderslist-01.swift, previousFile: implementing-mvvm-03-reminderslist-00.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Add a method to the View Model for toggling the completion state of a reminder") {
+    @ContentAndMedia {
+      In the next step, you will introduce a method for toggling the completion state of a reminder.
+    }
+    
+    @Steps {
+      @Step {
+        Add a new method `toggleCompleted` to `RemindersListViewModel`. Calling this method will toggle the `isCompleted` state of the reminder.
+        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-03-reminderslistviewmodel-01.swift, previousFile: implementing-mvvm-04-reminderslistviewmodel-00.swift)
+      }
+      @Step {
+        In `RemindersListView`, replace the call to `reminder.isCompleted.toggle()` with a call to `viewModel.toggleCompleted(_ reminder:)`
+        @Code(name: "RemindersListView.swift", file: implementing-mvvm-04-reminderslist-01.swift, previousFile: implementing-mvvm-04-reminderslist-00.swift)
+      }
+    }
+  }
+    
+}
