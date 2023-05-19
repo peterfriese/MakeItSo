@@ -1,0 +1,177 @@
+@Tutorial(time: 25, projectFiles: 02-developing-locally-with-the-emulator-suite.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Developing locally with the Emulator Suite") {
+    The [Firebase Local Emulator Suite](https://firebase.google.com/docs/emulator-suite) is a set of advanced tools for developers looking to build and test apps locally using Cloud Firestore, Realtime Database, Cloud Storage for Firebase, Authentication, Firebase Hosting, Cloud Functions (beta), Pub/Sub (beta), and Firebase Extensions (beta). It provides a rich user interface to help you get running and prototyping quickly.
+    
+    Local development with Local Emulator Suite can be a good fit for your evaluation, prototyping, development and continuous integration workflows.
+    @Image(source: hero-adding-firebase-to-your-project.png, alt: "")
+  }
+  
+  @Section(title: "Install the Firebase CLI") {
+    @ContentAndMedia {
+      The Firebase Local Emulator Suite can be installed and configured for different prototype and test environments, anything from one-off prototyping sessions to production-scale continuous integration workflows. In this section, you will install the Local Emulator Suite on your local development machine.
+    }
+    
+    @Steps {
+      > Note: Before installing the Emulator Suite you will need: 
+      > * [Node.js](https://nodejs.org/en) version 8.0 or higher. 
+      > * [Java JDK](https://openjdk.org/install/) version 11 or higher.
+      
+      @Step {
+        Install the Firebase CLI.
+        
+        > Note: This might take a couple of minutes, so be patient.
+        
+        @Code(name: "Shell", file: developing-locally-01-install-firebase-cli-01.sh, previousFile: developing-locally-01-install-firebase-cli-00.sh) {
+          @Image(source: developing-locally-01-install-firebase-cli.png, alt: "")
+        }
+      }
+      @Step {
+        Login to Firebase
+        
+        @Code(name: "Shell", file: developing-locally-01-login-01.sh, previousFile: developing-locally-01-login-00.sh)
+      }
+      @Step {
+        The Firebase CLI will open a browser window. Follow the steps in the browser to log in and authorize the CLI.
+        @Image(source: developing-locally-01-login-01.png, alt: "")
+      }
+      @Step {
+        Once you complete the sign-in flow, you should see a message saying `Success! Logged in as <your-email-address>`.open .
+        @Image(source: developing-locally-01-login-04.png, alt: "")
+      }
+    }
+  }
+  
+  @Section(title: "Connect to your Firebase project and enable the Emulator Suite") {
+    @ContentAndMedia {
+      In this step, you will associate the Firebase Emulator with the Firebase project you created in an earlier step of this tutorial.
+    }
+    
+    @Steps {
+      @Step {
+        Create a new folder for your Firebase project. In a later part of this tutorial, you will use this folder to write some backend functionality.
+        
+        @Code(name: "Shell", file: developing-locally-02-mkdir-01.sh, previousFile: developing-locally-02-mkdir-00.sh)
+      }
+      @Step {
+        Navigate into the new folder.
+        
+        @Code(name: "Shell", file: developing-locally-02-mkdir-02.sh)
+      }
+      @Step {
+        Run `firebase init` to connect to the Firebase project you created in an earlier step in this tutorial.
+        
+        @Code(name: "Shell", file: developing-locally-02-init-01.sh)
+      }
+      @Step {
+        You will see the Firebase initialisation screen.
+        
+        @Image(source: developing-locally-02-init-01.png, alt: "")
+      }
+      @Step {
+        Using the _up_ and _down_ arrows, navigate to the entry _Emulators: Set up local emulators for Firebase products_ and select it using the _Space_ bar. Then, press _Enter_ to continue.
+        
+        @Image(source: developing-locally-02-init-02.png, alt: "")
+      }
+      @Step {
+        In the next screen, press _Enter_ to choose the selected option _Use an existing project_.
+        
+        @Image(source: developing-locally-02-init-03.png, alt: "")
+      }
+      @Step {
+        Use the arrow keys to scroll through the list of projects, and press _Enter_ to select the one you created in a previous step of this tutorial.
+        
+        @Image(source: developing-locally-02-init-04.png, alt: "")
+      }
+      @Step {
+        In the next step, use the arrow keys and the _Enter_ key to select the _Authentication Emulator_ and the _ Firestore Emulator_. Then, press _Enter_ to proceed to the next step.
+        
+        @Image(source: developing-locally-02-init-05.png, alt: "")
+      }
+      @Step {
+        Confirm all the defaults for the ports, and agree to enabling the Emulator UI and downloading the Emulators.
+        
+        Downloading the Emulator runtime takes a short moment, after which you should see a message saying _Firebase initialization complete!_
+        
+        @Image(source: developing-locally-02-init-06.png, alt: "")
+      }
+    }
+  }
+  
+  @Section(title: "Launch the Emulator and view the Emulator dashboard") {
+    @ContentAndMedia {
+      Once set up, you can launch the Local Emulator Suite and open the Emulator dashboard in your browser.
+    }
+    
+    @Steps {
+      @Step {
+        Launch the Firebase Emulator Suite.
+        
+        @Code(name: "Shell", file: developing-locally-03-launch-01.sh, previousFile: developing-locally-03-launch-00.sh)
+      }
+      @Step {
+        After a short momemnt, you should see a message saying _All emulators ready! It is now safe to connect your app._, and an overview of the ports the individual emulators are running on.
+        
+        @Image(source: developing-locally-03-launch-01.png, alt: "")
+      }
+      @Step {
+        _CMD+Click_ on the URL of the Emulator UI (usually [http://127.0.0.1:4000/](http://127.0.0.1:4000/)) to open your browser to the Emulator UI.
+        
+        @Image(source: developing-locally-03-launch-02.png, alt: "")
+      }
+    }
+  }
+  
+  @Section(title: "Connect your app to the Emulator Suite") {
+    @ContentAndMedia {
+      To use the Local Emulator Suite instead of your online Firebase project in your app, you need to configure the Firebase SDK to interact with the Emulator.
+    }
+    
+    @Steps {
+      @Step {
+        In `MakeItSoApp.swift`, import `FirebaseFirestore` and add the following lines to connect your app to the Firestore Emulator.
+        
+        @Code(name: "MakeItSoApp.swift", file: developing-locally-04-MakeItSoApp-01.swift, previousFile: developing-locally-04-MakeItSoApp-00.swift)
+      }
+      @Step {
+        Import `FirebaseAuth` and add the following lines to connect your app to the Authentication Emulator.
+        
+        @Code(name: "MakeItSoApp.swift", file: developing-locally-04-MakeItSoApp-02.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Use launch arguments to switch between the Emulator and your Firebase project") {
+    @ContentAndMedia {
+      For most of the time during development, you will want your app to interact with the Local Emulator Suite to benefit from fast turn-around times. But once you've finished development, you will want to test your app against the online Firebase project. In this step, you will add a launch argument to your app's launch configuration in Xcode to make it easier to switch between those two environments.
+    }
+    
+    @Steps {
+      @Step {
+        In Xcode, click on the project name in the status bar, then select _Edit Scheme..._ to open the _Scheme_ dialog for your project.
+        
+        @Image(source: developing-locally-05-edit-scheme-01.png, alt: "")
+      }
+      @Step {
+        Navigate to the _Arguments_ tab, then click on the _+_ button to create a new launch argument. 
+        
+        @Image(source: developing-locally-05-edit-scheme-02.png, alt: "")
+      }
+      @Step {
+        Type `-useEmulator YES` into the field, then press the _Enter_ key to commit your changes. Click on the _Close_ button.
+        
+        @Image(source: developing-locally-05-edit-scheme-03.png, alt: "")
+      }
+      @Step {
+        To read the launch argument, and enable or disable using the Emulator accordingly, use the `UserDefaults` API.
+        
+        @Code(name: "MakeItSoApp.swift", file: developing-locally-05-MakeItSoApp-01.swift, previousFile: developing-locally-05-MakeItSoApp-00.swift)
+      }
+      @Step {
+        You can now switch between using the Emulator Suite and using your Firebase project by toggling the ckeck box in the launch configuration.
+        
+        @Image(source: developing-locally-05-edit-scheme-04.png, alt: "")
+      }
+    }
+  }
+}
