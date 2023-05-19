@@ -1,82 +1,45 @@
 @Article(time: 5) {
-  @Intro(title: "Intro to Cloud Firestore") {
-    Occaecat ipsum reprehenderit elit culpa. Incididunt enim reprehenderit elit anim duis deserunt aliquip velit irure. Laborum eu Lorem fugiat voluptate esse ipsum non irure commodo. Laboris proident commodo qui. Eiusmod qui consequat non dolore et pariatur aute fugiat amet nulla. Duis culpa irure nisi quis. Laboris pariatur labore sunt magna non in tempor esse incididunt et proident nisi qui deserunt anim.
+  @Intro(title: "Cloud Firestore") {
+    Cloud Firestore is Firebase's NoSQL cloud database for mobile, web, and server development.
     
     @Image(source: hero-intro-to-cloud-firestore, alt: "")
   }
   
   @ContentAndMedia {
-    @Comment {
-      This element has a sidebart for images - the `@Image` elment will appear in the sidebar.
-    }
+    ## A flexible and scalable database
     
-    ## Header
+    In Cloud Firestore you can store data in flexible and hierarchical structures. Instead of using tables and columns as you would do in a SQL database, all data is stored in collections and documents, which have a very JSON-like structure, as you can see in the image on the side: each document contains fields mapping to values.
     
-    Aute aliqua irure mollit enim nulla Lorem aliquip ullamco. Eu dolore elit dolore non culpa duis. Ut sint reprehenderit id sunt irure nostrud do reprehenderit aliqua. Sunt veniam nisi ipsum. Mollit adipisicing officia aliqua est aute commodo qui fugiat sint minim veniam non. Lorem cillum commodo consectetur magna. Elit culpa enim veniam cillum voluptate sit dolor consequat. Cupidatat dolore duis ut incididunt culpa voluptate esse ipsum dolore velit sunt adipisicing reprehenderit culpa dolore.
-    
-    ![](placeholder-image.png)
-        
-    Velit do voluptate sint sunt nostrud eu. Cillum proident ex esse ea pariatur dolor reprehenderit cillum. Magna quis do occaecat non veniam consequat culpa eu voluptate occaecat. Ipsum amet est officia anim dolor laborum. Occaecat dolor officia pariatur nisi enim ut ad veniam commodo anim elit ipsum quis ex eu.
-
-    Dolore ullamco nulla consectetur qui mollit sunt reprehenderit ad commodo est ut mollit. Irure officia velit excepteur proident enim dolore. Consectetur cupidatat quis est ipsum proident nisi velit eu sit cillum anim. Ut qui proident dolor cillum nulla dolore.
-
-    Occaecat nulla exercitation pariatur excepteur excepteur ullamco ea. Pariatur adipisicing proident officia ad ex sint nulla mollit duis pariatur amet nulla. Anim adipisicing ad nisi nisi. Id aute aliquip adipisicing consectetur Lorem esse ad fugiat eu. In aliquip esse ex dolore tempor aliqua aliquip aliqua. Irure dolore commodo proident ut in fugiat sint dolore minim laboris ullamco est pariatur.
-    
-    @Image(source: placeholder-image.png, alt: "")
+    @Image(source: firestore-document-structure.png, alt: "")
   }
   
   @Stack {
-    @Comment {
-      If you want a column that spans the entire width of the screen, use a `Stack` to wrap the `ContentAndMedia` element
-    }
     @ContentAndMedia {
-      ## Header
-      Nulla nisi dolore consequat veniam est est ullamco Lorem. Quis anim aute elit incididunt ipsum commodo anim aute ipsum amet. Ex anim eu excepteur id qui aute incididunt amet aute minim id fugiat sint pariatur reprehenderit. Id est et deserunt laborum non amet proident. Eiusmod ex culpa esse qui aliqua ut ipsum mollit fugiat sit exercitation nostrud proident. Ea esse sit laboris est anim.
-
-      ### Another header
-      Labore tempor est velit consectetur duis aliquip consequat dolor veniam irure. Velit duis laborum in tempor labore occaecat reprehenderit pariatur velit officia eiusmod Lorem commodo. Aliqua proident aute consequat culpa incididunt mollit aliquip do cupidatat ad proident non ullamco. Ullamco in mollit occaecat elit.
-
-      @Image(source: placeholder-image.png, alt: "")
+      Fields can be of the most variable types: strings, numbers, arrays, binary values and even references to other documents. This allows you to choose the data structure that works best for your application. Each document you create is stored in a collection, and it can have references to other subcollections that contain other documents (which can also point to subcollections, and so on). It means that documents do not contain other documents directly, so all the queries that you perform are shallow: when you retrieve one document, you only retrieve that specific document, not all the subcollections underneath.
+          
+      ![](firestore-collection-structure.png)
     }
-  }
-  
-  @ContentAndMedia {
-    ## Header
-    
-    Aute aliqua irure mollit enim nulla Lorem aliquip ullamco. Eu dolore elit dolore non culpa duis. Ut sint reprehenderit id sunt irure nostrud do reprehenderit aliqua. Sunt veniam nisi ipsum. Mollit adipisicing officia aliqua est aute commodo qui fugiat sint minim veniam non. Lorem cillum commodo consectetur magna. Elit culpa enim veniam cillum voluptate sit dolor consequat. Cupidatat dolore duis ut incididunt culpa voluptate esse ipsum dolore velit sunt adipisicing reprehenderit culpa dolore.
-    
-    ![](placeholder-image.png)
-        
-    Velit do voluptate sint sunt nostrud eu. Cillum proident ex esse ea pariatur dolor reprehenderit cillum. Magna quis do occaecat non veniam consequat culpa eu voluptate occaecat. Ipsum amet est officia anim dolor laborum. Occaecat dolor officia pariatur nisi enim ut ad veniam commodo anim elit ipsum quis ex eu.
-
-    Dolore ullamco nulla consectetur qui mollit sunt reprehenderit ad commodo est ut mollit. Irure officia velit excepteur proident enim dolore. Consectetur cupidatat quis est ipsum proident nisi velit eu sit cillum anim. Ut qui proident dolor cillum nulla dolore.
-
-    Occaecat nulla exercitation pariatur excepteur excepteur ullamco ea. Pariatur adipisicing proident officia ad ex sint nulla mollit duis pariatur amet nulla. Anim adipisicing ad nisi nisi. Id aute aliquip adipisicing consectetur Lorem esse ad fugiat eu. In aliquip esse ex dolore tempor aliqua aliquip aliqua. Irure dolore commodo proident ut in fugiat sint dolore minim laboris ullamco est pariatur.
-    
-    @Image(source: placeholder-image.png, alt: "")
   }
   
   @Stack {
-    @Comment {
-      You can use a `Stack` to create multiple columns. Here are two `ContentAndMedia` elements
+    @ContentAndMedia {
+      ## Querying in Cloud Firestore
+      To retrieve data from Cloud Firestore you can either fetch individual documents, or query a collection for multiple documents that match a certain criteria, according to the parameters you provide in the query. These queries are also indexed by default, so the performance is proportional to the size of your result set (not your entire data set), making querying in Cloud Firestore efficient and flexible. Additionally, you can add sorting and limits to your queries and cursors to paginate your results.
+    }
+  }
+  
+  @Stack {
+    @ContentAndMedia {
+      ## Real-time sync
+      Keeping data in your apps up to date is very important. To help you with that, Cloud Firestore offers data synchronization to update data across different platforms and devices, all you have to do is add real-time listeners to your app. You can listen to changes in a document by adding the onSnapshot() method to it. The first call to this method will create a document snapshot with the current contents of the single document, then another call will update this document snapshot each time the content changes.
+
+      @Image(source: firestore-realtime-sync.gif, alt: "")
     }
     @ContentAndMedia {
-      ## Header
-      Nulla nisi dolore consequat veniam est est ullamco Lorem. Quis anim aute elit incididunt ipsum commodo anim aute ipsum amet. Ex anim eu excepteur id qui aute incididunt amet aute minim id fugiat sint pariatur reprehenderit. Id est et deserunt laborum non amet proident. Eiusmod ex culpa esse qui aliqua ut ipsum mollit fugiat sit exercitation nostrud proident. Ea esse sit laboris est anim.
+      ## Offline support
+      With Cloud Firestore your app can write, read and listen to data even if the device is offline, which can happen if your users are in a spot with bad or no reception (for example, inside an airplane). Firestore caches a copy of the data that your app is actively using so you can have access to it offline, and then it synchronizes all local changes back to Cloud Firestore when the device comes back online. You don't have to make any changes to the code, or configure anything on the Firebase console to be able to use offline persistence, as Cloud Firestore offers this feature out of the box.
 
-      ### Another header
-      Labore tempor est velit consectetur duis aliquip consequat dolor veniam irure. Velit duis laborum in tempor labore occaecat reprehenderit pariatur velit officia eiusmod Lorem commodo. Aliqua proident aute consequat culpa incididunt mollit aliquip do cupidatat ad proident non ullamco. Ullamco in mollit occaecat elit.
-
-      @Image(source: placeholder-image.png, alt: "")
-    }
-    @ContentAndMedia {
-      ## Header
-      Nulla nisi dolore consequat veniam est est ullamco Lorem. Quis anim aute elit incididunt ipsum commodo anim aute ipsum amet. Ex anim eu excepteur id qui aute incididunt amet aute minim id fugiat sint pariatur reprehenderit. Id est et deserunt laborum non amet proident. Eiusmod ex culpa esse qui aliqua ut ipsum mollit fugiat sit exercitation nostrud proident. Ea esse sit laboris est anim.
-
-      ### Another header
-      Labore tempor est velit consectetur duis aliquip consequat dolor veniam irure. Velit duis laborum in tempor labore occaecat reprehenderit pariatur velit officia eiusmod Lorem commodo. Aliqua proident aute consequat culpa incididunt mollit aliquip do cupidatat ad proident non ullamco. Ullamco in mollit occaecat elit.
-
-      @Image(source: placeholder-image.png, alt: "")
+      @Image(source: firestore-offline-support.png, alt: "")
     }
   }
 
