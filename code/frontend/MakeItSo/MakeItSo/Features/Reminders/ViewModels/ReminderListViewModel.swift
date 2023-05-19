@@ -17,13 +17,29 @@
 // limitations under the License.
 
 import Foundation
+import Factory
+import FirebaseAuth
 
 class RemindersListViewModel: ObservableObject {
+  // MARK: - Dependencies
+  @Injected(\.remindersRepository)
+  private var remindersRepository: RemindersRepository
+
+  // MARK: - Publishers
   @Published
-  var reminders = Reminder.samples
+  var reminders: [Reminder] = []
+
+  init() {
+    remindersRepository.$reminders
+          .assign(to: &$reminders)
+  }
 
   func addReminder(_ reminder: Reminder) {
-    reminders.append(reminder)
+    remindersRepository.addReminder(reminder)
+  }
+
+  func updateReminder(_ reminder: Reminder) {
+    remindersRepository.updateReminder(reminder)
   }
 
   func toggleCompleted(_ reminder: Reminder) {

@@ -1,8 +1,8 @@
 //
-// Reminder.swift
+// Logging.swift
 // MakeItSo
 //
-// Created by Peter Friese on 01.03.23.
+// Created by Peter Friese on 19.05.23.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,23 +17,11 @@
 // limitations under the License.
 
 import Foundation
-import FirebaseFirestoreSwift
+import Factory
+import os
 
-struct Reminder: Identifiable, Equatable, Hashable, Codable {
-  @DocumentID
-  var id: String?
-  var title: String
-  var isCompleted = false
-
-  var userId: String? = nil
-}
-
-
-extension Reminder {
-  static let samples = [
-    Reminder(title: "Build sample app", isCompleted: true),
-    Reminder(title: "Create tutorial"),
-    Reminder(title: "???"),
-    Reminder(title: "PROFIT!"),
-  ]
+extension Container {
+  var logger: ParameterFactory<String, Logger> {
+    self { Logger(subsystem: "com.firebase.example.MakeItSo", category: $0) }
+  }
 }
