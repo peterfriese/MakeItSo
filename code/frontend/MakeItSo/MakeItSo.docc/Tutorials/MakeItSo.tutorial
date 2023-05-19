@@ -28,6 +28,7 @@
     
       In this chapter, you will connect your app to Firebase, Google's app development platform.
       @TutorialReference(tutorial: "doc:01-Adding-Firebase-to-Your-Project")
+      @TutorialReference(tutorial: "doc:02-Developing-Locally-with-the-Emulator-Suite")
     }
     
   }

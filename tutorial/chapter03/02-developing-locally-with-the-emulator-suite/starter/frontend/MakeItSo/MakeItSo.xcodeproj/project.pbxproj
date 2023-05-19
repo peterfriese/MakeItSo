@@ -22,7 +22,6 @@
 		886FAA722A1278FF004ACF43 /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */; };
 		887D19282A137D500034829D /* RemindersListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887D19272A137D500034829D /* RemindersListRowView.swift */; };
 		88AE77122A138B0B00C51000 /* ReminderToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */; };
-		88AE85682A12951B0040C93D /* MakeItSo.docc in Sources */ = {isa = PBXBuildFile; fileRef = 88AE85672A12951B0040C93D /* MakeItSo.docc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +36,6 @@
 		886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
 		887D19272A137D500034829D /* RemindersListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListRowView.swift; sourceTree = "<group>"; };
 		88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderToggleStyle.swift; sourceTree = "<group>"; };
-		88AE85672A12951B0040C93D /* MakeItSo.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MakeItSo.docc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +57,6 @@
 		8842940629AFEEA8002B16B9 = {
 			isa = PBXGroup;
 			children = (
-				88AE85672A12951B0040C93D /* MakeItSo.docc */,
 				8842941129AFEEA8002B16B9 /* MakeItSo */,
 				8842941029AFEEA8002B16B9 /* Products */,
 			);
@@ -249,7 +246,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8842942529AFF792002B16B9 /* Reminder.swift in Sources */,
-				88AE85682A12951B0040C93D /* MakeItSo.docc in Sources */,
 				8842941529AFEEA8002B16B9 /* RemindersListView.swift in Sources */,
 				886FAA722A1278FF004ACF43 /* ReminderListViewModel.swift in Sources */,
 				8842942729B275B9002B16B9 /* AddReminderView.swift in Sources */,
