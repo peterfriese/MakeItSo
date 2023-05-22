@@ -25,6 +25,7 @@ struct Reminder: Identifiable, Equatable, Hashable, Codable {
 
   var title: String
   var isCompleted = false
+  var isFlagged = false
 
   @ServerTimestamp
   var dateAdded: Date?

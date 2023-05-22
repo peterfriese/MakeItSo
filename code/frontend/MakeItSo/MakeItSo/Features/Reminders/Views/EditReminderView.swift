@@ -46,11 +46,26 @@ struct EditReminderView: View {
   var body: some View {
     NavigationStack {
       Form {
-        TextField("Title", text: $reminder.title)
-          .focused($focusedField, equals: .title)
-          .onSubmit {
-            commit()
+        Section {
+          TextField("Title", text: $reminder.title)
+            .focused($focusedField, equals: .title)
+            .onSubmit {
+              commit()
+            }
+        }
+
+        Section {
+          Toggle(isOn: $reminder.isFlagged) {
+            HStack {
+              Image(systemName: "flag.fill")
+                .frame(width: 26, height: 26, alignment: .center)
+                .background(.orange)
+                .foregroundColor(.white)
+                .cornerRadius(4)
+              Text("Flag")
+            }
           }
+        }
       }
       .navigationTitle("Details")
       .navigationBarTitleDisplayMode(.inline)

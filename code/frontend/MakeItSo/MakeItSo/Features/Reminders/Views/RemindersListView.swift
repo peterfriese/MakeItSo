@@ -47,6 +47,11 @@ struct RemindersListView: View {
             Image(systemName: "trash")
           }
           .tint(Color(UIColor.systemRed))
+
+          Button(action: { viewModel.toggleFlag(reminder) }) {
+            Image(systemName: "flag")
+          }
+          .tint(Color(UIColor.systemOrange))
         }
         .onTapGesture {
           editableReminder = reminder

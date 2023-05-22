@@ -23,11 +23,15 @@ struct RemindersListRowView: View {
   var reminder: Reminder
 
   var body: some View {
-    HStack {
+    HStack(alignment: .top) {
       Toggle(isOn: $reminder.isCompleted) { /* no label, on purpose */}
         .toggleStyle(.reminder)
       Text(reminder.title)
       Spacer()
+      if reminder.isFlagged {
+        Image(systemName: "flag.fill")
+          .foregroundColor(Color(UIColor.systemOrange))
+      }
     }
     .contentShape(Rectangle())
   }
