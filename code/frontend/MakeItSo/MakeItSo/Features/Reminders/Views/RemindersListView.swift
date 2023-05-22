@@ -23,6 +23,9 @@ struct RemindersListView: View {
   private var viewModel = RemindersListViewModel()
 
   @State
+  private var editableReminder: Reminder? = nil
+
+  @State
   private var isAddReminderDialogPresented = false
 
   private func presentAddReminderView() {
@@ -39,6 +42,9 @@ struct RemindersListView: View {
   var body: some View {
     List($viewModel.reminders) { $reminder in
       RemindersListRowView(reminder: $reminder)
+        .onTapGesture {
+          editableReminder = reminder
+        }
         .onChange(of: reminder) { newValue in
           viewModel.updateReminder(reminder)
         }
@@ -58,6 +64,11 @@ struct RemindersListView: View {
           }
         }
         Spacer()
+      }
+    }
+    .sheet(item: $editableReminder) { reminder in
+      EditReminderView(reminder: reminder) { reminder in
+        viewModel.updateReminder(reminder)
       }
     }
     .sheet(isPresented: $isAddReminderDialogPresented) {
