@@ -24,34 +24,34 @@ class RemindersListViewModel: ObservableObject {
   // MARK: - Dependencies
   @Injected(\.remindersRepository)
   private var remindersRepository: RemindersRepository
-
+  
   // MARK: - Publishers
   @Published
   var reminders: [Reminder] = []
-
+  
   init() {
     remindersRepository.$reminders
-          .assign(to: &$reminders)
+      .assign(to: &$reminders)
   }
-
+  
   func addReminder(_ reminder: Reminder) {
     remindersRepository.addReminder(reminder)
   }
-
+  
   func updateReminder(_ reminder: Reminder) {
     remindersRepository.updateReminder(reminder)
   }
-
+  
   func deleteReminder(_ reminder: Reminder) {
     remindersRepository.removeReminder(reminder)
   }
-
+  
   func toggleFlag(_ reminder: Reminder) {
     var editedReminder = reminder
     editedReminder.isFlagged.toggle()
     remindersRepository.updateReminder(editedReminder)
   }
-
+  
   func toggleCompleted(_ reminder: Reminder) {
     if let index = reminders.firstIndex(where: { $0.id == reminder.id} ) {
       reminders[index].isCompleted.toggle()
