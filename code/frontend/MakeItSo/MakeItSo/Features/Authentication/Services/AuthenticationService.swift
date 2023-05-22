@@ -60,7 +60,7 @@ public class AuthenticationService {
       signInAnonymously()
     }
     catch {
-      print(error)
+      logger.error("Error while trying to sign out: \(error.localizedDescription)")
       errorMessage = error.localizedDescription
     }
   }
@@ -164,6 +164,7 @@ enum AuthenticationError: Error {
 }
 
 extension AuthenticationService {
+  @MainActor
   func signInWithGoogle() async -> Bool {
     guard let clientID = FirebaseApp.app()?.options.clientID else {
       fatalError("No client ID found in Firebase configuration")
@@ -171,9 +172,9 @@ extension AuthenticationService {
     let config = GIDConfiguration(clientID: clientID)
     GIDSignIn.sharedInstance.configuration = config
     
-    guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let window = await windowScene.windows.first,
-          let rootViewController = await window.rootViewController else {
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+          let window = windowScene.windows.first,
+          let rootViewController = window.rootViewController else {
       logger.debug("There is no root view controller!")
       return false
     }
@@ -194,7 +195,7 @@ extension AuthenticationService {
       return true
     }
     catch {
-      print(error.localizedDescription)
+      logger.error("Errir while trying to sign in with Google: \(error.localizedDescription)")
       self.errorMessage = error.localizedDescription
       return false
     }

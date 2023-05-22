@@ -83,8 +83,9 @@ public class RemindersRepository: ObservableObject {
             self?.reminders = documents.compactMap { queryDocumentSnapshot in
               do {
                 return try queryDocumentSnapshot.data(as: Reminder.self)
-              } catch {
-                print(error)
+              }
+              catch {
+                self?.logger.debug("Error while trying to map document \(queryDocumentSnapshot.documentID): \(error.localizedDescription)")
                 return nil
               }
             }
