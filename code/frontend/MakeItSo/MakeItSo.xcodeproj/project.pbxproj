@@ -37,6 +37,7 @@
 		8842942729B275B9002B16B9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842942629B275B9002B16B9 /* AddReminderView.swift */; };
 		886FAA722A1278FF004ACF43 /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */; };
 		887D19282A137D500034829D /* RemindersListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887D19272A137D500034829D /* RemindersListRowView.swift */; };
+		8888AF982A1B6B6B00C7BC5D /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8888AF972A1B6B6B00C7BC5D /* UserProfileViewModel.swift */; };
 		88AE77122A138B0B00C51000 /* ReminderToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */; };
 		88AE85682A12951B0040C93D /* MakeItSo.docc in Sources */ = {isa = PBXBuildFile; fileRef = 88AE85672A12951B0040C93D /* MakeItSo.docc */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		8842942629B275B9002B16B9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 		886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
 		887D19272A137D500034829D /* RemindersListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListRowView.swift; sourceTree = "<group>"; };
+		8888AF972A1B6B6B00C7BC5D /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderToggleStyle.swift; sourceTree = "<group>"; };
 		88AE85672A12951B0040C93D /* MakeItSo.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MakeItSo.docc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,10 +104,10 @@
 		88058A992A17AA830044F9E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				88058AA22A17AB1C0044F9E4 /* AuthenticationView.swift */,
+				88058AA02A17AAFF0044F9E4 /* SignupView.swift */,
 				88058A9C2A17AAC40044F9E4 /* LoginView.swift */,
 				88058A9E2A17AAE30044F9E4 /* UserProfileView.swift */,
-				88058AA02A17AAFF0044F9E4 /* SignupView.swift */,
-				88058AA22A17AB1C0044F9E4 /* AuthenticationView.swift */,
 				88058ACE2A17DE830044F9E4 /* GoogleSignInButton.swift */,
 			);
 			path = Views;
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				88058AA42A17AB330044F9E4 /* AuthenticationViewModel.swift */,
+				8888AF972A1B6B6B00C7BC5D /* UserProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		883180242A17842C00E5DAFD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -404,6 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8888AF982A1B6B6B00C7BC5D /* UserProfileViewModel.swift in Sources */,
 				88058ACF2A17DE830044F9E4 /* GoogleSignInButton.swift in Sources */,
 				88058AA52A17AB330044F9E4 /* AuthenticationViewModel.swift in Sources */,
 				8842942529AFF792002B16B9 /* Reminder.swift in Sources */,

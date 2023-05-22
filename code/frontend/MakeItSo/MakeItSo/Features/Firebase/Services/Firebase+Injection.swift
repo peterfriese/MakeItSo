@@ -43,13 +43,12 @@ extension Container {
       if Container.shared.useEmulator() {
         let settings = Firestore.firestore().settings
         settings.host = "localhost:8080"
-        settings.isPersistenceEnabled = false
+        settings.cacheSettings = MemoryCacheSettings()
         settings.isSSLEnabled = false
         environment = "to use the local emulator on \(settings.host)"
 
         Firestore.firestore().settings = settings
         Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-
       }
       else {
         environment = "to use the Firebase backend"
@@ -61,8 +60,6 @@ extension Container {
       return Firestore.firestore()
     }.singleton
   }
-
-
 }
 
 

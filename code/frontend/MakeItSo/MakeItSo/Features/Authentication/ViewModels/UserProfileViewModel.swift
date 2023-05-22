@@ -1,8 +1,8 @@
 //
-// SettingsViewModel.swift
+// UserProfileViewModel.swift
 // MakeItSo
 //
-// Created by Peter Friese on 19.05.23.
+// Created by Peter Friese on 22.05.23.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,21 +16,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import SwiftUI
 import Factory
-import FirebaseAuth
 import Combine
+import FirebaseAuth
 
-class SettingsViewModel: ObservableObject {
+class UserProfileViewModel: ObservableObject {
   @Injected(\.authenticationService)
   private var authenticationService
 
+  @Published var authenticationState: AuthenticationState = .unauthenticated
+  @Published var errorMessage = ""
   @Published var user: User?
+  @Published var provider = ""
   @Published var displayName = ""
+  @Published var email = ""
 
   @Published var isGuestUser = false
-
-  @Published var loggedInAs = ""
+  @Published var isVerified = false
 
   init() {
     authenticationService.$user
@@ -44,17 +47,37 @@ class SettingsViewModel: ObservableObject {
 
     $user
       .compactMap { user in
-        user?.displayName ?? user?.email ?? ""
+        user?.isEmailVerified
+      }
+      .assign(to: &$isVerified)
+
+    $user
+      .compactMap { user in
+        user?.displayName ?? "N/A"
       }
       .assign(to: &$displayName)
 
-    Publishers.CombineLatest($isGuestUser, $displayName)
-      .map { isGuest, displayName in
-        isGuest
-          ? "You're using the app as a guest"
-          : "Logged in as \(displayName)"
+    $user
+      .compactMap { user in
+        user?.email ?? "N/A"
       }
-      .assign(to: &$loggedInAs)
+      .assign(to: &$email)
+
+    $user
+      .compactMap { user in
+        if let providerData = user?.providerData.first {
+          return providerData.providerID
+        }
+        else {
+          return user?.providerID
+        }
+      }
+      .assign(to: &$provider)
+
+  }
+
+  func deleteAccount() async -> Bool {
+    return await authenticationService.deleteAccount()
   }
 
   func signOut() {

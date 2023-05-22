@@ -18,6 +18,7 @@
 
 import Foundation
 import Combine
+import Factory
 import FirebaseCore
 import FirebaseAuth
 
@@ -32,6 +33,7 @@ public class AuthenticationService {
   @Published var user: User?
   @Published var errorMessage = ""
   @Published var authenticationState: AuthenticationState = .unauthenticated
+  let logger = Container.shared.logger("authentication")
   
   private var authStateHandler: AuthStateDidChangeListenerHandle?
   private var currentNonce: String?
@@ -81,22 +83,21 @@ public class AuthenticationService {
 extension AuthenticationService {
   func signInAnonymously() {
     if Auth.auth().currentUser == nil {
-      print("Nobody is signed in. Trying to sign in anonymously.")
+      logger.debug("Nobody is signed in. Trying to sign in anonymously.")
       Task {
         do {
           try await Auth.auth().signInAnonymously()
           errorMessage = ""
         }
         catch {
-          print(error.localizedDescription)
+          logger.error("Error when trying to sign in anonymously: \(error.localizedDescription)")
           errorMessage = error.localizedDescription
         }
       }
     }
     else {
-      print("Someone is signed in")
       if let user = Auth.auth().currentUser {
-        print(user.uid)
+        logger.debug("Someone is signed in with \(user.providerID) and user ID \(user.uid)")
       }
     }
   }
@@ -120,7 +121,7 @@ extension AuthenticationService {
       }
     }
     catch  {
-      print(error)
+      logger.error("Error when trying to link user account with Email and Password credentials: \(error.localizedDescription)")
       errorMessage = error.localizedDescription
       authenticationState = .unauthenticated
       return false
@@ -134,7 +135,7 @@ extension AuthenticationService {
       return true
     }
     catch  {
-      print(error)
+      logger.error("Error when trying to sign in with Email and Password credentials: \(error.localizedDescription)")
       errorMessage = error.localizedDescription
       authenticationState = .unauthenticated
       return false
@@ -148,7 +149,7 @@ extension AuthenticationService {
       return true
     }
     catch {
-      print(error)
+      logger.error("Error when trying to sign up with Email and Password credentials: \(error.localizedDescription)")
       errorMessage = error.localizedDescription
       authenticationState = .unauthenticated
       return false
@@ -173,7 +174,7 @@ extension AuthenticationService {
     guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene,
           let window = await windowScene.windows.first,
           let rootViewController = await window.rootViewController else {
-      print("There is no root view controller!")
+      logger.debug("There is no root view controller!")
       return false
     }
     
@@ -189,7 +190,7 @@ extension AuthenticationService {
       
       let result = try await Auth.auth().signIn(with: credential)
       let firebaseUser = result.user
-      print("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unknown")")
+      logger.debug("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unknown")")
       return true
     }
     catch {
@@ -222,11 +223,11 @@ extension AuthenticationService {
           fatalError("Invalid state: a login callback was received, but no login request was sent.")
         }
         guard let appleIDToken = appleIDCredential.identityToken else {
-          print("Unable to fetdch identify token.")
+          logger.error("Unable to fetch identify token.")
           return false
         }
         guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-          print("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
+          logger.error("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
           return false
         }
         
@@ -239,7 +240,7 @@ extension AuthenticationService {
           return true
         }
         catch {
-          print("Error authenticating: \(error.localizedDescription)")
+          logger.error("Error authenticating: \(error.localizedDescription)")
           return false
         }
       }
@@ -256,7 +257,8 @@ extension AuthenticationService {
           let credentialState = try await appleIDProvider.credentialState(forUserID: appleProviderData.uid)
           switch credentialState {
           case .authorized:
-            break // The Apple ID credential is valid.
+            // The Apple ID credential is valid.
+            break
           case .revoked, .notFound:
             // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
             self.signOut()
@@ -265,19 +267,12 @@ extension AuthenticationService {
           }
         }
         catch {
+          logger.error("Error when trying to verify Sign in with Apple authentication state: \(error.localizedDescription)")
         }
       }
     }
   }
   
-}
-
-extension ASAuthorizationAppleIDCredential {
-  func displayName() -> String {
-    return [self.fullName?.givenName, self.fullName?.familyName]
-      .compactMap( {$0})
-      .joined(separator: " ")
-  }
 }
 
 // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
@@ -324,11 +319,3 @@ private func sha256(_ input: String) -> String {
   
   return hashString
 }
-
-
-private func dumpUser(_ user: User) {
-  print(user.email)
-  print(user.isEmailVerified)
-  print(user.providerID)
-}
-

@@ -28,6 +28,7 @@ public class RemindersRepository: ObservableObject {
   // MARK: - Dependencies
   @Injected(\.firestore) var firestore
   @Injected(\.authenticationService) var authenticationService
+  let logger = Container.shared.logger("persistence")
 
   // MARK: - Publishers
   @Published
@@ -51,8 +52,6 @@ public class RemindersRepository: ObservableObject {
 
   // MARK: - Private attributes
   private var listenerRegistration: ListenerRegistration?
-
-  let logger = Container.shared.logger("persistence")
 
   deinit {
     unsubscribe()
