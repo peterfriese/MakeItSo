@@ -42,6 +42,12 @@ struct RemindersListView: View {
   var body: some View {
     List($viewModel.reminders) { $reminder in
       RemindersListRowView(reminder: $reminder)
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+          Button(role: .destructive, action: { viewModel.deleteReminder(reminder) }) {
+            Image(systemName: "trash")
+          }
+          .tint(.red)
+        }
         .onTapGesture {
           editableReminder = reminder
         }

@@ -42,6 +42,10 @@ class RemindersListViewModel: ObservableObject {
     remindersRepository.updateReminder(reminder)
   }
 
+  func deleteReminder(_ reminder: Reminder) {
+    remindersRepository.removeReminder(reminder)
+  }
+
   func toggleCompleted(_ reminder: Reminder) {
     if let index = reminders.firstIndex(where: { $0.id == reminder.id} ) {
       reminders[index].isCompleted.toggle()
