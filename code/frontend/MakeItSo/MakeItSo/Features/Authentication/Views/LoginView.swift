@@ -30,9 +30,9 @@ struct LoginView: View {
   @EnvironmentObject var viewModel: AuthenticationViewModel
   @Environment(\.colorScheme) var colorScheme
   @Environment(\.dismiss) var dismiss
-  
+
   @FocusState private var focus: FocusableField?
-  
+
   private func signInWithEmailPassword() {
     Task {
       if await viewModel.signInWithEmailPassword() == true {
@@ -40,7 +40,7 @@ struct LoginView: View {
       }
     }
   }
-  
+
   private func signInWithGoogle() {
     Task {
       if await viewModel.signInWithGoogle() == true {
@@ -48,18 +48,9 @@ struct LoginView: View {
       }
     }
   }
-  
-  var body: some View {
+
+  var emailPasswordSignInArea: some View {
     VStack {
-      Image("Login")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(minHeight: 300, maxHeight: 400)
-      Text("Login")
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .frame(maxWidth: .infinity, alignment: .leading)
-      
       HStack {
         Image(systemName: "at")
         TextField("Email", text: $viewModel.email)
@@ -74,7 +65,7 @@ struct LoginView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 4)
-      
+
       HStack {
         Image(systemName: "lock")
         SecureField("Password", text: $viewModel.password)
@@ -87,14 +78,14 @@ struct LoginView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
-      
+
       if !viewModel.errorMessage.isEmpty {
         VStack {
           Text(viewModel.errorMessage)
             .foregroundColor(Color(UIColor.systemRed))
         }
       }
-      
+
       Button(action: signInWithEmailPassword) {
         if viewModel.authenticationState != .authenticating {
           Text("Login")
@@ -111,18 +102,41 @@ struct LoginView: View {
       .disabled(!viewModel.isValid)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      
+    }
+  }
+
+  var body: some View {
+    VStack {
       HStack {
-        VStack { Divider() }
-        Text("or")
-        VStack { Divider() }
+        Image(colorScheme == .light ? "logo-light" : "logo-dark")
+          .resizable()
+          .frame(width: 30, height: 30 , alignment: .center)
+          .cornerRadius(8)
+        Text("Make It So")
+          .font(.title)
+          .bold()
       }
-      
-      GoogleSignInButton {
+      .padding(.horizontal)
+
+      VStack {
+        Image(colorScheme == .light ? "auth-hero-light" : "auth-hero-dark")
+          .resizable()
+          .frame(maxWidth: .infinity)
+          .scaledToFit()
+          .padding(.vertical, 24)
+
+        Text("Get your work done. Make it so.")
+          .font(.title2)
+          .padding(.bottom, 16)
+      }
+
+      Spacer()
+
+      GoogleSignInButton(.signIn) {
         signInWithGoogle()
       }
 
-      SignInWithAppleButton(.continue) { request in
+      SignInWithAppleButton(.signIn) { request in
         viewModel.handleSignInWithAppleRequest(request)
       } onCompletion: { result in
         Task {
@@ -132,9 +146,24 @@ struct LoginView: View {
         }
       }
       .signInWithAppleButtonStyle(colorScheme == .light ? .black : .white)
-      .frame(maxWidth: .infinity, minHeight: 50)
+      .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
       .cornerRadius(8)
-      
+
+      Button(action: {
+        withAnimation {
+          viewModel.isOtherAuthOptionsVisible.toggle()
+        }
+      }) {
+        Text("More sign-in options")
+          .underline()
+      }
+      .buttonStyle(.plain)
+      .padding(.top, 16)
+
+      if viewModel.isOtherAuthOptionsVisible {
+        emailPasswordSignInArea
+      }
+
       HStack {
         Text("Don't have an account yet?")
         Button(action: { viewModel.switchFlow() }) {
@@ -143,8 +172,7 @@ struct LoginView: View {
             .foregroundColor(.blue)
         }
       }
-      .padding([.top, .bottom], 50)
-      
+      .padding(.vertical, 8)
     }
     .padding()
     .analyticsScreen(name: "\(Self.self)")
@@ -152,12 +180,16 @@ struct LoginView: View {
 }
 
 struct LoginView_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
+  struct Container: View {
+    @StateObject var viewModel = AuthenticationViewModel(flow: .login)
+
+    var body: some View {
       LoginView()
-      LoginView()
-        .preferredColorScheme(.dark)
+        .environmentObject(viewModel)
     }
-    .environmentObject(AuthenticationViewModel())
+  }
+
+  static var previews: some View {
+    Container()
   }
 }

@@ -18,11 +18,23 @@
 
 import SwiftUI
 
+enum GoogleSignInButtonLabel: String {
+  case signIn = "Sign in with Google"
+  case `continue` = "Continue with Google"
+  case signUp = "Sign up with Google"
+}
+
 struct GoogleSignInButton: View {
   @Environment(\.colorScheme)
   private var colorScheme
 
+  var label = GoogleSignInButtonLabel.continue
   var action: () -> Void
+
+  init(_ label: GoogleSignInButtonLabel = .continue, action: @escaping () -> Void) {
+    self.label = label
+    self.action = action
+  }
 
   var body: some View {
     Button(action: action) {
@@ -31,7 +43,7 @@ struct GoogleSignInButton: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 20, alignment: .center)
-        Text("Continue with Google")
+        Text(label.rawValue)
           .bold()
           .padding(.vertical, 8)
       }

@@ -48,6 +48,7 @@ class AuthenticationViewModel: ObservableObject {
   @Published var confirmPassword = ""
   
   @Published var flow: AuthenticationFlow = .signUp
+  @Published var isOtherAuthOptionsVisible = false
   
   @Published var isValid = false
   @Published var authenticationState: AuthenticationState = .unauthenticated
@@ -60,7 +61,8 @@ class AuthenticationViewModel: ObservableObject {
   
   private var cancellables = Set<AnyCancellable>()
   
-  init() {
+  init(flow: AuthenticationFlow = .signUp) {
+    self.flow = flow
     
     $flow
       .combineLatest($email, $password, $confirmPassword)

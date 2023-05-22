@@ -67,6 +67,7 @@
 		8842942429AFF792002B16B9 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		8842942629B275B9002B16B9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 		886FAA712A1278FF004ACF43 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
+		8871805F2A1B96FD0086E27B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		887D19272A137D500034829D /* RemindersListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListRowView.swift; sourceTree = "<group>"; };
 		8888AF972A1B6B6B00C7BC5D /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderToggleStyle.swift; sourceTree = "<group>"; };
@@ -225,6 +226,7 @@
 		8842941129AFEEA8002B16B9 /* MakeItSo */ = {
 			isa = PBXGroup;
 			children = (
+				8871805F2A1B96FD0086E27B /* Info.plist */,
 				88058AC42A17BEBC0044F9E4 /* MakeItSo.entitlements */,
 				886FAA6C2A127422004ACF43 /* Features */,
 				8842941229AFEEA8002B16B9 /* MakeItSoApp.swift */,
@@ -563,6 +565,7 @@
 				DEVELOPMENT_TEAM = YGAZHQXHH4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MakeItSo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -593,6 +596,7 @@
 				DEVELOPMENT_TEAM = YGAZHQXHH4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MakeItSo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
