@@ -33,7 +33,6 @@ struct AuthenticationView: View {
           .environmentObject(viewModel)
       }
     }
-    .tint(.none)
   }
 }
 

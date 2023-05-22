@@ -46,7 +46,7 @@ struct RemindersListView: View {
           Button(role: .destructive, action: { viewModel.deleteReminder(reminder) }) {
             Image(systemName: "trash")
           }
-          .tint(.red)
+          .tint(Color(UIColor.systemRed))
         }
         .onTapGesture {
           editableReminder = reminder
@@ -85,7 +85,6 @@ struct RemindersListView: View {
     .sheet(isPresented: $isSettingsScreenPresented) {
         SettingsView()
     }
-    .tint(.red)
   }
 }
 
