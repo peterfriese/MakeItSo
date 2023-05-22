@@ -32,7 +32,7 @@
     }
     
     @Chapter(name: "Storing Data in the Cloud") {
-      @Image(source: chapter1.png, alt: "A wireframe of an app interface.")
+      @Image(source: chapter6.png, alt: "A wireframe of an app interface.")
     
       In this chapter, you will learn how to store data in the cloud with Cloud Firestore. 
       @TutorialReference(tutorial: "doc:01-Intro-to-Cloud-Firestore")
