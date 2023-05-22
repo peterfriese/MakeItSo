@@ -228,12 +228,12 @@
 		8842941129AFEEA8002B16B9 /* MakeItSo */ = {
 			isa = PBXGroup;
 			children = (
-				8871805F2A1B96FD0086E27B /* Info.plist */,
 				88058AC42A17BEBC0044F9E4 /* MakeItSo.entitlements */,
 				886FAA6C2A127422004ACF43 /* Features */,
 				8842941229AFEEA8002B16B9 /* MakeItSoApp.swift */,
 				8842941629AFEEA9002B16B9 /* Assets.xcassets */,
 				88058AC52A17C0190044F9E4 /* GoogleService-Info.plist */,
+				8871805F2A1B96FD0086E27B /* Info.plist */,
 				8842941829AFEEA9002B16B9 /* Preview Content */,
 			);
 			path = MakeItSo;
