@@ -42,7 +42,6 @@ extension ToggleStyle where Self == ReminderToggleStyle {
   }
 }
 
-
 struct ReminderToggleStyle_Previews: PreviewProvider {
   struct Container: View {
     @State var isOn = false

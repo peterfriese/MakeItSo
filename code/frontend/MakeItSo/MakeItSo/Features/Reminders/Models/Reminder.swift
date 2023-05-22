@@ -22,8 +22,12 @@ import FirebaseFirestoreSwift
 struct Reminder: Identifiable, Equatable, Hashable, Codable {
   @DocumentID
   var id: String?
+
   var title: String
   var isCompleted = false
+
+  @ServerTimestamp
+  var dateAdded: Date?
 
   var userId: String? = nil
 }
