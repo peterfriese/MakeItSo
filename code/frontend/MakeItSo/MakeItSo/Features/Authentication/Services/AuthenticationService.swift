@@ -127,7 +127,7 @@ extension AuthenticationService {
       return false
     }
   }
-  
+
   func signInWithEmailPassword(email: String, password: String) async -> Bool {
     authenticationState = .authenticating
     do {
@@ -200,6 +200,53 @@ extension AuthenticationService {
       return false
     }
   }
+
+  @MainActor
+  func linkWithGoogle() async -> Bool {
+    authenticationState = .authenticating
+
+    guard let clientID = FirebaseApp.app()?.options.clientID else {
+      fatalError("No client ID found in Firebase configuration")
+    }
+    let config = GIDConfiguration(clientID: clientID)
+    GIDSignIn.sharedInstance.configuration = config
+
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+          let window = windowScene.windows.first,
+          let rootViewController = window.rootViewController else {
+      logger.debug("There is no root view controller!")
+      return false
+    }
+
+    do {
+      let userAuthentication = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+
+      let googleUser = userAuthentication.user
+      guard let idToken = googleUser.idToken else { throw AuthenticationError.tokenError(message: "ID token missing") }
+      let accessToken = googleUser.accessToken
+
+      let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString,
+                                                     accessToken: accessToken.tokenString)
+
+      #warning("Refactor the account linking code")
+      if let user {
+        let result = try await user.link(with: credential)
+        self.user = result.user
+        authenticationState = .authenticated
+        return true
+      }
+      else {
+        fatalError("No user was signed in. This should not happen.")
+      }
+    }
+    catch  {
+      #warning("Handle credentials already in use by signing in to the existing account, asking the user whehter to merge, and then merging the data from the anonymous account")
+      logger.error("Error when trying to link user account with Google credentials: \(error.localizedDescription)")
+      errorMessage = error.localizedDescription
+      authenticationState = .unauthenticated
+      return false
+    }
+  }
 }
 
 // MARK: - Sign in with Apple
@@ -231,17 +278,64 @@ extension AuthenticationService {
           logger.error("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
           return false
         }
-        
+
         let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
                                                        rawNonce: nonce,
                                                        fullName: appleIDCredential.fullName)
-        
+
         do {
           try await Auth.auth().signIn(with: credential)
           return true
         }
         catch {
           logger.error("Error authenticating: \(error.localizedDescription)")
+          return false
+        }
+      }
+    }
+    return false
+  }
+
+  @MainActor
+  func handleSignInWithAppleCompletionAndPerformLink(_ result: Result<ASAuthorization, Error>) async -> Bool {
+    if case .failure(let failure) = result {
+      errorMessage = failure.localizedDescription
+      return false
+    }
+    else if case .success(let authorization) = result {
+      if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+        guard let nonce = currentNonce else {
+          fatalError("Invalid state: a login callback was received, but no login request was sent.")
+        }
+        guard let appleIDToken = appleIDCredential.identityToken else {
+          logger.error("Unable to fetch identify token.")
+          return false
+        }
+        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+          logger.error("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
+          return false
+        }
+
+        do {
+          let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
+                                                         rawNonce: nonce,
+                                                         fullName: appleIDCredential.fullName)
+
+          if let user {
+            let result = try await user.link(with: credential)
+            self.user = result.user
+            authenticationState = .authenticated
+            return true
+          }
+          else {
+            fatalError("No user was signed in. This should not happen.")
+          }
+        }
+        catch  {
+          
+          logger.error("Error when trying to link user account with Apple credentials: \(error.localizedDescription)")
+          errorMessage = error.localizedDescription
+          authenticationState = .unauthenticated
           return false
         }
       }

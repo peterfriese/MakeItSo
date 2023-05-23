@@ -69,7 +69,7 @@ public class RemindersRepository: ObservableObject {
       if let localUser = user ?? self.user {
         let query = firestore.collection("reminders")
           .whereField("userId", isEqualTo: localUser.uid)
-          .order(by: "dateAdded", descending: true)
+          .order(by: "createdAt", descending: true)
 
         listenerRegistration = query
           .addSnapshotListener { [weak self] (querySnapshot, error) in

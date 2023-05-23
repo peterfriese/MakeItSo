@@ -103,6 +103,8 @@ class AuthenticationViewModel: ObservableObject {
     password = ""
     confirmPassword = ""
   }
+
+  // MARK: - Email / Password
   
   func signInWithEmailPassword() async -> Bool {
     return await authenticationService.signInWithEmailPassword(email: email,
@@ -113,10 +115,18 @@ class AuthenticationViewModel: ObservableObject {
     return await authenticationService.linkWithEmailPassword(email: email,
                                                              password: password)
   }
+
+  // MARK: - Sign in with Google
   
   func signInWithGoogle() async -> Bool {
     return await authenticationService.signInWithGoogle()
   }
+
+  func linkWithGoogle() async -> Bool {
+    return await authenticationService.linkWithGoogle()
+  }
+
+  // MARK: - Sign in with Apple
   
   func handleSignInWithAppleRequest(_ request: ASAuthorizationAppleIDRequest) {
     authenticationService.handleSignInWithAppleRequest(request)
@@ -125,10 +135,18 @@ class AuthenticationViewModel: ObservableObject {
   func handleSignInWithAppleCompletion(_ result: Result<ASAuthorization, Error>) async -> Bool {
     return await authenticationService.handleSignInWithAppleCompletion(result)
   }
+
+  func handleSignInWithAppleCompletionAndLink(_ result: Result<ASAuthorization, Error>) async -> Bool {
+    return await authenticationService.handleSignInWithAppleCompletionAndPerformLink(result)
+  }
+
+  // MARK: - Account Deletion
   
   func deleteAccount() async -> Bool {
     return await authenticationService.deleteAccount()
   }
+
+  // MARK: - Signing out
   
   func signOut() {
     authenticationService.signOut()

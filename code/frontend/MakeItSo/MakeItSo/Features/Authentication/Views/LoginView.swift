@@ -43,7 +43,7 @@ struct LoginView: View {
 
   private func signInWithGoogle() {
     Task {
-      if await viewModel.signInWithGoogle() == true {
+      if await viewModel.linkWithGoogle() == true {
         dismiss()
       }
     }
@@ -140,7 +140,7 @@ struct LoginView: View {
         viewModel.handleSignInWithAppleRequest(request)
       } onCompletion: { result in
         Task {
-          if await viewModel.handleSignInWithAppleCompletion(result) {
+          if await viewModel.handleSignInWithAppleCompletionAndLink(result) {
             dismiss()
           }
         }

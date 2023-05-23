@@ -28,7 +28,7 @@ struct Reminder: Identifiable, Equatable, Hashable, Codable {
   var isFlagged = false
 
   @ServerTimestamp
-  var dateAdded: Date?
+  var createdAt: Date?
 
   var userId: String? = nil
 }
