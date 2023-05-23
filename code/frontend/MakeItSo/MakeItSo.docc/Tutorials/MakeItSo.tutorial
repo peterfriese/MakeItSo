@@ -36,6 +36,7 @@
     
       In this chapter, you will learn how to store data in the cloud with Cloud Firestore. 
       @TutorialReference(tutorial: "doc:01-Intro-to-Cloud-Firestore")
+      @TutorialReference(tutorial: "doc:02-Storing-Data-in-Cloud-Firestore")
     }
   }
 }
