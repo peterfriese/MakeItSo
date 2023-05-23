@@ -78,6 +78,11 @@ public class RemindersRepository: ObservableObject {
               return
             }
 
+            // see https://stackoverflow.com/a/50434127/281221
+            // and https://medium.com/firebase-developers/the-secrets-of-firestore-fieldvalue-servertimestamp-revealed-29dd7a38a82b
+            if let hasPenddingWrites = querySnapshot?.metadata.hasPendingWrites, hasPenddingWrites == true {
+              self?.logger.debug("Has pending writes")
+            }
             self?.logger.debug("Mapping \(documents.count) documents")
             self?.reminders = documents.compactMap { queryDocumentSnapshot in
               do {

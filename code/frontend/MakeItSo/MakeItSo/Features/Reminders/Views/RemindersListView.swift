@@ -56,8 +56,8 @@ struct RemindersListView: View {
         .onTapGesture {
           editableReminder = reminder
         }
-        .onChange(of: reminder) { newValue in
-          viewModel.updateReminder(reminder)
+        .onChange(of: reminder.isCompleted) { [reminder] newValue in
+          viewModel.setCompleted(reminder, isCompleted: newValue)
         }
     }
     .listStyle(.plain)
