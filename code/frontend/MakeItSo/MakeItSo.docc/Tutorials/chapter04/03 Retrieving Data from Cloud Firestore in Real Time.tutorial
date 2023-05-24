@@ -1,20 +1,17 @@
 @Tutorial(time: 25, projectFiles: 03-retrieving-data-from-cloud-firestore-in-real-time.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Retrieving data from Cloud Firestore in real-time") {
+    Now that you've implemented a `RemindersRepository`, and wrote code for storing `Reminder`s to Firestore, it is time to retrieve reminders from Firestore, so they can be displayed in the app's UI.
+    
+    In this chapter, you will use Firestore's snapshot listeners to implement a real-time sync between Firestore's backend and your iOS app.
+    
+    Download the project files to begin building this project, and follow the steps below.
     @Image(source: hero-intro-to-cloud-firestore, alt: "")
-  }
-  
-  @Comment {
-    * Add snapshot listener to the repo
-    * Manage the registration
-    * Subscribe in init / unsubscribe in deinit
-    * Connect the viewmodel reminders property to the repository reminders property
-    * Run the app and add a couple of reminders
-    * Cleanup: add an extension on Reminder to retrieve the collection name
   }
   
   @Section(title: "Implement a snapshot listener") {
     @ContentAndMedia { 
+      Snapshot listeners are the corner stone of Firestore's real-time sync capabilities. When you set up a snapshot listener, you will receive the current state of the data you're querying. For each subsequent change to the data, your snapshot listener will be called again.
     }
     
     @Steps {
@@ -119,6 +116,7 @@
     
   @Section(title: "Run the app to experience real-time sync") {
     @ContentAndMedia {
+      Your app is now capable of adding and displaying reminders. In this step, you will run the app on the Simulator, and connect it to the Firebase Emulator to take it for a spin.
     }
     
     @Steps {
@@ -139,15 +137,23 @@
       }
       @Step {
         Once the app has started, you should now see the reminders you added in the previous chapter.
+        
+        @Image(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-01.png)
       }
       @Step {
         Tap on the _+ New Reminder_ button, and add a new reminder. It should show up in the [Firestore Emulator](http://127.0.0.1:4000/firestore/data) (or in the Firestore data explorer in your online Firebase project, if you're not using the Emulator).
+        
+        @Video(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-02)
       }
       @Step {
-        Go to the [Firestore Emulator](http://127.0.0.1:4000/firestore/data), select one of the documents that you just created, and update its `title` field. You should see the update in the running app. 
+        Go to the [Firestore Emulator](http://127.0.0.1:4000/firestore/data), select one of the documents that you just created, and update its `title` field. You should see the update in the running app.
+        
+        @Video(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-02)
       }
       @Step {
         Launch the app on an additional iOS Simulator. Any changes you make to the data in Firestore (either by editing the `title` attribute of one of the `Reminder` documents, or by adding a new reminder via one of the apps) should be visible in both Simulators and the Firestore Emulator in real-time. 
+        
+        @Video(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-02)
       }
     }
   }
