@@ -1,0 +1,179 @@
+@Tutorial(time: 25, projectFiles: 03-retrieving-data-from-cloud-firestore-in-real-time.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Retrieving data from Cloud Firestore in real-time") {
+    Now that you've implemented a `RemindersRepository`, and wrote code for storing `Reminder`s to Firestore, it is time to retrieve reminders from Firestore, so they can be displayed in the app's UI.
+    
+    In this chapter, you will use Firestore's snapshot listeners to implement a real-time sync between Firestore's backend and your iOS app.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    @Image(source: hero-intro-to-cloud-firestore, alt: "")
+  }
+  
+  @Section(title: "Implement a snapshot listener") {
+    @ContentAndMedia { 
+      Snapshot listeners are the corner stone of Firestore's real-time sync capabilities. When you set up a snapshot listener, you will receive the current state of the data you're querying. For each subsequent change to the data, your snapshot listener will be called again.
+    }
+    
+    @Steps {
+      @Step {
+        In `RemindersRepository.swift`, create a new method named `subscribe`. You will use this method to implement a _snapshot listener_ that subscribes to the Firestore collection that contains the reminders that your app displays.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-01.swift, previousFile: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-00.swift)
+      }
+      @Step {
+        Set up a Firestore query for fetching all reminders from the `reminders` collection.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-02.swift)
+      }
+      @Step {
+        Add a _snapshot listenener_ to the `query`. 
+        
+        This listener will be called whenever the data returned by the query changes: e.g. when a new document is added, data in a document is changed, or a document is deleted. 
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-03.swift)
+      }
+      @Step {
+        Make sure the `querySnapshot` is not empty.
+        
+        In the next step, you will map the Firestore documents contained in the snapshot to `Reminder` structs. If the snapshot is empty, you can leave early. 
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-04.swift)
+      }
+      @Step {
+        Use `compactMap` to iterate over the documents in the snapshot.
+        
+        > Note: Inside the closure of `compactmap`, you will write code that maps a single Firestore document to a `Reminder`. If that mapping fails, the result will be `nil`. To eliminate any such `nil` values from the final result, it is a common approach to use `compactMap`: it returns an array containing the non-`nil` results of calling the transformation.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-05.swift)
+      }
+      @Step {
+        Use `querySnapshot.data(as:)` to map the Firestore document represented by `querySnapshot` to a `Reminder`.
+        
+        > Note: Firestore supports Swift's Codable protocol, which makes mapping Firestore documents to Swift structs a simple one-liner. No need to manually map all the individual attributes (and potentially mistyping the attribute names)! 
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-06.swift)
+      }
+      @Step {
+        Add some error handling code.
+        
+        > Note: It's a good idea to log any mapping errors, as Firestore will provide information about what went wront when trying to map a particular document. For example, your Swift struct might have a non-optional property that is missing in the Firestore document you're trying to map from.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-07.swift)
+      }
+      @Step {
+        Finally, assign the result of the transformation to the `reminders` property. 
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-08.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Manage the lifecycle of the snapshot listener") {
+    @ContentAndMedia { 
+      For each snapshot listener, your app will keep an active connection to Firebase. On the backend, Firestore will use a _[reverse query matcher](https://firebase.google.com/docs/firestore/real-time_queries_at_scale#understand_the_real-time_query_system)_ to see if any updates to any documents in the database match your snapshot listener. To conserve resources, you should deactivate any snapshot listeners you don't currently need. 
+      
+      In this section, you will write code to subscribe and unsubscribe from updates by registering and unregistering the snapshot listener.
+    }
+    
+    @Steps {
+      @Step {
+        Add a private property `listenerRegistration` to hold a handle to the snapshot listener.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-01.swift, previousFile: retrieving-data-from-cloud-firestore-in-real-time-01-RemindersRepository-08.swift)
+      }
+      @Step {
+        Update the code in the `subscribe` method to check if a snapshot listener has already been set up, and assign the snapshot listener handle to `listenerRegistration` if that's not the case.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-02.swift, previousFile: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-02-pre.swift)
+      }
+      @Step {
+        Add a method `unsubscribe` to deactivate the snapshot listener.
+        
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-03.swift)
+      }
+      @Step {
+        Add an initialiser to `RemindersRepository`, and call `subscribe`.
+        
+        > Note: Whether or not you should call `subscribe` in your repository's initialiser depends on your app. For some apps, it might be more suitable to enable the snapshot listener when a specific view becomes visible. 
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-04.swift)
+      }
+      @Step {
+        Add a deinitialiser to `RemindersRepository`, and call `unsubscribe`.
+        
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-05.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Connect the view model") {
+    @ContentAndMedia {
+      Thanks to Firestore's real-time sync capabilities, the `reminders` property in `RemindersRepository` will now be in sync with the data stored in Firestore. In the next few steps, you will make sure the view model is kept in sync with the repository as well.
+    }
+    
+    @Steps {
+      @Step {
+        Update the `reminders` property in `RemindersListViewModel`, and initialise it with an empty array.
+        
+        @Code(name: "RemindersListViewModel.swift", file: retrieving-data-from-cloud-firestore-in-real-time-03-RemindersListViewModel-01.swift, previousFile: retrieving-data-from-cloud-firestore-in-real-time-03-RemindersListViewModel-00.swift)
+      }
+      @Step {
+        Import Combine, then add an initialiser to `RemindersListViewModel`, and use Combine's `assign` operator to keep the local `reminders` property in sync with the `reminders` property on `RemindersRepository`.
+        
+        @Code(name: "RemindersListViewModel.swift", file: retrieving-data-from-cloud-firestore-in-real-time-03-RemindersListViewModel-02.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Run the app to experience real-time sync") {
+    @ContentAndMedia {
+      Your app is now capable of adding and displaying reminders. In this step, you will run the app on the Simulator, and connect it to the Firebase Emulator to take it for a spin.
+    }
+    
+    @Steps {
+      @Step {
+        Make sure the Firebase Emulator Suite is still running: Point your browser to [http://127.0.0.1:4000/firestore/data](http://127.0.0.1:4000/firestore/data). If you don't see the Firestore tab of the Firebase Emulator Suite, follow the steps in the [Developing Locally with the Emulator Suite]() tutorial.
+        
+        @Image(source: storing-data-in-cloud-firestore-05-run-the-app-01)
+      }
+      @Step {
+        Make sure your app is configured to connect to the Firebase Emulator: open the launch configuration and ensure the check box on the `-useEmulator YES` argument is checked.
+        
+        @Image(source: storing-data-in-cloud-firestore-05-run-the-app-02)
+      }
+      @Step {
+        Click on the _Play_ button (or press _CMD+R_) to run the app on the iOS Simulator.
+        
+        @Image(source: storing-data-in-cloud-firestore-05-run-the-app-03)
+      }
+      @Step {
+        Once the app has started, you should now see the reminders you added in the previous chapter.
+        
+        @Image(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-01.png)
+      }
+      @Step {
+        Tap on the _+ New Reminder_ button, and add a new reminder. It should show up in the [Firestore Emulator](http://127.0.0.1:4000/firestore/data) (or in the Firestore data explorer in your online Firebase project, if you're not using the Emulator).
+        
+        @Video(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-02)
+      }
+      @Step {
+        Go to the [Firestore Emulator](http://127.0.0.1:4000/firestore/data), select one of the documents that you just created, and update its `title` field. You should see the update in the running app.
+        
+        @Video(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-02)
+      }
+      @Step {
+        Launch the app on an additional iOS Simulator. Any changes you make to the data in Firestore (either by editing the `title` attribute of one of the `Reminder` documents, or by adding a new reminder via one of the apps) should be visible in both Simulators and the Firestore Emulator in real-time. 
+        
+        @Video(source: retrieving-data-from-cloud-firestore-in-real-time-04-launch-the-app-02)
+      }
+    }
+  }
+  
+  @Section(title: "Clean-up") {
+    @ContentAndMedia {
+      In the final step, you will clean up the code and replace the hard-coded string for the collection name with a constant value.
+    }
+    
+    @Steps {
+      @Step {
+        In `Reminder.swift`, add an extension on `Reminder`, and define a static property `collectionName`.
+        @Code(name: "Reminder.swift", file: retrieving-data-from-cloud-firestore-in-real-time-05-Reminder-01.swift, previousFile: retrieving-data-from-cloud-firestore-in-real-time-05-Reminder-00.swift)
+        }
+      @Step {
+        In `RemindersRepository.swift`, replace all occurrences of `"reminders"` with `Reminder.collectionName`.
+        @Code(name: "RemindersRepository.swift", file: retrieving-data-from-cloud-firestore-in-real-time-05-RemindersRepository-01.swift, previousFile: retrieving-data-from-cloud-firestore-in-real-time-02-RemindersRepository-05.swift)
+        }
+    }
+  }
+    
+  
+}
