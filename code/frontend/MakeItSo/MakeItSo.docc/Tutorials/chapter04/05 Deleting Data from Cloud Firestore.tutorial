@@ -1,0 +1,96 @@
+@Tutorial(time: 15, projectFiles: 05-deleting-data-from-cloud-firestore.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Deleting data from Cloud Firestore") {
+    In this chapter of the tutorial, you've written code for creating, reading, and updating data in Cloud Firestore. There is one more data operation that is common for many apps: deleting data.
+    
+    In this part of the tutorial, you will write code that allows users to delete reminders from their todo list app. Many steps will be familiar to you now, and you're not far from crossing the finish line.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    @Image(source: hero-intro-to-cloud-firestore, alt: "")
+  }
+  
+  @Comment {
+    * Add removeReminder method to the repo
+    * Add deleteReminder method to the VM
+    * Add swipeAction to the list view
+  }
+  
+  @Section(title: "Implement a method for removing a single reminder from the repository") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Step {
+        Add a new method named `removeReminder` to `RemindersRepository`.
+        
+        @Code(name: "RemindersRepository.swift", file: 05-deleting-data-from-cloud-firestore-01-RemindersRepository-01.swift, previousFile: 05-deleting-data-from-cloud-firestore-01-RemindersRepository-00.swift)
+      }
+      @Step {
+        Make sure the reminder has a document ID. 
+        
+        > Note: Since you can only remove Firestore documents if you have their document ID, it is a progamming error if the reminders ID is `nil`, so it is OK to use `fatalError` to terminate the app.
+        @Code(name: "RemindersRepository.swift", file: 05-deleting-data-from-cloud-firestore-01-RemindersRepository-02.swift)
+      }
+      @Step {
+        Get a reference to the document you want to update. 
+        @Code(name: "RemindersRepository.swift", file: 05-deleting-data-from-cloud-firestore-01-RemindersRepository-03.swift)
+      }
+      @Step {
+        Call `delete()` to delete the document.
+         
+        @Code(name: "RemindersRepository.swift", file: 05-deleting-data-from-cloud-firestore-01-RemindersRepository-04.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Add a method for deleting reminders to the view model") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Step {
+        Add a new method named `deleteReminder` to `RemindersListViewModel`.
+        
+        @Code(name: "RemindersRepository.swift", file: 05-deleting-data-from-cloud-firestore-02-RemindersListViewModel-01.swift, previousFile: 05-deleting-data-from-cloud-firestore-02-RemindersListViewModel-00.swift)
+      }
+      @Step {
+        Call `removeReminder` on the repository to remove the reminder.
+        
+        @Code(name: "RemindersRepository.swift", file: 05-deleting-data-from-cloud-firestore-02-RemindersListViewModel-02.swift
+      }
+    }
+  }  
+              
+  @Section(title: "Implement a swipe action for deleteing reminders from the list view") {
+    @ContentAndMedia {
+      Swipe actions are a common UI gesture in many iOS apps, inlcuding Apple's Reminders app. In this step, you will set up an action that allows users to delete individual reminders by swiping.  
+      @Video(source: sectionheader-01-delete-reminders.mp4)
+    }
+    
+    @Steps {
+      @Step {
+        In `ReminderListView`, add the `swipeActions` view modifier to the `RemindersListRowView`. Set the `edge` parameter to `.trailing`, and enable full swipe.
+        
+        > Note: Full swipe allows the user to swipe the row completely to the left edge of the screen to trigger the action. If full swipe is not enabled, the user will have to swipe, and then tap on the action to trigger it. If you register more than just one action for an edge, full swip is only meaningful for the outermost action.
+        
+        @Code(name: "RemindersListView.swift", file: 05-deleting-data-from-cloud-firestore-03-RemindersListView-01.swift, previousFile: 05-deleting-data-from-cloud-firestore-03-RemindersListView-00.swift)
+      }
+      @Step {
+        In the body of the `swipeActions` view modifier, instantiate a `Button`, and set the `role` to `.destructive`. 
+        
+        > Tip: Make sure to use the `Button(role:action:label:)` overload.
+        @Code(name: "RemindersListView.swift", file: 05-deleting-data-from-cloud-firestore-03-RemindersListView-02.swift)
+      }
+      @Step {
+        Use `Image(systemName:)` to display a trashcan icon on the button, and tint it red.
+        
+        @Code(name: "RemindersListView.swift", file: 05-deleting-data-from-cloud-firestore-03-RemindersListView-03.swift)
+      }
+      @Step {
+        Inside the action, call the `deleteReminder` method of the view model to delete the reminder displayed in the row.
+        
+        @Code(name: "RemindersListView.swift", file: 05-deleting-data-from-cloud-firestore-03-RemindersListView-04.swift)
+      }
+    }
+  }  
+}
