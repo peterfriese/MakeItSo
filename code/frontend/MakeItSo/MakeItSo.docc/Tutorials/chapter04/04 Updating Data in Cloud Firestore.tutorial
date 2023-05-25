@@ -1,0 +1,114 @@
+@Tutorial(time: 25, projectFiles: 04-updating-data-in-cloud-firestore.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Updating data in Cloud Firestore") {
+    So far, the app you're building can help you add an keep track of your todos, but you cannot mark them as completed.
+    
+    In this chapter, you will write code to mark reminders as completed - after all, getting things done is the ultimate purpose of a todo list app! 
+    
+    You will also implement a dialog for editing reminders, and store the updated reminder back in to Firestore using the repository you created.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    @Image(source: hero-intro-to-cloud-firestore, alt: "")
+  }
+  
+  @Comment {
+    * Mark reminders as completed
+      * Add updateReminder to the repo
+      * Add setCompleted to the view model
+      * Add onChangeOf to the view
+    * Edit reminders
+      * Add an edit dialog
+      * Open the dialog in a sheet
+      * Update the reminder when returning from the sheet
+    * Flag the reminder
+      * Add a toggleFlag method to the view model
+      * Add a flag icon to the row
+      * Add a swipe action to the list view
+      * Add a flag section to the edit dialog
+  }
+  
+  @Section(title: "Mark reminders as completed") {
+    @ContentAndMedia {
+      Marking reminders as completed is a critical user journey in your app. You will implmenet this feature by adding code to the repository that can update a `Reminder`. Then, you will implement an event handler that runs whenever the user toggles the state of a reminder's completion state. 
+      @Video(source: sectionheader-01-mark-reminders-completed.gif)
+    }
+    
+    @Steps {
+      Begin by implementing the update functionality on the repository.
+      
+      @Step {
+        In `RemindersRepository.swift`, create a new method named `updateReminder`.
+        @Code(name: "RemindersRepository.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersRepository-01.swift, previousFile: 04-updating-data-in-cloud-firestore-01-RemindersRepository-00.swift)
+      }
+      @Step {
+        Make sure the reminder has a document ID. 
+        
+        > Note: Since you can only update Firestore documents if you have their document ID, it is a progamming error if the reminders ID is `nil`, so it is OK to use `fatalError` to termninate the app.
+        @Code(name: "RemindersRepository.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersRepository-02.swift)
+      }
+      @Step {
+        Get a reference to the document you want to update. 
+        @Code(name: "RemindersRepository.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersRepository-03.swift)
+      }
+      @Step {
+        Use `setData(from:merge)` to update the document with the data from the `reminder`.
+        
+        > Note: Keep in mind that Firestore is a NoSQL database, so another client might have added some other fields to the document in the database. By using `merge: true`, you make sure that Firestore doesn't overwrite the existing document with the values of `reminder`.  
+        @Code(name: "RemindersRepository.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersRepository-04.swift)
+      }
+      
+      In the next few steps, you will enhance the view model so you can call the update functionality from the views in your app.
+      
+      @Step {
+        In `RemindersListViewModel.swift`, add a new method named `updateReminder`, and forward the call to `RemindersRepository`. 
+        @Code(name: "RemindersListViewModel.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-01.swift, previousFile: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-00.swift)
+      }
+      @Step {
+        Add some error handling code.
+        
+        @Code(name: "RemindersListViewModel.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-02.swift, previousFile: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-02-pre.swift)
+      }
+      @Step {
+        Add some error handling code.
+        
+        @Code(name: "RemindersListViewModel.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-02.swift, previousFile: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-02-pre.swift)
+      }
+      @Step {
+        Replace `toggleCompleted` with `setCompleted`. Inside the method, make an editable copy of the `reminder` parameter, and set its `isCompleted` state to the value of the `isCompleted` parameter. Finally, call the `updateReminder` method you created in the previous step.
+        
+        @Code(name: "RemindersListViewModel.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersListViewModel-03.swift)
+      }
+      
+      @Step {
+        In `RemindersListView.swift`, add an `onChange(of:)` view modifier to the `RemindersListRowView`, and listen to changes of the `isCompleted` property of the current `reminder`. 
+        @Code(name: "RemindersListView.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersListView-01.swift, previousFile: 04-updating-data-in-cloud-firestore-01-RemindersListView-00.swift)
+      }
+      @Step {
+        Inside the closure of the `onChange(of:)` view modifier, call the `setCompleted` method on the view model, and pass in the `reminder`, and the new value of the `isCompleted` property.
+        
+        > Note: When the closure is called, the value of `reminder` is still the _previous_ state, which is why you need to set the new state inside the view model's '`setCompleted` method.  
+        @Code(name: "RemindersListView.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersListView-02.swift)
+      }
+      @Step {
+        Run the app, making sure to connect to the Firebase Emulator. Whenever you check off a reminder, this should reflect in Firestore.
+        @Video(source: 01-mark-reminders-completed-final.mp4)
+      }
+    }
+  }
+  
+  @Section(title: "Edit reminders") {
+    @ContentAndMedia {
+      Users might sometimes want to edit a reminder, for example to add more details about a certain task. In this section, you will create a dialog for editing exsting reminders, connect it to the main list view, and write changes back to Firestore when users commit their changes.
+      @Video(source: sectionheader-01-mark-reminders-completed.gif)
+    }
+    
+    @Steps {
+      First, create a dialog for editing reminders.
+      
+      @Step {
+        In `RemindersRepository.swift`, create a new method named `updateReminder`.
+        @Code(name: "RemindersRepository.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersRepository-01.swift, previousFile: 04-updating-data-in-cloud-firestore-01-RemindersRepository-00.swift)
+      }
+    }
+  }  
+}
