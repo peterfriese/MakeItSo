@@ -39,6 +39,7 @@
       @TutorialReference(tutorial: "doc:02-Storing-Data-in-Cloud-Firestore")
       @TutorialReference(tutorial: "doc:03-Retrieving-Data-from-Cloud-Firestore-in-Real-Time")
       @TutorialReference(tutorial: "doc:04-Updating-Data-in-Cloud-Firestore")
+      @TutorialReference(tutorial: "doc:05-Deleting-Data-from-Cloud-Firestore")
     }
   }
 }
