@@ -105,7 +105,9 @@
       }
       
       @Step {
-        Add the `@Published` property wrapper to mark this property as published. 
+        Add the `@Published` property wrapper to mark this property as published.
+        
+        > Note: by marking the `reminders` property with the `@Published` property wrapper, the `RemindersListView` will be updated whenever any reminders are added, removed, or modified.   
         @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-02-reminderslistviewmodel-03.swift)
       }
       
@@ -117,7 +119,7 @@
       }
       
       @Step {
-        Uncomment (or remove) the `reminders` property and its `@State` property wrapper. Then, replace all accesses to `reminders` in `RemindersListView` with an access to the `reminders` property on `viewModel`.
+        Comment (or remove) the `reminders` property and its `@State` property wrapper. Then, replace all accesses to `reminders` in `RemindersListView` with an access to the `reminders` property on `viewModel`.
         @Code(name: "RemindersListView.swift", file: implementing-mvvm-02-reminderslistview-02.swift)
       }
     }
@@ -148,7 +150,7 @@
     @Steps {
       @Step {
         Add a new method `toggleCompleted` to `RemindersListViewModel`. Calling this method will toggle the `isCompleted` state of the reminder.
-        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-03-reminderslistviewmodel-01.swift, previousFile: implementing-mvvm-04-reminderslistviewmodel-00.swift)
+        @Code(name: "RemindersListViewModel.swift", file: implementing-mvvm-04-reminderslistviewmodel-01.swift, previousFile: implementing-mvvm-04-reminderslistviewmodel-00.swift)
       }
       @Step {
         In `RemindersListView`, replace the call to `reminder.isCompleted.toggle()` with a call to `viewModel.toggleCompleted(_ reminder:)`

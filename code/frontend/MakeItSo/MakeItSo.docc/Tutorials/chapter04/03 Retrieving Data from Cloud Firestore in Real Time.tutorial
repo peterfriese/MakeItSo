@@ -11,7 +11,7 @@
   
   @Section(title: "Implement a snapshot listener") {
     @ContentAndMedia { 
-      Snapshot listeners are the corner stone of Firestore's real-time sync capabilities. When you set up a snapshot listener, you will receive the current state of the data you're querying. For each subsequent change to the data, your snapshot listener will be called again.
+      Snapshot listeners are the centerpiece of Firestore's real-time sync capabilities. When you set up a snapshot listener, you will receive the current state of the data you're querying. For each subsequent change to the data, your snapshot listener will be called again.
     }
     
     @Steps {

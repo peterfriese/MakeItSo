@@ -51,6 +51,8 @@
       @Step {
         Create a new folder for your Firebase project. In a later part of this tutorial, you will use this folder to write some backend functionality.
         
+        > Note: The `backend` folder should be in the same folder as the `frontend` folder.
+        
         @Code(name: "Shell", file: developing-locally-02-mkdir-01.sh, previousFile: developing-locally-02-mkdir-00.sh)
       }
       @Step {
@@ -143,7 +145,7 @@
   
   @Section(title: "Use launch arguments to switch between the Emulator and your Firebase project") {
     @ContentAndMedia {
-      For most of the time during development, you will want your app to interact with the Local Emulator Suite to benefit from fast turn-around times. But once you've finished development, you will want to test your app against the online Firebase project. In this step, you will add a launch argument to your app's launch configuration in Xcode to make it easier to switch between those two environments.
+      For most of the time during development, you will want your app to interact with the Local Emulator Suite to benefit from fast turn-around times and other advantages (see [this video](https://www.youtube.com/watch?v=xyvxvnIlgBo) for more details). But once you've finished development, you will want to test your app against the online Firebase project. In this step, you will add a launch argument to your app's launch configuration in Xcode to make it easier to switch between those two environments.
     }
     
     @Steps {
@@ -163,7 +165,7 @@
         @Image(source: developing-locally-05-edit-scheme-03.png, alt: "")
       }
       @Step {
-        To read the launch argument, and enable or disable using the Emulator accordingly, use the `UserDefaults` API.
+        Back in `MakeItSoApp.swift`, use the `UserDefaults` API to read the launch argument and enable or disable using the Emulator accordingly
         
         @Code(name: "MakeItSoApp.swift", file: developing-locally-05-MakeItSoApp-01.swift, previousFile: developing-locally-05-MakeItSoApp-00.swift)
       }

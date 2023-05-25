@@ -3,7 +3,7 @@
   @Intro(title: "Storing data in Cloud Firestore") {
     With the UI of the application in place, and Firebase set up for local development, it is now time to store data in the cloud.
     
-    You will create a repository for managing reminders, connect it to the view model you built earlier, and star adding reminders to the repository.
+    You will create a repository for managing reminders, connect it to the view model you built earlier, and start adding reminders to the repository.
     
     Download the project files to begin building this project, and follow the steps below.
     @Image(source: hero-intro-to-cloud-firestore, alt: "")
@@ -11,7 +11,7 @@
   
   @Section(title: "Implement a repository") {
     @ContentAndMedia {
-      A repository is a a software design pattern that provides an abstraction of the the data storage layer of your app. Repositories provide some fundamental operations for working with data: creating, reading, updating, and deleting (CRUD).
+      A repository is a software design pattern that provides an abstraction of the data storage layer of your app. Repositories provide some fundamental operations for working with data: creating, reading, updating, and deleting (CRUD).
       
       In this and the next parts of the tutorial, you will create a `RemindersRepository`, which you will connect to the `RemindersListView` that you implemented earlier. First, you will write code to add new reminders to Firestore using the `RemindersRepository`.
     }

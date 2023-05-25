@@ -1,7 +1,7 @@
 @Tutorial(time: 25, projectFiles: 01-building-a-simple-todo-list-ui.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Building a Simple Todo List UI") {
-    This tutorial guides you through building _Make It So_, a todo list application. You will start by creating s simple UI for displaying todo list items.
+    This tutorial guides you through building _Make It So_, a todo list application. You will start by creating a simple UI for displaying todo list items.
     
     @Image(source: building-todo-ui-intro.png, alt: "")
   }
@@ -26,6 +26,11 @@
         In the template selector, select _iOS_ as the platform, select the _App_ template, and then click _Next_.
         
         @Image(source: building-todo-ui-xcode-app-template.png, alt: "")
+      }
+      
+      @Step {
+        Type in `MakeItSo` as the project name.
+        @Image(source: building-todo-ui-xcode-project-name.png, alt: "")
       }
       
       @Step {
@@ -158,9 +163,9 @@
     }
   }
   
-  @Section(title: "Mark Reminders as isCompleted") {
+  @Section(title: "Mark Reminders as completed") {
     @ContentAndMedia {
-      The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to mark tasks as `isCompleted`.
+      The main purpose of a todo list app is to allow users to get things done. In this step, you will turn the static `Image` view into an interactive component that allows users to toggle the completion status of a reminder.
       
       @Video(source: sectionintros.003.mp4, alt: "")
     }
@@ -183,7 +188,7 @@
       @Step {
         Toogle the `isCompleted` status of the respective reminder.
         
-        > Warning: This will result in a compiler error saying that you _cannot use mutating member on immutable value: 'reminder' is a 'let' constant._. You will fix this in the next step.
+        > Warning: This will result in a compiler error saying that you _cannot use mutating member on immutable value: 'reminder' is a 'let' constant._ You will fix this in the next step.
         
         @Code(name: "ContentView.swift", file: building-todo-ui-reminder-03-contentview-03.swift) {
           @Image(source: building-todo-ui-reminder-03-contentview-03.png, alt: "")
@@ -240,7 +245,7 @@
       }
       
       @Step {
-        Replace the `Text` view with a `TextField`. Set its `title` property to `"Title"`, and bind its `text` property to the `title` property of the `reminder` property.
+        Replace the `Text` view with a `TextField`, and set its `title` to `"Title"`. Then, bind its `text` property to the `title` property of the `reminder` state variable.  
         
         > Note: Since the `title` property of the `reminder` is empty, the `TextField` will display a placeholder text. 
         
@@ -276,9 +281,9 @@
   
   @Section(title: "Pass Data From the Child View") {
     @ContentAndMedia {
-      When the user taps on the _Add_ button in the _Add Reminder_ dialog, the new reminder needs to be passed to the calling view so it can be added to the list of reminders. 
+      When the user taps on the _Add_ button in the _Add Reminder_ dialog, the new reminder needs to be passed back to the calling view so it can be added to the list of reminders. 
       
-      A common way to implement this is by using a completion handler. In this section, you will implement a completion handler and present the _AddReminderView_ from the parent view.
+      A common way to implement this is by using a completion handler. In this section, you will implement an `onCommit` completion handler on `AddReminderView`. In the following section, you will use this completion handler to received data from `AddReminderView`.
       
       @Image(source: sectionintros.005.png, alt: "")
     }
@@ -427,7 +432,7 @@
       In the next step, you will make sure the _Add_ button is only active if the title of the reminder is not empty. This prevents adding empty reminders.
       
       @Step {
-        Add a `disabled` view modifier to the _Add_ button and bind it to the the `isEmpty` state of the `title` property of the reminder. 
+        Add a `disabled` view modifier to the _Add_ button and bind it to the `isEmpty` state of the `title` property of the reminder. 
         
         @Code(name: "AddReminderView.swift", file: building-todo-ui-reminder-06-addreminder-brushup-05.swift) {
           @Image(source: building-todo-ui-reminder-06-addreminder-brushup-05.png, alt: "")

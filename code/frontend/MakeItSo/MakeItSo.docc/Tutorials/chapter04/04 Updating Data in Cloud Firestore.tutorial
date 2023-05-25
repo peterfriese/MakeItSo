@@ -5,7 +5,7 @@
     
     In this chapter, you will write code to mark reminders as completed - after all, getting things done is the ultimate purpose of a todo list app! 
     
-    You will also implement a dialog for editing reminders, and store the updated reminder back in to Firestore using the repository you created.
+    You will also implement a dialog for editing reminders, and then update the reminder document in Firebase, using the repository you created earlier in this tutorial.
     
     Download the project files to begin building this project, and follow the steps below.
     @Image(source: hero-intro-to-cloud-firestore, alt: "")
@@ -43,7 +43,7 @@
       @Step {
         Make sure the reminder has a document ID. 
         
-        > Note: Since you can only update Firestore documents if you have their document ID, it is a progamming error if the reminders ID is `nil`, so it is OK to use `fatalError` to termninate the app.
+        > Note: Since you can only update Firestore documents if you have their document ID, it is a progamming error if the reminders ID is `nil`, so it is OK to use `fatalError` to terminate the app.
         @Code(name: "RemindersRepository.swift", file: 04-updating-data-in-cloud-firestore-01-RemindersRepository-02.swift)
       }
       @Step {
@@ -98,7 +98,7 @@
   
   @Section(title: "Edit reminders") {
     @ContentAndMedia {
-      Users might sometimes want to edit a reminder, for example to add more details about a certain task. In this section, you will create a dialog for editing exsting reminders, connect it to the main list view, and write changes back to Firestore when users commit their changes.
+      Users might sometimes want to edit a reminder, for example to add more details about a certain task. In this section, you will create a dialog for editing existing reminders, connect it to the main list view, and write changes back to Firestore when users commit their changes.
     }
     
     @Steps {
@@ -167,7 +167,7 @@
       }
       
       @Step {
-        Add a new `sheet` modifier to the `List` view, and bind it to the `editableReminder` property. This will result in the sheet being showm when `editableRemninder` is not `nil`.
+        Add a new `sheet` modifier to the `List` view, and bind it to the `editableReminder` property. This will result in the sheet being shown when `editableRemninder` is not `nil`.
         
         @Code(name: "RemindersListView.swift", file: 04-updating-data-in-cloud-firestore-02-RemindersListView-03.swift) 
       }
@@ -190,7 +190,7 @@
         @Video(source: 04-updating-data-in-cloud-firestore-02-editing-reminders-final.mp4) 
       }
       
-      You might notice two UX flaws: when tapping on the blank area in a list row, the details dialog doesn't seem to open', and it would be nice to be able to commit the edit dialog by tapping the _Enter_ key. In the next steps, you will fix these issues.
+      You might notice two UX flaws: when tapping on the blank area in a list row, the details dialog doesn't seem to open, and it would be nice to be able to commit the edit dialog by tapping the _Enter_ key. In the next steps, you will fix these issues.
       
       @Step {
         To ensure the user can tap anywhere in a list row to open the details dialog, you need to mark the entire area of the list row as tappable.  In `RemindersListRowView.swift`, add a `Spacer` view to make sure the `HStack` consumes the entire available space. Then, use the `contentShape` view modifier to mark the entire `HStack` as clickable.
