@@ -1,0 +1,254 @@
+@Tutorial(time: 15, projectFiles: 01-dependency-injection-with-factory.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Dependency Injection with Factory") {
+    Even though _MakeItSo_ is a relatively simple app, it consists of quite a few components that need to interact with each other: models, views, view models, repositories, and different backend services like Firebase. 
+    
+    So far, you've connected these components by hard-coding their dependencies. But as you add more components to the app, you will notice that this approach doesn't scale.
+    
+    In this chapter, you will use a Dependency Injection SDK called _Factory_ to manage the dependencies in _MakeItSo_. This is in preparation for the next chapter, in which you will implement user authentication, which will require you to set up more complex dependencies between the components in your app. 
+    @Image(source: hero-dependency-injection-with-factory)
+  }
+  
+  @Comment {
+    * Add Factory to the project
+    * Set up injection for Firebase
+    * Set up injection for RemindersRepository
+  }
+  
+  @Section(title: "Add the Factory SDK to your project") {
+    @ContentAndMedia {
+      Use Swift Package Manager to install the Factory SDK.
+    }
+    
+    @Steps {
+      @Step {
+        Select the _MakeItSo_ root node (1) in Xcode’s _Project Navigator_, then select _MakeItSo_ in the project editor (2). Select the _Package Dependencies_ tab (3).
+        
+        @Image(source: 01-dependency-injection-with-factory-01-add-factory-01.png)
+      }
+      @Step {
+        Click on the _+_ button to open the _Add package_ dialog
+        
+        @Image(source: 01-dependency-injection-with-factory-01-add-factory-02.png)
+      }
+      @Step {
+        Paste the package URL for the Factory package into the search field: `https://github.com/hmlongco/Factory`.
+        
+        > Note: This is also the URL of the GitHub repository of the project.
+        @Image(source: 01-dependency-injection-with-factory-01-add-factory-03.png)
+      }
+      @Step {
+        Make sure to select _Up to Next Major Version_, and then enter `2.1.0` into the _from version_ field.
+        
+        Click on _Add Package_.
+        
+        @Image(source: 01-dependency-injection-with-factory-01-add-factory-04.png)
+      }
+      @Step {
+        Xcode will now download Factory and its dependencies. Once it is finished, select the following Package Products: Factory.
+        
+        Then, click on Add Package.
+        @Image(source: 01-dependency-injection-with-factory-01-add-factory-05.png)
+      }
+    }
+  }
+    
+  @Section(title: "Make Firebase available via Dependency Injection") {
+    @ContentAndMedia {
+      Factory is a _Container-based Depenceny Injection_ system. In a first step, you will register Firestore with Factory's shared container. This will allow you to inject an instance of Firestore into any other component in _MakeItSo_ that requires Firestore. 
+    }
+    
+    @Steps {
+      @Step {
+        Select the `Features/Reminders` folder in your project, and create a new folder named `Services`.
+        
+        @Image(source: 01-dependency-injection-with-factory-02-register-firebase-01.png)
+      }
+      @Step {
+        Create a new Swift file and name it `Firebase+Injection.swift` inside the new `Services` folder.
+        
+        > Note: It's a common practice to use a `+` sign to indicate files that contain Swift extensions for existing classes or structs. 
+        @Image(source: 01-dependency-injection-with-factory-02-register-firebase-02.png)
+      }
+      @Step {
+        Import `Factory`, `FirebaseAuth`, `FirebaseFirestore`, and `FirebaseFirestoreSwift`.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-01.swift, previousFile: 01-dependency-injection-with-factory-02-register-firebase-00.swift)
+      }
+      @Step {
+        Create a Swift extension on `Container`. 
+        
+        > Note: `Container` is a class provided by Factory that helps manage object creation, object resolution, and object lifecycles. 
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-02.swift)
+      }
+      
+      In the next few steps, you will take the code you previously wrote for setting up Firebase and convert it into dependency-injection compatible code. First, you will define a property that tells your app whether it should use the Firebase Emulator suite.
+      
+      @Step {
+        Inside the extension on `Container`, create a new property named `useEmulator`. 
+        
+        This property will return a `Factory` that produces a `Bool` value that will contain the value of the `useEmulator` launch parameter.
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-03.swift)
+      }
+      @Step {
+        Instantiate a `Factory`, passing in a reference to the `Container`. 
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-04.swift)
+      }
+      @Step {
+        Since you only need exactly _one_ instance of this property in your app, mark the factory as `singleton`.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-05.swift)
+      }
+      @Step {
+        Using the same code you used in `MakeItSoApp`, read the launch parameter `useEmulator`. Write a log output indicating whether or not the app is using the Emulator.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-06.swift)
+      }
+      
+      Nice - you just wrote your first dependency registration! Next, you will write a dependency registration for Firestore.
+      
+      @Step {
+        Inside the extension on `Container`, create a new property named `firestore`. 
+        
+        This property will return a `Factory` that produces an instance of `Firestore`.
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-07.swift)
+      }
+      @Step {
+        Instantiate a `Factory`, passing in a reference to the `Container`. 
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-08.swift)
+      }
+      @Step {
+        Again, since you only need exactly _one_ instance of this property in your app, mark the factory as `singleton`.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-09.swift)
+      }
+      @Step {
+        Use the `useEmulator` property you just created to determine if the app should use the Emulator or not.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-10.swift)
+      }
+      @Step {
+        Using the same code as in `MakeItSoApp`, configure the settings for Firestore. This code will connect your app to the Firestore Emulator.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-11.swift)
+      }
+      @Step {
+        It the app should *not* connect to the Emulator, you don't need to configure anything.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-12.swift)
+      }
+      @Step {
+        Return an instance of Firestore.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-13.swift)
+      }
+      
+    }
+  }
+    
+  @Section(title: "Use Dependency Injection to inject Firebase into your Repository") {
+    @ContentAndMedia {
+      In this step, you will replace all hard-coded dependencies to Firestore, and inject the singleton instance you just registered. 
+    }
+    
+    @Steps {
+      @Step {
+        Navigate to `ReminderFactory.swift` and import `Factory`.
+        
+        @Code(name: "RemindersRepository.swift", file: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-01.swift, previousFile: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-00.swift)
+      }
+      @Step {
+        Use Factory's `@Injected` property wrapper to inject an instance of Firstore.
+        
+        @Code(name: "RemindersRepository.swift", file: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-02.swift)
+      }
+      @Step {
+        You can now replace all occurrences of `Firestore.firestore` with `firestore`.
+        
+        @Code(name: "RemindersRepository.swift", file: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-03.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Inject RemindersRepository into RemindersListViewModel") {
+    @ContentAndMedia {
+      Instead of hard-coding a reference to `RemindersRepository`, put your newly gained knowledge of Dependency Injection to use. In this section, you will first register `RemindersRepository` for Dependency Injection (DI), and then inject it into `RemindersListViewModel`.
+    }
+    
+    @Steps {
+      First, set up the container and register a factory for `RemindersRepository`.
+      
+      @Step {
+        Inside the `Features/Reminders/Repositories` folder, create a new Swift file and name it `Repositories+Injection.swift`.
+        
+        @Code(name: "Repositories+Injection.swift", file: 01-dependency-injection-with-factory-04-inject-repository-Repositories+Injection-01.swift)
+      }
+      @Step {
+        Import `Factory` and create an extension on `Container`.
+        
+        @Code(name: "Repositories+Injection.swift", file: 01-dependency-injection-with-factory-04-inject-repository-Repositories+Injection-02.swift)
+      }
+      @Step {
+        Create a new property named `remindersRepository`. This will return an instance of `RemindersRepository`.
+        
+        @Code(name: "Repositories+Injection.swift", file: 01-dependency-injection-with-factory-04-inject-repository-Repositories+Injection-03.swift)
+      }
+      @Step {
+        Set up the factory, and mark it as a `singleton`, as you only need one single intance of the repository in your app.
+        
+        > Tip: You can use `self { }` as a shortcut for `Factory(self) { }`.
+        
+        @Code(name: "Repositories+Injection.swift", file: 01-dependency-injection-with-factory-04-inject-repository-Repositories+Injection-04.swift)
+      }
+      @Step {
+        Instantiate the `RemindersRepository`.
+        
+        @Code(name: "Repositories+Injection.swift", file: 01-dependency-injection-with-factory-04-inject-repository-Repositories+Injection-05.swift)
+      }
+      
+      Next, you can inject an instance of `RemindersRepository` into your view model.
+      
+      @Step {
+        Navigate to `ReminderListViewModel.swift`, and import `Factory`.
+        
+        @Code(name: "ReminderListViewModel.swift", file: 01-dependency-injection-with-factory-04-inject-repository-RemindersListViewModel-01.swift, previousFile: 01-dependency-injection-with-factory-04-inject-repository-RemindersListViewModel-00.swift)
+      }
+      @Step {
+        Annotate the `remindersRepository` property with the `@Injected` property wrapper to inject the singleton instance of `RemindersRepository` you just set up. 
+        
+        > Note: Make sure to remove the initialisation part of the `reminderRepository` property. 
+        
+        @Code(name: "ReminderListViewModel.swift", file: 01-dependency-injection-with-factory-04-inject-repository-RemindersListViewModel-02.swift)
+      }
+    }
+  }
+
+  @Section(title: "Wrap-up") {
+    @ContentAndMedia {
+      As a final step, you will do some clean-up before verifying the app still works.
+    }
+    
+    @Steps {
+      @Step {
+        Navigate to `MakeItSoApp.swift`.
+        
+        @Code(name: "MakeItSoApp.swift", file: 01-dependency-injection-with-factory-05-inject-repository-MakeItSoApp-00.swift)
+      }
+      @Step {
+        Remove the entire code block you previously used for configuring Firebase.
+        
+        > Note: The code is uncommented in this tutorial, as the current version of DocC doesn't support highlighting removed lines yet. Feel free to remove the code completely in your app.
+        
+        > Warning: Make sure to keep the line `FirebaseApp.configure()` in place!
+        
+        @Code(name: "MakeItSoApp.swift", file: 01-dependency-injection-with-factory-05-inject-repository-MakeItSoApp-01.swift)
+      }
+      @Step {
+        Now is a good time to run the app and verify it still works as expected.
+      }
+    }
+  }
+
+}

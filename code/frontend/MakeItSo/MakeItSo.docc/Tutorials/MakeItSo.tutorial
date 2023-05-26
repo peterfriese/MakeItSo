@@ -41,5 +41,11 @@
       @TutorialReference(tutorial: "doc:04-Updating-Data-in-Cloud-Firestore")
       @TutorialReference(tutorial: "doc:05-Deleting-Data-from-Cloud-Firestore")
     }
+    
+    @Chapter(name: "Dependency Injection") {
+      
+      In this chapter, you will use dependency injection to connect the different parts of your application.
+      @TutorialReference(tutorial: "doc:01-Dependency-Injection-with-Factory")
+    }
   }
 }
