@@ -133,6 +133,8 @@
       @Step {
         Make sure to select _Up to Next Major Version_, and then enter `10.9.0` into the _from version_ field.
         
+        Click on _Add Package_.
+        
         @Image(source: adding-firebase-04-add-firebase-package-04.png, alt: "")
       }
       @Step {
@@ -140,7 +142,7 @@
         
         Then, click on _Add Package_.
         
-        @Image(source: adding-firebase-04-add-firebase-package-04.png, alt: "")
+        @Image(source: adding-firebase-04-add-firebase-package-05.png, alt: "")
       }
     }
   }
