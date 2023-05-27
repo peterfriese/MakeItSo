@@ -17,10 +17,13 @@
 // limitations under the License.
 
 import Foundation
+import Factory
 import FirebaseAuth
 
 public class AuthenticationService {
+  @Injected(\.auth) private var auth
   @Published var user: User?
+
   @Published var errorMessage = ""
 
   private var authStateHandler: AuthStateDidChangeListenerHandle?
@@ -33,7 +36,7 @@ public class AuthenticationService {
 
   func registerAuthStateHandler() {
     if authStateHandler == nil {
-      authStateHandler = Auth.auth().addStateDidChangeListener { auth, user in
+      authStateHandler = auth.addStateDidChangeListener { auth, user in
         self.user = user
       }
     }
@@ -41,7 +44,7 @@ public class AuthenticationService {
 
   func signOut() {
     do {
-      try Auth.auth().signOut()
+      try auth.signOut()
       signInAnonymously()
     }
     catch {
@@ -67,11 +70,11 @@ public class AuthenticationService {
 
 extension AuthenticationService {
   func signInAnonymously() {
-    if Auth.auth().currentUser == nil {
+    if auth.currentUser == nil {
       print("Nobody is signed in. Trying to sign in anonymously.")
       Task {
         do {
-          try await Auth.auth().signInAnonymously()
+          try await auth.signInAnonymously()
           errorMessage = ""
         }
         catch {
@@ -81,7 +84,7 @@ extension AuthenticationService {
       }
     }
     else {
-      if let user = Auth.auth().currentUser {
+      if let user = auth.currentUser {
         print("Someone is signed in with \(user.providerID) and user ID \(user.uid)")
       }
     }
