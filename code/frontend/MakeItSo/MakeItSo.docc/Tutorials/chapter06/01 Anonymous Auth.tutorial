@@ -114,7 +114,9 @@
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-02a.swift)
       }
       @Step {
-        Define a property named `user`. This property will hold the signed in user. Mark the property as `@Published`, so that you can later connect the view models to this property and make sure they get notified whenever a user signs in or out.
+        Define a property named `user`. This property will hold the signed in user. 
+        
+        Mark the property as `@Published`, so that you can later connect the view models to this property and make sure they get notified whenever a user signs in or out.
         
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-03.swift)
       }
@@ -127,12 +129,14 @@
       }
       
       @Step {
-        Inside `registerAuthStateHandler`, call `Auth.auth().addStateDidChangeListener` to register a closure that will be called whenever the authentication state changes.
+        Inside `registerAuthStateHandler`, call `auth.addStateDidChangeListener` to register a closure that will be called whenever the authentication state changes.
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-05.swift)
       }
       
       @Step {
-        When the closure is called, it will receive a `user` object. If this object is `nil`, it means that the user has signed out. Assign the `user` to the published `user` property on the `AuthenticationService`. Any observers listening to this publisher will receive an event, and can consequently perform some logic (such as updating the UI).
+        When the closure is called, it will receive a `user` object. 
+        
+        > Note: If this object is `nil`, it means that the user has signed out. Assign the `user` to the published `user` property on the `AuthenticationService`. Any observers listening to this publisher will receive an event, and can consequently perform some logic (such as updating the UI).
         
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-06.swift)
       }
@@ -180,7 +184,7 @@
       @Step {
         Add a method `signOut` for signing out. 
         
-        After signing our, _immediately_ sign back in again anonymously. This is to make sure that the app always has a signed in user that it can use to key the user's data to when writing to Firestore.
+        > Important: After signing our, _immediately_ sign back in again anonymously. This is to make sure that the app always has a signed in user that it can use to key the user's data to when writing to Firestore.
         
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-13.swift)
       }
@@ -216,10 +220,12 @@
       @Step {
         Instantiate a factory, and configure it to produce a `singleton`.
         
+        > Note: Remember: `self { }` is a shortcut for calling `Factory(self) { }`.
+        
         @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-04.swift)
       }
       @Step {
-        Create an instance of `AuthenticationService`.
+        Inside the factory, reate an instance of `AuthenticationService`.
         
         @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-05.swift)
       }
@@ -321,10 +327,24 @@
     }
   }
     
+  @Section(title: "Add a userId property to the Reminder struct") {
+    @ContentAndMedia {
+      The `RemindersRepository` you created in an earlier chapter of this tutorial didn't take the signed in user into consideration. Instead, it just stored all `Reminder` documents into the top-level `reminders` collection in Firestore. This means that all users see the same reminders. 
+      
+      To make sure users can only see their own reminders, you need to add a `userId` attribute to the `Reminder`. In the next section, you will then set this attribute when storing new reminders to Firestore.
+    }
+    @Steps {
+      @Step {
+        Add a new property named `userId` to the `Reminder` struct, and make sure to mark it as optional.
+        @Code(name: "Reminder.swift", file: 01-anonymous-auth-05-Reminder-01.swift, previousFile: 01-anonymous-auth-05-Reminder-00.swift)
+      }
+    }
+  }
+    
   @Section(title: "Update the RemindersRepository to operate only on the user's data") {
     @ContentAndMedia {
+      Now that `Reminder` has a property for the user's ID, you can update `RemindersRepository` to fill this field when storing the user's reminders into Firestore. Likewise, you will need to update the query you use to fetch the user's reminders from Firestore.
     }
-    
     @Steps {
       @Step {
         Make sure that, when the user signs in or out, the snapshot listener is first unregistered, and then a new one is registered for the newly signed-in user. This is to make sure your app always uses the signed-in user's user ID when fetching or writing data.
@@ -365,6 +385,8 @@
       }
       @Step {
         Run the app on a second Simulator. Notice how both Simulators will use two different anonymous users, and that they will each have their own set of data.
+        
+        > Tip: The easiest way to achieve this is to launch the app from Xcode on the first Simulator, and then use the _Debug > Detach_ menu item to detach the debugger. This will prevent the app from being terminated. You can then choose a different Simulator launch target, and launch the app on this second Simulator. This approach makes sure the app gets passed the launch argument to connect to the Firebase Emulator. If you're connecting to the Firebase project in the cloud, you won't need to detach the app from the debugger, as it won't need to reach the launch argument.
       }
     }
   }

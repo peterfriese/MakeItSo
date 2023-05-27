@@ -24,7 +24,6 @@ struct Reminder: Identifiable, Codable {
   var id: String?
   var title: String
   var isCompleted = false
-
   var userId: String? = nil
 }
 
