@@ -353,11 +353,15 @@
   
   @Section(title: "Take the app for a spin and experience its multi-user capabilities") {
     @ContentAndMedia {
+      Congratulations! In this chapter, you implemented anonymous authentication for your app and updated the `RemindersRepository` to use the signed-in user's ID to assign all their data to them. This is a major step on turning your app into a true multi-user app. 
     }
     
     @Steps {
       @Step {
-        Run the app on a Simulator.
+        Run the app on an iOS Simulator, and try all the features. 
+        
+        Note, that after signing out, you will be assigned a new anonymous user ID.
+        @Video(source: 01-anonymous-auth-final-demo.mp4)
       }
       @Step {
         Run the app on a second Simulator. Notice how both Simulators will use two different anonymous users, and that they will each have their own set of data.
