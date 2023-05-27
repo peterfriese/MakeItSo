@@ -1,0 +1,107 @@
+@Article(time: 10) {
+  @Intro(title: "Firebase Authenticatioon") {
+    Firebase Authentication provides backend services, easy-to-use SDKs, and ready-made UI libraries to authenticate users to your app. It supports authentication using passwords, phone numbers, popular federated identity providers like Google, Facebook and Twitter, and more.
+    
+    @Image(source: hero-anonymous-auth)
+  }
+  
+  @Stack {
+    @ContentAndMedia {
+      ## Why authenticate?
+      
+      Most apps need to know the identity of a user. Knowing a user's identity allows an app to securely save user data in the cloud and provide the same personalized experience across all of the user's devices.
+      
+      Firebase Authentication integrates tightly with other Firebase services, and it leverages industry standards like OAuth 2.0 and OpenID Connect, so it can be easily integrated with your custom backend.
+      
+      When you upgrade to [Firebase Authentication with Identity Platform](https://firebase.google.com/docs/auth#identity-platform), you unlock additional features, such as multi-factor authentication, blocking functions, user activity and audit logging, SAML and generic OpenID Connect support, multi-tenancy, and enterprise-level support.
+      
+      ## Users in Firebase Projects
+
+      The Firebase **user** object represents a user account that has signed up for an app in your project. Apps usually have many registered users, and every app in a project shares a user database.
+
+      User instances are independent from Firebase Authentication instances, so you can have several references to different users within the same context and still call any of their methods
+      
+      ## User properties
+      Firebase users have a fixed set of basic properties—a unique ID, a primary email address, a name and a photo URL—stored in the project's user database, that can be updated by the user ([iOS](https://firebase.google.com/docs/auth/ios/manage-users#update_a_users_profile), [Android](https://firebase.google.com/docs/auth/android/manage-users#update_a_users_profile), [web](https://firebase.google.com/docs/auth/web/manage-users#update_a_users_profile)). You cannot add other properties to the user object directly; instead, you can store the additional properties in any other storage services, like Google Cloud Firestore.
+
+      The first time a user signs up to your app, the user's profile data is populated using the available information:
+
+      * If the user signed up with an email address and password, only the primary email address property is populated
+      * If the user signed up with a federated identity provider, such as Google or Facebook, the account information made available by the provider is used to populate the user's profile
+      * If the user signed up with your custom auth system, you must explicitly add the information you want to the user's profile
+      
+      Once a user account has been created, you can reload the user's information to incorporate any changes the user might have made on another device.
+
+      ## Sign-in providers
+      You can sign in users to your apps using several methods: email address and password, federated identity providers, and your custom auth system. You can associate more than one sign-in method with a user: for example, a user can sign in to the same account using an email address and a password, or using Google Sign-In.
+
+      User instances keep track of every provider linked to the user. This allows you to update empty profile's properties using the information given by a provider. See Managing Users ([iOS](https://firebase.google.com/docs/auth/ios/manage-users#get_a_users_provider-specific_profile_information), [Android](https://firebase.google.com/docs/auth/android/manage-users#get_a_users_provider-specific_profile_information), [web](https://firebase.google.com/docs/auth/web/manage-users#get_a_users_provider-specific_profile_information)).
+      
+      ## The current user
+      When a user signs up or signs in, that user becomes the current user of the Auth instance. The instance persists the user's state, so that refreshing the page (in a browser) or restarting the application doesn't lose the user's information.
+
+      When the user signs out, the Auth instance stops keeping a reference to the user object and no longer persists its state; there is no current user. However, the user instance continues to be completely functional: if you keep a reference to it, you can still access and update the user's data.
+      
+      ## The user lifecycle
+      The recommended way to track the current state of the Auth instance is by using listeners (also called "observers" in JavaScript). An Auth listener gets notified any time something relevant happens to the Auth object. See Managing Users ([iOS](https://firebase.google.com/docs/auth/ios/manage-users#get_the_currently_signed-in_user), [Android](https://firebase.google.com/docs/auth/android/manage-users#get_the_currently_signed-in_user), [web](https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user)).
+
+      An Auth listener gets notified in the following situations:
+
+      * The Auth object finishes initializing and a user was already signed in from a previous session, or has been redirected from an identity provider's sign-in flow
+      * A user signs in (the current user is set)
+      * A user signs out (the current user becomes null)
+      * The current user's access token is refreshed. This case can happen in the following conditions:
+      * The access token expires: this is a common situation. The refresh token is used to get a new valid set of tokens.
+      * The user changes their password: Firebase issues new access and refresh tokens and renders the old tokens expired. This automatically expires the user's token and/or signs out the user on every device, for security reasons.
+      * The user re-authenticates: some actions require that the user's credentials are recently issued; such actions include deleting an account, setting a primary email address, and changing a password. Instead of signing out the user and then signing in the user again, get new credentials from the user, and pass the new credentials to the reauthenticate method of the user object.
+      
+      ## User self-service
+      By default, Firebase enables users to sign-up and delete their accounts without administrative intervention. In many circumstances, this enables end-users to discover your application or service and onboard (or offboard) with minimal friction.
+
+      There are situations, however, where you want users to be manually or programmatically created by an administrator, either using the Admin SDK or Firebase console. In these cases, you can disable user actions from the [Firebase Authentication Settings](https://console.firebase.google.com/project/_/authentication/settings) page, which prevents account creation and deletion by end-users. If you are using multi-tenancy, you will need to make an HTTP request to disable these features on a per-tenant basis.
+
+      If an end-user attempts to create or delete an account within your system, the Firebase service will return an error code: auth/admin-restricted-operation for Web API calls, or ERROR_ADMIN_RESTRICTED_OPERATION for Android and iOS. You should gracefully handle the error on your front-end by asking the user to take the appropriate actions for your service.
+      
+      ## Auth tokens
+      When you perform authentication with Firebase, there are three kinds of auth tokens you might encounter:
+      
+      | Firebase ID tokens       | Created by Firebase when a user signs in to an app. These tokens are signed JWTs that securely identify a user in a Firebase project. These tokens contain basic profile information for a user, including the user's ID string, which is unique to the Firebase project. Because the [integrity of ID tokens can be verified](https://firebase.google.com/docs/auth/admin/verify-id-tokens), you can send them to a backend server to identify the currently signed-in user. |
+      |--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      | Identity provider tokens | reated by federated identity providers, such as Google and Facebook. These tokens can have different formats, but are often OAuth 2.0 access tokens. Apps use these tokens to verify that users have successfully authenticated with the identity provider, and then convert them into credentials usable by Firebase services.                                                                               |
+      | Firebase custom tokens   | Created by your custom auth system to allow users to sign in to an app using your auth system. Custom tokens are JWTs [signed using a service account's private key](https://firebase.google.com/docs/auth/admin/create-custom-tokens). Apps use these tokens much like they use the tokens returned from federated identity providers.                                                                                                                                           |
+      
+      ## Verified email addresses
+      Firebase considers an email verified if it meets two conditions:
+
+      1. The user completes the Firebase verification flow
+      1. The email is verified by a trusted Identity Provider, or IdP for short.
+      
+      IdPs that verify email once, but then allow users to change email addresses without requiring re-verification, are not trusted. IdPs that either own the domain or always require verification are considered trusted.
+
+      Trusted providers:
+
+      * Google (for @gmail.com addresses)
+      * Yahoo (for @yahoo.com addresses)
+      * Microsoft (for @outlook.com and @hotmail.com addresses)
+      * Apple (always verified, because accounts are always verified and multi-factor-authenticated)
+      
+      Untrusted providers:
+
+      * Facebook
+      * Twitter
+      * GitHub
+      * Google, Yahoo, and Microsoft for domains not issued by that Identity Provider
+      * Email / Password without email verification
+      
+      In some situations, Firebase will automatically link accounts when a user signs in with different providers using the same email address. This can only happen when specific criteria are met, however. To understand why, consider the following situation: a user signs in using Google with a @gmail.com account and a malicious actor creates an account using the same @gmail.com address, but signing in via Facebook. If these two accounts were automatically linked, the malicious actor would gain access to the user's account.
+
+      The following cases describe when we automatically link accounts and when we throw an error requiring user or developer action:
+
+      * User signs in with an untrusted provider, then signs in with another untrusted provider with the same email (for example, Facebook followed by GitHub). This throws an error requiring account linking.
+      * User signs in with a trusted provider, then signs in with untrusted provider with the same email (for example, Google followed by Facebook). This throws an error requiring account linking.
+      * User signs in with an untrusted provider, then signs in with a trusted provider with the same email (for example, Facebook followed by Google). The trusted provider overwrites the untrusted provider. If the user attempts to sign in again with Facebook, it will cause an error requiring account linking.
+      * User signs in with a trusted provider, then signs in with a different trusted provider with the same email (for example, Apple followed by Google). Both providers will be linked without errors.
+      You can manually set an email as verified by using the Admin SDK, but we recommend only doing this if you know the user really does own the email.
+    }
+  }
+}
