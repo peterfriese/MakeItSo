@@ -24,7 +24,7 @@
     }
     
     @Chapter(name: "Connecting Your App to Firebase") {
-      @Image(source: chapter01.png, alt: "A wireframe of an app interface.")
+      @Image(source: chapter03.png, alt: "A wireframe of an app interface.")
     
       In this chapter, you will connect your app to Firebase, Google's app development platform.
       @TutorialReference(tutorial: "doc:01-Adding-Firebase-to-Your-Project")
@@ -43,6 +43,7 @@
     }
     
     @Chapter(name: "Dependency Injection") {
+      @Image(source: chapter05.png)
       
       In this chapter, you will use dependency injection to connect the different parts of your application.
       @TutorialReference(tutorial: "doc:01-Dependency-Injection-with-Factory")
