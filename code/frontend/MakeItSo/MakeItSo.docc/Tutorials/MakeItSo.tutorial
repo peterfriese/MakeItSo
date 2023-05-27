@@ -57,4 +57,33 @@
       @TutorialReference(tutorial: "doc:01-Anonymous-Auth")
     }
   }
+  
+  @Resources {
+    Explore more resources for learning about Firebase.
+
+    @Videos(destination: "https://youtube.com/playlist?list=PLl-K7zZEsYLnfwBe4WgEw9ao0J0N1LYDR") {
+      Watch our Firebase Fundamentals series to get started with Firebase.
+      
+      - [Firebase on Apple platforms](https://youtu.be/F9Gs_pfT3hs?t=PLl-K7zZEsYLnfwBe4WgEw9ao0J0N1LYDR)
+      - [Google Sign-In on Apple platforms](https://youtu.be/IzyOdKm0bWE?t=PLl-K7zZEsYLnfwBe4WgEw9ao0J0N1LYDR)
+      - [Account linking and anonymous authentication](https://youtu.be/6jGNSFdHHXc?t=PLl-K7zZEsYLnfwBe4WgEw9ao0J0N1LYDR)
+      - [Email/link auth on iOS](https://youtu.be/-OK7VG7Cl8I?t=PLl-K7zZEsYLnfwBe4WgEw9ao0J0N1LYDR)
+    }
+    
+    @Documentation(destination: "https://firebase.google.com/docs/guides") {
+      Here are some parts of the Firebase documentation that you might find useful.
+
+      - [Understand Firebase projects](https://firebase.google.com/docs/projects/learn-more)
+      - [Set up and manage a Firebase project using the Management REST API](https://firebase.google.com/docs/projects/api/workflow_set-up-and-manage-project?platform=ios)
+      - [Select locations for your project](https://firebase.google.com/docs/projects/locations)
+      - [Learn about using and managing API keys for Firebase](https://firebase.google.com/docs/projects/api-keys)
+    }
+    
+    @Forums(destination: "https://github.com/firebase/firebase-ios-sdk/discussions") {
+      Use the Firebase Apple SDK GitHub repository to connect with the team.
+      
+      - [Discuss with the Firebase SDK team](https://github.com/firebase/firebase-ios-sdk/discussions)
+      - [File issues or request features](https://github.com/firebase/firebase-ios-sdk/issues)
+    }
+  }  
 }
