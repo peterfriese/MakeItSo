@@ -1,0 +1,394 @@
+@Tutorial(time: 25, projectFiles: 01-anonymous-auth.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Implementing guest users with Firebase Anonymous Authentication") {
+    It seems like MakeItSo meets the bar for an MVP (minimum viable product): users can add new reminders, check them off, change their details, and even delete them. But - as you might have noticed when running the app on two different iOS Simulators - the app is not multi-user capable. What's worse, it seems like all users can see everyone else's todo items.
+    
+    That's definitely not what most users expect from a todo list app! Your app needs a way to store data on a per-user basis.
+    
+    In this chapter, you will implement user authentication, allowing users to sign in to your app with their preferred authentication mechanism. Firebase Authentication supports a broad range or authentication providers: signing in with email and password, email and link authentication, Sign in with Apple, Google Sign-In, phone number authentication, to name just a few.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    @Image(source: hero-anonymous-auth)
+  }
+  
+  @Comment {
+    * Make sure to start from the starter app, as it contains important helper files
+    * Add auth service
+    * Wire it up using DI
+    * Track current user in the repository
+    * Implement signIn: if nobody is signed in, sign in anon
+    * Call signIn from the main app
+  }
+  
+  @Section(title: "Download the project files") {
+    @ContentAndMedia {
+      Since this chapter relies on a relatively complex UI for authenticating the user, you **NEED** to use the starter project provided in the project files zip file. It contains a number of screens (settings, user profile, login, and sign-up), as well as the corresponding view models. In this first section, you will walk through the provided source code files to understand the code and how the individual parts are connected. 
+      
+      In the following sections, you will then implement a guest account system based on Firebase Anonymous Authentication. 
+    }
+    
+    @Steps {
+      In the following steps, you will navigate through the new screens of the app. You can read the code here in this tutorial, or open the files in Xcode.
+      
+      @Step {
+        Take a look at `RemindersListView.swift`. It now includes a gear-shaped toolbar button that will open the _Settings_ screen of the app.
+        
+        @Code(name: "RemindersListView.swift", file: 01-anonymous-auth-01-walkthrough-RemindersListView-01.swift, previousFile: 01-anonymous-auth-01-walkthrough-RemindersListView-00.swift) {
+          @Image(source: 01-anonymous-auth-01-walkthrough-RemindersListView-01.png)
+        }
+      }
+      
+      @Step {
+        The `SettingsView` includes a couple of authentication-related UI elements: users can navigate to the `ProfileView` to inspect their account. 
+        
+        There also is aa button for logging out or signing in, dependin on whether or not a user is signed in.  
+        
+        @Code(name: "SettingsView.swift", file: 01-anonymous-auth-01-walkthrough-SettingsView-01.swift, previousFile: 01-anonymous-auth-01-walkthrough-SettingsView-00.swift) {
+          @Image(source: 01-anonymous-auth-01-walkthrough-SettingsView-01.png)
+        }
+      }
+      
+      @Step {
+        The `UserProfileView` features a SwiftUI form for displaying some of the user account's details, such as their email address, full name, the user ID, and some information about the authentication provider used to sign in. 
+        
+        The screen also has two buttons: one for signing out, the other one for deleting the account.  
+        
+        @Code(name: "SettingsView.swift", file: 01-anonymous-auth-01-walkthrough-UserProfileView-01.swift, previousFile: 01-anonymous-auth-01-walkthrough-UserProfileView-00.swift) {
+          @Image(source: 01-anonymous-auth-01-walkthrough-UserProfileView-01.png)
+        }
+      }
+      
+      @Step {
+        The `SignupView` will be shown to the user when they tap on the _Sign up_ button on the _Settings_ screen. 
+        
+        The reason for showing the sign-up screen first (rather than the login screen) is that most users will not yet have an account, so they are more likely going to want to create a new account. You can see that the screen has buttons for signin in with Google and Apple. There also is a section for signin up with email and password, but it will only become visible once the user taps on the _More sign-in options_ button. 
+        
+        @Code(name: "SettingsView.swift", file: 01-anonymous-auth-01-walkthrough-SignupView-01.swift, previousFile: 01-anonymous-auth-01-walkthrough-SignupView-00.swift) {
+          @Image(source: 01-anonymous-auth-01-walkthrough-SignupView-01.png)
+        }
+      }
+      
+      @Step {
+        When the user taps on the _Already have an account? Log in_ button, they will be taken to the `LoginView`. This looks very similar to the _Sign up_ screen. 
+        
+        The main differences are the different labels on the Sign in with Apple and Google Sign-In buttons. Also, the _sign in with email and password_ section on this screen doesn't have a password confirmation field (like the _Sign up_ screen).
+        
+        @Code(name: "SettingsView.swift", file: 01-anonymous-auth-01-walkthrough-LoginView-01.swift, previousFile: 01-anonymous-auth-01-walkthrough-LoginView-00.swift) {
+          @Image(source: 01-anonymous-auth-01-walkthrough-LoginView-01.png)
+        }
+      }
+      
+      @Step {
+        Switching between the _sign up_ and _log in_ flows is handled by the `AuthenticationView`. 
+        
+        @Code(name: "SettingsView.swift", file: 01-anonymous-auth-01-walkthrough-AuthenticationView-00)
+      }
+      
+    }
+  }
+    
+  @Section(title: "Implement an AuthenticationService") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Step {
+        In `Firebase+Injection.swift`, add a factory for Firebase Auth.
+        
+        @Code(name: "Firebase+Injection.swift", file: 01-anonymous-auth-02-Firebase+Injection-01.swift, previousFile: 01-anonymous-auth-02-Firebase+Injection-00.swift)
+      }
+      
+      @Step {
+        Find the `Features/Reminders/Authentication/Services` folder in the Xcode's prooject navigator, and create a new file named `AuthenticationService.swift`.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-01.swift)
+      }
+      @Step {
+        Import `FirebaseAuth`, and create a new class named `AuthenticationService`.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-02.swift)
+      }
+      @Step {
+        Import `Factory`, and inject an instance of Firebase Auth.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-02a.swift)
+      }
+      @Step {
+        Define a property named `user`. This property will hold the signed in user. 
+        
+        Mark the property as `@Published`, so that you can later connect the view models to this property and make sure they get notified whenever a user signs in or out.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-03.swift)
+      }
+      
+      To keep track of the signed in Firebase user, you will now implement an authentication state listener. This listener will be called whenever the authenticated user changes.
+      
+      @Step {
+        Define a new private property to hold a reference to an `AuthStateDidChangeListenerHandle`, and create a function `registerAuthStateHandler` for registering the handler.
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-04.swift)
+      }
+      
+      @Step {
+        Inside `registerAuthStateHandler`, call `auth.addStateDidChangeListener` to register a closure that will be called whenever the authentication state changes.
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-05.swift)
+      }
+      
+      @Step {
+        When the closure is called, it will receive a `user` object. 
+        
+        > Note: If this object is `nil`, it means that the user has signed out. Assign the `user` to the published `user` property on the `AuthenticationService`. Any observers listening to this publisher will receive an event, and can consequently perform some logic (such as updating the UI).
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-06.swift)
+      }
+      @Step {
+        Create an initialiser, and call `registerAuthStateHandler`. This ensures the authentication state handler will be activated once the `AuthenticationService` is created.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-07.swift)
+      }
+      
+      Next, you will implement anonymous authentication. This is an authentication mechanism that create a Firebase user account without requiring the user to provide any credentials. Firebase will generate a completely random UUID and create a new user account with this ID.
+      
+      @Step {
+        To keep your code nicely separated, create an extension on `AuthenticationService`, and implement a method `signInAnonymously`.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-08.swift)
+      }
+      @Step {
+        Check if a user is already signed in.
+        
+        > Note: This will be the case if the user has already used the app before, or has signed in using one of the other authentication providers that your apps supports.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-09.swift)
+      }
+      
+      @Step {
+        If no user is signed in, call `auth.signInAnonymously` to sign the user in anonymously.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-10.swift)
+      }
+      
+      @Step {
+        Call `signInAnonymously` in the initialiser to ensure there is always a signed in user.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-11.swift)
+      }
+      
+      @Step {
+        Add some log statements to make it easier to see what's going on.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-12.swift)
+      }
+      
+      To complete the picture, add methods for signing out and deleting the currently signed in user. These are required for some of the authentication screens you saw ealier in this chapter.
+      
+      @Step {
+        Add a method `signOut` for signing out. 
+        
+        > Important: After signing our, _immediately_ sign back in again anonymously. This is to make sure that the app always has a signed in user that it can use to key the user's data to when writing to Firestore.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-13.swift)
+      }
+      
+      @Step {
+        Add a method `deleteAccount` for deleting the user account.
+        
+        @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-14.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Register AuthenticationService with the Dependency Injection container") {
+    @ContentAndMedia {
+    }
+    
+    @Steps {
+      @Step {
+        In the `Features/Reminders/Authentication/Services` folder, create a new file named `AuthenticationService+Injection.swift`.
+        
+        @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-01.swift)
+      }
+      @Step {
+        Import `Factory`, and create a Swift extension on `Container`.
+        
+        @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-02.swift)
+      }
+      @Step {
+        Create a new factory method named `authenticationService` that will produce instances of `AuthenticationService`.
+        
+        @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-03.swift)
+      }
+      @Step {
+        Instantiate a factory, and configure it to produce a `singleton`.
+        
+        > Note: Remember: `self { }` is a shortcut for calling `Factory(self) { }`.
+        
+        @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-04.swift)
+      }
+      @Step {
+        Inside the factory, reate an instance of `AuthenticationService`.
+        
+        @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-05.swift)
+      }
+    }
+  }
+
+  @Section(title: "Inject AuthenticationService into its dependants") {
+    @ContentAndMedia {
+      Your app has a couple of objects that depend on `AuthenticationService`: the `AppDelegate`, `AuthenticationViewModel`, `UserProfileViewModel`, `SettingsViewModel`, and `RemindersRepository`. 
+      
+      In this section, you will inject the singleton instance of `AuthenticationService` you just registered into all of these.
+    }
+    
+    @Steps {
+      Start by injecting the `AppDelegate`.
+      
+      @Step {
+        In `MakeItSoApp.swift`, use the `@LazyInjected` property wrapper to inject `AuthenticationService` into the `AppDelegate`.
+        
+        @Code(name: "MakeItSoApp.swift", file: 01-anonymous-auth-04-MakeItSoApp-01.swift, previousFile: 01-anonymous-auth-04-MakeItSoApp-00.swift)
+      }
+      
+      @Step {
+        In `didFinishLaunchingWithOptions`, call `authenticationService.signInAnonymously` to sign the user anonymously in once the application starts. 
+        
+        @Code(name: "MakeItSoApp.swift", file: 01-anonymous-auth-04-MakeItSoApp-02.swift)
+      }
+
+      
+      Inject the `AuthenticationService` into `AuthenticationViewModel`.
+      
+      @Step {
+        In `AuthenticationViewModel.swift`, use the `@Injected` property wrapper to inject `AuthenticationService`.
+        
+        @Code(name: "AuthenticationViewModel.swift", file: 01-anonymous-auth-04-AuthenticationViewModel-01.swift, previousFile: 01-anonymous-auth-04-AuthenticationViewModel-00.swift)
+      }
+      
+      @Step {
+        At the end of `AuthenticationViewModel.swift`, you can now use this instance to call the `deleteAccount` and `signOut` methods on the service.
+        
+        @Code(name: "AuthenticationViewModel.swift", file: 01-anonymous-auth-04-AuthenticationViewModel-02.swift)
+      }
+      
+      Inject the `AuthenticationService` into `UserProfileViewModel`.
+      
+      @Step {
+        In `UserProfileViewModel.swift`, use the `@Injected` property wrapper to inject `AuthenticationService`.
+        
+        @Code(name: "UserProfileViewModel.swift", file: 01-anonymous-auth-04-UserProfileViewModel-01.swift, previousFile: 01-anonymous-auth-04-UserProfileViewModel-00.swift)
+      }
+      
+      @Step {
+        In the initialiser, use the `assign` operator to keep the local `user` property in sync with the published `user` property on the `AuthenticationService`. 
+        
+        @Code(name: "UserProfileViewModel.swift", file: 01-anonymous-auth-04-UserProfileViewModel-02.swift)
+      }
+      
+      @Step {
+        At the end of `UserProfileViewModel.swift`, you can now use this instance to call the `deleteAccount` and `signOut` methods on the service.
+        
+        @Code(name: "UserProfileViewModel.swift", file: 01-anonymous-auth-04-UserProfileViewModel-03.swift)
+      }
+      
+      Inject the `AuthenticationService` into `SettingsViewModel`.
+      
+      @Step {
+        In `SettingsViewModel.swift`, use the `@Injected` property wrapper to inject `AuthenticationService`.
+        
+        @Code(name: "SettingsViewModel.swift", file: 01-anonymous-auth-04-SettingsViewModel-01.swift, previousFile: 01-anonymous-auth-04-SettingsViewModel-00.swift)
+      }
+      
+      @Step {
+        In the initialiser, use the `assign` operator to keep the local `user` property in sync with the published `user` property on the `AuthenticationService`. 
+        
+        @Code(name: "SettingsViewModel.swift", file: 01-anonymous-auth-04-SettingsViewModel-02.swift)
+      }
+      
+      @Step {
+        At the end of `SettingsViewModel.swift`, you can now use this instance to call the `signOut` method on the service.
+        
+        @Code(name: "SettingsViewModel.swift", file: 01-anonymous-auth-04-SettingsViewModel-03.swift)
+      }
+      
+      Finally, inject the `AuthenticationService` into the `RemindersRepository`.
+      
+      @Step {
+        In `RemindersRepository.swift`, use the `@Injected` property wrapper to inject `AuthenticationService`.
+        
+        @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-04-RemindersRepository-01.swift, previousFile: 01-anonymous-auth-04-RemindersRepository-00.swift)
+      }
+      
+      @Step {
+        Add a published propery for the signed-in user, and connect it to the `user` property on `AuthenticationService`.
+        
+        In the next section, you will use this user to make sure data that is written to and read from Firestore belongs to the signed in user.
+        
+        @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-04-RemindersRepository-02.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Add a userId property to the Reminder struct") {
+    @ContentAndMedia {
+      The `RemindersRepository` you created in an earlier chapter of this tutorial didn't take the signed in user into consideration. Instead, it just stored all `Reminder` documents into the top-level `reminders` collection in Firestore. This means that all users see the same reminders. 
+      
+      To make sure users can only see their own reminders, you need to add a `userId` attribute to the `Reminder`. In the next section, you will then set this attribute when storing new reminders to Firestore.
+    }
+    @Steps {
+      @Step {
+        Add a new property named `userId` to the `Reminder` struct, and make sure to mark it as optional.
+        @Code(name: "Reminder.swift", file: 01-anonymous-auth-05-Reminder-01.swift, previousFile: 01-anonymous-auth-05-Reminder-00.swift)
+      }
+    }
+  }
+    
+  @Section(title: "Update the RemindersRepository to operate only on the user's data") {
+    @ContentAndMedia {
+      Now that `Reminder` has a property for the user's ID, you can update `RemindersRepository` to fill this field when storing the user's reminders into Firestore. Likewise, you will need to update the query you use to fetch the user's reminders from Firestore.
+    }
+    @Steps {
+      @Step {
+        Make sure that, when the user signs in or out, the snapshot listener is first unregistered, and then a new one is registered for the newly signed-in user. This is to make sure your app always uses the signed-in user's user ID when fetching or writing data.
+        
+        To achieve this, set up a Combine pipeline on the `$user` publisher. When the pipeline receives an event (i.e., the `user` property has changed), first unsubscribe, and then subscribe with the new user.
+        @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-05-RemindersRepository-01.swift, previousFile: 01-anonymous-auth-05-RemindersRepository-00.swift)
+      }
+      @Step {
+        Unwrap the `user` object. If it is `nil`, use the `user` property on the `RemindersRepository`.
+        
+        @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-05-RemindersRepository-02.swift, previousFile: 01-anonymous-auth-05-RemindersRepository-02-pre.swift)
+      }
+      @Step {
+        Update the query and include a confition that compares the `userId` attribute on the Firestore document to the `uid` property of the signed-in user. This way, you will filter only the user's reminders.
+        @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-05-RemindersRepository-03.swift)
+      }
+      
+      Next, make sure to include the user's `uid` when storing their reminders in Firestore.
+      
+      @Step {
+        In the `addReminder` method, first make a mutable copy of the reminder. Then, set the `userId` property of the mutable copy to the `uid` of the signed-in user. 
+        @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-05-RemindersRepository-04.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Take the app for a spin and experience its multi-user capabilities") {
+    @ContentAndMedia {
+      Congratulations! In this chapter, you implemented anonymous authentication for your app and updated the `RemindersRepository` to use the signed-in user's ID to assign all their data to them. This is a major step on turning your app into a true multi-user app. 
+    }
+    
+    @Steps {
+      @Step {
+        Run the app on an iOS Simulator, and try all the features. 
+        
+        Note, that after signing out, you will be assigned a new anonymous user ID.
+        @Video(source: 01-anonymous-auth-final-demo.mp4)
+      }
+      @Step {
+        Run the app on a second Simulator. Notice how both Simulators will use two different anonymous users, and that they will each have their own set of data.
+        
+        > Tip: The easiest way to achieve this is to launch the app from Xcode on the first Simulator, and then use the _Debug > Detach_ menu item to detach the debugger. This will prevent the app from being terminated. You can then choose a different Simulator launch target, and launch the app on this second Simulator. This approach makes sure the app gets passed the launch argument to connect to the Firebase Emulator. If you're connecting to the Firebase project in the cloud, you won't need to detach the app from the debugger, as it won't need to reach the launch argument.
+      }
+    }
+  }
+  
+}

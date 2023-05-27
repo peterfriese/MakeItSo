@@ -6,6 +6,8 @@
     So far, you've connected these components by hard-coding their dependencies. But as you add more components to the app, you will notice that this approach doesn't scale.
     
     In this chapter, you will use a Dependency Injection SDK called _Factory_ to manage the dependencies in _MakeItSo_. This is in preparation for the next chapter, in which you will implement user authentication, which will require you to set up more complex dependencies between the components in your app. 
+    
+    Download the project files to begin building this project, and follow the steps below.
     @Image(source: hero-dependency-injection-with-factory)
   }
   
@@ -60,12 +62,12 @@
     
     @Steps {
       @Step {
-        Select the `Features/Reminders` folder in your project, and create a new folder named `Services`.
+        Select the `Features` folder in your project, and create a new folder named `Firebase`. Inside it, create another new folder named `Services`.
         
         @Image(source: 01-dependency-injection-with-factory-02-register-firebase-01.png)
       }
       @Step {
-        Create a new Swift file and name it `Firebase+Injection.swift` inside the new `Services` folder.
+        Create a new Swift file and name it `Firebase+Injection.swift` inside the new `Firebase/Services` folder.
         
         > Note: It's a common practice to use a `+` sign to indicate files that contain Swift extensions for existing classes or structs. 
         @Image(source: 01-dependency-injection-with-factory-02-register-firebase-02.png)
