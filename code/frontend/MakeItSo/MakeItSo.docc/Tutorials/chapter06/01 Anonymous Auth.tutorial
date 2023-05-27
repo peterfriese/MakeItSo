@@ -1,7 +1,7 @@
 @Tutorial(time: 25, projectFiles: 01-anonymous-auth.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Implementing guest users with Firebase Anonymous Authentication") {
-    It seems like MakeItSo meets the bar for an MVP (minimum viable product): users can add new reminders, check them off, change their details, and even delte them. But - as you might have noticed when running the app on two different iOS Simulators - the app is not multi-user capable. What's worse, it seems like all users can see everone else's todo items.
+    It seems like MakeItSo meets the bar for an MVP (minimum viable product): users can add new reminders, check them off, change their details, and even delete them. But - as you might have noticed when running the app on two different iOS Simulators - the app is not multi-user capable. What's worse, it seems like all users can see everyone else's todo items.
     
     That's definitely not what most users expect from a todo list app! Your app needs a way to store data on a per-user basis.
     
