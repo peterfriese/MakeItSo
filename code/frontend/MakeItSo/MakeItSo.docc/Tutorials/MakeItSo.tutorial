@@ -55,6 +55,7 @@
       In this chapter, you will learn how to turn your app into a multi-user app that is capable of managing data for more than just one user.
       @TutorialReference(tutorial: "doc:00-Intro-to-Firebase-Authentication")
       @TutorialReference(tutorial: "doc:01-Anonymous-Auth")
+      @TutorialReference(tutorial: "doc:02-Sign-in-with-Apple")
     }
   }
   
