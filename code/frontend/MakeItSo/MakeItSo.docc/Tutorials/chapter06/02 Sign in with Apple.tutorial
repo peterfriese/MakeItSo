@@ -1,4 +1,4 @@
-@Tutorial(time: 25, projectFiles: 01-sign-in-with-apple.zip) {
+@Tutorial(time: 25, projectFiles: 02-sign-in-with-apple.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Sign in with Apple and Firebase Authentication") {
     Your app is now capable of storing data on a per-user basis. You achieved this by implementing Firebase Anonymous Authentication in the previous chapter, and then using the anonymous user's ID to tag their reminders when storing them in Cloud Firestore. 
