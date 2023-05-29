@@ -273,9 +273,9 @@
         You will notice that the reminders you created using the anonymous account will not be visible once you've signed in using Sign in with Apple.
         
         > Important: This might or might not be what you expected, but the reason for this behavious is that you signed in rather than linking the two accounts. In the next chapter, you will learn how to use account linking to upgrade an existing account and connect it to the new credentials.
+        
+        @Video(source: 02-sign-in-with-apple-final-demo.mp4)
       }
     }
   }
-
-      
 }

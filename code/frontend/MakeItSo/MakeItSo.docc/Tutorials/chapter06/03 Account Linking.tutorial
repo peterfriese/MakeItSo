@@ -1,4 +1,4 @@
-@Tutorial(time: 25, projectFiles: 03-account-linking.zip) {
+@Tutorial(time: 10, projectFiles: 03-account-linking.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Account Linking") {
     Users of your app can now sign in to the app using their Apple ID, but unfortunately, when they do so, any data they might have entered before signing in will disappear. This is probably not what the user expected!  
@@ -70,5 +70,30 @@
       }
     }
   }
+    
+  @Section(title: "Run the app") {
+    @ContentAndMedia {
+      Congratulations! In this chapter, you implemented account linking, so your users can upgrade from using an anonymous account to a full account while taking all their data with them.
+    }
+    
+    @Steps {
+      @Step {
+        Make sure the Firebase Emulator is running. Then, launch the app on an iOS Simulator, making sure that it is configured to connect to the Firebase Emulator.
+      }
+      @Step {
+        When the app is started, it will first check if there already is a signed in user. If that's not the case, it will sign in an anonymous user.  You can verify this by navigating to the user profile view.
+      }
+      @Step {
+        Try out all the features of the app. Specifically, create a couple of reminders using an anonymous account, and then sign in using Apple.
+        @Video(source: 03-account-linking-final-demo.mp4)
+      }
+      @Step {
+        You should now still see all of the data you entered when being signed in as an anonymous user.
+        
+        @Video(source: 03-account-linking-final-demo.mp4)
+      }
+    }
+  }
+    
     
 }
