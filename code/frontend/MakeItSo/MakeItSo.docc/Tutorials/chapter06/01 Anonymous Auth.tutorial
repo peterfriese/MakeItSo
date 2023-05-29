@@ -1,11 +1,11 @@
-@Tutorial(time: 25, projectFiles: 01-anonymous-auth.zip) {
+@Tutorial(time: 35, projectFiles: 01-anonymous-auth.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Implementing guest users with Firebase Anonymous Authentication") {
     It seems like MakeItSo meets the bar for an MVP (minimum viable product): users can add new reminders, check them off, change their details, and even delete them. But - as you might have noticed when running the app on two different iOS Simulators - the app is not multi-user capable. What's worse, it seems like all users can see everyone else's todo items.
     
     That's definitely not what most users expect from a todo list app! Your app needs a way to store data on a per-user basis.
     
-    In this chapter, you will implement user authentication, allowing users to sign in to your app with their preferred authentication mechanism. Firebase Authentication supports a broad range or authentication providers: signing in with email and password, email and link authentication, Sign in with Apple, Google Sign-In, phone number authentication, to name just a few.
+    In this chapter, you will implement user authentication, allowing users to sign in to your app with their preferred authentication mechanism. Firebase Authentication supports a broad range of authentication providers: signing in with email and password, email and link authentication, Sign in with Apple, Google Sign-In, phone number authentication, to name just a few.
     
     Download the project files to begin building this project, and follow the steps below.
     @Image(source: hero-anonymous-auth)
@@ -41,7 +41,7 @@
       @Step {
         The `SettingsView` includes a couple of authentication-related UI elements: users can navigate to the `ProfileView` to inspect their account. 
         
-        There also is aa button for logging out or signing in, dependin on whether or not a user is signed in.  
+        There also is a button for logging out or signing in, dependin on whether or not a user is signed in.  
         
         @Code(name: "SettingsView.swift", file: 01-anonymous-auth-01-walkthrough-SettingsView-01.swift, previousFile: 01-anonymous-auth-01-walkthrough-SettingsView-00.swift) {
           @Image(source: 01-anonymous-auth-01-walkthrough-SettingsView-01.png)
@@ -99,7 +99,7 @@
       }
       
       @Step {
-        Find the `Features/Reminders/Authentication/Services` folder in the Xcode's prooject navigator, and create a new file named `AuthenticationService.swift`.
+        Find the `Features/Authentication/Services` folder in the Xcode's project navigator, and create a new file named `AuthenticationService.swift`.
         
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-01.swift)
       }
@@ -146,7 +146,7 @@
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-07.swift)
       }
       
-      Next, you will implement anonymous authentication. This is an authentication mechanism that create a Firebase user account without requiring the user to provide any credentials. Firebase will generate a completely random UUID and create a new user account with this ID.
+      Next, you will implement anonymous authentication. This is an authentication mechanism that creates a Firebase user account without requiring the user to provide any credentials. Firebase will generate a completely random UUID and create a new user account with this ID.
       
       @Step {
         To keep your code nicely separated, create an extension on `AuthenticationService`, and implement a method `signInAnonymously`.
@@ -184,7 +184,7 @@
       @Step {
         Add a method `signOut` for signing out. 
         
-        > Important: After signing our, _immediately_ sign back in again anonymously. This is to make sure that the app always has a signed in user that it can use to key the user's data to when writing to Firestore.
+        > Important: After signing out, _immediately_ sign back in again anonymously. This is to make sure that the app always has a signed in user that it can use to key the user's data to when writing to Firestore.
         
         @Code(name: "AuthenticationService.swift", file: 01-anonymous-auth-02-AuthenticationService-13.swift)
       }
@@ -203,7 +203,7 @@
     
     @Steps {
       @Step {
-        In the `Features/Reminders/Authentication/Services` folder, create a new file named `AuthenticationService+Injection.swift`.
+        In the `Features/Authentication/Services` folder, create a new file named `AuthenticationService+Injection.swift`.
         
         @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-01.swift)
       }
@@ -225,7 +225,7 @@
         @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-04.swift)
       }
       @Step {
-        Inside the factory, reate an instance of `AuthenticationService`.
+        Inside the factory, create an instance of `AuthenticationService`.
         
         @Code(name: "AuthenticationService+Injection.swift", file: 01-anonymous-auth-03-AuthenticationService+Injection-05.swift)
       }
@@ -358,7 +358,7 @@
         @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-05-RemindersRepository-02.swift, previousFile: 01-anonymous-auth-05-RemindersRepository-02-pre.swift)
       }
       @Step {
-        Update the query and include a confition that compares the `userId` attribute on the Firestore document to the `uid` property of the signed-in user. This way, you will filter only the user's reminders.
+        Update the query and include a condition that compares the `userId` attribute on the Firestore document to the `uid` property of the signed-in user. This way, you will filter only the user's reminders.
         @Code(name: "RemindersRepository.swift", file: 01-anonymous-auth-05-RemindersRepository-03.swift)
       }
       

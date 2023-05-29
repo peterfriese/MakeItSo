@@ -110,7 +110,7 @@
 		886FAA6C2A127422004ACF43 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				8883F17D2A20ABAC00DE7EC2 /* Services */,
+				88D7BF0E2A248497007BC16D /* Firebase */,
 				886FAA6D2A12742C004ACF43 /* Reminders */,
 			);
 			path = Features;
@@ -168,6 +168,14 @@
 				88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		88D7BF0E2A248497007BC16D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				8883F17D2A20ABAC00DE7EC2 /* Services */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

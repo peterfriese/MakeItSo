@@ -1,4 +1,4 @@
-@Tutorial(time: 15, projectFiles: 01-dependency-injection-with-factory.zip) {
+@Tutorial(time: 20, projectFiles: 01-dependency-injection-with-factory.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Dependency Injection with Factory") {
     Even though _MakeItSo_ is a relatively simple app, it consists of quite a few components that need to interact with each other: models, views, view models, repositories, and different backend services like Firebase. 
@@ -57,7 +57,7 @@
     
   @Section(title: "Make Firebase available via Dependency Injection") {
     @ContentAndMedia {
-      Factory is a _Container-based Depenceny Injection_ system. In a first step, you will register Firestore with Factory's shared container. This will allow you to inject an instance of Firestore into any other component in _MakeItSo_ that requires Firestore. 
+      Factory is a _Container-based Dependency Injection_ system. In a first step, you will register Firestore with Factory's shared container. This will allow you to inject an instance of Firestore into any other component in _MakeItSo_ that requires Firestore. 
     }
     
     @Steps {
@@ -137,7 +137,7 @@
         @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-11.swift)
       }
       @Step {
-        It the app should *not* connect to the Emulator, you don't need to configure anything.
+        If the app should *not* connect to the Emulator, you don't need to configure anything.
         
         @Code(name: "Firebase+Injection.swift", file: 01-dependency-injection-with-factory-02-register-firebase-12.swift)
       }
@@ -162,7 +162,7 @@
         @Code(name: "RemindersRepository.swift", file: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-01.swift, previousFile: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-00.swift)
       }
       @Step {
-        Use Factory's `@Injected` property wrapper to inject an instance of Firstore.
+        Use Factory's `@Injected` property wrapper to inject an instance of Firestore.
         
         @Code(name: "RemindersRepository.swift", file: 01-dependency-injection-with-factory-03-inject-firestore-RemindersRepository-02.swift)
       }
