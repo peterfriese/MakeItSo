@@ -56,6 +56,7 @@
       @TutorialReference(tutorial: "doc:00-Intro-to-Firebase-Authentication")
       @TutorialReference(tutorial: "doc:01-Anonymous-Auth")
       @TutorialReference(tutorial: "doc:02-Sign-in-with-Apple")
+      @TutorialReference(tutorial: "doc:03-Account-Linking")
     }
   }
   
