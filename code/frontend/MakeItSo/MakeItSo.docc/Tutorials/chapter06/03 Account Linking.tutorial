@@ -1,0 +1,74 @@
+@Tutorial(time: 25, projectFiles: 02-account-linking.zip) {
+  @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
+  @Intro(title: "Account Linking") {
+    Users of your app can now sign in to the app using their Apple ID, but unfortunately, when they do so, any data they might have entered before signing in will disappear. This is probably not what the user expected!  
+    
+    In this part of the tutorial, you will implement Account Linking to upgrade the anonymous account the user is signed in to a permament account that is linked to their Apple credentials.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    @Image(source: hero-anonymous-auth)
+  }
+  
+  @Comment {
+    * Describe the problem
+    * This is because we sign the user in instead of linking their credentials to the existing account
+    * Update the service
+      * In handleSignInWithAppleCompletion, add a new parameter
+      * if true, use account linking
+    * update the view model to use account linking
+    * run the app one more time, and now you should be able to upgrade
+  }
+  
+  @Section(title: "What's the problem") {
+    @ContentAndMedia {
+      Why do the user's reminders disappear when they sign in using Sign in with Apple?
+    }
+    
+    @Steps {      
+      @Step {
+        In `AuthenticationService`, when the user has finished the Sign in with Apple flow, you use Firebase's `OAuthProvider` to create an OAuth credential based on the Apple ID token. 
+        
+        @Code(name: "AuthenticationService.swift", file: 03-account-linking-01-the-problem-01.swift, previousFile: 03-account-linking-01-the-problem-00.swift)
+      }
+      @Step {
+        Then, you use this credential to sign the user in to Firebase using `auth.signIn(with: credential)`.
+        
+        > Important: This means: whenever the user signs in using Sign in with Apple, they are signed out of the anonymous account they were signed with before. And since their new Firebase account (which is now connected to their Apple ID) has a different UID than the anonymous account, all the data that they created before will now no longer be visible to them. 
+        @Code(name: "AuthenticationService.swift", file: 03-account-linking-01-the-problem-02.swift)
+      }
+    }
+  }  
+  @Section(title: "Implement Account Linking") {
+    @ContentAndMedia {
+      The solution for the problem is to use account linking to connect the user's Apple ID credentials to their existing (anonymous) account.
+    }
+    
+    @Steps {      
+      @Step {
+        In `AuthenticationService`, add a new parameter to `handleSignInWithAppleCompletion` to indicate whether to use a regular sign in flow or an account linking flow. 
+        @Code(name: "AuthenticationService.swift", file: 03-account-linking-01-AuthenticationService-01.swift, previousFile: 03-account-linking-01-AuthenticationService-00.swift)
+      }
+      @Step {
+        Then, put the call to `auth.signIn` into a conditional statement.
+        
+        @Code(name: "AuthenticationService.swift", file: 03-account-linking-01-AuthenticationService-02.swift, previousFile: 03-account-linking-01-AuthenticationService-02-pre.swift) 
+      }
+      @Step {
+        To link the user's Apple ID credentials to the anonymous account they're currently signed in with, call `user?.link(with:)` and pass in the OAuth credential you created in the step before.
+        
+        @Code(name: "AuthenticationService.swift", file: 03-account-linking-01-AuthenticationService-03.swift) 
+      }
+      @Step {
+        Since linking accounts does *not* trigger the authentication state handler, you need to set the published `user` property manually, to trigger a UI update. 
+        
+        @Code(name: "AuthenticationService.swift", file: 03-account-linking-01-AuthenticationService-04.swift) 
+      }
+      @Step {
+        Finally, update the view model to use the account linking flow.
+        
+        @Code(name: "AuthenticationViewModel.swift", file: 03-account-linking-01-AuthenticationViewModel-01.swift, previousFile: 03-account-linking-01-AuthenticationViewModel-00.swift) 
+      }
+    }
+  }
+    
+}
