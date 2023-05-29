@@ -3,7 +3,7 @@
   @Intro(title: "Sign in with Apple and Firebase Authentication") {
     Your app is now capable of storing data on a per-user basis. You achieved this by implementing Firebase Anonymous Authentication in the previous chapter, and then using the anonymous user's ID to tag their reminders when storing them in Cloud Firestore. 
     
-    This is a great first step on implementing a smooth onboarding experience. Once users want to continue using your app, you should offer a way to create a full account by signing into you app. On Apple's platforms, Sign in with Apple is a popular authentication mechanism.
+    This is a great first step on implementing a smooth onboarding experience. Once users want to continue using your app, you should offer a way to create a full account by signing into your app. On Apple's platforms, Sign in with Apple is a popular authentication mechanism.
     
     In this part of the tutorial, you will implement Sign in with Apple to allow users to sign in to your app using their Apple ID. 
     
@@ -31,13 +31,13 @@
       @Step {
         At this point, your app probably uses the bundle identifier `com.example.MakeItSo`. If you try to register this bundle identifier with your Apple developer account and add the Sign in with Apple capability,you will see an error messag saying that the bundle identifier is not available. 
         
-        > Note: This is because someone else already registered it, and - to prevent malicious actors from hijacking apps - Apple makes sure that a bundle IDs are unique and cannot be reused on the App Store.  
+        > Note: This is because someone else already registered it, and - to prevent malicious actors from hijacking apps - Apple makes sure that all bundle IDs are unique and cannot be reused on the App Store.  
         
         @Image(source: 02-sign-in-with-apple-01-register-bundleid-failure.png)
       }
       
       @Step {
-        Change your apps'e bundle ID to something unique. If you own a domain, use the reversed domain as the bundle ID. For example, `com.yourdomain.example.MakeItSo`. To set the bundle ID, open the project editor, select your app in the list of _TARGETS_, and navigate to the _Signing & Capabilities_ tab.
+        Change your app's bundle ID to something unique. If you own a domain, use the reversed domain as the bundle ID. For example, `com.yourdomain.example.MakeItSo`. To set the bundle ID, open the project editor, select your app in the list of _TARGETS_, and navigate to the _Signing & Capabilities_ tab.
         
         @Image(source: 02-sign-in-with-apple-01-register-bundleid-01.png)
       }
@@ -112,7 +112,7 @@
       @Step {
         Open `AuthenticationService.swift`, and create a new extension on `AuthenticationService`. 
         
-        > Tip: Using an extension will help you keep your code nicely organised. You can also use `// MARK: - ` to create a visual marker in your code that will show up in many place in the Xcode editor. 
+        > Tip: Using an extension will help you keep your code nicely organised. You can also use `// MARK: - ` to create a visual marker in your code that will show up in many places in the Xcode editor. 
         @Code(name: "AuthenticationService.swift", file: 02-sign-in-with-apple-03-AuthenticationService-SiwA-01.swift, previousFile: 02-sign-in-with-apple-03-AuthenticationService-SiwA-00.swift)
       }
       @Step {
@@ -162,7 +162,7 @@
         @Code(name: "AuthenticationService.swift", file: 02-sign-in-with-apple-03-AuthenticationService-SiwA-08.swift)
       }
       @Step {
-        In the authentication flow completed successfully, first extract the credential from the response, making sure it is an Apple ID credential.
+        If the authentication flow completed successfully, first extract the credential from the response, making sure it is an Apple ID credential.
         @Code(name: "AuthenticationService.swift", file: 02-sign-in-with-apple-03-AuthenticationService-SiwA-09.swift)
       }
       @Step {
@@ -192,7 +192,7 @@
       @Step {
         Use Firebase's `OAuthProvider` to mint an OAuth credential with the ID token, the raw nonce, and the user's full name. 
         
-        @Code(name: "AuthenticationService.swift", file: 02-sign-in-with-apple-03-AuthenticationService-SiwA-13.swift)
+        @Code(name: "AuthenticationService.swift", file: 02-sign-in-with-apple-03-AuthenticationService-SiwA-13.swift, previousFile: 02-sign-in-with-apple-03-AuthenticationService-SiwA-12.swift)
       }
       @Step {
         Call `auth.signIn(with:)` to sign in to Firebase with this credential.
@@ -245,7 +245,7 @@
         @Code(name: "SignupView.swift", file: 02-sign-in-with-apple-05-SignupView-SiwA-01.swift, previousFile: 02-sign-in-with-apple-05-SignupView-SiwA-00.swift)
       }
       @Step {
-        When the users completes the Sign in with Apple flow, the `onCompletion` handler will be called. Inside, forward the call to `handleSignInWithAppleCompletion` on the view model. If this call succeeds, you can dismiss `LoginView` by calling `dismiss`.
+        When the users completes the Sign in with Apple flow, the `onCompletion` handler will be called. Inside, forward the call to `handleSignInWithAppleCompletion` on the view model. If this call succeeds, you can dismiss `SignupView` by calling `dismiss`.
         
         @Code(name: "SignupView.swift", file: 02-sign-in-with-apple-05-SignupView-SiwA-02.swift)
       }
@@ -272,7 +272,7 @@
       @Step {
         You will notice that the reminders you created using the anonymous account will not be visible once you've signed in using Sign in with Apple.
         
-        > Important: This might or might not be what you expected, but the reason for this behavious is that you signed in rather than linking the two accounts. In the next chapter, you will learn how to use account linking to upgrade an existing account and connect it to the new credentials.
+        > Important: This might or might not be what you expected, but the reason for this behaviour is that you signed in rather than linking the two accounts. In the next chapter, you will learn how to use account linking to upgrade an existing account and connect it to the new credentials.
         
         @Video(source: 02-sign-in-with-apple-final-demo.mp4)
       }
