@@ -331,7 +331,7 @@
   
   @Section(title: "Present the Add Reminder Dialog") {
     @ContentAndMedia {
-      Open the dialog from the reminders lit.
+      Open the dialog from the reminders list.
       
       @Image(source: sectionintros.006, alt: "")
     }

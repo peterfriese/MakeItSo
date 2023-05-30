@@ -86,7 +86,7 @@
         @Image(source: developing-locally-02-init-04.png, alt: "")
       }
       @Step {
-        In the next step, use the arrow keys and the _Enter_ key to select the _Authentication Emulator_ and the _Firestore Emulator_. Then, press _Enter_ to proceed to the next step.
+        In the next step, use the arrow keys and the _Space_ bar to select the _Authentication Emulator_ and the _Firestore Emulator_. Then, press _Enter_ to proceed to the next step.
         
         @Image(source: developing-locally-02-init-05.png, alt: "")
       }
