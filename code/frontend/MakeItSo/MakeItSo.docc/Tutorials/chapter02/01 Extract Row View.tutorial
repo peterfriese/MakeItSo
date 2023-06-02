@@ -1,78 +1,185 @@
 @Tutorial(time: 15, projectFiles: 01-extract-row-view.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Extracting the Reminder Row Into a Separate View") {
+    SwiftUI's syntax for describing UIs in a declarative way is quite efficient, and allows you to describe rather complex UIs with relatively little code.
+    
+    However, as you add more and more features to your app, you will notice that the code tends to get more complex. To keep complexity manageable and your code maintainable (and reusable), it is a good idea to identify recurring patterns and extract reusable parts of your code into separate components.
+    
+    In this chapter, you will extract the SwiftUI code for displaying `Reminder` items in the `ReminderListView` into a custom view.
+    
+    Download the project files to begin building this project, and follow the steps below.
+    
     @Image(source: building-todo-ui-intro.png, alt: "")
   }
   
-  @Section(title: "Title") {
+  @Section(title: "Extract the view") {
     @ContentAndMedia {
+      In this first section, you will use Xcode's SwiftUI refactoring support to extract the code for displaying `Reminder` items in the `RemindersListView` into a separate SwiftUI view.
     }
     
     @Steps {
-      @Comment {
-        # Extract the view
-        * Open RemindersListView
-        * Make sure the preview is visible. Press CMD+Opt+Enter to show it, and CMD+Shift+P to refresh
-        * CMD + Click the HStack, then select Extrac Subview
-        * In Xcode Version 14.3 (14E222b), this doesn't seem to work, so need to rename manually
-        * Rename the new view to RemindersListRowView
-        * Update the call site
-        * reminder is unknown inside RemindersListRowView, so need to add a new property to hold it
+      @Step {
+        Open `RemindersListView` and make sure the preview is visible.
         
-        # Fix the binding
-        * add new property `reminder` and tag as `@Binding`
-          ```swift
-          @Binding
-          var reminder: Reminder
-          ```
-        * Update the call site: `RemindersListRowView(reminder: $reminder)`
-        * Create new SwiftUI file RemindersListRowView
-        * Move RemindersListRowView to this file
+        In case the preview canvas is not visible, press _CMD+Opt+Enter_ to show it. If the preview is paused, press _CMD+Shift+P_ to resume it.
         
-        # Make the preview provider interactive
-        * Update preview provider: `RemindersListRowView(reminder: .constant(Reminder.samples[0]))`
-        * This is nice, but not interactive
-        * Embed the view inside a container
-        ```swift
-        struct RemindersListRowView_Previews: PreviewProvider {
-          struct Container: View {
-            @State var reminder = Reminder.samples[0]
-            var body: some View {
-              RemindersListRowView(reminder: $reminder)
-            }
-          }
-
-          static var previews: some View {
-            Container()
-          }
-        }
-        ```
-        * Show that you have full control over the preview
-        * Embed row in list. Embed container in NavigationStack. Add title
-        ```swift
-        struct RemindersListRowView_Previews: PreviewProvider {
-          struct Container: View {
-            @State var reminder = Reminder.samples[0]
-            var body: some View {
-              List {
-                RemindersListRowView(reminder: $reminder)
-              }
-            }
-          }
-
-          static var previews: some View {
-            NavigationStack {
-              Container()
-                .listStyle(.plain)
-                .navigationTitle("Reminder")
-            }
-          }
-        }
-        ```
+        > Note: The SwiftUI refactorings will only be available when the preview is visible.
+        
+        @Image(source: 01-extract-row-view-01-extract-view-01.png)
         
       }
       @Step {
-        TODO
+        _CMD+Click_ on the `HStack`, then select _Extract Subview_ from the context menu.
+        
+        @Image(source: 01-extract-row-view-01-extract-view-02.png)
+      }
+      @Step {
+        Xcode will extract the _contents_ of the `HStack` into a new subview.
+        @Code(name: "RemindersListView.swift", file: 01-extract-row-view-01-extract-view-01.swift, previousFile: 01-extract-row-view-01-extract-view-00.swift)
+      }
+      @Step {
+        Rename the extracted view to `RemindersListRowView`.
+        
+        > Note: In some versions of Xcode, the _Extract to Subview_ refactoring selects the name of the extracted view so you can immediately refactor it. In Xcode 14.3 (14E222b), this doesn't seem to work, so you will have to manually rename the view.
+        @Code(name: "RemindersListView.swift", file: 01-extract-row-view-01-extract-view-02.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Implement parent/child communiction") {
+    @ContentAndMedia {
+      When creating subviews, you often need to share data between the parent and child views. In this particular case, `ReminderListRowView` needs access to the `Reminder` it is supposed to display.
+      
+      In this section, you will set up a parent/child relationship between `RemindersListView` and `RemindersListRowView`, making use of SwiftUI's `@Binding` property wrapper. 
+      
+      @Comment {
+        Image showing the parent/child relationship
+      }
+    }
+    
+    @Steps {
+      @Step {
+        After running the refactoring, you will notice that the new view has a couple of compile errors. That's because the refactoring unfortunately doesn't take into consideration any dependent properties, and didn't create a property for the `reminder` on the extracted view.
+        
+        @Image(source: 01-extract-row-view-01-fix-binding-01.png)
+      }
+      @Step {
+        To fix the compile errors, introduce a new property `reminder` on `RemindersListView`, and mark it as a `@Binding`.
+        
+        By marking the property as a binding, you indicate that the parent view is the owner of the data. All changes to the `reminder` property will be synced with the parent view, and vice versa.
+        
+        @Code(name: "RemindersListView.swift", file: 01-extract-row-view-01-fix-binding-01.swift, previousFile: 01-extract-row-view-01-extract-view-02.swift)
+      }
+      @Step {
+        Adding the `reminder` property to `RemindersListRowView` changes its initialiser signature (remember, structs in Swift automatically receive a memberwise initialiser (see the [Swift language documentation](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/initialization/#Memberwise-Initializers-for-Structure-Types) for more details)).
+        
+        Update the call to `RemindersListRowView` inside the `List` view, and pass in the current `Reminder`.
+        @Code(name: "RemindersListView.swift", file: 01-extract-row-view-01-fix-binding-02.swift)
+      }      
+      @Step {
+        There is another compile error - inside `onTapGesture`, `viewModel` is not in scope. Since the parent view is the owner, there is no need to pass state changes to the view model inside `RemindersListRowView`. Instead, you should let the parent view handle that.
+        
+        Toggle the completion state of the `reminder` directly. Thanks to the `@Binding`, this change will be visible to the parent view.
+        @Code(name: "RemindersListView.swift", file: 01-extract-row-view-01-fix-binding-03.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Move the new view into its own file") {
+    @ContentAndMedia {
+      
+      @Comment {
+      }
+    }
+    
+    @Steps {
+      @Step {
+        Inside the _Features/Reminders/Views_ folder, create a new SwiftUI file, naming it `RemindersListRowView.swift`
+        
+        > Note: Make sure you use the SwiftUI template, as this will create a preview provider for you, so you don't have to create one yourself. 
+        
+        @Image(source: 01-extract-row-view-03-move-to-file-01.png)
+      }
+      @Step {
+        You will see an error message saying "Invalid redeclaration of 'RemindersListRowView'" - this is expected, and you will fix this in the next step.
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-03-move-to-file-01.swift) {
+          @Image(source: 01-extract-row-view-03-move-to-file-02.png)
+        }
+      }
+      @Step {
+        Cut the code for `RemindersListRowView` from `RemindersListView.swift`, and paste it into the new file, replacing the default implementation generated by the SwiftUI template. 
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-03-move-to-file-02.swift, previousFile: 01-extract-row-view-03-move-to-file-02-pre.swift)
+      }
+      @Step {
+        Update the preview provider and pass in a constant binding to a sample `Reminder`.
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-03-move-to-file-03.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Make the preview provider interactive") {
+    @ContentAndMedia {
+      
+    }
+    
+    @Steps {
+      @Step {
+        When you try using the new `ReminderListRowView` inside Xcode's preview canvas, you will notice that you cannot toggle its completion state. This is because you passed in a constant binding in the preview provider. 
+      }
+      @Step {
+        Create a new view named `Container` **inside** the preview provider.
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-04-interactive-previews-01.swift, previousFile: 01-extract-row-view-04-interactive-previews-00.swift)
+      }
+      @Step {
+        Move the code for instantiating the `RemindersListRowView` into the `body` of the `Container` view.
+        
+        Then, replace the call for instantiating the `RemindersListRowView` inside the static `previews` method with a call to instantiate the `Container` view. 
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-04-interactive-previews-02.swift)
+      }
+      @Step {
+        Create a new `@State` property inside the `Container`, and use it to store a sample `Reminder`.
+        
+        Use the projected property of the `reminder` property to pass a binding to `RemindersListRowView`.
+        
+        > Important: Thanks to the `@State` property wrapper, this property can be changed from inside `RemindersListRowView`.
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-04-interactive-previews-03.swift)
+      }
+      @Step {
+        You can now toggle the completion state of the `ReminderListRowView` inside the preview canvas.
+        
+        @Comment {
+          Add a video
+        }
+      }
+    }
+  }
+  @Section(title: "Customise the preview") {
+    @ContentAndMedia {
+      One of the benefits of using SwiftUI's preview is that you can see how your view is going to look like without having to run the application. 
+      
+      However, it is hard to tell how `RemindersListRowView` is going to look like without seeing it inside a `List` view. The good news is: you can wrap it inside a `List` view in the preview provider.
+    }
+    
+    @Steps {
+      @Step {
+        Wrap `ReminderListRowView` inside a `List` to get a better idea of how it's going to look like when you run the app.
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-05-customise-previews-01.swift, previousFile: 01-extract-row-view-05-customise-previews-00.swift) {
+          @Image(source: 01-extract-row-view-05-customise-previews-01.png)
+        }
+      }
+      
+      This is a great start!
+      
+      @Step {
+        Finally, make sure to use a plain `List`, and set the screen's title.
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-extract-row-view-05-customise-previews-02.swift) {
+          @Image(source: 01-extract-row-view-05-customise-previews-02.png)
+        }
       }
     }
   }
