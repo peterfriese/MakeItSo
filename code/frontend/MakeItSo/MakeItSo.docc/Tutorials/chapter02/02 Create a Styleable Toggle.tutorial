@@ -1,96 +1,151 @@
 @Tutorial(time: 25, projectFiles: 02-styleable-toggle.zip) {
   @XcodeRequirement(title: "Xcode 14", destination: "https://xcodereleases.com/")
   @Intro(title: "Creating a Styleable Toggle") {
+    When you implemented the UI for displaying reminders in the `List` view, you used an `Image` view to create the a circular check box. 
+    
+    This works great, but it's not ideal, as it is not immediately obvious that the `Image` acts as a toggle. SwiftUI has a dedicated `Toggle` that would be a much better fit for a UI that allows users to switch between two states, but it looks like the toggles in iOS' settings app, and doesn't meet the UI design you're looking after for your todo list app.
+    
+    The good news is that `Toggle` is a styleable view. In this chapter, you will learn how to implement a custom style for `Toggle` that looks like a circular check box.
+    
+    Download the project files to begin building this project, and follow the steps below.
     @Image(source: building-todo-ui-intro.png, alt: "")
   }
   
-  @Section(title: "Title") {
+  @Section(title: "Create a custom toggle style") {
     @ContentAndMedia {
+      In this section, you will create a new custom style for the `Toggle` view. SwiftUI styles are very similar to regular SwiftUI views. In fact, you will be able to re-use much of the code you wrote when implementing the circular check box using an `Image` view.
     }
     
     @Steps {
-      @Comment {
-        # Create a style
-        * Create a new folder Styles
-        * Create a new SwiftUI file ReminderToggleStyle
-        * Remove the view, and comment the preview provider
-        * Add ReminderToggleStyle and conform it to ToggleStyle
-          ```swift
-          struct ReminderToggleStyle: ToggleStyle {
-            func makeBody(configuration: Configuration) -> some View {
-            }
-          }
-          ```
-        * Add an empty HStack
-        * Add `configuration.label` - we won't use it, but anyway!
-        * Add an Image *before* the label, and use `configuration.isOn` to deterine the icon
-        * make it resizable and set the frame to 24x24
-        * Define two styles for tinting
-          ```swift
-          private let onStyle: AnyShapeStyle = AnyShapeStyle(.tint)
-          private let offStyle: AnyShapeStyle = AnyShapeStyle(.gray)
-          ```
-        * Apply the style based on the state:
-          ```swift
-          .foregroundStyle(configuration.isOn ? onStyle : offStyle)
-          ```
-        * Add an onTapGesture handler
-          ```swift
-          .onTapGesture {
-            configuration.isOn.toggle()
-          }
-          ```
-        * To make it easier to use the style, define an extension
-          ```swift
-          extension ToggleStyle where Self == ReminderToggleStyle {
-            static var reminder: ReminderToggleStyle {
-              ReminderToggleStyle()
-            }
-          }
-          ```
-          
-        # Update the preview provider
-        * Uncomment the provider 
-        * Add a toggle: `Toggle(isOn: .constant(true)) { Text("Hello") }`
-        * Apply the style
-          ```
-          struct ReminderToggleStyle_Previews: PreviewProvider {
-            static var previews: some View {
-              Toggle(isOn: .constant(true)) { Text("Hello") }
-                .toggleStyle(.reminder)
-            }
-          }
-          ```
-        * When you clikc on it, it's not interactive
-        * Use the Container trick you learned in the previous chapter
-          ```
-          struct ReminderToggleStyle_Previews: PreviewProvider {
-            struct Container: View {
-              @State var isOn = false
-              var body: some View {
-                Toggle(isOn: $isOn) { Text("Hello") }
-                  .toggleStyle(.reminder)
-
-              }
-            }
-
-            static var previews: some View {
-              Container()
-            }
-          }
-          ```
+      @Step {
+        Select the `Features/Reminders` folder of your project, and create a new folder named `Styles`.
         
-        # Use the new style instead of the Image 
-        * Go to RemindersListRowView
-        * Replace the Image with the following:
-          ```
-          Toggle(isOn: $reminder.isCompleted) { /* no label, on purpose */}
-            .toggleStyle(.reminder)
-            .tint(.red)
-          ```
+        @Image(source: 01-styleable-toggle-01-create-style-01.png)
       }
       @Step {
-        TODO
+        Create a new SwiftUI file inside the new folder, naming it `ReminderToggleStyle.swift`.
+        
+        > Important: Make sure to choose the _SwiftUI_ file template so Xcode creates a preview provider for you, as you will need one in a few steps.
+        
+        @Image(source: 01-styleable-toggle-01-create-style-02.png)
+      }
+      @Step {
+        Replace the code for the view with the boilerplate code for a SwiftUI style.
+        
+        > Note: This style conforms to `ToggleStyle`, so you can use it to style a `Toggle` view. Other SwiftUI views are styleable as well, for example `List`. To implement new styles for other SwiftUI views that are styleable, you need to conform your custom style to the respective styleable protocol.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-01.swift, previousFile: 01-styleable-toggle-01-create-style-ReminderToggleStyle-00.swift)
+      }
+      @Step {
+        To silence the compiler error in the preview provider, comment out the entire preview provider for now.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-02.swift)
+      }
+      @Step {
+        A `Toggle` typically consists of an image to represent the on/off state of the toggle, and a label. To lay them out horizontally, first return an empy `HStack` from the `makeBody` function.
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-03.swift)
+      }
+      @Step {
+        Go to `RemindersListRowView.swift`, and copy the code for the `Image` that represents the toggle.
+        
+        Then, go back to `ReminderToggleStyle`, and paste the code inside the `HStack`.
+        > Note: The compiler will complain that `reminder` is not in scope, so you will need to fix this in the next step.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-04.swift)
+      }
+      @Step {
+        To determine how to present the toggle, you need to access its on/off state. SwiftUI makes this available via the `Configuration` type. For a `ToggleStyle`, it contains an `isOn` property that indicates whether the toggle is in _on_ or _off_ state.
+        
+        Update the code to use `configuration.isOn` to show the correct image for its current state.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-05.swift)
+      }
+      @Step {
+        Also update the code for changing the on/off state in response to the user tapping on the toggle.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-06.swift)
+      }
+      @Step {
+        Update the `foregroundStyle` of the `Image` to use the view's accent color when the toggle is in its _on_ state, and `gray` when it is in its _off_ state.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-07.swift)
+      }
+      
+      In the next step, you will add a label for the toggle. Usually, you would use a `Label` view for this. But if you take a look at the signature of the `Toggle` initialiser, you will notice that you can provide any `View` as a label - for example, an `Image`, or a `HStack` that wraps a couple of other views. How to make sure your new style is flexible enough to support this?
+      
+      @Step {
+        To allow your style to display a label that is composed of multiple views, `Configuration` contains a type-erased `Label` type in the `label` property. 
+        
+        To display whatever view the user passes in this parameter, just insert `configuration.label` where you want to place it. In this case, place the label at the end of the `HStack`. 
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-01-create-style-ReminderToggleStyle-08.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Update the preview provider") {
+    @ContentAndMedia {
+      When building SwiftUI views, you can use the preview canvas to see a live preview of the view as you implement it. In this section, you will update the preview provider so that you can benefit from a live preview for your custom style as well.
+    }
+    
+    @Steps {
+      @Step {
+        First, uncomment the preview provider and create a simple toggle.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-01.swift, previousFile: 01-styleable-toggle-01-create-style-ReminderToggleStyle-08.swift) {
+          @Image(source: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-01.png)
+        }
+      }
+      @Step {
+        Apply the style you just implemented to the `Toggle`.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-02.swift) {
+          @Image(source: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-02.png)
+        }
+      }
+      @Step {
+        When trying to interact with the toggle, you will notice that you cannot change its state. This is because you used `.constant)` to pass in a constant binding. To fix this, apply the _Container_ trick you learned in the previous chapter of this tutorial.
+
+        Create a new `Container` view that wraps the `Toggle`, and define an `@State` property. Replace the constant binding with a binding to the `isOn` state property, and your preview is now interactive.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-03.swift, previousFile: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-03-pre.swift) {
+          @Image(source: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-03.mp4)
+        }
+      }
+      @Step {
+        Finally, add an extension on `ToggleStyle` to make it easier to use the style.
+        
+        @Code(name: "ReminderToggleStyle.swift", file: 01-styleable-toggle-02-update-preview-provider-ReminderToggleStyle-04.swift)
+      }
+    }
+  }
+  
+  @Section(title: "Use the new style in your app") {
+    @ContentAndMedia {
+      Now that you've implemented a reusable `Toggle` style, you can use it in your app, and simplify the code in `ReminderListRowView`. 
+    }
+    
+    @Steps {
+      @Step {
+        Navigate to `ReminderListRowView.swift`, and replace the `Image` and its view modifiers with a `Toggle`.
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-styleable-toggle-03-update-preview-provider-ReminderListRowView-01.swift, previousFile: 01-styleable-toggle-03-update-preview-provider-ReminderListRowView-00.swift) {
+          @Image(source: 01-styleable-toggle-03-update-preview-provider-ReminderListRowView-01.png)
+        }
+      }
+      @Step {
+        Don't forget to apply the new style!
+        
+        @Code(name: "RemindersListRowView.swift", file: 01-styleable-toggle-03-update-preview-provider-ReminderListRowView-02.swift) {
+          @Image(source: 01-styleable-toggle-03-update-preview-provider-ReminderListRowView-02.png)
+        }
+      }
+      @Step {
+        As a finishing touch, navigate to `RemindersListView`, and tint the UI using an accent color.
+        
+        @Code(name: "RemindersListView.swift", file: 01-styleable-toggle-03-update-preview-provider-RemindersListView-01.swift, previousFile: 01-styleable-toggle-03-update-preview-provider-RemindersListView-00.swift) {
+          @Image(source: 01-styleable-toggle-03-update-preview-provider-RemindersListView-01.png)
+        }
       }
     }
   }

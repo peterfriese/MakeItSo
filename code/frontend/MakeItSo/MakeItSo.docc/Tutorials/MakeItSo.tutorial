@@ -21,7 +21,7 @@
     
       In this chapter, you will refactor the SwiftUI code you wrote in chapter 1, and make it more reusable. 
       @TutorialReference(tutorial: "doc:01-Extract-Row-View")
-<!--      @TutorialReference(tutorial: "doc:02-Create-a-Styleable-Toggle")-->
+      @TutorialReference(tutorial: "doc:02-Create-a-Styleable-Toggle")
     }
     
     @Chapter(name: "Connecting Your App to Firebase") {
