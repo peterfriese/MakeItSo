@@ -23,7 +23,7 @@ import Combine
 import Factory
 
 struct UserProfileView: View {
-  @StateObject var viewModel = UserProfileViewModel()
+  @State var viewModel = UserProfileViewModel()
   @Environment(\.dismiss) var dismiss
   @State var presentingConfirmationDialog = false
 

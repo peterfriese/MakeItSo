@@ -17,63 +17,63 @@
 // limitations under the License.
 
 import SwiftUI
+import Observation
 import Factory
 import Combine
 import FirebaseAuth
 
-class UserProfileViewModel: ObservableObject {
+@Observable
+class UserProfileViewModel {
+  @ObservationIgnored
   @Injected(\.authenticationService)
   private var authenticationService
 
-  @Published var authenticationState: AuthenticationState = .unauthenticated
-  @Published var errorMessage = ""
-  @Published var user: User?
-  @Published var provider = ""
-  @Published var displayName = ""
-  @Published var email = ""
-
-  @Published var isGuestUser = false
-  @Published var isVerified = false
-
   init() {
-//    authenticationService.$user
-//      .assign(to: &$user)
-//
-//    $user
-//      .compactMap { user in
-//        user?.isAnonymous
-//      }
-//      .assign(to: &$isGuestUser)
-//
-//    $user
-//      .compactMap { user in
-//        user?.isEmailVerified
-//      }
-//      .assign(to: &$isVerified)
-//
-//    $user
-//      .compactMap { user in
-//        user?.displayName ?? "N/A"
-//      }
-//      .assign(to: &$displayName)
-//
-//    $user
-//      .compactMap { user in
-//        user?.email ?? "N/A"
-//      }
-//      .assign(to: &$email)
-//
-//    $user
-//      .compactMap { user in
-//        if let providerData = user?.providerData.first {
-//          return providerData.providerID
-//        }
-//        else {
-//          return user?.providerID
-//        }
-//      }
-//      .assign(to: &$provider)
+    trackChanges()
+  }
 
+  private func trackChanges() {
+    withObservationTracking {
+      self.user = authenticationService.user
+    } onChange: {
+      Task { @MainActor in
+        self.trackChanges()
+      }
+    }
+  }
+
+  var authenticationState: AuthenticationState = .unauthenticated
+  var errorMessage = ""
+
+  var user: User? = nil
+
+  var provider: String {
+    if let providerData = user?.providerData.first {
+      return providerData.providerID
+    }
+    else {
+      return user?.providerID ?? ""
+    }
+  }
+
+  var displayName: String {
+    user?.displayName ?? "N/A"
+  }
+
+  var email: String {
+    user?.email ?? "N/A"
+  }
+
+  var isGuestUser: Bool {
+    if let isAnonymous = user?.isAnonymous {
+      return isAnonymous
+    }
+    return false
+  }
+
+  var isVerified: Bool {
+    guard let user else { return false }
+    return user.isEmailVerified
   }
 
   func deleteAccount() async -> Bool {

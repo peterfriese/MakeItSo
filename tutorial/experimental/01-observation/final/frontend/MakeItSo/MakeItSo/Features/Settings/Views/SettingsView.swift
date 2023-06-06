@@ -20,7 +20,7 @@ import SwiftUI
 
 struct SettingsView: View {
   @Environment(\.dismiss) var dismiss
-  @StateObject var viewModel = SettingsViewModel()
+  @State var viewModel = SettingsViewModel()
   @State var isShowSignUpDialogPresented = false
 
   private func signUp() {
