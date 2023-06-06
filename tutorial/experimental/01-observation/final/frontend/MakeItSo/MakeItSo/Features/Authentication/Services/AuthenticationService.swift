@@ -17,18 +17,22 @@
 // limitations under the License.
 
 import Foundation
+import Observation
 import Factory
 import FirebaseAuth
 import AuthenticationServices
 
+@Observable
 public class AuthenticationService {
+  @ObservationIgnored
   @Injected(\.auth) private var auth
-  @Published var user: User?
 
-  @Published var errorMessage = ""
+  var user: User? = nil
 
-  private var authStateHandler: AuthStateDidChangeListenerHandle?
-  private var currentNonce: String?
+  var errorMessage = ""
+
+  private var authStateHandler: AuthStateDidChangeListenerHandle? = nil
+  private var currentNonce: String? = nil
 
   init() {
     registerAuthStateHandler()

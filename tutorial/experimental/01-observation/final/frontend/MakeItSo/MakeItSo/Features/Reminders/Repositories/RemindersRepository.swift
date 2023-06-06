@@ -40,7 +40,9 @@ public class RemindersRepository {
   private var listenerRegistration: ListenerRegistration? = nil
 
   init() {
+    trackChanges()
     subscribe()
+
 //    authenticationService.$user
 //      .assign(to: &$user)
 //
@@ -51,15 +53,27 @@ public class RemindersRepository {
 //    .store(in: &cancelables)
   }
 
+  private func trackChanges() {
+    withObservationTracking {
+      self.user = authenticationService.user
+    } onChange: {
+      Task { @MainActor in
+        print("Hello")
+        self.subscribe(user: self.user)
+        self.trackChanges()
+      }
+    }
+  }
+
   deinit {
     unsubscribe()
   }
 
   func subscribe(user: User? = nil) {
     if listenerRegistration == nil {
-      if let localUser = user ?? self.user {
+//      if let localUser = user ?? self.user {
         let query = firestore.collection(Reminder.collectionName)
-          .whereField("userId", isEqualTo: localUser.uid)
+//          .whereField("userId", isEqualTo: localUser.uid)
 
         listenerRegistration = query
           .addSnapshotListener { [weak self] (querySnapshot, error) in
@@ -79,7 +93,7 @@ public class RemindersRepository {
               }
             }
           }
-      }
+//      }
     }
   }
 

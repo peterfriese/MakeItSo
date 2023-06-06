@@ -20,79 +20,42 @@ import Foundation
 import Factory
 import Combine
 import Observation
-import FirebaseAuth
-import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 @Observable
 class RemindersListViewModel {
-  // MARK: - Dependencies
-  @ObservationIgnored
-  @Injected(\.firestore) var firestore
-
-  @ObservationIgnored
-  @Injected(\.authenticationService) var authenticationService
-
   var reminders = [Reminder]()
+
+//  var reminders: [Reminder] {
+//    remindersRepository.reminders
+//  }
 
   var errorMessage: String? = nil
 
-  var user: User? = nil
-
-  private var listenerRegistration: ListenerRegistration? = nil
+  // MARK: - Dependencies
+  @ObservationIgnored
+  @Injected(\.remindersRepository)
+  private var remindersRepository: RemindersRepository
 
   init() {
-    print(authenticationService.user)
-    subscribe()
+    trackChanges()
   }
 
-  deinit {
-    unsubscribe()
-  }
-
-  func subscribe(user: User? = nil) {
-    if listenerRegistration == nil {
-      if let localUser = user ?? authenticationService.user {
-        let query = firestore.collection(Reminder.collectionName)
-          .whereField("userId", isEqualTo: localUser.uid)
-
-        listenerRegistration = query
-          .addSnapshotListener { [weak self] (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-              print("No documents")
-              return
-            }
-
-            print("Mapping \(documents.count) documents")
-            self?.reminders = documents.compactMap { queryDocumentSnapshot in
-              do {
-                return try queryDocumentSnapshot.data(as: Reminder.self)
-              }
-              catch {
-                print("Error while trying to map document \(queryDocumentSnapshot.documentID): \(error.localizedDescription)")
-                return nil
-              }
-            }
-          }
+  private func trackChanges() {
+    withObservationTracking {
+      self.reminders = remindersRepository.reminders
+    } onChange: {
+      Task { @MainActor in
+        print("Hello")
+        self.trackChanges()
       }
     }
   }
 
-  private func unsubscribe() {
-    if listenerRegistration != nil {
-      listenerRegistration?.remove()
-      listenerRegistration = nil
-    }
-  }
 
   func addReminder(_ reminder: Reminder) {
-    var userReminder = reminder
-    userReminder.userId = user?.uid
-
     do {
-      try firestore
-        .collection(Reminder.collectionName)
-        .addDocument(from: userReminder)
+      try remindersRepository.addReminder(reminder)
+      errorMessage = nil
     }
     catch {
       print(error)
@@ -101,31 +64,17 @@ class RemindersListViewModel {
   }
 
   func updateReminder(_ reminder: Reminder) {
-    guard let documentId = reminder.id else {
-      fatalError("Reminder \(reminder.title) has no document ID.")
-    }
-
     do {
-      try firestore
-        .collection(Reminder.collectionName)
-        .document(documentId)
-        .setData(from: reminder, merge: true)
+      try remindersRepository.updateReminder(reminder)
     }
     catch {
       print(error)
       errorMessage = error.localizedDescription
     }
-
   }
 
-  func removeReminder(_ reminder: Reminder) {
-    guard let documentId = reminder.id else {
-      fatalError("Reminder \(reminder.title) has no document ID.")
-    }
-    firestore
-      .collection(Reminder.collectionName)
-      .document(documentId)
-      .delete()
+  func deleteReminder(_ reminder: Reminder) {
+    remindersRepository.removeReminder(reminder)
   }
 
   func setCompleted(_ reminder: Reminder, isCompleted: Bool) {

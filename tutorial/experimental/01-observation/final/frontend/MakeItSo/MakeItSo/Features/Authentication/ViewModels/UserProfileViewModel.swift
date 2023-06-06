@@ -36,43 +36,43 @@ class UserProfileViewModel: ObservableObject {
   @Published var isVerified = false
 
   init() {
-    authenticationService.$user
-      .assign(to: &$user)
-
-    $user
-      .compactMap { user in
-        user?.isAnonymous
-      }
-      .assign(to: &$isGuestUser)
-
-    $user
-      .compactMap { user in
-        user?.isEmailVerified
-      }
-      .assign(to: &$isVerified)
-
-    $user
-      .compactMap { user in
-        user?.displayName ?? "N/A"
-      }
-      .assign(to: &$displayName)
-
-    $user
-      .compactMap { user in
-        user?.email ?? "N/A"
-      }
-      .assign(to: &$email)
-
-    $user
-      .compactMap { user in
-        if let providerData = user?.providerData.first {
-          return providerData.providerID
-        }
-        else {
-          return user?.providerID
-        }
-      }
-      .assign(to: &$provider)
+//    authenticationService.$user
+//      .assign(to: &$user)
+//
+//    $user
+//      .compactMap { user in
+//        user?.isAnonymous
+//      }
+//      .assign(to: &$isGuestUser)
+//
+//    $user
+//      .compactMap { user in
+//        user?.isEmailVerified
+//      }
+//      .assign(to: &$isVerified)
+//
+//    $user
+//      .compactMap { user in
+//        user?.displayName ?? "N/A"
+//      }
+//      .assign(to: &$displayName)
+//
+//    $user
+//      .compactMap { user in
+//        user?.email ?? "N/A"
+//      }
+//      .assign(to: &$email)
+//
+//    $user
+//      .compactMap { user in
+//        if let providerData = user?.providerData.first {
+//          return providerData.providerID
+//        }
+//        else {
+//          return user?.providerID
+//        }
+//      }
+//      .assign(to: &$provider)
 
   }
 
