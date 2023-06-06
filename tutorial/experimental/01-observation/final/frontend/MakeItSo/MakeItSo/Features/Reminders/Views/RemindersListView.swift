@@ -19,7 +19,7 @@
 import SwiftUI
 
 struct RemindersListView: View {
-  @StateObject
+  @State
   private var viewModel = RemindersListViewModel()
 
   @State
@@ -43,7 +43,7 @@ struct RemindersListView: View {
     List($viewModel.reminders) { $reminder in
       RemindersListRowView(reminder: $reminder)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-          Button(role: .destructive, action: { viewModel.deleteReminder(reminder) }) {
+          Button(role: .destructive, action: { viewModel.removeReminder(reminder) }) {
             Image(systemName: "trash")
           }
           .tint(Color(UIColor.systemRed))

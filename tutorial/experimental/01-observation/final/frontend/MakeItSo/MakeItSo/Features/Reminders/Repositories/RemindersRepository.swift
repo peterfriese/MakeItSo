@@ -18,34 +18,37 @@
 
 import Foundation
 import Combine
+import Observation
 import Factory
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
 
-public class RemindersRepository: ObservableObject {
+@Observable
+public class RemindersRepository {
   // MARK: - Dependencies
+  @ObservationIgnored
   @Injected(\.firestore) var firestore
+
+  @ObservationIgnored
   @Injected(\.authenticationService) var authenticationService
 
-  @Published
   var reminders = [Reminder]()
 
-  @Published
   var user: User? = nil
 
-  private var listenerRegistration: ListenerRegistration?
-  private var cancelables = Set<AnyCancellable>()
+  private var listenerRegistration: ListenerRegistration? = nil
 
   init() {
-    authenticationService.$user
-      .assign(to: &$user)
-
-    $user.sink { user in
-      self.unsubscribe()
-      self.subscribe(user: user)
-    }
-    .store(in: &cancelables)
+    subscribe()
+//    authenticationService.$user
+//      .assign(to: &$user)
+//
+//    $user.sink { user in
+//      self.unsubscribe()
+//      self.subscribe(user: user)
+//    }
+//    .store(in: &cancelables)
   }
 
   deinit {

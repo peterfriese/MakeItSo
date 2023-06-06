@@ -19,28 +19,80 @@
 import Foundation
 import Factory
 import Combine
+import Observation
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-class RemindersListViewModel: ObservableObject {
-  @Published
+@Observable
+class RemindersListViewModel {
+  // MARK: - Dependencies
+  @ObservationIgnored
+  @Injected(\.firestore) var firestore
+
+  @ObservationIgnored
+  @Injected(\.authenticationService) var authenticationService
+
   var reminders = [Reminder]()
 
-  @Published
-  var errorMessage: String?
+  var errorMessage: String? = nil
 
-  // MARK: - Dependencies
-  @Injected(\.remindersRepository)
-  private var remindersRepository: RemindersRepository
+  var user: User? = nil
+
+  private var listenerRegistration: ListenerRegistration? = nil
 
   init() {
-    remindersRepository
-      .$reminders
-      .assign(to: &$reminders)
+    print(authenticationService.user)
+    subscribe()
+  }
+
+  deinit {
+    unsubscribe()
+  }
+
+  func subscribe(user: User? = nil) {
+    if listenerRegistration == nil {
+      if let localUser = user ?? authenticationService.user {
+        let query = firestore.collection(Reminder.collectionName)
+          .whereField("userId", isEqualTo: localUser.uid)
+
+        listenerRegistration = query
+          .addSnapshotListener { [weak self] (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+              print("No documents")
+              return
+            }
+
+            print("Mapping \(documents.count) documents")
+            self?.reminders = documents.compactMap { queryDocumentSnapshot in
+              do {
+                return try queryDocumentSnapshot.data(as: Reminder.self)
+              }
+              catch {
+                print("Error while trying to map document \(queryDocumentSnapshot.documentID): \(error.localizedDescription)")
+                return nil
+              }
+            }
+          }
+      }
+    }
+  }
+
+  private func unsubscribe() {
+    if listenerRegistration != nil {
+      listenerRegistration?.remove()
+      listenerRegistration = nil
+    }
   }
 
   func addReminder(_ reminder: Reminder) {
+    var userReminder = reminder
+    userReminder.userId = user?.uid
+
     do {
-      try remindersRepository.addReminder(reminder)
-      errorMessage = nil
+      try firestore
+        .collection(Reminder.collectionName)
+        .addDocument(from: userReminder)
     }
     catch {
       print(error)
@@ -49,17 +101,31 @@ class RemindersListViewModel: ObservableObject {
   }
 
   func updateReminder(_ reminder: Reminder) {
+    guard let documentId = reminder.id else {
+      fatalError("Reminder \(reminder.title) has no document ID.")
+    }
+
     do {
-      try remindersRepository.updateReminder(reminder)
+      try firestore
+        .collection(Reminder.collectionName)
+        .document(documentId)
+        .setData(from: reminder, merge: true)
     }
     catch {
       print(error)
       errorMessage = error.localizedDescription
     }
+
   }
 
-  func deleteReminder(_ reminder: Reminder) {
-    remindersRepository.removeReminder(reminder)
+  func removeReminder(_ reminder: Reminder) {
+    guard let documentId = reminder.id else {
+      fatalError("Reminder \(reminder.title) has no document ID.")
+    }
+    firestore
+      .collection(Reminder.collectionName)
+      .document(documentId)
+      .delete()
   }
 
   func setCompleted(_ reminder: Reminder, isCompleted: Bool) {
