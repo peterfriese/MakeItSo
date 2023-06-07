@@ -38,6 +38,7 @@
 		8883F17F2A20AD2E00DE7EC2 /* Firebase+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883F17E2A20AD2E00DE7EC2 /* Firebase+Injection.swift */; };
 		8883F1812A20BBAB00DE7EC2 /* Repositories+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883F1802A20BBAB00DE7EC2 /* Repositories+Injection.swift */; };
 		88AE77122A138B0B00C51000 /* ReminderToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */; };
+		88DBEA212A30742D00B91F00 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBEA202A30742D00B91F00 /* Logging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		8883F17E2A20AD2E00DE7EC2 /* Firebase+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Injection.swift"; sourceTree = "<group>"; };
 		8883F1802A20BBAB00DE7EC2 /* Repositories+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Repositories+Injection.swift"; sourceTree = "<group>"; };
 		88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderToggleStyle.swift; sourceTree = "<group>"; };
+		88DBEA202A30742D00B91F00 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 		886FAA6C2A127422004ACF43 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				88DBEA1E2A30741400B91F00 /* Common */,
 				881D1D352A20EFD900D9B8B8 /* Firebase */,
 				881D1D482A20F26000D9B8B8 /* Settings */,
 				881D1D362A20F06300D9B8B8 /* Authentication */,
@@ -278,6 +281,22 @@
 				88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		88DBEA1E2A30741400B91F00 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				88DBEA1F2A30741B00B91F00 /* Services */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		88DBEA1F2A30741B00B91F00 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				88DBEA202A30742D00B91F00 /* Logging.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				881D1D3B2A20F0B900D9B8B8 /* GoogleSignInButton.swift in Sources */,
+				88DBEA212A30742D00B91F00 /* Logging.swift in Sources */,
 				8842942529AFF792002B16B9 /* Reminder.swift in Sources */,
 				881D1D412A20F12F00D9B8B8 /* AuthenticationViewModel.swift in Sources */,
 				881D1D432A20F1EF00D9B8B8 /* LoginView.swift in Sources */,

@@ -27,6 +27,8 @@ public class AuthenticationService {
   @ObservationIgnored
   @Injected(\.auth) private var auth
 
+  let logger = Container.shared.logger("authentication")
+
   var user: User? = nil
 
   var errorMessage = ""
@@ -54,7 +56,7 @@ public class AuthenticationService {
       signInAnonymously()
     }
     catch {
-      print("Error while trying to sign out: \(error.localizedDescription)")
+      logger.error("Error while trying to sign out: \(error.localizedDescription)")
       errorMessage = error.localizedDescription
     }
   }
@@ -77,21 +79,21 @@ public class AuthenticationService {
 extension AuthenticationService {
   func signInAnonymously() {
     if auth.currentUser == nil {
-      print("Nobody is signed in. Trying to sign in anonymously.")
+      logger.info("Nobody is signed in. Trying to sign in anonymously.")
       Task {
         do {
           try await auth.signInAnonymously()
           errorMessage = ""
         }
         catch {
-          print("Error when trying to sign in anonymously: \(error.localizedDescription)")
+          logger.error("Error when trying to sign in anonymously: \(error.localizedDescription)")
           errorMessage = error.localizedDescription
         }
       }
     }
     else {
       if let user = auth.currentUser {
-        print("Someone is signed in with \(user.providerID) and user ID \(user.uid)")
+        logger.info("Someone is signed in with \(user.providerID) and user ID \(user.uid)")
       }
     }
   }
@@ -108,7 +110,7 @@ extension AuthenticationService {
       request.nonce = CryptoUtils.sha256(nonce)
     }
     catch {
-      print("Error when creating a nonce: \(error.localizedDescription)")
+      logger.error("Error when creating a nonce: \(error.localizedDescription)")
     }
   }
 
@@ -124,11 +126,11 @@ extension AuthenticationService {
           fatalError("Invalid state: a login callback was received, but no login request was sent.")
         }
         guard let appleIDToken = appleIDCredential.identityToken else {
-          print("Unable to fetch identify token.")
+          logger.error("Unable to fetch identify token.")
           return false
         }
         guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-          print("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
+          logger.error("Unable to serialise token string from data: \(appleIDToken.debugDescription)")
           return false
         }
 
@@ -147,7 +149,7 @@ extension AuthenticationService {
           return true
         }
         catch {
-          print("Error authenticating: \(error.localizedDescription)")
+          logger.error("Error authenticating: \(error.localizedDescription)")
           return false
         }
       }

@@ -23,6 +23,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 extension Container {
+  static var logger = Container.shared.logger("configuration")
 
   /// Determines whether to use the Firebase Local Emulator Suite.
   /// To use the local emulator, go to the active scheme, and add `-useEmulator YES`
@@ -30,7 +31,7 @@ extension Container {
   public var useEmulator: Factory<Bool> {
     Factory(self) {
       let value =  UserDefaults.standard.bool(forKey: "useEmulator")
-      print("Using the emulator: \(value == true ? "YES" : "NO")")
+      Self.logger.info("Using the emulator: \(value == true ? "YES" : "NO")")
       return value
     }.singleton
   }
@@ -47,7 +48,7 @@ extension Container {
       else {
         environment = "to use the Firebase backend"
       }
-      print("Configuring Firebase Auth \(environment).")
+      Self.logger.info("Configuring Firebase Auth \(environment).")
       return Auth.auth()
     }.singleton
   }
@@ -67,7 +68,7 @@ extension Container {
       else {
         environment = "to use the Firebase backend"
       }
-      print("Configuring Cloud Firestore \(environment).")
+      Self.logger.info("Configuring Cloud Firestore \(environment).")
       return Firestore.firestore()
     }.singleton
   }

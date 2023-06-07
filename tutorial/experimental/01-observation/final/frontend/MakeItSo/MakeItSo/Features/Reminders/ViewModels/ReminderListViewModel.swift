@@ -36,6 +36,8 @@ class RemindersListViewModel {
   @Injected(\.remindersRepository)
   private var remindersRepository: RemindersRepository
 
+  let logger = Container.shared.logger("presentation")
+
   init() {
     trackChanges()
   }
@@ -45,7 +47,6 @@ class RemindersListViewModel {
       self.reminders = remindersRepository.reminders
     } onChange: {
       Task { @MainActor in
-        print("Hello")
         self.trackChanges()
       }
     }
@@ -58,7 +59,7 @@ class RemindersListViewModel {
       errorMessage = nil
     }
     catch {
-      print(error)
+      logger.error("\(error.localizedDescription)")
       errorMessage = error.localizedDescription
     }
   }
@@ -68,7 +69,7 @@ class RemindersListViewModel {
       try remindersRepository.updateReminder(reminder)
     }
     catch {
-      print(error)
+      logger.error("\(error.localizedDescription)")
       errorMessage = error.localizedDescription
     }
   }

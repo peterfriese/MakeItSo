@@ -33,6 +33,8 @@ public class RemindersRepository {
   @ObservationIgnored
   @Injected(\.authenticationService) var authenticationService
 
+  let logger = Container.shared.logger("persistence")
+
   var reminders = [Reminder]()
 
   var user: User? = nil
@@ -42,15 +44,6 @@ public class RemindersRepository {
   init() {
     trackChanges()
     subscribe()
-
-//    authenticationService.$user
-//      .assign(to: &$user)
-//
-//    $user.sink { user in
-//      self.unsubscribe()
-//      self.subscribe(user: user)
-//    }
-//    .store(in: &cancelables)
   }
 
   private func trackChanges() {
@@ -58,8 +51,7 @@ public class RemindersRepository {
       self.user = authenticationService.user
     } onChange: {
       Task { @MainActor in
-        print("Hello")
-        self.subscribe(user: self.user)
+        self.subscribe(user: self.authenticationService.user)
         self.trackChanges()
       }
     }
@@ -71,29 +63,29 @@ public class RemindersRepository {
 
   func subscribe(user: User? = nil) {
     if listenerRegistration == nil {
-//      if let localUser = user ?? self.user {
+      if let localUser = user ?? self.user {
         let query = firestore.collection(Reminder.collectionName)
-//          .whereField("userId", isEqualTo: localUser.uid)
+          .whereField("userId", isEqualTo: localUser.uid)
 
         listenerRegistration = query
           .addSnapshotListener { [weak self] (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-              print("No documents")
+              self?.logger.debug("No documents")
               return
             }
 
-            print("Mapping \(documents.count) documents")
+            self?.logger.error("Mapping \(documents.count) documents")
             self?.reminders = documents.compactMap { queryDocumentSnapshot in
               do {
                 return try queryDocumentSnapshot.data(as: Reminder.self)
               }
               catch {
-                print("Error while trying to map document \(queryDocumentSnapshot.documentID): \(error.localizedDescription)")
+                self?.logger.debug("Error while trying to map document \(queryDocumentSnapshot.documentID): \(error.localizedDescription)")
                 return nil
               }
             }
           }
-//      }
+      }
     }
   }
 
