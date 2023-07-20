@@ -167,7 +167,7 @@
       }
       
       @Step {
-        Add a new `sheet` modifier to the `List` view, and bind it to the `editableReminder` property. This will result in the sheet being shown when `editableRemninder` is not `nil`.
+        Add a new `sheet` modifier to the `List` view, and bind it to the `editableReminder` property. This will result in the sheet being shown when `editableReminder` is not `nil`.
         
         @Code(name: "RemindersListView.swift", file: 04-updating-data-in-cloud-firestore-02-RemindersListView-03.swift) 
       }

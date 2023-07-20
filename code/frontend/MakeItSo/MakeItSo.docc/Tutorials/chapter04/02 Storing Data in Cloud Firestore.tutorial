@@ -9,11 +9,13 @@
     @Image(source: hero-intro-to-cloud-firestore, alt: "")
   }
   
-  @Section(title: "Implement a repository") {
+  @Section(title: "Implement a repository for managing reminders") {
     @ContentAndMedia {
-      A repository is a software design pattern that provides an abstraction of the data storage layer of your app. Repositories provide some fundamental operations for working with data: creating, reading, updating, and deleting (CRUD).
+      A repository is a software design pattern that provides an abstraction of the data storage layer of your app. Repositories provide some fundamental operations for working with data: **C**reating, **R**eading, **U**pdating, and **D**eleting (CRUD).
       
-      In this and the next parts of the tutorial, you will create a `RemindersRepository`, which you will connect to the `RemindersListView` that you implemented earlier. First, you will write code to add new reminders to Firestore using the `RemindersRepository`.
+      In this and the next parts of the tutorial, you will create a `RemindersRepository`, which you will connect to the `RemindersListView` that you implemented earlier. 
+      
+      First, you will write code to add new reminders to Firestore using the `RemindersRepository`.
     }
     
     @Steps {
@@ -86,14 +88,14 @@
     @ContentAndMedia {
       Firestore supports Swift's Codable protocol, which makes mapping Firestore documents to Swift structs (and vice versa) a lot less work than implementing the mapping manually.
       
-      In this section, you will make the `Reminder` struct codable, so it can be saved to Firestore with one line of code.
+      In this section, you will make the `Reminder` struct codable, so it can be saved to Firestore with just one line of code.
     }
     
     @Steps {
       @Step {
         Navigate to `Reminder.swift`, and note that it conforms to the `Identifiable` protocol. This is to make sure you can use `Reminder` instances in a `List` view. 
         
-        > Note: `List` requires its elements to be identifiable, so that it can correctly determine which element is which when inserting or removing elements. This allows `List` to implement fluent animations.   
+        > Note: `List` requires its elements to be identifiable, so that it can correctly determine which element is which when inserting or removing elements. This allows `List` to implement smooth animations.   
         @Code(name: "Reminder.swift", file: storing-data-in-cloud-firestore-03-Reminder-01.swift, previousFile: storing-data-in-cloud-firestore-03-Reminder-00.swift)
       }
       @Step {
@@ -117,7 +119,7 @@
     
   @Section(title: "Connect the view model to the repository") {
     @ContentAndMedia {
-      So far, you've used `RemindersListViewModel` to store all reminders in-memory. In this step, you will connect the `RemninderRepository` you just created to `ReminderViewModel`. This will allow you to use Firestore to store and retrieve reminders. 
+      So far, you've used `RemindersListViewModel` to store all reminders in-memory. In this step, you will connect the `ReminderRepository` you just created to `ReminderViewModel`. This will allow you to use Firestore to store reminders in the cloud. 
     }
     
     @Steps {
@@ -145,12 +147,15 @@
     @ContentAndMedia {
       Congratulations! In this part of the tutorial, you connected your todo list app to Firestore. You created a repository for managing reminders, and implemented adding new reminders to Firestore. 
       
-      You can now run the app and add a couple of reminders to Firestore.
+      You can now run the app and add a couple of reminders to Firestore. 
     }
     
     @Steps {
       @Step {
-        Make sure the Firebase Emulator Suite is still running: Point your browser to [http://127.0.0.1:4000/firestore/data](http://127.0.0.1:4000/firestore/data). If you don't see the Firestore tab of the Firebase Emulator Suite, follow the steps in the [Developing Locally with the Emulator Suite]() tutorial.
+        Make sure the Firebase Emulator Suite is still running: Point your browser to [http://127.0.0.1:4000/firestore/data](http://127.0.0.1:4000/firestore/data). 
+        
+        
+        > Note: If you don't see the _Firestore_ tab of the Firebase Emulator Suite, follow the steps in the [Developing Locally with the Emulator Suite](doc:02-Developing-Locally-with-the-Emulator-Suite) tutorial to set up the Firebase Emulator and connect your app to it.
         
         @Image(source: storing-data-in-cloud-firestore-05-run-the-app-01)
       }
@@ -177,7 +182,11 @@
         @Video(source: storing-data-in-cloud-firestore-05-run-the-app.mp4)
       }
       
-      You might notice that the UI of your app doesn't update - no matter how many new reminders you add. This is becaue your app doens't listen to updates yet. Proceed to the next chapter of the tutorial to implement real-time sync.
+      > Note: You might notice that the UI of your app doesn't update - no matter how many new reminders you add.
+      >
+      > This is because your app doens't listen to updates yet.
+      >
+      > Proceed to the next chapter of the tutorial to implement real-time sync.
     }
   }
     
