@@ -88,7 +88,6 @@
 		886FAA6D2A12742C004ACF43 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
-				88E3D3A92A2B472100C1656C /* New Group */,
 				886FAA6E2A12743E004ACF43 /* Models */,
 				886FAA6F2A127444004ACF43 /* ViewModels */,
 				886FAA702A12744A004ACF43 /* Views */,
@@ -129,13 +128,6 @@
 				88AE77112A138B0B00C51000 /* ReminderToggleStyle.swift */,
 			);
 			path = Styles;
-			sourceTree = "<group>";
-		};
-		88E3D3A92A2B472100C1656C /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
