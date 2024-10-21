@@ -39,6 +39,18 @@ extension TodoItemListScreen {
     NavigationStack {
       List($store.todoItems) { $todoItem in
         TodoItemRowView(todoItem: $todoItem)
+          .swipeActions {
+            Button(role: .destructive, action: { store.remove(todoItem) }) {
+              Label("Delete", systemImage: "trash")
+            }
+            Button(action: { store.toggleFlagged(todoItem) }) {
+              Label("Flag", systemImage: "flag")
+            }
+            .tint(Color(UIColor.systemOrange))
+          }
+          .onChange(of: todoItem) { oldValue, newValue in
+            store.update(todoItem)
+          }
       }
       .listStyle(.plain)
       .navigationTitle("Make It So")

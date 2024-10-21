@@ -21,10 +21,11 @@ import Observation
 
 protocol TodoItemStore {
   var todoItems: [TodoItem] { get }
-  func add(_ todoItem: TodoItem) async
-  func remove(_ todoItem: TodoItem) async
-  func update(_ todoItem: TodoItem) async
-  func toggleCompleted(_ todoItem: TodoItem) async
+  func add(_ todoItem: TodoItem)
+  func remove(_ todoItem: TodoItem)
+  func update(_ todoItem: TodoItem)
+  func toggleCompleted(_ todoItem: TodoItem)
+  func toggleFlagged(_ todoItem: TodoItem)
 }
 
 @Observable
@@ -52,6 +53,12 @@ public class MemoryTodoItemStore: TodoItemStore {
   public func toggleCompleted(_ todoItem: TodoItem) {
     if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
       todoItems[index].isCompleted.toggle()
+    }
+  }
+
+  public func toggleFlagged(_ todoItem: TodoItem) {
+    if let index = todoItems.firstIndex(of: todoItem) {
+      todoItems[index].isFlagged.toggle()
     }
   }
 }

@@ -25,7 +25,7 @@ public enum Priority: Int, Codable, Sendable {
   case high
 }
 
-public struct TodoItem: Identifiable, Sendable {
+public struct TodoItem: Identifiable, Equatable, Sendable {
   public var id: String?
   public var title: String
   public var priority: Priority
