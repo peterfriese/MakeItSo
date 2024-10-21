@@ -27,8 +27,7 @@ struct TodoItemListScreen: View {
   }
 
   func addTodoItem () {
-    store.todoItems
-      .append(
+    store.add(
         .init(id: UUID().uuidString, title: "New Todo Item", priority: .none)
       )
   }
