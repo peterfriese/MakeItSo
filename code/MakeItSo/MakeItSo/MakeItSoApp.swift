@@ -23,6 +23,7 @@ struct MakeItSoApp: App {
   var body: some Scene {
     WindowGroup {
       TodoItemListScreen()
+        .font(.system(.body, design: .rounded))
     }
   }
 }

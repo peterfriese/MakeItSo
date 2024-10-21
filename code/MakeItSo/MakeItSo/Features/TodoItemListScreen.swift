@@ -52,7 +52,8 @@ extension TodoItemListScreen {
           }
       }
       .listStyle(.plain)
-      .navigationTitle("Make It So")
+      .navigationBarTitle("Make It So")
+      .navigationBarTitleFontDesign(.rounded, color: .accentColor)
       .toolbar {
         ToolbarItem(placement: .bottomBar) {
           Button(action: {addTodoItem()}) {
