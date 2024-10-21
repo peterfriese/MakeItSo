@@ -42,7 +42,7 @@ extension TodoItemListScreen {
             Button(role: .destructive, action: { store.remove(todoItem) }) {
               Label("Delete", systemImage: "trash")
             }
-            Button(action: { store.toggleFlagged(todoItem) }) {
+            Button(action: { todoItem.isFlagged.toggle() }) {
               Label("Flag", systemImage: "flag")
             }
             .tint(Color(UIColor.systemOrange))
