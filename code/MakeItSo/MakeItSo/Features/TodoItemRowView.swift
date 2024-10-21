@@ -20,8 +20,9 @@ import SwiftUI
 
 struct TodoItemRowView: View {
   @Binding var todoItem: TodoItem
+
   var body: some View {
-    HStack {
+    HStack(alignment: .top) {
       Image(systemName: todoItem.isCompleted ? "largecircle.fill.circle" : "circle")
         .resizable()
         .frame(width: 24, height: 24)
@@ -31,7 +32,7 @@ struct TodoItemRowView: View {
         }
       Text(String(repeating: "!", count: todoItem.priority.rawValue))
         .foregroundStyle(Color.accentColor)
-      Text(todoItem.title)
+      TextField("", text: $todoItem.title, axis: .vertical)
       Spacer()
       if todoItem.isFlagged {
         Image(systemName: "flag.fill")
