@@ -1,3 +1,26 @@
+<!-- PROJECT LOGO -->
+<p align="center">
+  <img src="assets/logo/check-square.png" height="128">
+  <h1 align="center">Make It So</h1>
+</p>
+
+<p align="center">
+  Make It So is a replica of Apple's <i>Reminders</i> app, built with Firebase and SwiftUI.
+</p>
+
+<p align="center">
+  <img src="assets/hero/repo-hero.png" alt="Logo">
+</p>
+
+<p align="center">
+  <a href="https://twitter.com/peterfriese/status/1453467058302291975"><strong>Follow along on Twitter as I code the app</strong></a>
+  <br />
+  <br />
+  <a href="https://github.com/peterfriese/MakeItSo/issues">Report Bug</a>
+  ·
+  <a href="https://github.com/peterfriese/MakeItSo/issues">Request Feature</a>
+</p>
+
 <!-- PROJECT SHIELDS -->
 [![Xcode][xcode-shield]][xcode-url]
 [![Swift][swift-shield]][swift-url]
@@ -7,26 +30,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/peterfriese/MakeItSo">
-    <img src="assets/hero/repo-hero.png" alt="Logo">
-  </a>
-
-  <h1 align="center">Make It So - Again!</h1>
-
-  <p align="center">
-    This is the source code for <i>Make It So</i>, a sample app that demonstrates how to use Firebase in a SwiftUI app that runs on all (most) of Apple's platforms.
-    <br />
-    <a href="https://twitter.com/peterfriese/status/1453467058302291975"><strong>Follow along on Twitter as I code the app »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/peterfriese/MakeItSo/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/peterfriese/MakeItSo/issues">Request Feature</a>
-  </p>
-</p>
 
 # Getting started
 
@@ -42,37 +45,34 @@ This app requires a Firebase project, which you can create at no cost using the 
 1. Select the `MakeItSo (iOS) DEV` target
 1. Run the app
 
-# About the project
-
-
 <!-- LICENSE -->
-## License
+# License
 
 See [LICENSE](LICENSE)
 
 <!-- Disclaimer -->
-## Disclaimer
+# Disclaimer
 
 This is not an official Google product.
 
 <!-- CONTACT -->
-## Contact
+# Contact
 Peter Friese - [@peterfriese](https://twitter.com/peterfriese)
 
 Project Link: [https://github.com/peterfriese/MakeItSo](https://github.com/peterfriese/MakeItSo)
 
 <!-- ACKNOWLEDGEMENTS -->
 
-## Acknowledgements
+# Acknowledgements
 
 The application icon is based on [Check](https://thenounproject.com/term/check/1905028/) by [Robert Won](https://thenounproject.com/robertwon/) from the [Noun Project](https://thenounproject.com/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[xcode-shield]: https://img.shields.io/badge/xcode-v13.3.1-blue
+[xcode-shield]: https://img.shields.io/badge/xcode-v16-blue
 [xcode-url]: https://developer.apple.com/xcode/
 
-[swift-shield]: https://img.shields.io/badge/swift-v5.5-%23fe4b2d
+[swift-shield]: https://img.shields.io/badge/swift-v6.0-%23fe4b2d
 [swift-url]: https://swift.org/
 
 [contributors-shield]: https://img.shields.io/github/contributors/peterfriese/MakeItSo.svg?style=flat-square
