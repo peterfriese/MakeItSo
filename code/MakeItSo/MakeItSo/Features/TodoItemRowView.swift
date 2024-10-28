@@ -18,6 +18,11 @@
 
 import SwiftUI
 
+/// Use this flag to turn multi line text fields on / off. At the moment, it's not possible to
+/// use multi-line text fields and the `onSubmit` event handler together. Since most tasks will
+/// less than two lines, we're going to prefer supporting `onSubmit` over multi-line tasks for now.
+private let MULTI_LINE_TEXT_FIELD = false
+
 struct TodoItemRowView: View {
   @Binding var todoItem: TodoItem
 
@@ -27,12 +32,17 @@ struct TodoItemRowView: View {
         .resizable()
         .frame(width: 24, height: 24)
         .foregroundColor(todoItem.isCompleted ? .accentColor : .gray)
+        .contentShape(Rectangle())
         .onTapGesture {
           todoItem.isCompleted.toggle()
         }
       Text(String(repeating: "!", count: todoItem.priority.rawValue))
         .foregroundStyle(Color.accentColor)
+#if MULTI_LINE_TEXT_FIELD
       TextField("", text: $todoItem.title, axis: .vertical)
+#else
+      TextField("", text: $todoItem.title)
+#endif
       Spacer()
       if todoItem.isFlagged {
         Image(systemName: "flag.fill")

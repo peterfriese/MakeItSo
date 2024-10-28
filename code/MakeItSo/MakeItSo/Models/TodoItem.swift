@@ -26,7 +26,7 @@ public enum Priority: Int, Codable, Sendable {
 }
 
 public struct TodoItem: Identifiable, Equatable, Sendable {
-  public var id: String?
+  public var id: String
   public var title: String
   public var priority: Priority
   public var isCompleted: Bool
@@ -41,6 +41,9 @@ public struct TodoItem: Identifiable, Equatable, Sendable {
   ) {
     if let id {
       self.id = id
+    }
+    else {
+      self.id = UUID().uuidString
     }
     self.title = title
     self.priority = priority

@@ -18,18 +18,41 @@
 
 import SwiftUI
 
+enum Focusable: Hashable {
+  case row(id: String)
+}
+
 struct TodoItemListScreen: View {
-  @State var todoItems = TodoItem.mockList
   @State var store = MemoryTodoItemStore()
+  @FocusState var focusedItem: Focusable?
 
   init () {
     store.todoItems = TodoItem.mockList
   }
 
   func addTodoItem () {
-    store.add(
-        .init(id: UUID().uuidString, title: "New Todo Item", priority: .none)
-      )
+    let newTodoItem = TodoItem(
+      id: UUID().uuidString,
+      title: "",
+      priority: .none
+    )
+
+    if case .row(let id) = focusedItem {
+      let existingTodoItem = store.todoItems.first(where: {$0.id == id})
+      if let existingTodoItem {
+        if existingTodoItem.title.isEmpty {
+          store.remove(existingTodoItem)
+        }
+        else {
+          store.insert(newTodoItem, after: existingTodoItem)
+        }
+      }
+    }
+    else {
+      store.add(newTodoItem)
+    }
+
+    focusedItem = .row(id: newTodoItem.id)
   }
 }
 
@@ -38,6 +61,7 @@ extension TodoItemListScreen {
     NavigationStack {
       List($store.todoItems) { $todoItem in
         TodoItemRowView(todoItem: $todoItem)
+          .focused($focusedItem, equals: .row(id: todoItem.id))
           .swipeActions {
             Button(role: .destructive, action: { store.remove(todoItem) }) {
               Label("Delete", systemImage: "trash")
@@ -47,6 +71,9 @@ extension TodoItemListScreen {
             }
             .tint(Color(UIColor.systemOrange))
           }
+          .onSubmit {
+            addTodoItem()
+          }
           .onChange(of: todoItem) { oldValue, newValue in
             store.update(todoItem)
           }
@@ -55,6 +82,15 @@ extension TodoItemListScreen {
       .navigationBarTitle("Make It So")
       .navigationBarTitleFontDesign(.rounded, color: .accentColor)
       .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          if focusedItem != nil {
+            Button(action: {
+              focusedItem = nil
+            }) {
+              Text("Done")
+            }
+          }
+        }
         ToolbarItem(placement: .bottomBar) {
           Button(action: {addTodoItem()}) {
             HStack {

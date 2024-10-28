@@ -33,30 +33,47 @@ public class MemoryTodoItemStore: TodoItemStore {
   public var todoItems: [TodoItem] = []
 
   public func add(_ todoItem: TodoItem) {
-    var newItem = todoItem
-    if newItem.id == nil {
-      newItem.id = UUID().uuidString
+    print("Function: \(#function) Thread: \(Thread.isMainThread)")
+
+    todoItems.append(todoItem)
+  }
+
+  public func insert (_ todoItem: TodoItem, after: TodoItem) {
+    print("Function: \(#function) Thread: \(Thread.isMainThread)")
+
+    if let index = todoItems.firstIndex(of: after) {
+      todoItems.insert(todoItem, at: index + 1)
     }
-    todoItems.append(newItem)
+    else {
+      todoItems.append(todoItem)
+    }
   }
 
   public func remove(_ todoItem: TodoItem) {
+    print("Function: \(#function) Thread: \(Thread.isMainThread)")
+
     todoItems.removeAll(where: { $0.id == todoItem.id })
   }
 
   public func update(_ todoItem: TodoItem) {
+    print("Function: \(#function) Thread: \(Thread.isMainThread)")
+
     if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
       todoItems[index] = todoItem
     }
   }
 
   public func toggleCompleted(_ todoItem: TodoItem) {
+    print("Function: \(#function) Thread: \(Thread.isMainThread)")
+
     if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
       todoItems[index].isCompleted.toggle()
     }
   }
 
   public func toggleFlagged(_ todoItem: TodoItem) {
+    print("Function: \(#function) Thread: \(Thread.isMainThread)")
+
     if let index = todoItems.firstIndex(of: todoItem) {
       todoItems[index].isFlagged.toggle()
     }
