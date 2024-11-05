@@ -23,12 +23,8 @@ enum Focusable: Hashable {
 }
 
 struct TodoItemListScreen: View {
-  @State var store = MemoryTodoItemStore()
+  @Environment(MemoryTodoItemStore.self) var store
   @FocusState var focusedItem: Focusable?
-
-  init () {
-    store.todoItems = TodoItem.mockList
-  }
 
   func addTodoItem () {
     let newTodoItem = TodoItem(
@@ -59,6 +55,7 @@ struct TodoItemListScreen: View {
 extension TodoItemListScreen {
   var body: some View {
     NavigationStack {
+      @Bindable var store = store
       List($store.todoItems) { $todoItem in
         TodoItemRowView(todoItem: $todoItem)
           .focused($focusedItem, equals: .row(id: todoItem.id))
@@ -66,7 +63,7 @@ extension TodoItemListScreen {
             Button(role: .destructive, action: { store.remove(todoItem) }) {
               Label("Delete", systemImage: "trash")
             }
-            Button(action: { todoItem.isFlagged.toggle() }) {
+            Button(action: { store.toggleFlagged(todoItem) }) {
               Label("Flag", systemImage: "flag")
             }
             .tint(Color(UIColor.systemOrange))

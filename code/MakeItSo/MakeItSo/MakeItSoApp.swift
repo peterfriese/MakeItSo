@@ -20,10 +20,17 @@ import SwiftUI
 
 @main
 struct MakeItSoApp: App {
+  @State var store = MemoryTodoItemStore()
+
+  init() {
+    store.todoItems = TodoItem.mockList
+  }
+
   var body: some Scene {
     WindowGroup {
       TodoItemListScreen()
         .font(.system(.body, design: .rounded))
+        .environment(store)
     }
   }
 }
