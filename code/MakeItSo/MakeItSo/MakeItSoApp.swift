@@ -17,13 +17,25 @@
 // limitations under the License.
 
 import SwiftUI
+import Firebase
 
 @main
 struct MakeItSoApp: App {
-  @State var store = MemoryTodoItemStore()
+
+  @State var store: TodoItemStore
 
   init() {
-    store.todoItems = TodoItem.mockList
+    FirebaseApp.configure()
+
+    let inMemoryStorageStrategy = InMemoryStorageStrategy()
+    inMemoryStorageStrategy.todoItems = TodoItem.mockList
+
+    let firebaseStorageStrategy = FirebaseStorageStrategy()
+    store = TodoItemStore(storage: firebaseStorageStrategy)
+
+#error("Continue here.")
+#error("1) implement the insert method in FirestoreTodoItemStore (or make inserting items is handled properly on the client)")
+
   }
 
   var body: some Scene {

@@ -19,16 +19,15 @@
 import SwiftUI
 
 enum Focusable: Hashable {
-  case row(id: String)
+  case row(id: String?)
 }
 
 struct TodoItemListScreen: View {
-  @Environment(MemoryTodoItemStore.self) var store
+  @Environment(TodoItemStore.self) var store
   @FocusState var focusedItem: Focusable?
 
   func addTodoItem () {
     let newTodoItem = TodoItem(
-      id: UUID().uuidString,
       title: "",
       priority: .none
     )
@@ -48,7 +47,9 @@ struct TodoItemListScreen: View {
       store.add(newTodoItem)
     }
 
-    focusedItem = .row(id: newTodoItem.id)
+    if let newTodoItemId = newTodoItem.id {
+      focusedItem = .row(id: newTodoItemId)
+    }
   }
 }
 

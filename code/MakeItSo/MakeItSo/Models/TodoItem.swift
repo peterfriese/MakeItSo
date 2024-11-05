@@ -17,6 +17,7 @@
 // limitations under the License.
 
 import Foundation
+@preconcurrency import FirebaseFirestore
 
 public enum Priority: Int, Codable, Sendable {
   case none = 0
@@ -26,14 +27,19 @@ public enum Priority: Int, Codable, Sendable {
 }
 
 public struct TodoItem: Identifiable, Equatable, Sendable {
-  public var id: String
+  /// We need the Firestore document ID so we can update / delete the document
+  @DocumentID var docId: String?
+
+  /// The `id` is required to make the `Reminder` identifiable. We also need to persist this, otherwise
+  /// it would get lost when round-tripping to Firestore, which would result in the item losing focus.
+  public var id: String? = UUID().uuidString
   public var title: String
   public var priority: Priority
   public var isCompleted: Bool
   public var isFlagged: Bool
 
   public init(
-    id: String? = nil,
+    id: String? = UUID().uuidString,
     title: String,
     priority: Priority = .none,
     isCompleted: Bool = false,
@@ -54,6 +60,7 @@ public struct TodoItem: Identifiable, Equatable, Sendable {
 
 extension TodoItem: Codable {
   enum CodingKeys: String, CodingKey {
+    case docId
     case id
     case title
     case priority

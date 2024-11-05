@@ -22,11 +22,11 @@ import SwiftUI
 import FirebaseFirestore
 
 extension EnvironmentValues {
-  @Entry var todoItemStore: TodoItemStore = MemoryTodoItemStore()
+  @Entry var todoItemStore: TodoItemStore = TodoItemStore(storage: InMemoryStorageStrategy())
 }
 
-protocol TodoItemStore: Observable, AnyObject {
-  var todoItems: [TodoItem] { get }
+protocol TodoItemStorageStrategy: Observable, AnyObject {
+  var todoItems: [TodoItem] { get set }
   func add(_ todoItem: TodoItem)
   func insert (_ todoItem: TodoItem, after: TodoItem)
   func remove(_ todoItem: TodoItem)
@@ -35,7 +35,8 @@ protocol TodoItemStore: Observable, AnyObject {
   func toggleFlagged(_ todoItem: TodoItem)
 }
 
-public class MemoryTodoItemStore: TodoItemStore {
+
+public class InMemoryStorageStrategy: TodoItemStorageStrategy {
   public var todoItems: [TodoItem] = []
 
   public func add(_ todoItem: TodoItem) {
@@ -87,7 +88,7 @@ public class MemoryTodoItemStore: TodoItemStore {
 }
 
 @Observable
-public class FirestoreTodoItemStore: TodoItemStore {
+public class FirebaseStorageStrategy: TodoItemStorageStrategy {
   private var db = Firestore.firestore()
   private var listenerRegistration: ListenerRegistration?
 
@@ -102,7 +103,7 @@ public class FirestoreTodoItemStore: TodoItemStore {
   }
 
   private func setupSnapshotListener() {
-    listenerRegistration = db.collection("todoItems").addSnapshotListener { [weak self] querySnapshot, error in
+    listenerRegistration = db.collection("todoitems").addSnapshotListener { [weak self] querySnapshot, error in
       guard let documents = querySnapshot?.documents else {
         print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
         return
@@ -116,7 +117,7 @@ public class FirestoreTodoItemStore: TodoItemStore {
 
   public func add(_ todoItem: TodoItem) {
     do {
-      _ = try db.collection("todoItems").addDocument(from: todoItem)
+      _ = try db.collection("todoitems").addDocument(from: todoItem)
     } catch {
       print("Error adding todo item: \(error.localizedDescription)")
     }
@@ -126,16 +127,20 @@ public class FirestoreTodoItemStore: TodoItemStore {
   }
 
   public func remove(_ todoItem: TodoItem) {
-    db.collection("todoItems").document(todoItem.id).delete() { error in
-      if let error = error {
-        print("Error removing todo item: \(error.localizedDescription)")
+    if let documentId = todoItem.docId {
+      db.collection("todoitems").document(documentId).delete() { error in
+        if let error = error {
+          print("Error removing todo item: \(error.localizedDescription)")
+        }
       }
     }
   }
 
   public func update(_ todoItem: TodoItem) {
     do {
-      try db.collection("todoItems").document(todoItem.id).setData(from: todoItem)
+      if let documentId = todoItem.docId {
+        try db.collection("todoitems").document(documentId).setData(from: todoItem)
+      }
     } catch {
       print("Error updating todo item: \(error.localizedDescription)")
     }
@@ -151,5 +156,43 @@ public class FirestoreTodoItemStore: TodoItemStore {
     var updatedItem = todoItem
     updatedItem.isFlagged.toggle()
     update(updatedItem)
+  }
+}
+
+@Observable
+public class TodoItemStore: TodoItemStorageStrategy {
+  private var storage: TodoItemStorageStrategy
+
+  public var todoItems: [TodoItem] {
+    get { storage.todoItems }
+    set { storage.todoItems = newValue }
+  }
+
+  init(storage: TodoItemStorageStrategy) {
+    self.storage = storage
+  }
+
+  public func add(_ todoItem: TodoItem) {
+    storage.add(todoItem)
+  }
+
+  public func insert(_ todoItem: TodoItem, after: TodoItem) {
+    storage.insert(todoItem, after: after)
+  }
+
+  public func remove(_ todoItem: TodoItem) {
+    storage.remove(todoItem)
+  }
+
+  public func update(_ todoItem: TodoItem) {
+    storage.update(todoItem)
+  }
+
+  public func toggleCompleted(_ todoItem: TodoItem) {
+    storage.toggleCompleted(todoItem)
+  }
+
+  public func toggleFlagged(_ todoItem: TodoItem) {
+    storage.toggleFlagged(todoItem)
   }
 }
