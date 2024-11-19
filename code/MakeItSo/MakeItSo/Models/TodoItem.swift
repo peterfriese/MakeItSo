@@ -19,6 +19,23 @@
 import Foundation
 @preconcurrency import FirebaseFirestore
 
+extension Array where Element == TodoItem {
+  func computeOrder(for item: TodoItem) -> Int {
+    let index = self.endIndex == 0 ? 0 : self.endIndex - 1
+    return self.computeOrder(for: item, after: index)
+  }
+
+  func computeOrder(for item: TodoItem, after index: Int) -> Int {
+    guard self.count > 0 else { return 0 }
+    let currentOrder = self[index].order
+
+    let nextIndex = self.index(after: index)
+    let nextOrder = nextIndex < self.endIndex ? self[nextIndex].order : currentOrder + 1_000
+
+    return (currentOrder + nextOrder) / 2
+  }
+}
+
 public enum Priority: Int, Codable, Sendable {
   case none = 0
   case low
@@ -37,6 +54,7 @@ public struct TodoItem: Identifiable, Equatable, Sendable {
   public var priority: Priority
   public var isCompleted: Bool
   public var isFlagged: Bool
+  public var order: Int = 0
 
   public init(
     id: String? = UUID().uuidString,
@@ -66,5 +84,6 @@ extension TodoItem: Codable {
     case priority
     case isCompleted = "completed"
     case isFlagged = "flagged"
+    case order
   }
 }

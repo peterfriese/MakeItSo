@@ -26,29 +26,30 @@ struct TodoItemListScreen: View {
   @Environment(TodoItemStore.self) var store
   @FocusState var focusedItem: Focusable?
 
-  func addTodoItem () {
+  func createNewTodoItem(current: TodoItem?) {
     let newTodoItem = TodoItem(
       title: "",
       priority: .none
     )
 
-    if case .row(let id) = focusedItem {
-      let existingTodoItem = store.todoItems.first(where: {$0.id == id})
-      if let existingTodoItem {
-        if existingTodoItem.title.isEmpty {
-          store.remove(existingTodoItem)
-        }
-        else {
-          store.insert(newTodoItem, after: existingTodoItem)
-        }
+    if let current {
+      if current.title.isEmpty {
+        store.remove(current)
+      }
+      else {
+        store.update(current)
+        store.insert(newTodoItem, after: current)
       }
     }
     else {
       store.add(newTodoItem)
     }
 
-    if let newTodoItemId = newTodoItem.id {
-      focusedItem = .row(id: newTodoItemId)
+    Task {
+      // We need to wait a short moment for the item to show up before we can focus it.
+      // I assume this is to make sure SwiftUI can do one rendering pass.
+      try await Task.sleep(for: .milliseconds(100))
+      focusedItem = .row(id: newTodoItem.id)
     }
   }
 }
@@ -59,6 +60,7 @@ extension TodoItemListScreen {
       @Bindable var store = store
       List($store.todoItems) { $todoItem in
         TodoItemRowView(todoItem: $todoItem)
+          .id(todoItem.id)
           .focused($focusedItem, equals: .row(id: todoItem.id))
           .swipeActions {
             Button(role: .destructive, action: { store.remove(todoItem) }) {
@@ -70,9 +72,11 @@ extension TodoItemListScreen {
             .tint(Color(UIColor.systemOrange))
           }
           .onSubmit {
-            addTodoItem()
+            withAnimation {
+              createNewTodoItem(current: todoItem)
+            }
           }
-          .onChange(of: todoItem) { oldValue, newValue in
+          .task(id: todoItem, debounce: .milliseconds(600)) {
             store.update(todoItem)
           }
       }
@@ -90,7 +94,7 @@ extension TodoItemListScreen {
           }
         }
         ToolbarItem(placement: .bottomBar) {
-          Button(action: {addTodoItem()}) {
+          Button(action: { createNewTodoItem(current: nil) }) {
             HStack {
               Image(systemName: "plus.circle.fill")
                 .font(.title2)
@@ -100,6 +104,14 @@ extension TodoItemListScreen {
         }
         ToolbarItem(placement: .bottomBar) {
           Spacer()
+        }
+        ToolbarItem(placement: .bottomBar) {
+          Button {
+            focusedItem = .row(id: store.todoItems.first?.id)
+          } label: {
+            Image(systemName: "dot.scope")
+          }
+
         }
       }
     }

@@ -31,11 +31,9 @@ struct MakeItSoApp: App {
     inMemoryStorageStrategy.todoItems = TodoItem.mockList
 
     let firebaseStorageStrategy = FirebaseStorageStrategy()
+    let memoryStorageStrategy = InMemoryStorageStrategy()
+    memoryStorageStrategy.todoItems = TodoItem.mockList
     store = TodoItemStore(storage: firebaseStorageStrategy)
-
-#error("Continue here.")
-#error("1) implement the insert method in FirestoreTodoItemStore (or make inserting items is handled properly on the client)")
-
   }
 
   var body: some Scene {

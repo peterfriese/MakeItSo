@@ -35,7 +35,7 @@ protocol TodoItemStorageStrategy: Observable, AnyObject {
   func toggleFlagged(_ todoItem: TodoItem)
 }
 
-
+@Observable
 public class InMemoryStorageStrategy: TodoItemStorageStrategy {
   public var todoItems: [TodoItem] = []
 
@@ -103,7 +103,10 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
   }
 
   private func setupSnapshotListener() {
-    listenerRegistration = db.collection("todoitems").addSnapshotListener { [weak self] querySnapshot, error in
+    listenerRegistration = db
+      .collection("todoitems")
+      .order(by: "order")
+      .addSnapshotListener { [weak self] querySnapshot, error in
       guard let documents = querySnapshot?.documents else {
         print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
         return
@@ -116,17 +119,35 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
   }
 
   public func add(_ todoItem: TodoItem) {
+    var newTodoItem = todoItem
+    newTodoItem.order = todoItems.computeOrder(for: newTodoItem)
+    todoItems.append(newTodoItem)
+
     do {
-      _ = try db.collection("todoitems").addDocument(from: todoItem)
+      _ = try db.collection("todoitems").addDocument(from: newTodoItem)
     } catch {
       print("Error adding todo item: \(error.localizedDescription)")
     }
   }
 
   func insert(_ todoItem: TodoItem, after: TodoItem) {
+    var newTodoItem = todoItem
+    if let index = todoItems.firstIndex(where: { $0.id == after.id } ) {
+      newTodoItem.order = todoItems.computeOrder(for: todoItem, after: index)
+      todoItems.insert(newTodoItem, at: index + 1)
+    }
+
+    do {
+      _ = try db.collection("todoitems").addDocument(from: newTodoItem)
+    } catch {
+      print("Error adding todo item: \(error.localizedDescription)")
+    }
   }
 
   public func remove(_ todoItem: TodoItem) {
+    if let index = todoItems.firstIndex(of: todoItem) {
+      todoItems.remove(at: index)
+    }
     if let documentId = todoItem.docId {
       db.collection("todoitems").document(documentId).delete() { error in
         if let error = error {
