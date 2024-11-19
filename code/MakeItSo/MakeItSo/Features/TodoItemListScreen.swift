@@ -72,11 +72,14 @@ extension TodoItemListScreen {
             .tint(Color(UIColor.systemOrange))
           }
           .onSubmit {
-            withAnimation {
+//            withAnimation {
               createNewTodoItem(current: todoItem)
-            }
+//            }
           }
           .task(id: todoItem, debounce: .milliseconds(600)) {
+            // TODO: this results in an Index Out of Bounds exception when the item
+            // has just been removed in `createNewTodoItem`, but only if `createNewTodoItem`
+            // is wrapped inside `withAnimation`
             store.update(todoItem)
           }
       }
@@ -105,14 +108,6 @@ extension TodoItemListScreen {
         ToolbarItem(placement: .bottomBar) {
           Spacer()
         }
-        ToolbarItem(placement: .bottomBar) {
-          Button {
-            focusedItem = .row(id: store.todoItems.first?.id)
-          } label: {
-            Image(systemName: "dot.scope")
-          }
-
-        }
       }
     }
   }
@@ -121,4 +116,3 @@ extension TodoItemListScreen {
 #Preview {
   TodoItemListScreen()
 }
-
