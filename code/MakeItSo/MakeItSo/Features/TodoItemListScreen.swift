@@ -26,29 +26,55 @@ struct TodoItemListScreen: View {
   @Environment(TodoItemStore.self) var store
   @FocusState var focusedItem: Focusable?
 
+  func focusedTodoItem() -> TodoItem? {
+    guard case let .row(id) = focusedItem, let id else { return nil }
+    return store.todoItems.first(where: { $0.id == id })
+  }
+
   // TODO: this does more than just adding the new item. It also updates the current todo item (the one the cursors sits in).
   // This is required since we debounce updating the current todo item.
   // Might need to find a better way to implement this
-  func createNewTodoItem(current: TodoItem?) {
+  func createNewTodoItem(append: Bool = false) {
     let newTodoItem = TodoItem(
       title: "",
       priority: .none
     )
 
-    if let current {
-      if current.title.isEmpty {
-        store.remove(current)
-      }
-      else {
-        store.update(current)
-        store.insert(newTodoItem, after: current)
+    Task {
+      if let item = focusedTodoItem() {
+        if item.title.isEmpty {
+          if append {
+            // If empty item is not at the end, remove it and append new one
+            let isLastItem = store.todoItems.last?.id == item.id
+            if !isLastItem {
+              store.remove(item)
+              let addedItem = await store.add(newTodoItem)
+              focusedItem = .row(id: addedItem.id)
+            }
+            // Otherwise, keep using current empty one (no-op)
+          } else {
+            store.remove(item)
+            focusedItem = nil
+          }
+        } else {
+          // Title is not empty, update current and add new
+          if append {
+            let addedItem = await store.add(newTodoItem)
+            focusedItem = .row(id: addedItem.id)
+          } else {
+            store.update(item)
+            let insertedItem = await store.insert(newTodoItem, after: item)
+            focusedItem = .row(id: insertedItem.id)
+          }
+        }
+      } else if append {
+        // No focused item, just append
+        let addedItem = await store.add(newTodoItem)
+        focusedItem = .row(id: addedItem.id)
+      } else {
+        focusedItem = nil
       }
     }
-    else {
-      store.add(newTodoItem)
-    }
-
-    focusedItem = .row(id: newTodoItem.id)
   }
 }
 
@@ -70,14 +96,11 @@ extension TodoItemListScreen {
             .tint(Color(UIColor.systemOrange))
           }
           .onSubmit {
-//            withAnimation {
-              createNewTodoItem(current: todoItem)
-//            }
+            withAnimation {
+              createNewTodoItem()
+            }
           }
           .task(id: todoItem, debounce: .milliseconds(600)) {
-            // TODO: this results in an Index Out of Bounds exception when the item
-            // has just been removed in `createNewTodoItem`, but only if `createNewTodoItem`
-            // is wrapped inside `withAnimation`
             store.update(todoItem)
           }
       }
@@ -93,7 +116,7 @@ extension TodoItemListScreen {
           }
         }
         ToolbarItem(placement: .bottomBar) {
-          Button(action: { createNewTodoItem(current: nil) }) {
+          Button(action: { createNewTodoItem(append: true) }) {
             HStack {
               Image(systemName: "plus.circle.fill")
                 .font(.title2)

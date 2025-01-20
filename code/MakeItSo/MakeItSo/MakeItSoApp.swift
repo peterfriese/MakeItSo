@@ -26,13 +26,8 @@ struct MakeItSoApp: App {
 
   init() {
     FirebaseApp.configure()
-
-    let inMemoryStorageStrategy = InMemoryStorageStrategy()
-    inMemoryStorageStrategy.todoItems = TodoItem.mockList
-
+    
     let firebaseStorageStrategy = FirebaseStorageStrategy()
-    let memoryStorageStrategy = InMemoryStorageStrategy()
-    memoryStorageStrategy.todoItems = TodoItem.mockList
     store = TodoItemStore(storage: firebaseStorageStrategy)
   }
 

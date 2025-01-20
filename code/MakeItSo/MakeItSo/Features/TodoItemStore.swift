@@ -27,8 +27,8 @@ extension EnvironmentValues {
 
 protocol TodoItemStorageStrategy: Observable, AnyObject {
   var todoItems: [TodoItem] { get set }
-  func add(_ todoItem: TodoItem)
-  func insert (_ todoItem: TodoItem, after: TodoItem)
+  func add(_ todoItem: TodoItem) async -> TodoItem
+  func insert (_ todoItem: TodoItem, after: TodoItem) async -> TodoItem
   func remove(_ todoItem: TodoItem)
   func update(_ todoItem: TodoItem)
   func toggleCompleted(_ todoItem: TodoItem)
@@ -39,48 +39,43 @@ protocol TodoItemStorageStrategy: Observable, AnyObject {
 public class InMemoryStorageStrategy: TodoItemStorageStrategy {
   public var todoItems: [TodoItem] = []
 
-  public func add(_ todoItem: TodoItem) {
-    print("Function: \(#function) Thread: \(Thread.isMainThread)")
-
+  public func add(_ todoItem: TodoItem) async -> TodoItem {
     todoItems.append(todoItem)
+    return todoItem
   }
 
-  public func insert (_ todoItem: TodoItem, after: TodoItem) {
-    print("Function: \(#function) Thread: \(Thread.isMainThread)")
-
+  public func insert (_ todoItem: TodoItem, after: TodoItem) async -> TodoItem {
     if let index = todoItems.firstIndex(of: after) {
       todoItems.insert(todoItem, at: index + 1)
     }
     else {
       todoItems.append(todoItem)
     }
+    return todoItem
   }
 
   public func remove(_ todoItem: TodoItem) {
     print("Function: \(#function) Thread: \(Thread.isMainThread)")
-
-    todoItems.removeAll(where: { $0.id == todoItem.id })
+    if let id = todoItem.id {
+      todoItems.removeAll(where: { $0.id == id })
+    }
   }
 
   public func update(_ todoItem: TodoItem) {
     print("Function: \(#function) Thread: \(Thread.isMainThread)")
-
-    if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
+    if let id = todoItem.id, let index = todoItems.firstIndex(where: { $0.id == id }) {
       todoItems[index] = todoItem
     }
   }
 
   public func toggleCompleted(_ todoItem: TodoItem) {
     print("Function: \(#function) Thread: \(Thread.isMainThread)")
-
-    if let index = todoItems.firstIndex(where: { $0.id == todoItem.id }) {
+    if let id = todoItem.id, let index = todoItems.firstIndex(where: { $0.id == id }) {
       todoItems[index].isCompleted.toggle()
     }
   }
 
   public func toggleFlagged(_ todoItem: TodoItem) {
-    print("Function: \(#function) Thread: \(Thread.isMainThread)")
-
     if let index = todoItems.firstIndex(of: todoItem) {
       todoItems[index].isFlagged.toggle()
     }
@@ -118,49 +113,55 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
       }
   }
 
-  public func add(_ todoItem: TodoItem) {
+  public func add(_ todoItem: TodoItem) async -> TodoItem {
     var newTodoItem = todoItem
     newTodoItem.order = todoItems.computeOrder(for: newTodoItem)
     todoItems.append(newTodoItem)
 
     do {
-      _ = try db.collection("todoitems").addDocument(from: newTodoItem)
+      let documentReference = try db.collection("todoitems").addDocument(from: newTodoItem)
+      newTodoItem.id = documentReference.documentID
+      return newTodoItem
     } catch {
       print("Error adding todo item: \(error.localizedDescription)")
+      return newTodoItem
     }
   }
 
-  func insert(_ todoItem: TodoItem, after: TodoItem) {
+  func insert(_ todoItem: TodoItem, after: TodoItem) async -> TodoItem {
     var newTodoItem = todoItem
-    if let index = todoItems.firstIndex(where: { $0.id == after.id } ) {
+    if let afterId = after.id, let index = todoItems.firstIndex(where: { $0.id == afterId }) {
       newTodoItem.order = todoItems.computeOrder(for: todoItem, after: index)
       todoItems.insert(newTodoItem, at: index + 1)
     }
 
     do {
-      _ = try db.collection("todoitems").addDocument(from: newTodoItem)
+      let documentReference = try db.collection("todoitems").addDocument(from: newTodoItem)
+      newTodoItem.id = documentReference.documentID
+      return newTodoItem
     } catch {
       print("Error adding todo item: \(error.localizedDescription)")
+      return newTodoItem
     }
   }
 
   public func remove(_ todoItem: TodoItem) {
-    if let index = todoItems.firstIndex(of: todoItem) {
-      todoItems.remove(at: index)
-    }
-    if let documentId = todoItem.documentId {
-      db.collection("todoitems").document(documentId).delete() { error in
-        if let error = error {
-          print("Error removing todo item: \(error.localizedDescription)")
-        }
+    guard let id = todoItem.id else { return }
+    todoItems.removeAll(where: { $0.id == id })
+
+    // First remove from Firebase
+    db.collection("todoitems").document(id).delete() { [weak self] error in
+      if let error = error {
+        print("Error removing todo item: \(error.localizedDescription)")
+        return
       }
     }
   }
 
   public func update(_ todoItem: TodoItem) {
     do {
-      if let documentId = todoItem.documentId {
-        try db.collection("todoitems").document(documentId).setData(from: todoItem)
+      if let id = todoItem.id {
+        try db.collection("todoitems").document(id).setData(from: todoItem)
       }
     } catch {
       print("Error updating todo item: \(error.localizedDescription)")
@@ -193,12 +194,12 @@ public class TodoItemStore: TodoItemStorageStrategy {
     self.storage = storage
   }
 
-  public func add(_ todoItem: TodoItem) {
-    storage.add(todoItem)
+  public func add(_ todoItem: TodoItem) async -> TodoItem {
+    await storage.add(todoItem)
   }
 
-  public func insert(_ todoItem: TodoItem, after: TodoItem) {
-    storage.insert(todoItem, after: after)
+  public func insert(_ todoItem: TodoItem, after: TodoItem) async -> TodoItem {
+    await storage.insert(todoItem, after: after)
   }
 
   public func remove(_ todoItem: TodoItem) {
