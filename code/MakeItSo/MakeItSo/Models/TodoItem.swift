@@ -45,7 +45,7 @@ public enum Priority: Int, Codable, Sendable {
 
 public struct TodoItem: Identifiable, Equatable, Sendable {
   /// We need the Firestore document ID so we can update / delete the document
-  @DocumentID var docId: String?
+  @DocumentID var documentId: String?
 
   /// The `id` is required to make the `Reminder` identifiable. We also need to persist this, otherwise
   /// it would get lost when round-tripping to Firestore, which would result in the item losing focus.
@@ -78,7 +78,7 @@ public struct TodoItem: Identifiable, Equatable, Sendable {
 
 extension TodoItem: Codable {
   enum CodingKeys: String, CodingKey {
-    case docId
+    case documentId = "documentId"
     case id
     case title
     case priority

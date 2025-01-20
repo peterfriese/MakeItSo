@@ -107,15 +107,15 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
       .collection("todoitems")
       .order(by: "order")
       .addSnapshotListener { [weak self] querySnapshot, error in
-      guard let documents = querySnapshot?.documents else {
-        print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
-        return
-      }
+        guard let documents = querySnapshot?.documents else {
+          print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+          return
+        }
 
-      self?.todoItems = documents.compactMap { queryDocumentSnapshot -> TodoItem? in
-        try? queryDocumentSnapshot.data(as: TodoItem.self)
+        self?.todoItems = documents.compactMap { queryDocumentSnapshot -> TodoItem? in
+          try? queryDocumentSnapshot.data(as: TodoItem.self)
+        }
       }
-    }
   }
 
   public func add(_ todoItem: TodoItem) {
@@ -148,7 +148,7 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
     if let index = todoItems.firstIndex(of: todoItem) {
       todoItems.remove(at: index)
     }
-    if let documentId = todoItem.docId {
+    if let documentId = todoItem.documentId {
       db.collection("todoitems").document(documentId).delete() { error in
         if let error = error {
           print("Error removing todo item: \(error.localizedDescription)")
@@ -159,7 +159,7 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
 
   public func update(_ todoItem: TodoItem) {
     do {
-      if let documentId = todoItem.docId {
+      if let documentId = todoItem.documentId {
         try db.collection("todoitems").document(documentId).setData(from: todoItem)
       }
     } catch {
