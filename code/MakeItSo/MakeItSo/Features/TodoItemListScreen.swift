@@ -89,10 +89,8 @@ extension TodoItemListScreen {
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {
           if focusedItem != nil {
-            Button(action: {
+            Button("Done") {
               focusedItem = nil
-            }) {
-              Text("Done")
             }
           }
         }
