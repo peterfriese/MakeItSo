@@ -26,13 +26,13 @@ extension Array where Element == TodoItem {
   }
 
   func computeOrder(for item: TodoItem, after index: Int) -> Int {
-    guard self.count > 0 else { return 0 }
+    guard self.count > 0 else { return 10_000 }
     let currentOrder = self[index].order
 
     let nextIndex = self.index(after: index)
-    let nextOrder = nextIndex < self.endIndex ? self[nextIndex].order : currentOrder + 1_000
+    let nextOrder = nextIndex < self.endIndex ? self[nextIndex].order : currentOrder + 10_000
 
-    return (currentOrder + nextOrder) / 2
+    return currentOrder + ((nextOrder - currentOrder) / 2)
   }
 }
 
