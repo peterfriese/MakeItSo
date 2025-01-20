@@ -26,6 +26,9 @@ struct TodoItemListScreen: View {
   @Environment(TodoItemStore.self) var store
   @FocusState var focusedItem: Focusable?
 
+  // TODO: this does more than just adding the new item. It also updates the current todo item (the one the cursors sits in).
+  // This is required since we debounce updating the current todo item.
+  // Might need to find a better way to implement this
   func createNewTodoItem(current: TodoItem?) {
     let newTodoItem = TodoItem(
       title: "",
@@ -45,12 +48,7 @@ struct TodoItemListScreen: View {
       store.add(newTodoItem)
     }
 
-    Task {
-      // We need to wait a short moment for the item to show up before we can focus it.
-      // I assume this is to make sure SwiftUI can do one rendering pass.
-      try await Task.sleep(for: .milliseconds(100))
-      focusedItem = .row(id: newTodoItem.id)
-    }
+    focusedItem = .row(id: newTodoItem.id)
   }
 }
 
