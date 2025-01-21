@@ -21,10 +21,6 @@ import Observation
 import SwiftUI
 import FirebaseFirestore
 
-extension EnvironmentValues {
-  @Entry var todoItemStore: TodoItemStore = TodoItemStore(storage: InMemoryStorageStrategy())
-}
-
 protocol TodoItemStorageStrategy: Observable, AnyObject {
   var todoItems: [TodoItem] { get set }
   func add(_ todoItem: TodoItem) async -> TodoItem
@@ -40,18 +36,24 @@ public class InMemoryStorageStrategy: TodoItemStorageStrategy {
   public var todoItems: [TodoItem] = []
 
   public func add(_ todoItem: TodoItem) async -> TodoItem {
-    todoItems.append(todoItem)
-    return todoItem
+    var newTodoItem = todoItem
+    newTodoItem.id = UUID().uuidString
+
+    todoItems.append(newTodoItem)
+    return newTodoItem
   }
 
   public func insert (_ todoItem: TodoItem, after: TodoItem) async -> TodoItem {
+    var newTodoItem = todoItem
+    newTodoItem.id = UUID().uuidString
+
     if let index = todoItems.firstIndex(of: after) {
-      todoItems.insert(todoItem, at: index + 1)
+      todoItems.insert(newTodoItem, at: index + 1)
     }
     else {
-      todoItems.append(todoItem)
+      todoItems.append(newTodoItem)
     }
-    return todoItem
+    return newTodoItem
   }
 
   public func remove(_ todoItem: TodoItem) {
@@ -149,13 +151,7 @@ public class FirebaseStorageStrategy: TodoItemStorageStrategy {
     guard let id = todoItem.id else { return }
     todoItems.removeAll(where: { $0.id == id })
 
-    // First remove from Firebase
-    db.collection("todoitems").document(id).delete() { [weak self] error in
-      if let error = error {
-        print("Error removing todo item: \(error.localizedDescription)")
-        return
-      }
-    }
+    db.collection("todoitems").document(id).delete()
   }
 
   public func update(_ todoItem: TodoItem) {

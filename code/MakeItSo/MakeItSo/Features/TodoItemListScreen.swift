@@ -133,5 +133,8 @@ extension TodoItemListScreen {
 }
 
 #Preview {
+  let memoryStorageStrategy = InMemoryStorageStrategy()
+  let store = TodoItemStore(storage: memoryStorageStrategy)
   TodoItemListScreen()
+    .environment(store)
 }

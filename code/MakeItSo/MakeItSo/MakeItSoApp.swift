@@ -26,7 +26,7 @@ struct MakeItSoApp: App {
 
   init() {
     FirebaseApp.configure()
-    
+
     let firebaseStorageStrategy = FirebaseStorageStrategy()
     store = TodoItemStore(storage: firebaseStorageStrategy)
   }
