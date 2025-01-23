@@ -17,13 +17,25 @@
 // limitations under the License.
 
 import SwiftUI
+import Firebase
 
 @main
 struct MakeItSoApp: App {
+
+  @State var store: TodoItemStore
+
+  init() {
+    FirebaseApp.configure()
+
+    let firebaseStorageStrategy = FirebaseStorageStrategy()
+    store = TodoItemStore(storage: firebaseStorageStrategy)
+  }
+
   var body: some Scene {
     WindowGroup {
       TodoItemListScreen()
         .font(.system(.body, design: .rounded))
+        .environment(store)
     }
   }
 }

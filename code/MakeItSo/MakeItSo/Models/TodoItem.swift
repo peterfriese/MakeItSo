@@ -17,6 +17,24 @@
 // limitations under the License.
 
 import Foundation
+@preconcurrency import FirebaseFirestore
+
+extension Array where Element == TodoItem {
+  func computeOrder(for item: TodoItem) -> Int {
+    let index = self.endIndex == 0 ? 0 : self.endIndex - 1
+    return self.computeOrder(for: item, after: index)
+  }
+
+  func computeOrder(for item: TodoItem, after index: Int) -> Int {
+    guard self.count > 0 else { return 10_000 }
+    let currentOrder = self[index].order
+
+    let nextIndex = self.index(after: index)
+    let nextOrder = nextIndex < self.endIndex ? self[nextIndex].order : currentOrder + 10_000
+
+    return currentOrder + ((nextOrder - currentOrder) / 2)
+  }
+}
 
 public enum Priority: Int, Codable, Sendable {
   case none = 0
@@ -26,11 +44,13 @@ public enum Priority: Int, Codable, Sendable {
 }
 
 public struct TodoItem: Identifiable, Equatable, Sendable {
-  public var id: String
+  @DocumentID public var id: String?
+
   public var title: String
   public var priority: Priority
   public var isCompleted: Bool
   public var isFlagged: Bool
+  public var order: Int = 0
 
   public init(
     id: String? = nil,
@@ -39,12 +59,7 @@ public struct TodoItem: Identifiable, Equatable, Sendable {
     isCompleted: Bool = false,
     isFlagged: Bool = false
   ) {
-    if let id {
-      self.id = id
-    }
-    else {
-      self.id = UUID().uuidString
-    }
+    self.id = id
     self.title = title
     self.priority = priority
     self.isCompleted = isCompleted
@@ -54,10 +69,11 @@ public struct TodoItem: Identifiable, Equatable, Sendable {
 
 extension TodoItem: Codable {
   enum CodingKeys: String, CodingKey {
-    case id
+    case id // even though we don't store the document ID as a field, it needs to be encoded/decoded
     case title
     case priority
     case isCompleted = "completed"
     case isFlagged = "flagged"
+    case order
   }
 }

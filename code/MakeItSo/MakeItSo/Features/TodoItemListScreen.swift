@@ -19,62 +19,88 @@
 import SwiftUI
 
 enum Focusable: Hashable {
-  case row(id: String)
+  case row(id: String?)
 }
 
 struct TodoItemListScreen: View {
-  @State var store = MemoryTodoItemStore()
+  @Environment(TodoItemStore.self) var store
   @FocusState var focusedItem: Focusable?
 
-  init () {
-    store.todoItems = TodoItem.mockList
+  func focusedTodoItem() -> TodoItem? {
+    guard case let .row(id) = focusedItem, let id else { return nil }
+    return store.todoItems.first(where: { $0.id == id })
   }
 
-  func addTodoItem () {
+  // TODO: this does more than just adding the new item. It also updates the current todo item (the one the cursors sits in).
+  // This is required since we debounce updating the current todo item.
+  // Might need to find a better way to implement this
+  func createNewTodoItem(append: Bool = false) {
     let newTodoItem = TodoItem(
-      id: UUID().uuidString,
       title: "",
       priority: .none
     )
 
-    if case .row(let id) = focusedItem {
-      let existingTodoItem = store.todoItems.first(where: {$0.id == id})
-      if let existingTodoItem {
-        if existingTodoItem.title.isEmpty {
-          store.remove(existingTodoItem)
+    Task {
+      if let item = focusedTodoItem() {
+        if item.title.isEmpty {
+          if append {
+            // If empty item is not at the end, remove it and append new one
+            let isLastItem = store.todoItems.last?.id == item.id
+            if !isLastItem {
+              store.remove(item)
+              let addedItem = await store.add(newTodoItem)
+              focusedItem = .row(id: addedItem.id)
+            }
+            // Otherwise, keep using current empty one (no-op)
+          } else {
+            store.remove(item)
+            focusedItem = nil
+          }
+        } else {
+          // Title is not empty, update current and add new
+          if append {
+            let addedItem = await store.add(newTodoItem)
+            focusedItem = .row(id: addedItem.id)
+          } else {
+            store.update(item)
+            let insertedItem = await store.insert(newTodoItem, after: item)
+            focusedItem = .row(id: insertedItem.id)
+          }
         }
-        else {
-          store.insert(newTodoItem, after: existingTodoItem)
-        }
+      } else if append {
+        // No focused item, just append
+        let addedItem = await store.add(newTodoItem)
+        focusedItem = .row(id: addedItem.id)
+      } else {
+        focusedItem = nil
       }
     }
-    else {
-      store.add(newTodoItem)
-    }
-
-    focusedItem = .row(id: newTodoItem.id)
   }
 }
 
 extension TodoItemListScreen {
   var body: some View {
     NavigationStack {
+      @Bindable var store = store
       List($store.todoItems) { $todoItem in
         TodoItemRowView(todoItem: $todoItem)
+          .id(todoItem.id)
           .focused($focusedItem, equals: .row(id: todoItem.id))
           .swipeActions {
             Button(role: .destructive, action: { store.remove(todoItem) }) {
               Label("Delete", systemImage: "trash")
             }
-            Button(action: { todoItem.isFlagged.toggle() }) {
+            Button(action: { store.toggleFlagged(todoItem) }) {
               Label("Flag", systemImage: "flag")
             }
             .tint(Color(UIColor.systemOrange))
           }
           .onSubmit {
-            addTodoItem()
+            withAnimation {
+              createNewTodoItem()
+            }
           }
-          .onChange(of: todoItem) { oldValue, newValue in
+          .task(id: todoItem, debounce: .milliseconds(600)) {
             store.update(todoItem)
           }
       }
@@ -84,15 +110,13 @@ extension TodoItemListScreen {
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {
           if focusedItem != nil {
-            Button(action: {
+            Button("Done") {
               focusedItem = nil
-            }) {
-              Text("Done")
             }
           }
         }
         ToolbarItem(placement: .bottomBar) {
-          Button(action: {addTodoItem()}) {
+          Button(action: { createNewTodoItem(append: true) }) {
             HStack {
               Image(systemName: "plus.circle.fill")
                 .font(.title2)
@@ -109,6 +133,8 @@ extension TodoItemListScreen {
 }
 
 #Preview {
+  let memoryStorageStrategy = InMemoryStorageStrategy()
+  let store = TodoItemStore(storage: memoryStorageStrategy)
   TodoItemListScreen()
+    .environment(store)
 }
-
